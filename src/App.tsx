@@ -1,12 +1,8 @@
+import React from "react";
+import Home from "./components/Home";
 
+const App: React.FC = () => {
+  return <Home />;
+};
 
-function App() {
-
-  return (
-    <>
-      <h1 className="text-3xl font-bold underline">WaxPsy</h1>
-    </>
-  )
-}
-
-export default App
+export default App;
