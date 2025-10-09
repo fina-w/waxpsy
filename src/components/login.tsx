@@ -1,59 +1,105 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login: React.FC = () => {
+interface User {
+  id: number;
+  nom: string;
+  email: string;
+  motDePasse: string;
+}
+
+const Login: React.FC<{ setIsAuthenticated: (value: boolean) => void }> = ({ setIsAuthenticated }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setMessage('All fields are required');
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:3000/utilisateurs');
+      const users = await response.json();
+      const user = users.find((u: User) => u.email === email && u.motDePasse === password);
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        setIsAuthenticated(true);
+        navigate('/dashboard');
+      } else {
+        setMessage('Invalid credentials');
+      }
+    } catch {
+      setMessage('Error logging in');
+    }
+  };
+
   return (
-    <div className="flex h-screen bg-green-100 font-sans">
-      <div className="flex-1 flex justify-center items-center p-5">
-        <img
-          src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTgd5dfmmoo97TJzYwUlvGuTZhfAgUvRVnOgUCLr6efsVYg_aET"
-          alt="Mental Health Word Cloud"
-          className="max-w-full max-h-full object-contain"
-          style={{ maxWidth: '100%', maxHeight: '100%' }}
-        />
-      </div>
-      <div className="flex-1 bg-white m-10 rounded-lg p-8 shadow-md flex flex-col items-center">
-        <div className="flex items-center mb-5">
-          <svg
-            className="w-10 h-10 mr-3 text-black"
-            fill="currentColor"
-            viewBox="0 0 64 64"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-label="brain"
-            role="img"
-          >
-            <path d="M32 2C18 2 6 14 6 28c0 9 6 16 14 18v8h12v-8c8-2 14-9 14-18 0-14-12-26-26-26zm0 4c11 0 20 9 20 20 0 7-5 13-12 15v7H24v-7c-7-2-12-8-12-15 0-11 9-20 20-20z"/>
-            <path d="M22 22h4v20h-4zM38 22h4v20h-4z"/>
-          </svg>
-          <div className="text-left">
-            <h1 className="text-2xl font-bold m-0">WaxPsy</h1>
-            <p className="text-xs italic text-gray-600 m-0">Mental Health Awareness</p>
-          </div>
+    <div className="flex h-screen bg-[#C8FACC] justify-center items-center font-sans">
+      <div className="flex bg-white shadow-lg overflow-hidden w-[900px] h-[550px] rounded-[40px]">
+        {/* Image à gauche */}
+        <div className="w-1/2 bg-gray-100 flex justify-center items-center rounded-l-[40px] overflow-hidden">
+          <img
+            src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTgd5dfmmoo97TJzYwUlvGuTZhfAgUvRVnOgUCLr6efsVYg_aET"
+            alt="Mental Health Awareness"
+            className="w-[90%] h-[90%] object-contain"
+          />
         </div>
-        <h2 className="font-bold text-2xl mb-5">Connexion</h2>
-        <form className="w-full">
-          <label htmlFor="email" className="block mb-1 font-semibold">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="w-full p-2 mb-4 rounded border border-gray-300 text-sm"
-          />
 
-          <label htmlFor="password" className="block mb-1 font-semibold">password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="w-full p-2 mb-4 rounded border border-gray-300 text-sm"
-          />
+        {/* Formulaire */}
+        <div className="w-1/2 flex flex-col items-center justify-center p-10 rounded-r-[40px]">
+          {/* Logo */}
+          <div className="flex items-center mb-5">
+            <img src="https://previews.123rf.com/images/tmricons/tmricons1510/tmricons151000371/45812514-brain-icon.jpg" alt="Logo" className="w-10 h-10 mr-3" />
+            <div className="text-left">
+              <h1 className="text-2xl font-bold m-0">WaxPsy</h1>
+              <p className="text-xs italic text-gray-600 m-0">
+                Mental Health Awareness
+              </p>
+            </div>
+          </div>
 
-          <button
-            type="submit"
-            className="w-full bg-green-800 text-white py-2 rounded-full text-lg hover:bg-green-900 transition-colors"
-          >
-            Se Connecter
-          </button>
-        </form>
+          <h2 className="font-bold text-2xl mb-5">Connexion</h2>
+
+          <form onSubmit={handleSubmit} className="w-full max-w-xs">
+            <label className="block mb-1 font-semibold text-sm">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full p-2 mb-3 rounded-full border border-gray-300 text-sm"
+            />
+
+            <label className="block mb-1 font-semibold text-sm">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2 mb-4 rounded-full border border-gray-300 text-sm"
+            />
+
+            <button
+              type="submit"
+              className="w-full bg-green-800 text-white py-2 rounded-full text-lg hover:bg-green-900 transition-colors"
+            >
+              Se Connecter
+            </button>
+          </form>
+
+          {message && <p className="mt-4 text-sm text-red-600">{message}</p>}
+
+          <p className="mt-4 text-xs">
+            Pas de compte ?{" "}
+            <Link
+              to="/register"
+              className="text-green-800 font-bold hover:underline"
+            >
+              S'inscrire
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );
