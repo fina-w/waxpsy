@@ -1,11 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<{ setIsAuthenticated: (value: boolean) => void }> = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    setIsAuthenticated(false);
     navigate('/');
   };
 

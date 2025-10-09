@@ -15,10 +15,10 @@ const Register: React.FC = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:3000/users', {
+      const response = await fetch('http://localhost:3000/utilisateurs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ nom: name, email, motDePasse: password }),
       });
       if (response.ok) {
         setMessage('Registration successful');
@@ -37,7 +37,7 @@ const Register: React.FC = () => {
         {/* Image à gauche */}
         <div className="w-1/2 bg-gray-100 flex justify-center items-center rounded-l-[40px] overflow-hidden">
           <img
-            src="/mental.svg"
+            src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTgd5dfmmoo97TJzYwUlvGuTZhfAgUvRVnOgUCLr6efsVYg_aET "
             alt="Mental Health Awareness"
             className="w-[90%] h-[90%] object-contain"
           />
@@ -47,7 +47,7 @@ const Register: React.FC = () => {
         <div className="w-1/2 flex flex-col items-center justify-center p-10 rounded-r-[40px]">
           {/* Logo */}
           <div className="flex items-center mb-5">
-            <img src="/logo_brain.svg" alt="Logo" className="w-10 h-10 mr-3" />
+            <img src="https://previews.123rf.com/images/tmricons/tmricons1510/tmricons151000371/45812514-brain-icon.jpg" alt="Logo" className="w-10 h-10 mr-3" />
             <div className="text-left">
               <h1 className="text-2xl font-bold m-0">WaxPsy</h1>
               <p className="text-xs italic text-gray-600 m-0">

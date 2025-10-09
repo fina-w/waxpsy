@@ -1,0 +1,3 @@
+- [x] Create logo_brain.svg in public/ directory with a simple brain icon SVG
+- [ ] Check if the external image URL is loading; if not, replace with a local placeholder or another image
+- [ ] Run the development server and verify images display on the registration page
