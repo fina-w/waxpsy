@@ -1,6 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setMessage('All fields are required');
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:3000/users');
+      const users = await response.json();
+      const user = users.find((u: User) => u.email === email && u.password === password);
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user));
+        navigate('/dashboard');
+      } else {
+        setMessage('Invalid credentials');
+      }
+    } catch {
+      setMessage('Error logging in');
+    }
+  };
+
   return (
     <div className="flex h-screen bg-green-100 font-sans">
       <div className="flex-1 flex justify-center items-center p-5">
@@ -30,12 +64,14 @@ const Login: React.FC = () => {
           </div>
         </div>
         <h2 className="font-bold text-2xl mb-5">Connexion</h2>
-        <form className="w-full">
+        <form onSubmit={handleSubmit} className="w-full">
           <label htmlFor="email" className="block mb-1 font-semibold">Email</label>
           <input
             type="email"
             id="email"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             className="w-full p-2 mb-4 rounded border border-gray-300 text-sm"
           />
 
@@ -44,6 +80,8 @@ const Login: React.FC = () => {
             type="password"
             id="password"
             name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full p-2 mb-4 rounded border border-gray-300 text-sm"
           />
 
@@ -54,6 +92,16 @@ const Login: React.FC = () => {
             Se Connecter
           </button>
         </form>
+        {message && <p className="mt-4 text-sm text-red-600">{message}</p>}
+        <p className="mt-4 text-xs">
+          Pas de compte ?{" "}
+          <Link
+            to="/register"
+            className="text-green-800 font-bold hover:underline"
+          >
+            S'inscrire
+          </Link>
+        </p>
       </div>
     </div>
   );

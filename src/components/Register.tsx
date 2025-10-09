@@ -1,7 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !password) {
+      setMessage('All fields are required');
+      return;
+    }
+    try {
+      const response = await fetch('http://localhost:3000/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+      if (response.ok) {
+        setMessage('Registration successful');
+        setTimeout(() => navigate('/'), 2000);
+      } else {
+        setMessage('Registration failed');
+      }
+    } catch {
+      setMessage('Error registering user');
+    }
+  };
+
   return (
     <div className="flex h-screen bg-[#C8FACC] justify-center items-center font-sans">
       <div className="flex bg-white shadow-lg overflow-hidden w-[900px] h-[550px] rounded-[40px]">
@@ -29,34 +58,28 @@ const Register: React.FC = () => {
 
           <h2 className="font-bold text-2xl mb-5">Inscription</h2>
 
-          <form className="w-full max-w-xs">
-            <label className="block mb-1 font-semibold text-sm">Nom</label>
+          <form onSubmit={handleSubmit} className="w-full max-w-xs">
+            <label className="block mb-1 font-semibold text-sm">Name</label>
             <input
               type="text"
-              className="w-full p-2 mb-3 rounded-full border border-gray-300 text-sm"
-            />
-
-            <label className="block mb-1 font-semibold text-sm">Prénom</label>
-            <input
-              type="text"
-              className="w-full p-2 mb-3 rounded-full border border-gray-300 text-sm"
-            />
-
-            <label className="block mb-1 font-semibold text-sm">Téléphone</label>
-            <input
-              type="tel"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full p-2 mb-3 rounded-full border border-gray-300 text-sm"
             />
 
             <label className="block mb-1 font-semibold text-sm">Email</label>
             <input
               type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-2 mb-3 rounded-full border border-gray-300 text-sm"
             />
 
             <label className="block mb-1 font-semibold text-sm">Password</label>
             <input
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 mb-4 rounded-full border border-gray-300 text-sm"
             />
 
@@ -67,6 +90,8 @@ const Register: React.FC = () => {
               S’inscrire
             </button>
           </form>
+
+          {message && <p className="mt-4 text-sm text-red-600">{message}</p>}
 
           <p className="mt-4 text-xs">
             Déjà un compte ?{" "}
