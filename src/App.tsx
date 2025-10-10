@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/login";
+import Homepage from "./components/Homepage.tsx";
 import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
 import ProfessionalsList from "./components/ProfessionalsList";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />} />
-        <Route path="/dashboard" element={isAuthenticated ? <Dashboard setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/" />} />
+        <Route path="/home" element={isAuthenticated ? <Homepage /> : <Navigate to="/" />} />
         
         {/* Cette route doit toujours être accessible */}
         <Route path="/professionals" element={<ProfessionalsList />} />
