@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./components/login";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
+import ProfessionalsList from "./components/ProfessionalsList";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('user'));
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
 
   useEffect(() => {
     const handleStorageChange = () => {
@@ -21,6 +22,12 @@ function App() {
         <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />} />
         <Route path="/dashboard" element={isAuthenticated ? <Dashboard setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/" />} />
+        
+        {/* Cette route doit toujours être accessible */}
+        <Route path="/professionals" element={<ProfessionalsList />} />
+        
+        {/* Page de test en cas de besoin */}
+        <Route path="/test" element={<h1>Test OK</h1>} />
       </Routes>
     </Router>
   );

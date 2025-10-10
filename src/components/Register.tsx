@@ -24,10 +24,11 @@ const Register: React.FC = () => {
         setMessage('Registration successful');
         setTimeout(() => navigate('/'), 2000);
       } else {
-        setMessage('Registration failed');
+        setMessage(`Registration failed: ${response.status} ${response.statusText}`);
       }
-    } catch {
-      setMessage('Error registering user');
+    } catch (error) {
+      console.error('Registration error:', error);
+      setMessage(`Error registering user: ${error instanceof Error ? error.message : String(error)}`);
     }
   };
 
