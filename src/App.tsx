@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/login";
 import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
+
 import ProfessionalsList from "./components/ProfessionalsList";
 
 function App() {
@@ -19,12 +19,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/register" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Register />} />
-        <Route path="/dashboard" element={isAuthenticated ? <Dashboard setIsAuthenticated={setIsAuthenticated} /> : <Navigate to="/" />} />
-        
-        {/* Cette route doit toujours être accessible */}
-        <Route path="/professionals" element={<ProfessionalsList />} />
+        <Route path="/" element={isAuthenticated ? <Navigate to="/professionals" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/register" element={isAuthenticated ? <Navigate to="/professionals" /> : <Register />} />
+
+
+        {/* Cette route est protégée */}
+        <Route path="/professionals" element={isAuthenticated ? <ProfessionalsList /> : <Navigate to="/" />} />
         
         {/* Page de test en cas de besoin */}
         <Route path="/test" element={<h1>Test OK</h1>} />

@@ -1,5 +1,3 @@
-# TODO: Supprimer Header
-
-- [x] Edit src/components/Dashboard.tsx: Remove Header import, usage, and pt-16 padding
-- [x] Edit src/components/ProfessionalsList.tsx: Remove Header import, usages, and pt-16 padding
-- [x] Delete src/components/Header.tsx by overwriting with empty content
+- [x] Modify App.tsx to redirect authenticated users to "/professionals" instead of "/dashboard" and protect the "/professionals" route
+- [x] Update login.tsx to navigate to "/professionals" after successful login
+- [x] Test the application to ensure login redirects work correctly

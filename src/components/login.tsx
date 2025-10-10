@@ -27,7 +27,7 @@ const Login: React.FC<{ setIsAuthenticated: (value: boolean) => void }> = ({ set
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         setIsAuthenticated(true);
-        navigate('/dashboard');
+        navigate('/professionals');
       } else {
         setMessage('Invalid credentials');
       }
