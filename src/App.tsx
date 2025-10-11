@@ -9,6 +9,8 @@ import ProfessionalsList from "./components/ProfessionalsList";
 import Articles from "./components/Articles";
 import ShareExperience from "./components/ShareExperience";
 import Homepage from "./components/Homepage";
+import Glossaire from "./components/Glossaire";
+import APropos from "./components/APropos";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
@@ -35,10 +37,11 @@ function App() {
         <Route path="/test" element={<h1>Test OK</h1>} />
         <Route path="/troubles" element={<Troubles />} />
         <Route path="/temoignages" element={<Temoignages />} />
-        <Route path="/articles/:id" element={<Articles />} />
+        <Route path="/articles" element={<Articles />} />
         <Route path="/home" element={<Homepage />} />
-
-        
+        <Route path="/glossaire" element={<Glossaire />} />
+        <Route path="/apropos" element={<APropos />} />
+        <Route path="/articles/:id" element={<Articles />} />
       </Routes>
     </Router>
   );
