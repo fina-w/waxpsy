@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+.troubles-bg {
+  background-color: #f0f9f0; /* Light green body background */
+}
+
+.troubles-header {
+  background-color: #e0f2e9; /* Exact header green from image */
+}
+
+.troubles-title {
+  color: #166534; /* Darker green for titles */
+}

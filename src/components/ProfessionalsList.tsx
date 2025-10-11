@@ -25,6 +25,28 @@ const ProfessionalsList: React.FC = () => {
     const hardcodedData = [
       {
         id: "101",
+        nom: "Cabinet Zeynab Ayub",
+        specialite: "Psychiatre",
+        adresse: "Dakar, Sénégal",
+        telephone: "(221) 77 952 05",
+        email: "zeynab.ayub@psychiatre.sn",
+        description: "Spécialisée en troubles anxieux et dépressifs. Approche intégrative (médicaments + thérapie).",
+        verification: true,
+        langues: ["Français", "Wolof"]
+      },
+      {
+        id: "102",
+        nom: "Dr. Amadou Sow",
+        specialite: "Psychologue",
+        adresse: "Dakar, Sénégal",
+        telephone: "(221) 78 456 78 90",
+        email: "amadou.sow@psy.sn",
+        description: "Psychologue spécialisé en thérapie cognitivo-comportementale pour adultes.",
+        verification: true,
+        langues: ["Français", "Wolof"]
+      },
+      {
+        id: "103",
         nom: "Dr. Khadija Diallo",
         specialite: "Psychiatre",
         adresse: "Cabinet Fann Hock, Dakar",
@@ -35,15 +57,37 @@ const ProfessionalsList: React.FC = () => {
         langues: ["Français", "Wolof", "Pulaar"]
       },
       {
-        id: "102",
+        id: "104",
         nom: "M. Seydou Cissé",
         specialite: "Psychologue clinicien",
         adresse: "Centre de santé mentale de Grand Yoff, Dakar",
         telephone: "+221 78 987 65 43",
         email: "s.cisse.psy@email.sn",
-        description: "Approche humaniste et thérapies cognitivo-comportementales (TCC).",
+        description: "Approche humaniste et thérapies cognitivo-comportementales (TCC) pour troubles anxieux.",
         verification: true,
         langues: ["Français", "Sérère"]
+      },
+      {
+        id: "105",
+        nom: "Pr. Fatou Ndiaye",
+        specialite: "Psychiatre spécialisée en TDAH",
+        adresse: "Clinique des Almadies, Dakar",
+        telephone: "+221 33 889 01 23",
+        email: "f.ndiaye.tdah@clinique.sn",
+        description: "Expertise en diagnostic et traitement du TDAH chez les enfants et adolescents.",
+        verification: true,
+        langues: ["Français", "Wolof"]
+      },
+      {
+        id: "106",
+        nom: "Dr. Moussa Traoré",
+        specialite: "Psychologue pour adultes",
+        adresse: "Centre Médico-Psychologique, Thiès",
+        telephone: "+221 77 555 66 77",
+        email: "m.traore.adultes@psy.sn",
+        description: "Thérapie pour troubles dépressifs et anxieux chez les adultes.",
+        verification: true,
+        langues: ["Français", "Bambara"]
       }
     ];
     console.log('Using hardcoded data for debugging');
