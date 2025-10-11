@@ -236,11 +236,11 @@ const ProfessionalsList: React.FC = () => {
             return (
               <div key={pro.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
                 {/* Photo */}
-                <div className="relative h-64 bg-gradient-to-r from-green-50 to-green-100 flex items-center justify-center overflow-hidden">
+                <div className="relative h-48 bg-gradient-to-r from-green-50 to-green-100 flex items-center justify-center overflow-hidden">
                   <img
                     src={`https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80`}
                     alt={pro.nom}
-                    className="w-40 h-48 rounded-lg object-cover shadow-md"
+                    className="w-40 h-32 rounded-lg object-cover shadow-md"
                   />
                 </div>
 

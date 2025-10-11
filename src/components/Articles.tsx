@@ -1,17 +1,64 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+interface Article {
+  id: string;
+  titre: string;
+  contenu: string;
+  auteurId: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+}
 
 const Articles: React.FC = () => {
-  const [isExpanded, setIsExpanded] = React.useState(false);
+  const { id } = useParams<{ id: string }>();
+  const [article, setArticle] = useState<Article | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
-  const partialText = `Le trouble déficitaire de l'attention avec ou sans hyperactivité (TDAH) est un trouble neurodéveloppemental qui se manifeste par des difficultés d'attention, d'hyperactivité et d'impulsivité. Dans les contextes sénégalais, les symptômes du TDAH sont souvent mal compris et attribués à un manque de discipline ou à des facteurs culturels. Les troubles de l'attention peuvent avoir un impact significatif sur la vie scolaire et professionnelle des enfants et des adultes.`;
+  useEffect(() => {
+    const fetchArticle = async () => {
+      try {
+        const response = await fetch(`/api/articles/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch article');
+        const data = await response.json();
+        setArticle(data);
+      } catch (err) {
+        console.error('Fetch error:', err);
+        setError(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (id) {
+      fetchArticle();
+    }
+  }, [id]);
 
-  const fullText = `Le trouble déficitaire de l'attention avec ou sans hyperactivité (TDAH) est un trouble neurodéveloppemental qui se manifeste par des difficultés d'attention, d'hyperactivité et d'impulsivité. Dans les contextes sénégalais, les symptômes du TDAH sont souvent mal compris et attribués à un manque de discipline ou à des facteurs culturels. Les troubles de l'attention peuvent avoir un impact significatif sur la vie scolaire et professionnelle des enfants et des adultes.
+  if (loading) {
+    return (
+      <div className="min-h-screen page-bg">
+        <div className="container mx-auto px-4 py-8 text-center">Loading article...</div>
+      </div>
+    );
+  }
 
-Les symptômes du TDAH peuvent être gérés avec des traitements appropriés, y compris des médicaments et des thérapies comportementales. Le diagnostic du TDAH nécessite une évaluation complète par un professionnel de la santé mentale. Les familles et les écoles jouent un rôle important dans le soutien des enfants atteints de TDAH. L'éducation sur le TDAH est essentielle pour réduire la stigmatisation et encourager les personnes à chercher de l'aide.
+  if (error) {
+    return (
+      <div className="min-h-screen page-bg">
+        <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error}</div>
+      </div>
+    );
+  }
 
-Les troubles de l'attention peuvent être gérés avec des stratégies d'adaptation et un soutien approprié. Le TDAH est un trouble neurodéveloppemental qui affecte la capacité à se concentrer et à contrôler les impulsions. Les symptômes du TDAH peuvent varier en intensité et se manifester différemment chez les enfants et les adultes. Le diagnostic du TDAH nécessite une évaluation complète par un professionnel de la santé mentale. Les familles et les écoles jouent un rôle important dans le soutien des enfants atteints de TDAH. L'éducation sur le TDAH est essentielle pour réduire la stigmatisation et encourager les personnes à chercher de l'aide.
-
-Au Sénégal, l'accès aux services de santé mentale reste limité, mais des initiatives comme WaxPsy visent à sensibiliser et à fournir des ressources. Il est crucial de reconnaître le TDAH comme un trouble médical plutôt qu'un défaut de caractère pour favoriser un meilleur soutien communautaire.`;
+  if (!article) {
+    return (
+      <div className="min-h-screen page-bg">
+        <div className="container mx-auto px-4 py-8 text-center">Article not found</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen page-bg">
@@ -39,24 +86,23 @@ Au Sénégal, l'accès aux services de santé mentale reste limité, mais des in
           {/* Breadcrumb/Sub-nav */}
           <nav className="flex items-center space-x-4 mb-6 text-sm text-gray-600">
             <span className="font-medium">Lire :</span>
-            <a href="/articles" className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">Article</a>
-            <a href="/histoire" className="text-gray-500 hover:text-green-700">Histoire</a>
+            <a href={`/articles/${id}`} className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">Article</a>
+            <a href={`/histoires/${id}`} className="text-gray-500 hover:text-green-700">Histoire</a>
           </nav>
 
           {/* Article Title */}
-          <h1 className="text-3xl font-bold mb-6 troubles-title text-center">TDAH: Quand la tête dans les nuages</h1>
+          <h1 className="text-3xl font-bold mb-6 troubles-title text-center">{article.titre}</h1>
+
+          {/* Article Image */}
+          <div className="mb-6">
+            <img src="/adhd.jpg" alt={`Illustration ${article.titre}`} className="w-full h-64 rounded-lg shadow-md object-cover" />
+          </div>
 
           {/* Article Content */}
           <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
             <p className="text-gray-700 leading-relaxed mb-4">
-              {isExpanded ? fullText : partialText}
+              {article.contenu}
             </p>
-            <button 
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-green-600 hover:underline font-semibold"
-            >
-              {isExpanded ? 'Voir moins' : 'Voir plus'}
-            </button>
           </div>
         </div>
       </main>
