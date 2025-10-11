@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "./footer.tsx";
+import Troubles from "./Troubles.tsx";
+import Articles from "./Articles.tsx";
+import Temoignages from "./Temoignages.tsx";
+import ProfessionalsList from "./ProfessionalsList.tsx";
 import type { Trouble, Temoignage } from "../types/types";
 
 const Homepage: React.FC = () => {
@@ -9,6 +13,7 @@ const Homepage: React.FC = () => {
   const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,14 +66,24 @@ const Homepage: React.FC = () => {
     );
   }
 
-  return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-r from-white to-blue-100">
-      {/* Hero Section avec Header intégré */}
-      <section
-        className="relative bg-cover bg-center h-[600px] flex flex-col justify-center items-center text-white"
-        style={{ backgroundImage: "url('/public/homepage-img.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-black opacity-40"></div>
+    switch (window.location.pathname) {
+      case 'troubles':
+        return <Troubles />;
+      case 'articles':
+        return <Articles />;
+      case 'temoignages':
+        return <Temoignages />;
+      case 'professionals':
+        return <ProfessionalsList />;
+      default:
+        return (
+          <div className="min-h-screen flex flex-col bg-gradient-to-r from-white to-blue-100">
+            {/* Hero Section */}
+            <section
+              className="relative bg-cover bg-center h-[600px] flex flex-col justify-center items-center text-white"
+              style={{ backgroundImage: "url('/homepage-img.jpg')" }}
+            >
+              <div className="absolute inset-0 bg-black opacity-40"></div>
 
         {/* Header superposé */}
         <header className="absolute top-0 left-0 right-0 z-20 text-white flex items-center justify-between px-6 py-4">
@@ -330,55 +345,56 @@ const Homepage: React.FC = () => {
           </h2>
         </div>
 
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className=" rounded-3xl p-8 border-2 border-black shadow-lg text-center">
-            <div className="mb-6">
-              <img
-                src="public/doctor.png"
-                alt="Doctor"
-                className="w-35 h-40 mx-auto"
-              />
-            </div>
-            <h3 className="font-serif text-2xl font-bold mb-4">
-              Consulter un Professionnel
-            </h3>
-            <p className="text-gray-700 text-base leading-relaxed mb-6">
-              Vous souhaitez parler à un psychologue ou psychiatre ? Trouvez un
-              spécialiste près de vous
-            </p>
-            <button className="bg-green-800 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition">
-              Voir l'Annuaire
-            </button>
-          </div>
+              <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className=" rounded-3xl p-8 border-2 border-black shadow-lg text-center">
+                  <div className="mb-6">
+                    <img
+                      src="/doctor.png"
+                      alt="Doctor"
+                      className="w-35 h-40 mx-auto"
+                    />
+                  </div>
+                  <h3 className="font-serif text-2xl font-bold mb-4">
+                    Consulter un Professionnel
+                  </h3>
+                  <p className="text-gray-700 text-base leading-relaxed mb-6">
+                    Vous souhaitez parler à un psychologue ou psychiatre ? Trouvez un
+                    spécialiste près de vous
+                  </p>
+                  <button className="bg-green-800 text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition">
+                    Voir l'Annuaire
+                  </button>
+                </div>
 
-          <div className=" rounded-3xl p-8 border-4 border-red-500 shadow-lg text-center">
-            <div className="mb-6">
-              <img
-                src="public/sos_button.png"
-                alt="SOS Button"
-                className="w-32 h-32 mx-auto"
-              />
-            </div>
-            <h3 className="font-serif text-2xl font-bold mb-4 text-red-600">
-              Urgence / SOS
-            </h3>
-            <p className="text-gray-700 text-base leading-relaxed mb-6">
-              Vous êtes en détresse ou avez besoin d'aide immédiate ? Accédez
-              aux numéros d'urgence 24h/24.
-            </p>
-            <button className="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition">
-              Numéros
-            </button>
-          </div>
-        </div>
+                <div className=" rounded-3xl p-8 border-4 border-red-500 shadow-lg text-center">
+                  <div className="mb-6">
+                    <img
+                      src="/sos_button.png"
+                      alt="SOS Button"
+                      className="w-32 h-32 mx-auto"
+                    />
+                  </div>
+                  <h3 className="font-serif text-2xl font-bold mb-4 text-red-600">
+                    Urgence / SOS
+                  </h3>
+                  <p className="text-gray-700 text-base leading-relaxed mb-6">
+                    Vous êtes en détresse ou avez besoin d'aide immédiate ? Accédez
+                    aux numéros d'urgence 24h/24.
+                  </p>
+                  <button className="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition">
+                    Numéros
+                  </button>
+                </div>
+              </div>
       </section>
 
-      <section className="bg-gradient-to-r from-white to-blue-100">
-        <Footer/>
-      </section>
-      
-    </div>
-  );
-};
+            <section className="bg-gradient-to-r from-white to-blue-100">
+              <Footer/>
+            </section>
+          </div>
+        );
+    }
+    
+  };
 
 export default Homepage;
