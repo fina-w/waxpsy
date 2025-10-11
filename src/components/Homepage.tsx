@@ -227,7 +227,22 @@ const Homepage: React.FC = () => {
         </div>
       </section>
 
+
       <section className="bg-green-800 text-white px-6 py-16 relative">
+        {/* La vague SVG en haut */}
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          className="relative block w-full h-[75px] bg-gradient-to-r from-white to-blue-100" // Ajustez la hauteur de la vague
+        >
+          <path
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+            className="fill-current text-brand-green"
+          ></path>
+        </svg>
+      </div>
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <h2 className="text-3xl font-serif mb-8">Pour mieux comprendre</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
