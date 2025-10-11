@@ -54,15 +54,7 @@
       "dateInscription": "2025-10-05T13:00:00Z",
       "actif": true
     },
-    {
-      "id": 7,
-      "nom": "Ndeye Diop",
-      "email": "ndeye.diop@email.com",
-      "motDePasse": "password123",
-      "role": "utilisateur",
-      "dateInscription": "2025-10-08T15:30:00Z",
-      "actif": true
-    },
+    
     {
       "id": 8,
       "nom": "Ousmane Cissé",
@@ -1342,7 +1334,7 @@
     },
     {
       "id": "2",
-      "image": "public/erotomanie.jpg",
+      "image": "https://hookedonhopementalhealth.com/wp-content/uploads/2025/04/What-Is-Erotomania.jpg",
       "nom": "Érotomanie",
       "description": "L'érotomanie est un trouble délirant rare où une personne est convaincue qu'une autre personne, souvent d'un statut social plus élevé, est secrètement amoureuse d'elle.",
       "symptomes": [
@@ -1373,7 +1365,7 @@
     },
     {
       "id": "4",
-      "image": "public/anxiete.jpg",
+      "image": "https://www.shutterstock.com/image-photo/anxiety-thinking-black-woman-home-260nw-2467379207.jpg",
       "nom": "Troubles Anxieux",
       "description": "Les troubles anxieux regroupent plusieurs conditions où l'anxiété excessive et persistante interfère avec le fonctionnement quotidien.",
       "symptomes": [
@@ -1389,7 +1381,7 @@
     },
     {
       "id": "5",
-      "image": "public/bipolaire.jpg",
+      "image": "https://static.cnews.fr/sites/default/files/styles/image_750_422/public/kanye_west_bipolaire_maladie_5f169923715c5.jpg?itok=xjeLitLQ",
       "nom": "Trouble Bipolaire",
       "description": "Le trouble bipolaire se caractérise par des alternances entre des phases de manie (excitation) et de dépression.",
       "symptomes": [
@@ -1405,7 +1397,7 @@
     },
     {
       "id": "6",
-      "image": "public/autisme.jpg",
+      "image": "https://images.squarespace-cdn.com/content/v1/5e04f2158c0a456f278aac8b/1614369543568-VUZJJ35325JUTBPVIL0Z/Screen+Shot+2021-02-24+at+1.13.14+PM.png",
       "nom": "Trouble du Spectre de l'Autisme (TSA)",
       "description": "Le TSA est un trouble neurodéveloppemental affectant la communication sociale et comportant des intérêts restreints et répétitifs.",
       "symptomes": [
@@ -1421,7 +1413,7 @@
     },
     {
       "id": "7",
-      "image": "public/ptsd.jpg",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwq_gpDpmao2K7aG7cFKt728VENU8-4u_okg&s",
       "nom": "Trouble de Stress Post-Traumatique (TSPT)",
       "description": "Le TSPT survient après avoir vécu ou été témoin d'un événement traumatisant grave.",
       "symptomes": [
@@ -1437,7 +1429,7 @@
     },
     {
       "id": "8",
-      "image": "public/toc.jpg",
+      "image": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half-caption/public/field_blog_entry_images/2020-09/istock_000011269785xsmall.jpg?itok=44Mh-AdQ",
       "nom": "Trouble Obsessionnel Compulsif (TOC)",
       "description": "Le TOC se caractérise par des obsessions (pensées intrusives) et des compulsions (comportements répétitifs) visant à réduire l'anxiété.",
       "symptomes": [
@@ -1453,7 +1445,7 @@
     },
     {
       "id": "9",
-      "image": "public/schizophrenie.jpg",
+      "image": "https://www.shutterstock.com/image-photo/schizophrenia-fear-black-woman-on-260nw-2385072745.jpg",
       "nom": "Schizophrénie",
       "description": "La schizophrénie est un trouble psychotique grave affectant la pensée, les perceptions et le comportement.",
       "symptomes": [
@@ -1469,7 +1461,7 @@
     },
     {
       "id": "10",
-      "image": "public/addiction.jpg",
+      "image": "https://cdn.angermanage.co.uk/wp-content/uploads/2016/09/Anger-and-Addiction.jpg",
       "nom": "Troubles Addictifs",
       "description": "Les addictions sont des dépendances pathologiques à des substances (alcool, drogues) ou des comportements (jeux, écrans).",
       "symptomes": [
@@ -1485,7 +1477,7 @@
     },
     {
       "id": "11",
-      "image": "public/burnout.jpg",
+      "image": "https://www.shutterstock.com/image-photo/stress-burnout-tired-black-man-600nw-2240694803.jpg",
       "nom": "Syndrome d'Épuisement Professionnel (Burnout)",
       "description": "Le burnout est un état d'épuisement émotionnel, physique et mental causé par un stress professionnel prolongé.",
       "symptomes": [
@@ -1501,7 +1493,7 @@
     },
     {
       "id": "12",
-      "image": "public/anorexie.jpg",
+      "image": "https://www.shutterstock.com/image-photo/young-lady-having-tiny-serving-600nw-1997866784.jpg",
       "nom": "Troubles du Comportement Alimentaire (TCA)",
       "description": "Les TCA incluent l'anorexie, la boulimie et l'hyperphagie, caractérisés par une relation perturbée avec la nourriture et l'image corporelle.",
       "symptomes": [

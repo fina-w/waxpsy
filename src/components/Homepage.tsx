@@ -6,7 +6,7 @@ import type { Trouble, Temoignage } from "../types/types";
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
   const [troubles, setTroubles] = useState<Trouble[]>([]);
-  const [, setTemoignages] = useState<Temoignage[]>([]);
+  const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -39,28 +39,9 @@ const Homepage: React.FC = () => {
     fetchData();
   }, []);
 
-
- /**  const getTroubleColor = (tag: string): string => {
-    const colors: { [key: string]: string } = {
-      "TDAH": "bg-purple-100 text-purple-800",
-      "Anxiété": "bg-blue-100 text-blue-800",
-      "Dépression": "bg-indigo-100 text-indigo-800",
-      "Bipolaire": "bg-yellow-100 text-yellow-800",
-      "Schizophrénie": "bg-red-100 text-red-800",
-      "Autisme": "bg-green-100 text-green-800",
-      "TOC": "bg-pink-100 text-pink-800",
-      "default": "bg-gray-100 text-gray-800"
-    };
-    return colors[tag] || colors.default;
-  };*/
-
   const handleTroubleClick = (id: string) => {
     navigate(`/troubles/${id}`);
   };
-
-  /*const handleTemoignageClick = (id: string) => {
-    navigate(`/temoignages/${id}`);
-  };*/
 
   if (loading) {
     return (
@@ -94,10 +75,10 @@ const Homepage: React.FC = () => {
           <img
             src="/public/black-logo.png"
             alt="WaxPsy Logo"
-            className="h-15 w-50 brightness-0 invert"
+            className="h-13 w-50 brightness-0 invert"
           />
           <nav className="space-x-4 text-sm">
-            <a href="/" className="underline hover:text-gray-300 transition">
+            <a href="/home" className="underline hover:text-gray-300 transition">
               Accueil
             </a>
             <a href="/troubles" className="hover:text-gray-300 transition">
@@ -157,7 +138,7 @@ const Homepage: React.FC = () => {
         <img
           src="/public/c-est-quoi-waxpsy.png"
           alt="Green Ribbon"
-          className="w-60 h-auto"
+          className="w-70 h-auto"
         />
         <div className="max-w-xl">
           <h2 className="text-4xl font-serif font-bold mb-4">
@@ -174,7 +155,7 @@ const Homepage: React.FC = () => {
       </section>
 
       {/* Section Découvrez - DYNAMIQUE */}
-      <section className=" px-6 py-16 bg-gradient-to-r from-white to-blue-100">
+      <section className="px-6 py-6 bg-gradient-to-r from-white to-blue-100">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-8">
             <h2 className="text-3xl font-serif">Découvrez</h2>
@@ -203,18 +184,24 @@ const Homepage: React.FC = () => {
             {troubles.map((trouble) => (
               <div
                 key={trouble.id}
-                className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow cursor-pointer"
+                className="bg-transparent cursor-pointer group"
                 onClick={() => handleTroubleClick(trouble.id)}
               >
-                <div className="relative h-48">
+                <div className="relative h-50 overflow-hidden">
                   <img
                     src={trouble.image}
                     alt={trouble.nom}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-sm"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = "/public/tdah-card.jpg";
+                      (e.target as HTMLImageElement).src = "public/adhd.jpg";
                     }}
                   />
+                  {/* Bouton Lire qui apparaît au survol */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <button className="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors duration-300">
+                      Lire
+                    </button>
+                  </div>
                 </div>
                 <div className="p-5">
                   <h3 className="font-serif text-xl font-semibold mb-2">
@@ -227,7 +214,7 @@ const Homepage: React.FC = () => {
         </div>
       </section>
 
-
+      {/* Section Pour mieux comprendre */}
       <section className="bg-green-800 text-white px-6 py-16 relative">
         {/* La vague SVG en haut */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
@@ -235,7 +222,7 @@ const Homepage: React.FC = () => {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1200 120"
           preserveAspectRatio="none"
-          className="relative block w-full h-[75px] bg-gradient-to-r from-white to-blue-100" // Ajustez la hauteur de la vague
+          className="relative block w-full h-[75px]" // Ajustez la hauteur de la vague
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
@@ -277,6 +264,60 @@ const Homepage: React.FC = () => {
                 Évaluez votre compréhension des troubles mentaux
               </p>
             </div>
+          </div>
+        </div>
+        {/* Témoignages */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-3xl font-bold text-white">Quelques Témoignages</h2>
+            <button className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
+              Tout Voir <span className="text-xl">→</span>
+            </button>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {temoignages.map((temoignage) => (
+              <div 
+                key={temoignage.id} 
+                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col"
+              >
+                {/* En-tête avec nom et date */}
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 className="font-semibold text-sm text-gray-800">
+                      {temoignage.utilisateurId ? `Utilisateur ${temoignage.utilisateurId}` : 'Anonyme'}
+                    </h4>
+                    <p className="text-xs text-gray-500 mt-1">Il y a 2 jours</p>
+                  </div>
+                </div>
+
+                {/* Titre avec badge */}
+                <div className="flex items-center gap-3 mb-4">
+                  <h3 className="font-bold text-base text-gray-900 flex-grow">
+                    {temoignage.titre}
+                  </h3>
+                  <span className="bg-purple-200 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+                    TDAH
+                  </span>
+                </div>
+
+                {/* Contenu */}
+                <p className="text-gray-700 text-sm mb-6 flex-grow leading-relaxed">
+                  {temoignage.contenu.substring(0, 150)}...
+                </p>
+
+                {/* Footer avec likes et bouton */}
+                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <span className="text-red-500 text-xl">❤️</span>
+                    <span className="text-sm font-medium text-gray-600">12</span>
+                  </div>
+                  <button className="bg-teal-700 hover:bg-teal-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-colors">
+                    Lire la suite
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
