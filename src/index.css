@@ -11,3 +11,7 @@
 .troubles-title {
   color: #166534; /* Darker green for titles */
 }
+
+.page-bg {
+  background: linear-gradient(to right, white, #D7E3EF);
+}

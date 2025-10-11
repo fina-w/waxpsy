@@ -34,7 +34,7 @@ const Homepage: React.FC = () => {
   };
 
   const renderContent = () => {
-    const protectedTabs = ['troubles', 'articles', 'temoignages', 'professionals'];
+    const protectedTabs = ['articles'];
     if (protectedTabs.includes(activeTab) && !isAuthenticated) {
       return (
         <div className="min-h-screen flex items-center justify-center">
@@ -95,8 +95,8 @@ const Homepage: React.FC = () => {
             {/* About Section */}
             <section className="flex flex-col md:flex-row items-center bg-gradient-to-b from-white to-blue-100 px-6 py-12 space-y-8 md:space-y-0 md:space-x-12">
               <img
-                src="/green-ribbon.png"
-                alt="Green Ribbon"
+                src="/c-est-quoi-waxpsy.png"
+                alt="C'est quoi WaxPsy"
                 className="w-48 h-auto"
               />
               <div className="max-w-xl">
@@ -113,22 +113,24 @@ const Homepage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <header className="bg-white text-black flex items-center justify-between px-6 py-4">
-        <img
-          src="/public/black-logo.png"
-          alt="WaxPsy Logo"
-          className="h-10 w-50"
-        />
-        <nav className="space-x-4 text-sm">
-          <button onClick={() => setActiveTab('home')} className="underline hover:text-gray-300 transition">Accueil</button>
-          <button onClick={() => handleTabClick('troubles')} className="hover:text-gray-300 transition">Troubles</button>
-          <button onClick={() => handleTabClick('articles')} className="hover:text-gray-300 transition">Articles</button>
-          <button onClick={() => handleTabClick('temoignages')} className="hover:text-gray-300 transition">Témoignages</button>
-          <button onClick={() => handleTabClick('professionals')} className="hover:text-green-300 transition">Professionnels</button>
-          <a href="/glossaire" className="hover:text-gray-300 transition">Glossaire</a>
-          <a href="/apropos" className="hover:text-gray-300 transition">A propos</a>
-          <a href="/contact" className="hover:text-gray-300 transition">Contact</a>
-          <a href="/profil" className="hover:text-gray-300 transition">Profil</a>
+      <header className="troubles-header p-4 flex justify-between items-center shadow-md">
+        <div className="flex items-center">
+          <img
+            src="/black-logo.png"
+            alt="WaxPsy Logo"
+            className="h-10 mr-4"
+          />
+        </div>
+        <nav className="hidden md:flex space-x-4 text-sm">
+          <a href="/" className="text-green-700 hover:text-green-900">Accueil</a>
+          <a href="/troubles" className="text-green-700 hover:text-green-900">Troubles</a>
+          <a href="/articles" className="text-green-700 hover:text-green-900">Articles</a>
+          <a href="/temoignages" className="text-green-700 hover:text-green-900">Témoignages</a>
+          <a href="/professionals" className="text-green-700 hover:text-green-900">Professionnels</a>
+          <a href="/glossaire" className="text-green-700 hover:text-green-900">Glossaire</a>
+          <a href="/apropos" className="text-green-700 hover:text-green-900">A propos</a>
+          <a href="/contact" className="text-green-700 hover:text-green-900">Contact</a>
+          <a href="/profil" className="text-green-700 hover:text-green-900">Profil</a>
         </nav>
       </header>
       {renderContent()}

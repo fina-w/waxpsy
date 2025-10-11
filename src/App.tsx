@@ -5,6 +5,9 @@ import Register from "./components/Register";
 import Home from "./components/Homepage";
 import Troubles from "./components/Troubles";
 import Temoignages from "./components/Temoignages";
+import ProfessionalsList from "./components/ProfessionalsList";
+import Articles from "./components/Articles";
+import ShareExperience from "./components/ShareExperience";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
@@ -20,12 +23,15 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
+        <Route path="/" element={<Home />} />
         <Route path="/homepage" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/troubles" element={<Troubles />} />
+        <Route path="/articles" element={<Articles />} />
         <Route path="/temoignages" element={<Temoignages />} />
+        <Route path="/professionals" element={<ProfessionalsList />} />
+        <Route path="/share-experience" element={<ShareExperience />} />
         <Route path="/test" element={<h1>Test OK</h1>} />
       </Routes>
     </Router>

@@ -159,8 +159,8 @@ const ProfessionalsList: React.FC = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-[#C8FACC]">
+  return (
+    <div className="min-h-screen page-bg">
         <div className="container mx-auto px-4 py-8 text-center">Loading professionals...</div>
       </div>
     );
@@ -168,14 +168,32 @@ const ProfessionalsList: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#C8FACC]">
+      <div className="min-h-screen page-bg">
         <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error}</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#C8FACC]">
+    <div className="min-h-screen page-bg">
+      {/* Header */}
+      <header className="troubles-header p-4 flex justify-between items-center shadow-md">
+        <div className="flex items-center">
+          <img src="/black-logo.png" alt="WaxPsy Logo" className="h-10 mr-4" />
+        </div>
+        <nav className="hidden md:flex space-x-4 text-sm">
+          <a href="/" className="text-green-700 hover:text-green-900">Accueil</a>
+          <a href="/troubles" className="text-green-700 hover:text-green-900">Troubles</a>
+          <a href="/articles" className="text-green-700 hover:text-green-900">Articles</a>
+          <a href="/temoignages" className="text-green-700 hover:text-green-900">Témoignages</a>
+          <a href="/professionals" className="text-green-700 hover:text-green-900">Professionnels</a>
+          <a href="/glossaire" className="text-green-700 hover:text-green-900">Glossaire</a>
+          <a href="/apropos" className="text-green-700 hover:text-green-900">A propos</a>
+          <a href="/contact" className="text-green-700 hover:text-green-900">Contact</a>
+          <a href="/profil" className="text-green-700 hover:text-green-900">Profil</a>
+        </nav>
+      </header>
+
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-12 text-green-800">Liste des psychologues et psychiatres</h1>
 
@@ -218,7 +236,7 @@ const ProfessionalsList: React.FC = () => {
             return (
               <div key={pro.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
                 {/* Photo */}
-                <div className="relative h-64 bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center overflow-hidden">
+                <div className="relative h-64 bg-gradient-to-r from-green-50 to-green-100 flex items-center justify-center overflow-hidden">
                   <img
                     src={`https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80`}
                     alt={pro.nom}
