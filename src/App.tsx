@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/login";
-import Homepage from "./components/Homepage.tsx";
 
 import Register from "./components/Register";
+import Home from "./components/Homepage";
+import Troubles from "./components/Troubles";
+import Temoignages from "./components/Temoignages";
 import ProfessionalsList from "./components/ProfessionalsList";
+import Articles from "./components/Articles";
+import ShareExperience from "./components/ShareExperience";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
@@ -27,8 +31,7 @@ function App() {
         
         {/* Cette route doit toujours être accessible */}
         <Route path="/professionals" element={<ProfessionalsList />} />
-        
-        {/* Page de test en cas de besoin */}
+        <Route path="/share-experience" element={<ShareExperience />} />
         <Route path="/test" element={<h1>Test OK</h1>} />
       </Routes>
     </Router>

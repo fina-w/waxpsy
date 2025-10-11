@@ -127,19 +127,25 @@ const Homepage: React.FC = () => {
           </nav>
         </header>
 
-        {/* Contenu principal du Hero */}
-        <div className="relative z-10 text-center">
-          <h1 className="text-5xl font-serif font-bold mb-6 tracking-wide">
-            COMPRENDRE LA SANTE MENTALE
-          </h1>
-          <button className="border-2 border-white rounded-full px-8 py-3 flex items-center space-x-2 hover:bg-white hover:text-black transition mx-auto">
-            <span className="text-lg">Lire le Glossaire</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+  const handleTabClick = (tab: string) => {
+    if (!isAuthenticated) {
+      navigate('/login', { state: { tab } });
+    } else {
+      setActiveTab(tab);
+    }
+  };
+
+  const renderContent = () => {
+    const protectedTabs = ['articles'];
+    if (protectedTabs.includes(activeTab) && !isAuthenticated) {
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold mb-4">Accès restreint</h2>
+            <p className="mb-4">Veuillez vous connecter pour accéder à cette section.</p>
+            <button 
+              onClick={() => navigate('/login', { state: { tab: activeTab } })}
+              className="bg-green-800 text-white px-6 py-2 rounded-full hover:bg-green-900 transition"
             >
               <path
                 strokeLinecap="round"
@@ -150,7 +156,48 @@ const Homepage: React.FC = () => {
             </svg>
           </button>
         </div>
-      </section>
+      );
+    }
+
+    switch (activeTab) {
+      case 'troubles':
+        return <Troubles />;
+      case 'articles':
+        return <Articles />;
+      case 'temoignages':
+        return <Temoignages />;
+      case 'professionals':
+        return <ProfessionalsList />;
+      default:
+        return (
+          <>
+            {/* Hero Section */}
+            <section
+              className="relative bg-cover bg-center h-[600px] flex flex-col justify-center items-center text-white"
+              style={{ backgroundImage: "url('/homepage-img.jpg')" }}
+            >
+              {/* Overlay sombre pour améliorer la lisibilité */}
+              <div className="absolute inset-0 bg-black opacity-40"></div>
+
+              {/* Contenu principal du Hero */}
+              <div className="relative z-10 text-center">
+                <h1 className="text-5xl font-serif font-bold mb-6 tracking-wide">
+                  COMPRENDRE LA SANTE MENTALE
+                </h1>
+                <button className="border-2 border-white rounded-full px-8 py-3 flex items-center space-x-2 hover:bg-white hover:text-black transition mx-auto">
+                  <span className="text-lg">Lire le Glossaire</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </section>
 
       {/* Section A propos */}
       <section className="flex flex-col justify-center items-center md:flex-row bg-gradient-to-r from-white to-blue-100 px-6 py-12 space-y-8 md:space-y-0 md:space-x-12">

@@ -54,15 +54,7 @@
       "dateInscription": "2025-10-05T13:00:00Z",
       "actif": true
     },
-    {
-      "id": 7,
-      "nom": "Ndeye Diop",
-      "email": "ndeye.diop@email.com",
-      "motDePasse": "password123",
-      "role": "utilisateur",
-      "dateInscription": "2025-10-08T15:30:00Z",
-      "actif": true
-    },
+    
     {
       "id": 8,
       "nom": "Ousmane Cissé",

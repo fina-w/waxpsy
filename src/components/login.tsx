@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 interface User {
   id: number;
@@ -13,6 +13,7 @@ const Login: React.FC<{ setIsAuthenticated: (value: boolean) => void }> = ({ set
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,7 +28,12 @@ const Login: React.FC<{ setIsAuthenticated: (value: boolean) => void }> = ({ set
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         setIsAuthenticated(true);
-        navigate('/dashboard');
+        const tab = location.state?.tab;
+        if (tab) {
+          navigate('/', { state: { tab } });
+        } else {
+          navigate('/');
+        }
       } else {
         setMessage('Invalid credentials');
       }
