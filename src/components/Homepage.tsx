@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Footer from "./footer.tsx";
 import type { Trouble, Temoignage } from "../types/types";
 import Header from "./Header.tsx";
+import Login from "./Login.tsx";
+import { useAuthStore } from "../stores/authStore";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +14,8 @@ const Homepage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentTroubleIndex, setCurrentTroubleIndex] = useState(0);
   const [currentTemoignageIndex, setCurrentTemoignageIndex] = useState(0);
+  const [showLogin, setShowLogin] = useState(false);
+  const [pendingTab, setPendingTab] = useState<string | null>(null);
 
   const nextTroubles = useCallback(() => {
     setCurrentTroubleIndex((prev) =>
@@ -93,8 +97,45 @@ const Homepage: React.FC = () => {
     }
   }, [temoignages.length, currentTemoignageIndex, nextTemoignages]);
 
+  const { isAuthenticated } = useAuthStore();
+
   const handleTroubleClick = (id: string) => {
     navigate(`/troubles/${id}`);
+  };
+
+  const handleProfessionalsClick = () => {
+    if (!isAuthenticated) {
+      setPendingTab('professionals');
+      setShowLogin(true);
+    } else {
+      navigate('/professionals');
+    }
+  };
+
+  const handleTemoignagesClick = () => {
+    if (!isAuthenticated) {
+      setPendingTab('temoignages');
+      setShowLogin(true);
+    } else {
+      navigate('/temoignages');
+    }
+  };
+
+  const handleUrgenceClick = () => {
+    navigate('/urgences');
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLogin(false);
+    if (pendingTab) {
+      navigate(`/${pendingTab}`);
+      setPendingTab(null);
+    }
+  };
+
+  const handleLoginClose = () => {
+    setShowLogin(false);
+    setPendingTab(null);
   };
 
   if (loading) {
@@ -370,7 +411,7 @@ const Homepage: React.FC = () => {
             <h2 className="text-3xl font-bold text-white">
               Quelques Témoignages
             </h2>
-            <button className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
+            <button onClick={handleTemoignagesClick} className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
               Tout Voir <span className="text-xl">→</span>
             </button>
           </div>
@@ -515,7 +556,7 @@ const Homepage: React.FC = () => {
               spécialiste près de vous
             </p>
             <button
-              onClick={() => navigate("/professionals")}
+              onClick={handleProfessionalsClick}
               className="bg-[#015635] text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition"
             >
               Voir l'Annuaire
@@ -538,7 +579,7 @@ const Homepage: React.FC = () => {
               aux numéros d'urgence 24h/24.
             </p>
             <button
-              onClick={() => navigate("/urgence")}
+              onClick={handleUrgenceClick}
               className="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition"
             >
               Numéros
@@ -550,6 +591,14 @@ const Homepage: React.FC = () => {
       <section className="bg-gradient-to-r from-white to-blue-100">
         <Footer />
       </section>
+
+      {/* Login Modal */}
+      {showLogin && (
+        <Login
+          onSuccess={handleLoginSuccess}
+          onClose={handleLoginClose}
+        />
+      )}
     </div>
   );
 };

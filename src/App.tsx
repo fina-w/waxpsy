@@ -16,30 +16,36 @@ import MentionsLegales from "./components/MentionsLegales";
 import Confidentialite from "./components/Confidentialite";
 import ConditionsUtilisation from "./components/ConditionsUtilisation";
 import UrgenceSOS from "./components/Urgence-SOS";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/register" element={<Register onClose={() => {}} onSwitchToLogin={() => {}} />} />
-        <Route path="/login" element={<Login onClose={() => {}} onSwitchToRegister={() => {}} />} />
-        <Route path="/professionals" element={<ProfessionalsList />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        {/* Routes protégées */}
+        <Route element={<ProtectedRoute />}>
+          <Route path="/professionals" element={<ProfessionalsList />} />
+          <Route path="/troubles" element={<Troubles />} />
+          <Route path="/troubles/:id" element={<Troubles />} />
+          <Route path="/temoignages" element={<Temoignages />} />
+          <Route path="/histoires/:id" element={<Histoire />} />
+          <Route path="/urgences" element={<UrgenceSOS />} />
+        </Route>
+        {/* Routes publiques */}
         <Route path="/share-experience" element={<ShareExperience />} />
         <Route path="/test" element={<h1>Test OK</h1>} />
-        <Route path="/troubles" element={<Troubles />} />
-        <Route path="/temoignages" element={<Temoignages />} />
         <Route path="/articles" element={<Articles />} />
         <Route path="/home" element={<Homepage />} />
         <Route path="/glossaire" element={<Glossaire />} />
         <Route path="/apropos" element={<APropos />} />
         <Route path="/articles/:id" element={<Articles />} />
-        <Route path="/histoires/:id" element={<Histoire />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/confidentialite" element={<Confidentialite />} />
         <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
-        <Route path="/urgences" element={<UrgenceSOS />} />
       </Routes>
     </Router>
   );
