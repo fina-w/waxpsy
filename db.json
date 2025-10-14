@@ -83,6 +83,375 @@
       "actif": true
     }
   ],
+  "professionnels": [
+    {
+      "id": 101,
+      "nom": "Dr. Khadija Diallo",
+      "email": "khadija.diallo@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre",
+      "diplome": "Doctorat en Psychiatrie - Université Cheikh Anta Diop",
+      "experience": "15 ans",
+      "adresse": "Cabinet Médical Fann, Rue Aimé Césaire, Dakar",
+      "telephone": "33 825 XX XX",
+      "tarif": "25000 FCFA",
+      "bio": "Spécialisée dans les troubles de l'humeur et l'anxiété. Approche bienveillante et culturellement adaptée.",
+      "langues": ["Français", "Wolof", "Anglais"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["09:00", "10:00", "14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "11:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-01T10:00:00Z"
+    },
+    {
+      "id": 102,
+      "nom": "M. Seydou Cissé",
+      "email": "seydou.cisse@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychologue Clinicien",
+      "diplome": "Master en Psychologie Clinique - UCAD",
+      "experience": "10 ans",
+      "adresse": "Centre de Santé Mentale Pikine, Dakar",
+      "telephone": "77 XXX XX XX",
+      "tarif": "20000 FCFA",
+      "bio": "Spécialisé en thérapie cognitivo-comportementale (TCC) pour l'anxiété et la dépression.",
+      "langues": ["Français", "Wolof", "Sérère"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mardi",
+          "heures": ["10:00", "11:00", "14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Samedi",
+          "heures": ["09:00", "10:00", "11:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-05T11:00:00Z"
+    },
+    {
+      "id": 103,
+      "nom": "Mme Awa Mbaye",
+      "email": "awa.mbaye@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychologue",
+      "diplome": "Master en Psychologie - Université Gaston Berger",
+      "experience": "8 ans",
+      "adresse": "Cabinet Liberté 6, Dakar",
+      "telephone": "70 XXX XX XX",
+      "tarif": "18000 FCFA",
+      "bio": "Accompagnement des troubles anxieux, phobies sociales et gestion du stress.",
+      "langues": ["Français", "Wolof"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["14:00", "15:00", "16:00", "17:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["10:00", "11:00", "14:00", "15:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-10T09:00:00Z"
+    },
+    {
+      "id": 104,
+      "nom": "Dr. Mamadou Diop",
+      "email": "mamadou.diop@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Addictologue",
+      "diplome": "Doctorat en Médecine, Spécialisation en Addictologie",
+      "experience": "12 ans",
+      "adresse": "Centre Hospitalier Fann, Dakar",
+      "telephone": "33 821 XX XX",
+      "tarif": "30000 FCFA",
+      "bio": "Spécialiste des addictions (alcool, drogues, comportements). Approche médicale et psychologique.",
+      "langues": ["Français", "Wolof", "Peul"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["09:00", "10:00", "11:00"]
+        },
+        {
+          "jour": "Mardi",
+          "heures": ["14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-12T13:00:00Z"
+    },
+    {
+      "id": 105,
+      "nom": "Dr. Bineta Sow",
+      "email": "bineta.sow@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre",
+      "diplome": "Doctorat en Psychiatrie - Université de Bordeaux",
+      "experience": "18 ans",
+      "adresse": "Clinique Psychiatrique Dantec, Dakar",
+      "telephone": "33 822 XX XX",
+      "tarif": "28000 FCFA",
+      "bio": "Spécialisée en dépression post-partum, troubles de l'humeur et santé mentale maternelle.",
+      "langues": ["Français", "Wolof", "Anglais"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["09:00", "10:00", "11:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-15T10:00:00Z"
+    },
+    {
+      "id": 106,
+      "nom": "M. Alioune Ndiaye",
+      "email": "alioune.ndiaye@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychologue",
+      "diplome": "Master en Psychologie - UCAD",
+      "experience": "7 ans",
+      "adresse": "Cabinet Plateau, Avenue Léopold Sédar Senghor, Dakar",
+      "telephone": "76 XXX XX XX",
+      "tarif": "20000 FCFA",
+      "bio": "Spécialisé en TOC, thérapie comportementale et gestion de l'anxiété.",
+      "langues": ["Français", "Wolof"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["10:00", "11:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Mardi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["14:00", "15:00", "16:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-18T11:30:00Z"
+    },
+    {
+      "id": 107,
+      "nom": "Dr. Aïda Thiam",
+      "email": "aida.thiam@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Pédopsychiatre",
+      "diplome": "Doctorat en Pédopsychiatrie - UCAD",
+      "experience": "11 ans",
+      "adresse": "Hôpital pour Enfants Albert Royer, Dakar",
+      "telephone": "33 824 XX XX",
+      "tarif": "25000 FCFA",
+      "bio": "Spécialisée dans les troubles neurodéveloppementaux chez l'enfant (TDAH, autisme).",
+      "langues": ["Français", "Wolof", "Diola"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mardi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "11:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-20T09:00:00Z"
+    },
+    {
+      "id": 108,
+      "nom": "Mme Coumba Dieng",
+      "email": "coumba.dieng@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychothérapeute EMDR",
+      "diplome": "Certification EMDR - Institut EMDR France",
+      "experience": "9 ans",
+      "adresse": "Cabinet Grand Yoff, Dakar",
+      "telephone": "77 XXX XX XX",
+      "tarif": "22000 FCFA",
+      "bio": "Spécialisée en thérapie EMDR pour traumatismes et TSPT. Approche douce et sécurisante.",
+      "langues": ["Français", "Wolof", "Sérère"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-22T14:00:00Z"
+    },
+    {
+      "id": 109,
+      "nom": "Dr. Omar Kane",
+      "email": "omar.kane@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre",
+      "diplome": "Doctorat en Psychiatrie - Université de Dakar",
+      "experience": "20 ans",
+      "adresse": "Centre Hospitalier National Psychiatrique Fann, Dakar",
+      "telephone": "33 825 XX XX",
+      "tarif": "30000 FCFA",
+      "bio": "Expert en troubles psychotiques (schizophrénie, délires). Plus de 20 ans d'expérience.",
+      "langues": ["Français", "Wolof", "Soninké"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["09:00", "10:00", "11:00"]
+        },
+        {
+          "jour": "Mardi",
+          "heures": ["09:00", "10:00", "14:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-25T10:30:00Z"
+    },
+    {
+      "id": 110,
+      "nom": "Dr. Fatima Diallo",
+      "email": "fatima.diallo@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre - TCA",
+      "diplome": "Doctorat en Psychiatrie, Spécialisation TCA",
+      "experience": "13 ans",
+      "adresse": "Clinique Mermoz, Dakar",
+      "telephone": "33 860 XX XX",
+      "tarif": "27000 FCFA",
+      "bio": "Spécialisée dans les troubles du comportement alimentaire (anorexie, boulimie).",
+      "langues": ["Français", "Wolof", "Anglais"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mardi",
+          "heures": ["10:00", "11:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Samedi",
+          "heures": ["09:00", "10:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-28T11:00:00Z"
+    }
+  ],
+  "administrateurs": [
+    {
+      "id": 1,
+      "nom": "Admin Principal",
+      "email": "admin@waxpsy.sn",
+      "motDePasse": "adminpassword123",
+      "role": "administrateur",
+      "permissions": ["all"],
+      "dateCreation": "2025-08-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "nom": "Moderateur",
+      "email": "moderateur@waxpsy.sn",
+      "motDePasse": "modpassword123",
+      "role": "moderateur",
+      "permissions": ["moderation", "validation"],
+      "dateCreation": "2025-08-01T00:00:00Z"
+    }
+  ],
+  "favoris": [
+    {
+      "id": 1,
+      "utilisateurId": 1,
+      "typeContenu": "article",
+      "contenuId": 1,
+      "dateAjout": "2025-10-16T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "utilisateurId": 1,
+      "typeContenu": "temoignage",
+      "contenuId": 3,
+      "dateAjout": "2025-10-20T14:00:00Z"
+    },
+    {
+      "id": 3,
+      "utilisateurId": 2,
+      "typeContenu": "article",
+      "contenuId": 4,
+      "dateAjout": "2025-10-18T11:30:00Z"
+    },
+    {
+      "id": 4,
+      "utilisateurId": 3,
+      "typeContenu": "histoire",
+      "contenuId": 3,
+      "dateAjout": "2025-10-22T09:15:00Z"
+    },
+    {
+      "id": 5,
+      "utilisateurId": 5,
+      "typeContenu": "article",
+      "contenuId": 13,
+      "dateAjout": "2025-10-25T16:00:00Z"
+    }
+  ],
   "temoignages": [
     {
       "id": "1",
