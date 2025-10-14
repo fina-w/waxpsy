@@ -5,13 +5,13 @@ import { Header } from './Header';
 const Confidentialite: React.FC = () => {
   const developpeurs = [
     {
-      nom: "Ndeye Binta BADIANE",
+      nom: "Binta BADIANE",
       telephone: "+221 78 016 64 06",
       email: "binetabadiane6@gmail.com"
     },
     {
       nom: "Safiétou DIANGAR",
-      telephone: "774833965",
+      telephone: "+221 77 483 39 65",
       email: "safietoudiangarecfpt@gmail.com"
     }
   ];
