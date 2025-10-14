@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/login";
+
 import Register from "./components/Register";
+import Login from "./components/Login";
 import Troubles from "./components/Troubles";
 import Temoignages from "./components/Temoignages";
 import ProfessionalsList from "./components/ProfessionalsList";
@@ -18,21 +18,12 @@ import ConditionsUtilisation from "./components/ConditionsUtilisation";
 import UrgenceSOS from "./components/Urgence-SOS";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      setIsAuthenticated(!!localStorage.getItem('user'));
-    };
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="/home" /> : <Login setIsAuthenticated={setIsAuthenticated} />} />
-        <Route path="/register" element={isAuthenticated ? <Navigate to="/home" /> : <Register />} />
+        <Route path="/" element={<Navigate to="/home" />} />
+        <Route path="/register" element={<Register onClose={() => {}} onSwitchToLogin={() => {}} />} />
+        <Route path="/login" element={<Login onClose={() => {}} onSwitchToRegister={() => {}} />} />
         <Route path="/professionals" element={<ProfessionalsList />} />
         <Route path="/share-experience" element={<ShareExperience />} />
         <Route path="/test" element={<h1>Test OK</h1>} />

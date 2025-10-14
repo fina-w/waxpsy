@@ -54,7 +54,16 @@
       "dateInscription": "2025-10-05T13:00:00Z",
       "actif": true
     },
-    
+
+    {
+      "id": 7,
+      "nom": "Khadim Diop",
+      "email": "khadim.diop@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-10-10T12:00:00Z",
+      "actif": true
+    },
     {
       "id": 8,
       "nom": "Ousmane Cissé",
@@ -218,7 +227,7 @@
       "diplome": "Doctorat en Psychiatrie - Université de Bordeaux",
       "experience": "18 ans",
       "adresse": "Clinique Psychiatrique Dantec, Dakar",
-      "telephone": "33 822 XX XX",
+      "telephone": "33 822 18 22",
       "tarif": "28000 FCFA",
       "bio": "Spécialisée en dépression post-partum, troubles de l'humeur et santé mentale maternelle.",
       "langues": ["Français", "Wolof", "Anglais"],
@@ -1810,6 +1819,7 @@
       "causes": "Facteurs génétiques, neurologiques et environnementaux. Un dysfonctionnement des circuits cérébraux impliquant la sérotonine.",
       "traitements": "Thérapie cognitivo-comportementale (TCC), médicaments sérotoninergiques (ISRS), thérapie d'exposition avec prévention de la réponse.",
       "tags": ["anxiété", "obsessions", "compulsions", "adulte"]
-    }
+    }]
+}
     
       

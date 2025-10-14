@@ -35,22 +35,47 @@ const Register: React.FC<RegisterProps> = ({ onClose, onSwitchToLogin }) => {
       return;
     }
 
+    if (!formData.nom || !formData.email || !formData.motDePasse) {
+      setError('Tous les champs sont requis');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // In a real app, this would be an API call
-      // For now, we'll just show success
-      setSuccess('Inscription réussie ! Vous pouvez maintenant vous connecter.');
-      setTimeout(() => {
-        onSwitchToLogin();
-      }, 2000);
-    } catch (err) {
-      setError('Erreur lors de l\'inscription');
+      const response = await fetch('http://localhost:3000/utilisateurs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: formData.nom, email: formData.email, motDePasse: formData.motDePasse }),
+      });
+      if (response.ok) {
+        setSuccess('Inscription réussie ! Vous pouvez maintenant vous connecter.');
+        setTimeout(() => {
+          onSwitchToLogin();
+        }, 2000);
+      } else {
+        setError(`Échec de l'inscription: ${response.status} ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'inscription:', error);
+      setError(`Erreur lors de l'inscription: ${error instanceof Error ? error.message : String(error)}`);
     }
     setLoading(false);
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
+      <div className="flex w-full max-w-4xl mx-4 bg-white rounded-lg shadow-xl overflow-hidden">
+        {/* Image Section */}
+        <div className="hidden md:block w-2/5">
+          <img
+            src="/login-register.png"
+            alt="Register"
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        {/* Form Section */}
+        <div className="w-full md:w-3/5 p-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Inscription</h2>
           <button
@@ -148,6 +173,7 @@ const Register: React.FC<RegisterProps> = ({ onClose, onSwitchToLogin }) => {
           >
             Déjà un compte ? Se connecter
           </button>
+        </div>
         </div>
       </div>
     </div>

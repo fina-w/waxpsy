@@ -32,21 +32,24 @@ const ProfessionalsList: React.FC = () => {
         const response = await fetch('/db.json');
         if (!response.ok) throw new Error('Failed to fetch professionals');
         const data = await response.json();
-        const professionnelsData = data.professionnels.map((pro: any) => ({
-          id: pro.id.toString(),
-          nom: pro.nom,
-          specialite: pro.specialite,
-          adresse: pro.adresse,
-          telephone: pro.telephone,
-          email: pro.email,
-          description: pro.bio,
-          verification: pro.verifiee,
-          langues: pro.langues,
-          diplome: pro.diplome,
-          experience: pro.experience,
-          tarif: pro.tarif,
-          creneauxDisponibles: pro.creneauxDisponibles
-        }));
+        const professionnelsData = data.professionnels.map((pro: unknown) => {
+          const p = pro as Record<string, unknown>;
+          return {
+            id: String(p.id),
+            nom: String(p.nom),
+            specialite: String(p.specialite),
+            adresse: String(p.adresse),
+            telephone: String(p.telephone),
+            email: String(p.email),
+            description: String(p.bio),
+            verification: Boolean(p.verifiee),
+            langues: Array.isArray(p.langues) ? p.langues.map(String) : [],
+            diplome: String(p.diplome),
+            experience: String(p.experience),
+            tarif: String(p.tarif),
+            creneauxDisponibles: Array.isArray(p.creneauxDisponibles) ? p.creneauxDisponibles as { jour: string; heures: string[] }[] : []
+          };
+        });
         setProfessionnels(professionnelsData);
         setFilteredProfessionnels(professionnelsData);
       } catch (err) {

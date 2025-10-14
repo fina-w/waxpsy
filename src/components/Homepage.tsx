@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "./footer.tsx";
 import type { Trouble, Temoignage } from "../types/types";
@@ -13,30 +13,30 @@ const Homepage: React.FC = () => {
   const [currentTroubleIndex, setCurrentTroubleIndex] = useState(0);
   const [currentTemoignageIndex, setCurrentTemoignageIndex] = useState(0);
 
-  const nextTroubles = () => {
+  const nextTroubles = useCallback(() => {
     setCurrentTroubleIndex((prev) =>
       prev + 3 >= troubles.length ? 0 : prev + 3
     );
-  };
+  }, [troubles.length]);
 
-  const prevTroubles = () => {
+  const prevTroubles = useCallback(() => {
     setCurrentTroubleIndex((prev) =>
       prev - 3 < 0 ? Math.max(0, troubles.length - 3) : prev - 3
     );
-  };
+  }, [troubles.length]);
 
   // Pour les témoignages
-  const nextTemoignages = () => {
+  const nextTemoignages = useCallback(() => {
     setCurrentTemoignageIndex((prev) =>
       prev + 3 >= temoignages.length ? 0 : prev + 3
     );
-  };
+  }, [temoignages.length]);
 
-  const prevTemoignages = () => {
+  const prevTemoignages = useCallback(() => {
     setCurrentTemoignageIndex((prev) =>
       prev - 3 < 0 ? Math.max(0, temoignages.length - 3) : prev - 3
     );
-  };
+  }, [temoignages.length]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,14 +44,14 @@ const Homepage: React.FC = () => {
         setLoading(true);
 
         // Récupération des troubles
-        const troublesRes = await fetch("http://localhost:3000/troubles");
+        const troublesRes = await fetch("/api/troubles");
         if (!troublesRes.ok)
           throw new Error("Erreur lors du chargement des troubles");
         const troublesData = await troublesRes.json();
 
         // Récupération des témoignages approuvés
         const temoignagesRes = await fetch(
-          "http://localhost:3000/temoignages?statut=approuvé"
+          "/api/temoignages?statut=approuvé"
         );
         if (!temoignagesRes.ok)
           throw new Error("Erreur lors du chargement des témoignages");
@@ -81,7 +81,7 @@ const Homepage: React.FC = () => {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [troubles.length, currentTroubleIndex]);
+  }, [troubles.length, currentTroubleIndex, nextTroubles]);
 
   // Auto-scroll pour les témoignages (toutes les 5 secondes)
   useEffect(() => {
@@ -91,7 +91,7 @@ const Homepage: React.FC = () => {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [temoignages.length, currentTemoignageIndex]);
+  }, [temoignages.length, currentTemoignageIndex, nextTemoignages]);
 
   const handleTroubleClick = (id: string) => {
     navigate(`/troubles/${id}`);
