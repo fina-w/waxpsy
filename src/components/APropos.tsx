@@ -26,7 +26,7 @@ const APropos: React.FC = () => {
            gap-12">
             <div className="pl-30 md:w-1/2">
               <img 
-                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                src="public/raise_awairness.jpg" 
                 alt="Notre mission"
                 className="rounded-lg shadow-xl w-120 h-100 "
               />
@@ -50,7 +50,7 @@ const APropos: React.FC = () => {
       </section>
 
       {/* Nos Valeurs */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Nos Valeurs</h2>
@@ -92,7 +92,7 @@ const APropos: React.FC = () => {
       </section>
 
       {/* Notre Équipe */}
-      <section className="py-16 bg-white">
+      <section className="py-16 ">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Notre Équipe</h2>

@@ -20,13 +20,15 @@ const Histoire: React.FC = () => {
   useEffect(() => {
     const fetchHistoire = async () => {
       try {
-        const response = await fetch(`/api/histoires/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch histoire');
+        const response = await fetch('/db.json');
+        if (!response.ok) throw new Error('Échec de la récupération des données');
         const data = await response.json();
-        setHistoire(data);
+        const foundHistoire = data.histoires.find((histoire: Histoire) => histoire.id === id);
+        if (!foundHistoire) throw new Error('Histoire non trouvée');
+        setHistoire(foundHistoire);
       } catch (err) {
         console.error('Fetch error:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        setError(err instanceof Error ? err.message : 'Erreur inconnue');
       } finally {
         setLoading(false);
       }
@@ -39,7 +41,7 @@ const Histoire: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center">Loading histoire...</div>
+        <div className="container mx-auto px-4 py-8 text-center">Chargement de l'histoire...</div>
       </div>
     );
   }
@@ -47,7 +49,7 @@ const Histoire: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error}</div>
+        <div className="container mx-auto px-4 py-8 text-center text-red-600">Erreur: {error}</div>
       </div>
     );
   }
@@ -55,7 +57,7 @@ const Histoire: React.FC = () => {
   if (!histoire) {
     return (
       <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center">Histoire not found</div>
+        <div className="container mx-auto px-4 py-8 text-center">Histoire non trouvée</div>
       </div>
     );
   }

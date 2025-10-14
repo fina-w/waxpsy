@@ -1,0 +1,2134 @@
+{
+  "utilisateurs": [
+    {
+      "id": 1,
+      "nom": "Aminata Diallo",
+      "email": "aminata.diallo@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-09-10T10:00:00Z",
+      "actif": true
+    },
+    {
+      "id": 2,
+      "nom": "Moussa Sarr",
+      "email": "moussa.sarr@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-09-15T14:30:00Z",
+      "actif": true
+    },
+    {
+      "id": 3,
+      "nom": "Fatou Ndiaye",
+      "email": "fatou.ndiaye@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-09-20T09:15:00Z",
+      "actif": true
+    },
+    {
+      "id": 4,
+      "nom": "Cheikh Ba",
+      "email": "cheikh.ba@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-09-25T16:45:00Z",
+      "actif": true
+    },
+    {
+      "id": 5,
+      "nom": "Mariama Seck",
+      "email": "mariama.seck@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-10-01T11:20:00Z",
+      "actif": true
+    },
+    {
+      "id": 6,
+      "nom": "Ibrahima Fall",
+      "email": "ibrahima.fall@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-10-05T13:00:00Z",
+      "actif": true
+    },
+    
+    {
+      "id": 8,
+      "nom": "Ousmane Cissé",
+      "email": "ousmane.cisse@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-10-12T10:45:00Z",
+      "actif": true
+    },
+    {
+      "id": 9,
+      "nom": "Aïssatou Sy",
+      "email": "aissatou.sy@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-10-15T14:00:00Z",
+      "actif": true
+    },
+    {
+      "id": 10,
+      "nom": "Demba Gueye",
+      "email": "demba.gueye@email.com",
+      "motDePasse": "password123",
+      "role": "utilisateur",
+      "dateInscription": "2025-10-18T09:30:00Z",
+      "actif": true
+    }
+  ],
+  "professionnels": [
+    {
+      "id": 101,
+      "nom": "Dr. Khadija Diallo",
+      "email": "khadija.diallo@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre",
+      "diplome": "Doctorat en Psychiatrie - Université Cheikh Anta Diop",
+      "experience": "15 ans",
+      "adresse": "Cabinet Médical Fann, Rue Aimé Césaire, Dakar",
+      "telephone": "33 825 XX XX",
+      "tarif": "25000 FCFA",
+      "bio": "Spécialisée dans les troubles de l'humeur et l'anxiété. Approche bienveillante et culturellement adaptée.",
+      "langues": ["Français", "Wolof", "Anglais"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["09:00", "10:00", "14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "11:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-01T10:00:00Z"
+    },
+    {
+      "id": 102,
+      "nom": "M. Seydou Cissé",
+      "email": "seydou.cisse@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychologue Clinicien",
+      "diplome": "Master en Psychologie Clinique - UCAD",
+      "experience": "10 ans",
+      "adresse": "Centre de Santé Mentale Pikine, Dakar",
+      "telephone": "77 XXX XX XX",
+      "tarif": "20000 FCFA",
+      "bio": "Spécialisé en thérapie cognitivo-comportementale (TCC) pour l'anxiété et la dépression.",
+      "langues": ["Français", "Wolof", "Sérère"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mardi",
+          "heures": ["10:00", "11:00", "14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Samedi",
+          "heures": ["09:00", "10:00", "11:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-05T11:00:00Z"
+    },
+    {
+      "id": 103,
+      "nom": "Mme Awa Mbaye",
+      "email": "awa.mbaye@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychologue",
+      "diplome": "Master en Psychologie - Université Gaston Berger",
+      "experience": "8 ans",
+      "adresse": "Cabinet Liberté 6, Dakar",
+      "telephone": "70 XXX XX XX",
+      "tarif": "18000 FCFA",
+      "bio": "Accompagnement des troubles anxieux, phobies sociales et gestion du stress.",
+      "langues": ["Français", "Wolof"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["14:00", "15:00", "16:00", "17:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["10:00", "11:00", "14:00", "15:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-10T09:00:00Z"
+    },
+    {
+      "id": 104,
+      "nom": "Dr. Mamadou Diop",
+      "email": "mamadou.diop@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Addictologue",
+      "diplome": "Doctorat en Médecine, Spécialisation en Addictologie",
+      "experience": "12 ans",
+      "adresse": "Centre Hospitalier Fann, Dakar",
+      "telephone": "33 821 XX XX",
+      "tarif": "30000 FCFA",
+      "bio": "Spécialiste des addictions (alcool, drogues, comportements). Approche médicale et psychologique.",
+      "langues": ["Français", "Wolof", "Peul"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["09:00", "10:00", "11:00"]
+        },
+        {
+          "jour": "Mardi",
+          "heures": ["14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-12T13:00:00Z"
+    },
+    {
+      "id": 105,
+      "nom": "Dr. Bineta Sow",
+      "email": "bineta.sow@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre",
+      "diplome": "Doctorat en Psychiatrie - Université de Bordeaux",
+      "experience": "18 ans",
+      "adresse": "Clinique Psychiatrique Dantec, Dakar",
+      "telephone": "33 822 XX XX",
+      "tarif": "28000 FCFA",
+      "bio": "Spécialisée en dépression post-partum, troubles de l'humeur et santé mentale maternelle.",
+      "langues": ["Français", "Wolof", "Anglais"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["09:00", "10:00", "11:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-15T10:00:00Z"
+    },
+    {
+      "id": 106,
+      "nom": "M. Alioune Ndiaye",
+      "email": "alioune.ndiaye@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychologue",
+      "diplome": "Master en Psychologie - UCAD",
+      "experience": "7 ans",
+      "adresse": "Cabinet Plateau, Avenue Léopold Sédar Senghor, Dakar",
+      "telephone": "76 XXX XX XX",
+      "tarif": "20000 FCFA",
+      "bio": "Spécialisé en TOC, thérapie comportementale et gestion de l'anxiété.",
+      "langues": ["Français", "Wolof"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["10:00", "11:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Mardi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["14:00", "15:00", "16:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-18T11:30:00Z"
+    },
+    {
+      "id": 107,
+      "nom": "Dr. Aïda Thiam",
+      "email": "aida.thiam@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Pédopsychiatre",
+      "diplome": "Doctorat en Pédopsychiatrie - UCAD",
+      "experience": "11 ans",
+      "adresse": "Hôpital pour Enfants Albert Royer, Dakar",
+      "telephone": "33 824 XX XX",
+      "tarif": "25000 FCFA",
+      "bio": "Spécialisée dans les troubles neurodéveloppementaux chez l'enfant (TDAH, autisme).",
+      "langues": ["Français", "Wolof", "Diola"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mardi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "11:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-20T09:00:00Z"
+    },
+    {
+      "id": 108,
+      "nom": "Mme Coumba Dieng",
+      "email": "coumba.dieng@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychothérapeute EMDR",
+      "diplome": "Certification EMDR - Institut EMDR France",
+      "experience": "9 ans",
+      "adresse": "Cabinet Grand Yoff, Dakar",
+      "telephone": "77 XXX XX XX",
+      "tarif": "22000 FCFA",
+      "bio": "Spécialisée en thérapie EMDR pour traumatismes et TSPT. Approche douce et sécurisante.",
+      "langues": ["Français", "Wolof", "Sérère"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["14:00", "15:00", "16:00"]
+        },
+        {
+          "jour": "Mercredi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Vendredi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-22T14:00:00Z"
+    },
+    {
+      "id": 109,
+      "nom": "Dr. Omar Kane",
+      "email": "omar.kane@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre",
+      "diplome": "Doctorat en Psychiatrie - Université de Dakar",
+      "experience": "20 ans",
+      "adresse": "Centre Hospitalier National Psychiatrique Fann, Dakar",
+      "telephone": "33 825 XX XX",
+      "tarif": "30000 FCFA",
+      "bio": "Expert en troubles psychotiques (schizophrénie, délires). Plus de 20 ans d'expérience.",
+      "langues": ["Français", "Wolof", "Soninké"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Lundi",
+          "heures": ["09:00", "10:00", "11:00"]
+        },
+        {
+          "jour": "Mardi",
+          "heures": ["09:00", "10:00", "14:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "11:00", "14:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-25T10:30:00Z"
+    },
+    {
+      "id": 110,
+      "nom": "Dr. Fatima Diallo",
+      "email": "fatima.diallo@waxpsy.sn",
+      "motDePasse": "profpassword123",
+      "role": "professionnel",
+      "specialite": "Psychiatre - TCA",
+      "diplome": "Doctorat en Psychiatrie, Spécialisation TCA",
+      "experience": "13 ans",
+      "adresse": "Clinique Mermoz, Dakar",
+      "telephone": "33 860 XX XX",
+      "tarif": "27000 FCFA",
+      "bio": "Spécialisée dans les troubles du comportement alimentaire (anorexie, boulimie).",
+      "langues": ["Français", "Wolof", "Anglais"],
+      "creneauxDisponibles": [
+        {
+          "jour": "Mardi",
+          "heures": ["10:00", "11:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Jeudi",
+          "heures": ["09:00", "10:00", "14:00", "15:00"]
+        },
+        {
+          "jour": "Samedi",
+          "heures": ["09:00", "10:00"]
+        }
+      ],
+      "verifiee": true,
+      "dateInscription": "2025-08-28T11:00:00Z"
+    }
+  ],
+  "administrateurs": [
+    {
+      "id": 1,
+      "nom": "Admin Principal",
+      "email": "admin@waxpsy.sn",
+      "motDePasse": "adminpassword123",
+      "role": "administrateur",
+      "permissions": ["all"],
+      "dateCreation": "2025-08-01T00:00:00Z"
+    },
+    {
+      "id": 2,
+      "nom": "Moderateur",
+      "email": "moderateur@waxpsy.sn",
+      "motDePasse": "modpassword123",
+      "role": "moderateur",
+      "permissions": ["moderation", "validation"],
+      "dateCreation": "2025-08-01T00:00:00Z"
+    }
+  ],
+  "favoris": [
+    {
+      "id": 1,
+      "utilisateurId": 1,
+      "typeContenu": "article",
+      "contenuId": 1,
+      "dateAjout": "2025-10-16T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "utilisateurId": 1,
+      "typeContenu": "temoignage",
+      "contenuId": 3,
+      "dateAjout": "2025-10-20T14:00:00Z"
+    },
+    {
+      "id": 3,
+      "utilisateurId": 2,
+      "typeContenu": "article",
+      "contenuId": 4,
+      "dateAjout": "2025-10-18T11:30:00Z"
+    },
+    {
+      "id": 4,
+      "utilisateurId": 3,
+      "typeContenu": "histoire",
+      "contenuId": 3,
+      "dateAjout": "2025-10-22T09:15:00Z"
+    },
+    {
+      "id": 5,
+      "utilisateurId": 5,
+      "typeContenu": "article",
+      "contenuId": 13,
+      "dateAjout": "2025-10-25T16:00:00Z"
+    }
+  ],
+  "temoignages": [
+    {
+      "id": "1",
+      "utilisateurId": 1,
+      "titre": "Sortir du silence",
+      "contenu": "J'ai souffert de dépression post-partum après la naissance de mon fils. Dans mon quartier, on disait que c'était 'le mauvais œil'. Trouver des mots sur ma souffrance et lire d'autres histoires m'a sauvée. N'ayez pas honte de demander de l'aide.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-20T11:00:00Z",
+      "updatedAt": "2025-10-21T08:00:00Z"
+    },
+    {
+      "id": "2",
+      "utilisateurId": 2,
+      "titre": "Mon anxiété sociale",
+      "contenu": "Je n'arrivais plus à sortir de chez moi. Le simple fait d'aller à la boutique du coin était une épreuve. Je suis en thérapie maintenant et je voulais partager mon histoire pour que d'autres sachent qu'ils ne sont pas seuls.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-22T16:45:00Z",
+      "updatedAt": "2025-10-23T09:00:00Z"
+    },
+    {
+      "id": "3",
+      "utilisateurId": 3,
+      "titre": "Ma bataille contre l'anorexie",
+      "contenu": "Pendant 3 ans, j'ai lutté contre l'anorexie. Je pesais 35 kg et mes parents ne savaient plus quoi faire. Grâce à une équipe médicale formidable et à ma détermination, j'ai repris 15 kg et j'apprends à m'aimer comme je suis.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-18T14:20:00Z",
+      "updatedAt": "2025-10-19T10:00:00Z"
+    },
+    {
+      "id": "4",
+      "utilisateurId": 4,
+      "titre": "Vivre avec la schizophrénie",
+      "contenu": "On m'a diagnostiqué schizophrène à 24 ans. Les voix, les délires... c'était l'enfer. Mais avec le bon traitement et un suivi régulier, j'ai retrouvé une vie normale. Je travaille, j'ai des amis. La maladie mentale n'est pas une condamnation.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-15T11:30:00Z",
+      "updatedAt": "2025-10-16T08:00:00Z"
+    },
+    {
+      "id": "5",
+      "utilisateurId": 5,
+      "titre": "Mon fils et son TDAH",
+      "contenu": "En tant que mère, c'était difficile d'accepter le diagnostic de TDAH pour mon fils. Mais comprendre son fonctionnement m'a permis de mieux l'accompagner. Il est brillant à sa façon et je suis fière de lui.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-12T09:15:00Z",
+      "updatedAt": "2025-10-13T14:00:00Z"
+    },
+    {
+      "id": "6",
+      "utilisateurId": 6,
+      "titre": "Sortir de l'addiction à l'alcool",
+      "contenu": "L'alcool contrôlait ma vie. J'ai perdu mon travail, ma femme menaçait de partir. Le jour où j'ai accepté que j'étais malade, j'ai commencé à guérir. 2 ans de sobriété aujourd'hui.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-08T16:00:00Z",
+      "updatedAt": "2025-10-09T11:00:00Z"
+    },
+    {
+      "id": "7",
+      "utilisateurId": 7,
+      "titre": "Mon burn-out d'enseignante",
+      "contenu": "Après 15 ans d'enseignement, j'ai fait un burn-out sévère. Je ne reconnaissais plus le métier que j'aimais. Prendre soin de moi n'était pas un luxe mais une nécessité pour continuer à aider mes élèves.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-05T10:45:00Z",
+      "updatedAt": "2025-10-06T09:30:00Z"
+    },
+    {
+      "id": "8",
+      "utilisateurId": 8,
+      "titre": "Mes TOC ne me définissent plus",
+      "contenu": "Vérifications compulsives, rituels interminables... Les TOC ont gâché ma jeunesse. La thérapie comportementale a changé ma vie. Je contrôle maintenant mes pensées obsessionnelles au lieu qu'elles me contrôlent.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-30T13:20:00Z",
+      "updatedAt": "2025-10-01T08:00:00Z"
+    },
+    {
+      "id": "9",
+      "utilisateurId": 9,
+      "titre": "Dépression après un divorce",
+      "contenu": "Le divorce m'a plongé dans une dépression profonde. Je ne voyais plus aucune issue. Consulter un psychologue m'a sauvé. J'ai appris que pleurer n'est pas une faiblesse et demander de l'aide est un acte de courage.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-25T15:00:00Z",
+      "updatedAt": "2025-09-26T10:00:00Z"
+    },
+    {
+      "id": "10",
+      "utilisateurId": 10,
+      "titre": "Guérir d'un traumatisme d'enfance",
+      "contenu": "Pendant 20 ans, j'ai porté un traumatisme d'enfance en silence. La thérapie EMDR m'a libéré d'un poids que je croyais éternel. On peut guérir, même des blessures les plus anciennes.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-20T11:30:00Z",
+      "updatedAt": "2025-09-21T09:00:00Z"
+    },
+    {
+      "id": "11",
+      "utilisateurId": 3,
+      "titre": "Ma phobie sociale vaincue",
+      "contenu": "J'ai évité toutes les interactions sociales pendant des années. Aujourd'hui, grâce à la TCC, je peux aller à des événements sans paniquer. C'est un combat quotidien mais j'avance.",
+      "statut": "en attente",
+      "createdAt": "2025-10-28T14:00:00Z",
+      "updatedAt": "2025-10-28T14:00:00Z"
+    },
+    {
+      "id": "12",
+      "utilisateurId": 5,
+      "titre": "Accepter mon trouble bipolaire",
+      "contenu": "Le diagnostic a été un choc. Mais comprendre mes phases maniaques et dépressives m'a permis de mieux les gérer. Je ne suis pas mon trouble, j'ai un trouble que je peux traiter.",
+      "statut": "en attente",
+      "createdAt": "2025-10-30T10:00:00Z",
+      "updatedAt": "2025-10-30T10:00:00Z"
+    }
+  ],
+  "commentaires": [
+    {
+      "id": "1",
+      "articleId": 1,
+      "utilisateurId": 1,
+      "contenu": "Merci beaucoup pour cet article. Il met des mots sur ce que vit mon fils à l'école. Très éclairant.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-16T09:15:20Z",
+      "updatedAt": "2025-10-16T09:15:20Z"
+    },
+    {
+      "id": "2",
+      "articleId": 1,
+      "utilisateurId": 2,
+      "contenu": "En tant qu'enseignant, je suis confronté à cela tous les jours. Comment mieux aider ces élèves ?",
+      "statut": "approuvé",
+      "createdAt": "2025-10-17T11:40:05Z",
+      "updatedAt": "2025-10-17T12:00:00Z"
+    },
+    {
+      "id": "3",
+      "articleId": 3,
+      "utilisateurId": 4,
+      "contenu": "Article qui tombe à point. J'ai enfin compris que ma tristesse n'était pas normale. Je vais consulter.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-23T14:30:00Z",
+      "updatedAt": "2025-09-23T15:00:00Z"
+    },
+    {
+      "id": "4",
+      "articleId": 3,
+      "utilisateurId": 7,
+      "contenu": "Bravo pour cet article courageux. La stigmatisation tue plus que la maladie elle-même.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-24T10:00:00Z",
+      "updatedAt": "2025-09-24T10:30:00Z"
+    },
+    {
+      "id": "5",
+      "articleId": 4,
+      "utilisateurId": 3,
+      "contenu": "Je me reconnais totalement dans cette description. L'anxiété m'empêche de vivre pleinement.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-06T15:20:00Z",
+      "updatedAt": "2025-10-06T16:00:00Z"
+    },
+    {
+      "id": "6",
+      "articleId": 5,
+      "utilisateurId": 8,
+      "contenu": "Mon frère est bipolaire. Cet article m'aide à mieux comprendre ce qu'il traverse.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-11T11:00:00Z",
+      "updatedAt": "2025-09-11T11:30:00Z"
+    },
+    {
+      "id": "7",
+      "articleId": 6,
+      "utilisateurId": 5,
+      "contenu": "Merci pour ces informations précieuses sur l'autisme. J'aurais aimé les avoir plus tôt.",
+      "statut": "approuvé",
+      "createdAt": "2025-08-29T09:30:00Z",
+      "updatedAt": "2025-08-29T10:00:00Z"
+    },
+    {
+      "id": "8",
+      "articleId": 7,
+      "utilisateurId": 9,
+      "contenu": "La thérapie EMDR a changé ma vie après mon accident. Je recommande vivement.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-02T16:45:00Z",
+      "updatedAt": "2025-10-02T17:00:00Z"
+    },
+    {
+      "id": "9",
+      "articleId": 8,
+      "utilisateurId": 6,
+      "contenu": "Enfin un article qui explique bien les TOC sans jugement. Merci.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-16T14:20:00Z",
+      "updatedAt": "2025-09-16T14:45:00Z"
+    },
+    {
+      "id": "10",
+      "articleId": 9,
+      "utilisateurId": 10,
+      "contenu": "Mon oncle est schizophrène. Ces informations aident toute la famille à mieux l'accompagner.",
+      "statut": "approuvé",
+      "createdAt": "2025-08-21T13:00:00Z",
+      "updatedAt": "2025-08-21T13:30:00Z"
+    },
+    {
+      "id": "11",
+      "articleId": 10,
+      "utilisateurId": 4,
+      "contenu": "L'addiction a détruit mon mariage. J'espère que cet article aidera d'autres personnes à agir plus tôt.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-29T11:15:00Z",
+      "updatedAt": "2025-09-29T11:45:00Z"
+    },
+    {
+      "id": "12",
+      "articleId": 11,
+      "utilisateurId": 7,
+      "contenu": "Le burnout est tellement réel dans nos écoles. Merci d'en parler.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-13T10:30:00Z",
+      "updatedAt": "2025-10-13T11:00:00Z"
+    },
+    {
+      "id": "13",
+      "articleId": 12,
+      "utilisateurId": 3,
+      "contenu": "Ma sœur souffre d'anorexie. Votre article m'aide à mieux la comprendre et la soutenir.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-09T15:00:00Z",
+      "updatedAt": "2025-10-09T15:30:00Z"
+    },
+    {
+      "id": "14",
+      "articleId": 13,
+      "utilisateurId": 1,
+      "contenu": "J'ai vécu une dépression post-partum terrible. Personne n'en parlait autour de moi. Merci pour cet article.",
+      "statut": "approuvé",
+      "createdAt": "2025-09-19T12:00:00Z",
+      "updatedAt": "2025-09-19T12:30:00Z"
+    },
+    {
+      "id": "15",
+      "articleId": 14,
+      "utilisateurId": 7,
+      "contenu": "L'anxiété sociale m'a isolée pendant des années. Je suis contente qu'on en parle enfin.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-21T11:20:00Z",
+      "updatedAt": "2025-10-21T11:45:00Z"
+    },
+    {
+      "id": "16",
+      "articleId": 15,
+      "utilisateurId": 2,
+      "contenu": "J'ai découvert mon TDAH à 35 ans. Cet article aurait changé ma vie si je l'avais lu plus tôt.",
+      "statut": "en attente",
+      "createdAt": "2025-10-26T14:00:00Z",
+      "updatedAt": "2025-10-26T14:00:00Z"
+    },
+    {
+      "id": "17",
+      "articleId": 2,
+      "utilisateurId": 6,
+      "contenu": "Article fascinant et inquiétant à la fois. L'esprit humain est complexe.",
+      "statut": "en attente",
+      "createdAt": "2025-10-19T16:30:00Z",
+      "updatedAt": "2025-10-19T16:30:00Z"
+    },
+    {
+      "id": "18",
+      "articleId": 4,
+      "utilisateurId": 9,
+      "contenu": "L'anxiété généralisée ruine ma vie. Où puis-je trouver de l'aide à Dakar ?",
+      "statut": "approuvé",
+      "createdAt": "2025-10-07T13:45:00Z",
+      "updatedAt": "2025-10-07T14:00:00Z"
+    }
+  ],
+  "rendezVous": [
+    {
+      "id": "1",
+      "utilisateurId": 1,
+      "professionnelId": 101,
+      "date": "2025-11-10T10:00:00Z",
+      "motif": "Première consultation pour mon fils",
+      "statut": "confirmé",
+      "createdAt": "2025-11-01T14:30:00Z"
+    },
+    {
+      "id": "2",
+      "utilisateurId": 2,
+      "professionnelId": 102,
+      "date": "2025-11-12T15:00:00Z",
+      "motif": "Suivi pour anxiété",
+      "statut": "confirmé",
+      "createdAt": "2025-11-03T18:00:00Z"
+    },
+    {
+      "id": "3",
+      "utilisateurId": 3,
+      "professionnelId": 103,
+      "date": "2025-11-15T14:00:00Z",
+      "motif": "Anxiété sociale et panique",
+      "statut": "confirmé",
+      "createdAt": "2025-11-05T10:00:00Z"
+    },
+    {
+      "id": "4",
+      "utilisateurId": 4,
+      "professionnelId": 109,
+      "date": "2025-11-18T09:00:00Z",
+      "motif": "Suivi schizophrénie",
+      "statut": "confirmé",
+      "createdAt": "2025-11-06T11:30:00Z"
+    },
+    {
+      "id": "5",
+      "utilisateurId": 5,
+      "professionnelId": 107,
+      "date": "2025-11-20T11:00:00Z",
+      "motif": "Évaluation TDAH pour mon enfant",
+      "statut": "en attente",
+      "createdAt": "2025-11-07T15:00:00Z"
+    },
+    {
+      "id": "6",
+      "utilisateurId": 6,
+      "professionnelId": 104,
+      "date": "2025-11-22T16:00:00Z",
+      "motif": "Consultation addiction alcool",
+      "statut": "confirmé",
+      "createdAt": "2025-11-08T09:45:00Z"
+    },
+    {
+      "id": "7",
+      "utilisateurId": 7,
+      "professionnelId": 102,
+      "date": "2025-11-25T10:30:00Z",
+      "motif": "Burn-out professionnel",
+      "statut": "confirmé",
+      "createdAt": "2025-11-09T13:20:00Z"
+    },
+    {
+      "id": "8",
+      "utilisateurId": 8,
+      "professionnelId": 106,
+      "date": "2025-11-27T15:30:00Z",
+      "motif": "Suivi TOC",
+      "statut": "confirmé",
+      "createdAt": "2025-11-10T10:00:00Z"
+    },
+    {
+      "id": "9",
+      "utilisateurId": 9,
+      "professionnelId": 105,
+      "date": "2025-12-02T09:30:00Z",
+      "motif": "Dépression post-divorce",
+      "statut": "en attente",
+      "createdAt": "2025-11-10T14:15:00Z"
+    },
+    {
+      "id": "10",
+      "utilisateurId": 10,
+      "professionnelId": 108,
+      "date": "2025-12-05T14:00:00Z",
+      "motif": "Séance EMDR traumatisme",
+      "statut": "confirmé",
+      "createdAt": "2025-11-10T16:30:00Z"
+    },
+    {
+      "id": "11",
+      "utilisateurId": 1,
+      "professionnelId": 105,
+      "date": "2025-12-08T11:00:00Z",
+      "motif": "Consultation dépression post-partum",
+      "statut": "en attente",
+      "createdAt": "2025-11-11T09:00:00Z"
+    },
+    {
+      "id": "12",
+      "utilisateurId": 3,
+      "professionnelId": 110,
+      "date": "2025-12-10T17:00:00Z",
+      "motif": "Trouble alimentaire",
+      "statut": "confirmé",
+      "createdAt": "2025-11-11T11:20:00Z"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "1",
+      "titre": "Quiz : Démystifier le TDAH",
+      "troubleId": 1,
+      "questions": [
+        {
+          "id": 1,
+          "question": "Le TDAH ne touche que les enfants.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Faux",
+          "explication": "Le TDAH peut persister à l'âge adulte et est souvent sous-diagnostiqué chez les adultes, en particulier les femmes."
+        },
+        {
+          "id": 2,
+          "question": "Quel est l'un des symptômes principaux du TDAH ?",
+          "options": ["Tristesse constante", "Inattention", "Délires"],
+          "reponseCorrecte": "Inattention",
+          "explication": "L'inattention, l'hyperactivité et l'impulsivité sont les trois symptômes cardinaux du TDAH."
+        },
+        {
+          "id": 3,
+          "question": "Le TDAH est causé par une mauvaise éducation.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Faux",
+          "explication": "Le TDAH est un trouble neurodéveloppemental d'origine génétique et neurologique, pas un problème d'éducation."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "titre": "Quiz : Connaissez-vous la dépression ?",
+      "troubleId": 3,
+      "questions": [
+        {
+          "id": 1,
+          "question": "La dépression est juste une phase de tristesse passagère.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Faux",
+          "explication": "La dépression est une maladie sérieuse qui nécessite souvent un traitement professionnel."
+        },
+        {
+          "id": 2,
+          "question": "Quelle est la durée minimale des symptômes pour diagnostiquer une dépression ?",
+          "options": ["1 semaine", "2 semaines", "1 mois"],
+          "reponseCorrecte": "2 semaines",
+          "explication": "Les symptômes doivent persister au moins 2 semaines pour un diagnostic de dépression."
+        },
+        {
+          "id": 3,
+          "question": "La dépression peut avoir des causes biologiques.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Vrai",
+          "explication": "Un déséquilibre chimique dans le cerveau peut contribuer à la dépression."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "titre": "Quiz : Les troubles anxieux",
+      "troubleId": 4,
+      "questions": [
+        {
+          "id": 1,
+          "question": "L'anxiété est toujours pathologique.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Faux",
+          "explication": "L'anxiété normale est adaptative. Elle devient pathologique quand elle est excessive et handicapante."
+        },
+        {
+          "id": 2,
+          "question": "Quel traitement est efficace pour les troubles anxieux ?",
+          "options": ["TCC", "Homéopathie seule", "Aucun traitement"],
+          "reponseCorrecte": "TCC",
+          "explication": "La thérapie cognitivo-comportementale est un traitement validé scientifiquement pour l'anxiété."
+        },
+        {
+          "id": 3,
+          "question": "Les attaques de panique peuvent donner l'impression de faire une crise cardiaque.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Vrai",
+          "explication": "Les symptômes physiques d'une attaque de panique peuvent ressembler à ceux d'une crise cardiaque."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "titre": "Quiz : Comprendre l'autisme",
+      "troubleId": 6,
+      "questions": [
+        {
+          "id": 1,
+          "question": "L'autisme est causé par les vaccins.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Faux",
+          "explication": "Aucune étude scientifique n'a établi de lien entre les vaccins et l'autisme. Cette théorie a été totalement discréditée."
+        },
+        {
+          "id": 2,
+          "question": "Toutes les personnes autistes ont les mêmes difficultés.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Faux",
+          "explication": "L'autisme est un spectre avec une grande diversité de profils et de capacités."
+        },
+        {
+          "id": 3,
+          "question": "Une intervention précoce peut améliorer le développement des enfants autistes.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Vrai",
+          "explication": "Les interventions précoces et adaptées améliorent significativement le développement et l'autonomie."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "titre": "Quiz : Les addictions",
+      "troubleId": 10,
+      "questions": [
+        {
+          "id": 1,
+          "question": "L'addiction est un manque de volonté.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Faux",
+          "explication": "L'addiction est une maladie chronique du cerveau, pas un problème de caractère."
+        },
+        {
+          "id": 2,
+          "question": "On peut être dépendant à un comportement (jeux, écrans).",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Vrai",
+          "explication": "Les addictions comportementales activent les mêmes circuits cérébraux que les addictions aux substances."
+        },
+        {
+          "id": 3,
+          "question": "La rechute fait partie du processus de guérison.",
+          "options": ["Vrai", "Faux"],
+          "reponseCorrecte": "Vrai",
+          "explication": "La rechute est fréquente et ne signifie pas l'échec. Elle fait souvent partie du parcours de rétablissement."
+        }
+      ]
+    }
+  ],
+  "glossaire": [
+    {
+      "id": "1",
+      "terme": "Psychothérapie",
+      "definition": "Traitement psychologique pour des troubles mentaux ou émotionnels, basé sur la communication verbale entre un patient et un thérapeute."
+    },
+    {
+      "id": "2",
+      "terme": "Neurotransmetteur",
+      "definition": "Composé chimique libéré par les neurones qui transmet des signaux à d'autres neurones. Un déséquilibre peut être lié à des troubles mentaux."
+    },
+    {
+      "id": "3",
+      "terme": "TCC (Thérapie Cognitivo-Comportementale)",
+      "definition": "Approche thérapeutique qui vise à modifier les pensées et comportements dysfonctionnels pour améliorer l'état émotionnel."
+    },
+    {
+      "id": "4",
+      "terme": "EMDR",
+      "definition": "Eye Movement Desensitization and Reprocessing. Thérapie utilisant les mouvements oculaires pour traiter les traumatismes psychologiques."
+    },
+    {
+      "id": "5",
+      "terme": "Trouble bipolaire",
+      "definition": "Trouble de l'humeur caractérisé par l'alternance de phases maniaques (excitation) et dépressives."
+    },
+    {
+      "id": "6",
+      "terme": "Psychose",
+      "definition": "Perte de contact avec la réalité, pouvant inclure des hallucinations et des délires."
+    },
+    {
+      "id": "7",
+      "terme": "Anxiété généralisée",
+      "definition": "Inquiétude excessive et chronique concernant divers aspects de la vie quotidienne."
+    },
+    {
+      "id": "8",
+      "terme": "Dépression post-partum",
+      "definition": "Dépression survenant après l'accouchement, affectant la mère et pouvant nécessiter un traitement."
+    },
+    {
+      "id": "9",
+      "terme": "Burn-out",
+      "definition": "Syndrome d'épuisement professionnel résultant d'un stress chronique au travail."
+    },
+    {
+      "id": "10",
+      "terme": "Résilience",
+      "definition": "Capacité à surmonter les épreuves et à s'adapter face à l'adversité."
+    },
+    {
+      "id": "11",
+      "terme": "Stigmatisation",
+      "definition": "Processus par lequel des individus sont marqués négativement en raison de leurs caractéristiques, comme une maladie mentale."
+    },
+    {
+      "id": "12",
+      "terme": "Trouble panique",
+      "definition": "Trouble anxieux caractérisé par des attaques de panique récurrentes et inattendues."
+    },
+    {
+      "id": "13",
+      "terme": "Spectre autistique",
+      "definition": "Continuum de manifestations de l'autisme, allant de formes légères à sévères."
+    },
+    {
+      "id": "14",
+      "terme": "Compulsion",
+      "definition": "Comportement répétitif effectué pour réduire l'anxiété liée à une obsession."
+    },
+    {
+      "id": "15",
+      "terme": "Hallucination",
+      "definition": "Perception sensorielle sans stimulus externe réel (voir, entendre des choses qui n'existent pas)."
+    },
+    {
+      "id": "16",
+      "terme": "Antidépresseur",
+      "definition": "Médicament utilisé pour traiter la dépression en régulant les neurotransmetteurs."
+    },
+    {
+      "id": "17",
+      "terme": "Antipsychotique",
+      "definition": "Médicament utilisé pour traiter les troubles psychotiques comme la schizophrénie."
+    },
+    {
+      "id": "18",
+      "terme": "Sevrage",
+      "definition": "Processus d'arrêt de consommation d'une substance addictive, souvent accompagné de symptômes physiques et psychologiques."
+    },
+    {
+      "id": "19",
+      "terme": "Trouble du comportement alimentaire (TCA)",
+      "definition": "Troubles caractérisés par une relation perturbée avec la nourriture et l'image corporelle."
+    },
+    {
+      "id": "20",
+      "terme": "TSPT (Trouble de Stress Post-Traumatique)",
+      "definition": "Trouble anxieux survenant après l'exposition à un événement traumatisant."
+    }
+  ],
+  "ressourcesSOS": {
+    "numerosUrgence": [
+      {
+        "nom": "SAMU National Sénégal",
+        "numero": "15 15",
+        "description": "Urgences médicales 24h/24"
+      },
+      {
+        "nom": "Sapeurs-Pompiers",
+        "numero": "18",
+        "description": "Secours et urgences"
+      },
+      {
+        "nom": "SOS Médecins Sénégal",
+        "numero": "33 889 15 15",
+        "description": "Service médical d'urgence à domicile"
+      },
+      {
+        "nom": "Croix Rouge Sénégal",
+        "numero": "33 823 92 23",
+        "description": "Assistance humanitaire et urgences"
+      },
+      {
+        "nom": "Service d'Écoute Psychologique (Université)",
+        "numero": "77 XXX XX XX",
+        "description": "Ligne d'écoute pour étudiants en détresse"
+      }
+    ],
+    "centresCrise": [
+      {
+        "nom": "Centre Hospitalier National Psychiatrique de Fann",
+        "adresse": "Rue Aimé Césaire, Fann, Dakar",
+        "telephone": "33 825 81 81",
+        "horaires": "24h/24, 7j/7",
+        "services": "Urgences psychiatriques, hospitalisation"
+      },
+      {
+        "nom": "Clinique Psychiatrique Moussa Diop",
+        "adresse": "Thiaroye, Dakar",
+        "telephone": "33 834 XX XX",
+        "horaires": "Lun-Dim: 8h-20h",
+        "services": "Consultations, urgences"
+      }
+    ],
+    "protocolesCrise": "En cas de crise de panique, essayez la technique de respiration 5-2-6 : inspirez lentement pendant 5 secondes, retenez votre souffle pendant 2 secondes, puis expirez doucement pendant 6 secondes. Répétez jusqu'à ce que vous vous sentiez plus calme.",
+    "signesCrise": [
+      "Pensées suicidaires",
+      "Hallucinations ou délires",
+      "Comportement auto-destructeur",
+      "Anxiété extrême et incontrôlable",
+      "Confusion mentale soudaine"
+    ],
+    "conseilsProches": "Si un proche est en crise : Restez calme, écoutez sans jugement, ne le laissez pas seul, appelez les urgences si nécessaire, évitez les confrontations."
+  },
+  "categories": [
+    {
+      "id": "1",
+      "nom": "Troubles neurodéveloppementaux",
+      "description": "TDAH, autisme, troubles d'apprentissage",
+      "icon": "brain"
+    },
+    {
+      "id": "2",
+      "nom": "Troubles de l'humeur",
+      "description": "Dépression, trouble bipolaire",
+      "icon": "heart"
+    },
+    {
+      "id": "3",
+      "nom": "Troubles anxieux",
+      "description": "Anxiété généralisée, TOC, phobies, TSPT",
+      "icon": "alert-circle"
+    },
+    {
+      "id": "4",
+      "nom": "Troubles psychotiques",
+      "description": "Schizophrénie, troubles délirants",
+      "icon": "eye"
+    },
+    {
+      "id": "5",
+      "nom": "Addictions",
+      "description": "Dépendances aux substances et comportements",
+      "icon": "x-circle"
+    },
+    {
+      "id": "6",
+      "nom": "Troubles alimentaires",
+      "description": "Anorexie, boulimie, hyperphagie",
+      "icon": "utensils"
+    },
+    {
+      "id": "7",
+      "nom": "Stress et épuisement",
+      "description": "Burn-out, stress post-traumatique",
+      "icon": "zap"
+    }
+  ],
+  "faq": [
+    {
+      "id": "1",
+      "question": "Comment savoir si je dois consulter un psychologue ou un psychiatre ?",
+      "reponse": "Un psychologue propose de la psychothérapie (thérapie par la parole) mais ne prescrit pas de médicaments. Un psychiatre est un médecin spécialisé qui peut prescrire des médicaments en plus de la thérapie. Si vous pensez avoir besoin d'un traitement médicamenteux, consultez d'abord un psychiatre.",
+      "categorie": "Général"
+    },
+    {
+      "id": "2",
+      "question": "Combien coûte une consultation au Sénégal ?",
+      "reponse": "Les tarifs varient entre 15,000 et 35,000 FCFA selon le professionnel et la spécialité. Certains centres publics proposent des consultations à moindre coût. N'hésitez pas à vous renseigner.",
+      "categorie": "Général"
+    },
+    {
+      "id": "3",
+      "question": "La thérapie, est-ce vraiment efficace ?",
+      "reponse": "Oui, de nombreuses études scientifiques prouvent l'efficacité de la psychothérapie, notamment la TCC. Les résultats dépendent de l'engagement du patient et de la qualité de la relation thérapeutique.",
+      "categorie": "Thérapie"
+    },
+    {
+      "id": "4",
+      "question": "Comment parler de santé mentale à ma famille qui ne comprend pas ?",
+      "reponse": "Commencez par partager des informations fiables (articles, vidéos). Expliquez vos symptômes concrètement. Proposez à un membre de la famille de vous accompagner à une consultation. La patience et la pédagogie sont essentielles.",
+      "categorie": "Famille"
+    },
+    {
+      "id": "5",
+      "question": "Les médicaments psychiatriques rendent-ils dépendant ?",
+      "reponse": "La plupart des médicaments psychiatriques (antidépresseurs, antipsychotiques) ne créent pas de dépendance au sens strict. Cependant, l'arrêt doit toujours se faire progressivement sous supervision médicale.",
+      "categorie": "Traitement"
+    },
+    {
+      "id": "6",
+      "question": "Combien de temps dure une thérapie ?",
+      "reponse": "Cela dépend du trouble et des objectifs. Une thérapie brève peut durer 3-6 mois, tandis que certains suivis sont plus longs. Votre thérapeute établira un plan avec vous.",
+      "categorie": "Thérapie"
+    },
+    {
+      "id": "7",
+      "question": "Puis-je guérir complètement d'un trouble mental ?",
+      "reponse": "Certains troubles peuvent être complètement résolus (dépression épisodique, TSPT). D'autres sont chroniques mais peuvent être très bien gérés avec un traitement adapté (schizophrénie, trouble bipolaire). La rémission et la qualité de vie sont possibles.",
+      "categorie": "Guérison"
+    },
+    {
+      "id": "8",
+      "question": "Comment aider un proche qui refuse de consulter ?",
+      "reponse": "Exprimez votre inquiétude avec bienveillance, sans jugement. Proposez votre soutien. Partagez des informations. Respectez son rythme tout en restant disponible. Dans les situations d'urgence, n'hésitez pas à contacter les services d'aide.",
+      "categorie": "Famille"
+    },
+    {
+      "id": "9",
+      "question": "La prière peut-elle remplacer la thérapie ?",
+      "reponse": "La spiritualité peut être un soutien important, mais elle ne remplace pas un traitement médical ou psychologique pour les troubles mentaux. Les deux approches peuvent être complémentaires.",
+      "categorie": "Spiritualité"
+    },
+    {
+      "id": "10",
+      "question": "Les enfants peuvent-ils avoir des troubles mentaux ?",
+      "reponse": "Oui, de nombreux troubles commencent dans l'enfance (TDAH, autisme, anxiété). Un diagnostic et une prise en charge précoces améliorent considérablement le pronostic.",
+      "categorie": "Enfants"
+    }
+  ],
+  "statistiques": {
+    "prevalence": [
+      {
+        "trouble": "Dépression",
+        "pourcentage": "5-7%",
+        "population": "Population générale adulte",
+        "source": "OMS 2023"
+      },
+      {
+        "trouble": "Troubles anxieux",
+        "pourcentage": "8-12%",
+        "population": "Population générale",
+        "source": "OMS 2023"
+      },
+      {
+        "trouble": "TDAH",
+        "pourcentage": "5-7%",
+        "population": "Enfants d'âge scolaire",
+        "source": "Études internationales"
+      },
+      {
+        "trouble": "Trouble bipolaire",
+        "pourcentage": "1-2%",
+        "population": "Population mondiale",
+        "source": "OMS 2023"
+      },
+      {
+        "trouble": "Schizophrénie",
+        "pourcentage": "0.5-1%",
+        "population": "Population mondiale",
+        "source": "OMS 2023"
+      }
+    ],
+    "accesSoins": {
+      "pourcentageConsultation": "30%",
+      "barrières": [
+        "Stigmatisation sociale",
+        "Manque d'information",
+        "Coût des consultations",
+        "Pénurie de professionnels",
+        "Distance géographique"
+      ]
+    }
+  },
+  "evenements": [
+    {
+      "id": "1",
+      "titre": "Journée Mondiale de la Santé Mentale",
+      "date": "2025-10-10",
+      "type": "Sensibilisation",
+      "description": "Événement annuel pour sensibiliser à la santé mentale et briser les tabous.",
+      "lieu": "Place de l'Obélisque, Dakar"
+    },
+    {
+      "id": "2",
+      "titre": "Conférence : Comprendre l'autisme",
+      "date": "2025-11-15T14:00:00Z",
+      "type": "Conférence",
+      "description": "Conférence animée par des experts sur le diagnostic et l'accompagnement de l'autisme.",
+      "lieu": "Université Cheikh Anta Diop, Dakar",
+      "intervenant": "Pr. Mamadou Ba"
+    },
+    {
+      "id": "3",
+      "titre": "Atelier de gestion du stress",
+      "date": "2025-11-20T10:00:00Z",
+      "type": "Atelier",
+      "description": "Atelier pratique sur les techniques de gestion du stress et de l'anxiété.",
+      "lieu": "Centre culturel Douta Seck, Dakar",
+      "places": 30
+    },
+    {
+      "id": "4",
+      "titre": "Groupe de parole - Dépression",
+      "date": "2025-11-25T16:00:00Z",
+      "type": "Groupe de soutien",
+      "description": "Rencontre mensuelle pour personnes vivant avec la dépression.",
+      "lieu": "Centre de santé mentale Grand Yoff",
+      "gratuit": true
+    },
+    {
+      "id": "5",
+      "titre": "Formation pour enseignants : TDAH en classe",
+      "date": "2025-12-05T09:00:00Z",
+      "type": "Formation",
+      "description": "Formation destinée aux enseignants pour mieux comprendre et accompagner les élèves avec TDAH.",
+      "lieu": "Inspections d'Académie, Dakar",
+      "public": "Enseignants"
+    }
+  ],
+  "videos": [
+    {
+      "id": "1",
+      "titre": "C'est quoi le TDAH ?",
+      "url": "https://youtube.com/watch?v=example1",
+      "duree": "5:30",
+      "troubleId": 1,
+      "description": "Vidéo explicative sur le TDAH avec des animations."
+    },
+    {
+      "id": "2",
+      "titre": "Témoignage : Vivre avec la dépression",
+      "url": "https://youtube.com/watch?v=example2",
+      "duree": "8:15",
+      "troubleId": 3,
+      "description": "Témoignage poignant d'une personne ayant surmonté la dépression."
+    },
+    {
+      "id": "3",
+      "titre": "Techniques de respiration anti-anxiété",
+      "url": "https://youtube.com/watch?v=example3",
+      "duree": "6:00",
+      "troubleId": 4,
+      "description": "Guide pratique des exercices de respiration pour gérer l'anxiété."
+    },
+    {
+      "id": "4",
+      "titre": "Comprendre l'autisme - Interview d'expert",
+      "url": "https://youtube.com/watch?v=example4",
+      "duree": "12:45",
+      "troubleId": 6,
+      "description": "Interview d'un pédopsychiatre sur le spectre autistique."
+    },
+    {
+      "id": "5",
+      "titre": "Sortir de l'addiction : le parcours",
+      "url": "https://youtube.com/watch?v=example5",
+      "duree": "10:20",
+      "troubleId": 10,
+      "description": "Documentaire sur le processus de guérison de l'addiction."
+    }
+  ],
+  "newsletters": [
+    {
+      "id": "1",
+      "email": "awa.gueye@email.com",
+      "dateInscription": "2025-09-15T10:00:00Z",
+      "actif": true
+    },
+    {
+      "id": "2",
+      "email": "demba.fall@email.com",
+      "dateInscription": "2025-09-20T14:30:00Z",
+      "actif": true
+    },
+    {
+      "id": "3",
+      "email": "mariama.seck@email.com",
+      "dateInscription": "2025-10-01T09:15:00Z",
+      "actif": true
+    },
+    {
+      "id": "4",
+      "email": "ousmane.diop@email.com",
+      "dateInscription": "2025-10-05T16:45:00Z",
+      "actif": false
+    },
+    {
+      "id": "5",
+      "email": "fatou.thiam@email.com",
+      "dateInscription": "2025-10-10T11:20:00Z",
+      "actif": true
+    }
+  ],
+  "partenaires": [
+    {
+      "id": "1",
+      "nom": "Ministère de la Santé et de l'Action Sociale",
+      "type": "Institution publique",
+      "logo": "public/partners/msas.png",
+      "lien": "https://sante.gouv.sn"
+    },
+    {
+      "id": "2",
+      "nom": "OMS Sénégal",
+      "type": "Organisation internationale",
+      "logo": "public/partners/oms.png",
+      "lien": "https://who.int"
+    },
+    {
+      "id": "3",
+      "nom": "Université Cheikh Anta Diop",
+      "type": "Institution académique",
+      "logo": "public/partners/ucad.png",
+      "lien": "https://ucad.sn"
+    },
+    {
+      "id": "4",
+      "nom": "Croix Rouge Sénégal",
+      "type": "ONG",
+      "logo": "public/partners/croixrouge.png",
+      "lien": "https://croixrouge.sn"
+    },
+    {
+      "id": "5",
+      "nom": "Association Sénégalaise de Psychiatrie",
+      "type": "Association professionnelle",
+      "logo": "public/partners/asp.png",
+      "lien": "#"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "1",
+      "utilisateurId": 1,
+      "type": "rendez-vous",
+      "titre": "Rappel de rendez-vous",
+      "message": "Votre rendez-vous avec Dr. Khadija Diallo est prévu demain à 10h.",
+      "lu": false,
+      "dateCreation": "2025-11-09T09:00:00Z"
+    },
+    {
+      "id": "2",
+      "utilisateurId": 2,
+      "type": "commentaire",
+      "titre": "Nouveau commentaire",
+      "message": "Quelqu'un a répondu à votre commentaire sur l'article TDAH.",
+      "lu": true,
+      "dateCreation": "2025-11-08T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "utilisateurId": 3,
+      "type": "article",
+      "titre": "Nouvel article publié",
+      "message": "Un nouvel article sur l'anxiété sociale vient d'être publié.",
+      "lu": false,
+      "dateCreation": "2025-11-10T10:00:00Z"
+    }
+  ],
+  "donations": [
+    {
+      "id": "1",
+      "montant": 50000,
+      "devise": "FCFA",
+      "donateur": "Anonyme",
+      "date": "2025-10-15T12:00:00Z",
+      "message": "Pour soutenir votre belle initiative"
+    },
+    {
+      "id": "2",
+      "montant": 100000,
+      "devise": "FCFA",
+      "donateur": "Entreprise ABC",
+      "date": "2025-10-20T15:30:00Z",
+      "message": "Don d'entreprise pour la santé mentale"
+    },
+    {
+      "id": "3",
+      "montant": 25000,
+      "devise": "FCFA",
+      "donateur": "Awa G.",
+      "date": "2025-10-25T09:15:00Z",
+      "message": "Continuez ce travail important"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "1",
+      "titre": "Santé mentale au Sénégal : où en sommes-nous ?",
+      "auteur": "Équipe WaxPsy",
+      "contenu": "La santé mentale reste un défi majeur au Sénégal. Avec seulement une quinzaine de psychiatres pour 17 millions d'habitants, l'accès aux soins est limité. De plus, la stigmatisation empêche de nombreuses personnes de consulter. Pourtant, des initiatives prometteuses émergent...",
+      "image": "public/blog/sante-mentale-senegal.jpg",
+      "tags": ["santé mentale", "Sénégal", "accès aux soins"],
+      "vues": 1250,
+      "likes": 89,
+      "datePublication": "2025-10-01T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "titre": "5 mythes sur la psychothérapie",
+      "auteur": "Dr. Khadija Diallo",
+      "contenu": "Mythe 1 : La thérapie, c'est pour les fous. FAUX ! La thérapie aide toute personne traversant des difficultés. Mythe 2 : Ça dure des années. FAUX ! Certaines thérapies sont brèves et ciblées...",
+      "image": "public/blog/mythes-therapie.jpg",
+      "tags": ["psychothérapie", "mythes", "éducation"],
+      "vues": 890,
+      "likes": 67,
+      "datePublication": "2025-09-15T14:00:00Z"
+    },
+    {
+      "id": "3",
+      "titre": "Comment prendre soin de sa santé mentale au quotidien",
+      "auteur": "M. Seydou Cissé",
+      "contenu": "La santé mentale se cultive chaque jour. Voici 7 habitudes à adopter : 1. Dormir suffisamment (7-8h), 2. Pratiquer une activité physique régulière, 3. Maintenir des liens sociaux...",
+      "image": "public/blog/soin-quotidien.jpg",
+      "tags": ["bien-être", "prévention", "habitudes"],
+      "vues": 1450,
+      "likes": 123,
+      "datePublication": "2025-10-10T09:00:00Z"
+    }
+  ],
+  "exercices": [
+    {
+      "id": "1",
+      "titre": "Exercice de respiration 4-7-8",
+      "type": "Respiration",
+      "difficulte": "Facile",
+      "duree": "5 minutes",
+      "troubleCible": ["anxiété", "stress"],
+      "instructions": [
+        "Asseyez-vous confortablement",
+        "Inspirez par le nez pendant 4 secondes",
+        "Retenez votre souffle pendant 7 secondes",
+        "Expirez par la bouche pendant 8 secondes",
+        "Répétez 4 fois"
+      ],
+      "benefices": "Réduit l'anxiété, favorise le calme, aide à l'endormissement"
+    },
+    {
+      "id": "2",
+      "titre": "Journal de gratitude",
+      "type": "Écriture",
+      "difficulte": "Facile",
+      "duree": "10 minutes",
+      "troubleCible": ["dépression", "anxiété"],
+      "instructions": [
+        "Chaque soir, notez 3 choses positives de votre journée",
+        "Soyez précis et détaillé",
+        "Relisez vos notes régulièrement"
+      ],
+      "benefices": "Améliore l'humeur, développe l'optimisme, réduit les ruminations"
+    },
+    {
+      "id": "3",
+      "titre": "Scan corporel",
+      "type": "Méditation",
+      "difficulte": "Moyenne",
+      "duree": "15 minutes",
+      "troubleCible": ["anxiété", "stress", "burn-out"],
+      "instructions": [
+        "Allongez-vous confortablement",
+        "Fermez les yeux",
+        "Portez attention à chaque partie de votre corps, des pieds à la tête",
+        "Observez les sensations sans jugement",
+        "Respirez profondément"
+      ],
+      "benefices": "Réduit les tensions, améliore la conscience corporelle, favorise la relaxation"
+    },
+    {
+      "id": "4",
+      "titre": "Technique de restructuration cognitive",
+      "type": "Réflexion",
+      "difficulte": "Moyenne",
+      "duree": "20 minutes",
+      "troubleCible": ["dépression", "anxiété", "TOC"],
+      "instructions": [
+        "Identifiez une pensée négative récurrente",
+        "Notez les preuves pour et contre cette pensée",
+        "Formulez une pensée alternative plus équilibrée",
+        "Pratiquez régulièrement"
+      ],
+      "benefices": "Modifie les schémas de pensée négatifs, améliore l'humeur"
+    },
+    {
+      "id": "5",
+      "titre": "Marche en pleine conscience",
+      "type": "Mouvement",
+      "difficulte": "Facile",
+      "duree": "20 minutes",
+      "troubleCible": ["anxiété", "dépression", "stress"],
+      "instructions": [
+        "Marchez lentement",
+        "Concentrez-vous sur chaque pas",
+        "Observez votre environnement (sons, odeurs, sensations)",
+        "Revenez à l'instant présent quand votre esprit divague"
+      ],
+      "benefices": "Réduit le stress, améliore la concentration, favorise l'ancrage"
+    }
+  ],
+  "liensUtiles": [
+    {
+      "id": "1",
+      "titre": "OMS - Santé mentale",
+      "url": "https://www.who.int/health-topics/mental-health",
+      "categorie": "Information",
+      "description": "Ressources internationales sur la santé mentale"
+    },
+    {
+      "id": "2",
+      "titre": "Ministère de la Santé Sénégal",
+      "url": "https://sante.gouv.sn",
+      "categorie": "Officiel",
+      "description": "Site officiel du Ministère de la Santé"
+    },
+    {
+      "id": "3",
+      "titre": "Croix Rouge Sénégal",
+      "url": "https://croixrouge.sn",
+      "categorie": "Aide",
+      "description": "Assistance et soutien humanitaire"
+    },
+    {
+      "id": "4",
+      "titre": "UCAD - Faculté de Médecine",
+      "url": "https://ucad.sn",
+      "categorie": "Formation",
+      "description": "Formation médicale et recherche"
+    }
+  ],
+  "citations": [
+    {
+      "id": "1",
+      "texte": "Il n'y a pas de santé sans santé mentale.",
+      "auteur": "Organisation Mondiale de la Santé"
+    },
+    {
+      "id": "2",
+      "texte": "Demander de l'aide n'est pas un signe de faiblesse, c'est un signe de force.",
+      "auteur": "Barack Obama"
+    },
+    {
+      "id": "3",
+      "texte": "La santé mentale est tout aussi importante que la santé physique.",
+      "auteur": "Anonyme"
+    },
+    {
+      "id": "4",
+      "texte": "Vous n'avez pas à contrôler vos pensées. Vous devez juste arrêter de les laisser vous contrôler.",
+      "auteur": "Dan Millman"
+    },
+    {
+      "id": "5",
+      "texte": "La guérison est un voyage, pas une destination.",
+      "auteur": "Anonyme"
+    }
+  ],
+  "parametres": {
+    "siteInfo": {
+      "nom": "WaxPsy",
+      "slogan": "Pour une santé mentale accessible à tous",
+      "description": "Plateforme de sensibilisation et d'information sur la santé mentale au Sénégal",
+      "email": "contact@waxpsy.sn",
+      "telephone": "+221 XX XXX XX XX",
+      "adresse": "Dakar, Sénégal",
+      "reseauxSociaux": {
+        "facebook": "https://facebook.com/waxpsy",
+        "twitter": "https://twitter.com/waxpsy",
+        "instagram": "https://instagram.com/waxpsy",
+        "linkedin": "https://linkedin.com/company/waxpsy"
+      }
+    },
+    "maintenance": false,
+    "inscriptionsOuvertes": true,
+    "moderationActive": true
+  },
+  "troubles": [
+    {
+      "id": "1",
+      "image": "public/adhd.jpg",
+      "nom": "TDAH (Trouble du Déficit de l'Attention avec ou sans Hyperactivité)",
+      "description": "Le TDAH est un trouble neurodéveloppemental qui se caractérise par des difficultés de concentration, de l'hyperactivité et de l'impulsivité, impactant le fonctionnement quotidien.",
+      "symptomes": [
+        "Difficulté à prêter attention aux détails",
+        "Tendance à perdre ses affaires",
+        "Gigote souvent des mains ou des pieds",
+        "Interrompt souvent les autres"
+      ],
+      "causes": "Combinaison de facteurs génétiques, neurologiques et environnementaux. Un déséquilibre des neurotransmetteurs joue un rôle clé.",
+      "traitements": "Approche multimodale incluant thérapie comportementale, soutien scolaire et, si nécessaire, un traitement médicamenteux.",
+      "tags": ["neurodéveloppemental", "concentration", "enfant", "adulte"]
+    },
+    {
+      "id": "2",
+      "image": "https://hookedonhopementalhealth.com/wp-content/uploads/2025/04/What-Is-Erotomania.jpg",
+      "nom": "Érotomanie",
+      "description": "L'érotomanie est un trouble délirant rare où une personne est convaincue qu'une autre personne, souvent d'un statut social plus élevé, est secrètement amoureuse d'elle.",
+      "symptomes": [
+        "Conviction inébranlable et non fondée d'être aimé",
+        "Interprétation de signaux neutres comme des preuves d'amour",
+        "Tentatives répétées d'entrer en contact avec la personne",
+        "Peu de remise en question de cette croyance, même face à des preuves contraires"
+      ],
+      "causes": "Les causes exactes sont mal comprises, mais des facteurs de stress importants ou des traumatismes peuvent en être des déclencheurs.",
+      "traitements": "Psychothérapie et médicaments antipsychotiques pour gérer les délires.",
+      "tags": ["trouble délirant", "relationnel", "adulte"]
+    },
+    {
+      "id": "3",
+      "image": "public/depression.jpg",
+      "nom": "Dépression",
+      "description": "La dépression est un trouble de l'humeur caractérisé par une tristesse persistante, une perte d'intérêt pour les activités et un sentiment de désespoir qui interfère avec la vie quotidienne.",
+      "symptomes": [
+        "Tristesse persistante ou humeur dépressive",
+        "Perte d'intérêt ou de plaisir dans les activités",
+        "Fatigue et manque d'énergie",
+        "Troubles du sommeil (insomnie ou hypersomnie)",
+        "Pensées de mort ou idées suicidaires"
+      ],
+      "causes": "Combinaison de facteurs biologiques (déséquilibre chimique cérébral), psychologiques (traumatismes), et sociaux (isolement, stress).",
+      "traitements": "Psychothérapie (TCC, thérapie interpersonnelle), antidépresseurs, soutien social, activité physique régulière.",
+      "tags": ["humeur", "tristesse", "adulte", "adolescent"]
+    },
+    {
+      "id": "4",
+      "image": "https://www.shutterstock.com/image-photo/anxiety-thinking-black-woman-home-260nw-2467379207.jpg",
+      "nom": "Troubles Anxieux",
+      "description": "Les troubles anxieux regroupent plusieurs conditions où l'anxiété excessive et persistante interfère avec le fonctionnement quotidien.",
+      "symptomes": [
+        "Inquiétude excessive et incontrôlable",
+        "Tensions musculaires",
+        "Palpitations cardiaques",
+        "Difficultés de concentration",
+        "Évitement de situations anxiogènes"
+      ],
+      "causes": "Facteurs génétiques, expériences traumatisantes, stress chronique, déséquilibres neurochimiques.",
+      "traitements": "Thérapie cognitivo-comportementale, techniques de relaxation, médication anxiolytique si nécessaire.",
+      "tags": ["anxiété", "stress", "adulte", "adolescent"]
+    },
+    {
+      "id": "5",
+      "image": "https://static.cnews.fr/sites/default/files/styles/image_750_422/public/kanye_west_bipolaire_maladie_5f169923715c5.jpg?itok=xjeLitLQ",
+      "nom": "Trouble Bipolaire",
+      "description": "Le trouble bipolaire se caractérise par des alternances entre des phases de manie (excitation) et de dépression.",
+      "symptomes": [
+        "Épisodes maniaques avec euphorie et énergie excessive",
+        "Épisodes dépressifs avec tristesse profonde",
+        "Changements d'humeur imprévisibles",
+        "Comportements impulsifs durant la manie",
+        "Pensées accélérées"
+      ],
+      "causes": "Prédisposition génétique forte, déséquilibres neurochimiques, événements de vie stressants.",
+      "traitements": "Stabilisateurs de l'humeur, psychothérapie, régularité du sommeil, soutien familial.",
+      "tags": ["humeur", "manie", "dépression", "adulte"]
+    },
+    {
+      "id": "6",
+      "image": "https://images.squarespace-cdn.com/content/v1/5e04f2158c0a456f278aac8b/1614369543568-VUZJJ35325JUTBPVIL0Z/Screen+Shot+2021-02-24+at+1.13.14+PM.png",
+      "nom": "Trouble du Spectre de l'Autisme (TSA)",
+      "description": "Le TSA est un trouble neurodéveloppemental affectant la communication sociale et comportant des intérêts restreints et répétitifs.",
+      "symptomes": [
+        "Difficultés dans les interactions sociales",
+        "Comportements répétitifs ou stéréotypés",
+        "Sensibilité sensorielle inhabituelle",
+        "Difficulté avec les changements de routine",
+        "Intérêts très spécifiques et intenses"
+      ],
+      "causes": "Facteurs génétiques et neurologiques complexes présents dès la naissance.",
+      "traitements": "Interventions comportementales précoces, thérapie du langage, soutien éducatif adapté, accompagnement familial.",
+      "tags": ["neurodéveloppemental", "enfant", "communication", "social"]
+    },
+    {
+      "id": "7",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwq_gpDpmao2K7aG7cFKt728VENU8-4u_okg&s",
+      "nom": "Trouble de Stress Post-Traumatique (TSPT)",
+      "description": "Le TSPT survient après avoir vécu ou été témoin d'un événement traumatisant grave.",
+      "symptomes": [
+        "Reviviscences traumatiques (flashbacks)",
+        "Cauchemars récurrents",
+        "Évitement de tout ce qui rappelle le trauma",
+        "Hypervigilance et sursauts exagérés",
+        "Détachement émotionnel"
+      ],
+      "causes": "Exposition à un événement traumatisant (violence, accident, catastrophe naturelle, guerre).",
+      "traitements": "EMDR (désensibilisation et retraitement par mouvements oculaires), TCC centrée sur le trauma, thérapie de groupe.",
+      "tags": ["traumatisme", "stress", "adulte", "réfugié"]
+    },
+    {
+      "id": "8",
+      "image": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half-caption/public/field_blog_entry_images/2020-09/istock_000011269785xsmall.jpg?itok=44Mh-AdQ",
+      "nom": "Trouble Obsessionnel Compulsif (TOC)",
+      "description": "Le TOC se caractérise par des obsessions (pensées intrusives) et des compulsions (comportements répétitifs) visant à réduire l'anxiété.",
+      "symptomes": [
+        "Obsessions récurrentes et envahissantes",
+        "Compulsions ritualisées",
+        "Vérifications excessives",
+        "Peur de la contamination",
+        "Besoin d'ordre et de symétrie"
+      ],
+      "causes": "Facteurs neurobiologiques, génétiques et environnementaux.",
+      "traitements": "TCC avec exposition et prévention de la réponse, médicaments ISRS.",
+      "tags": ["anxiété", "obsession", "compulsion", "adulte"]
+    },
+    {
+      "id": "9",
+      "image": "https://www.shutterstock.com/image-photo/schizophrenia-fear-black-woman-on-260nw-2385072745.jpg",
+      "nom": "Schizophrénie",
+      "description": "La schizophrénie est un trouble psychotique grave affectant la pensée, les perceptions et le comportement.",
+      "symptomes": [
+        "Hallucinations (auditives principalement)",
+        "Délires",
+        "Discours désorganisé",
+        "Retrait social",
+        "Manque de motivation"
+      ],
+      "causes": "Facteurs génétiques, anomalies cérébrales, stress environnemental.",
+      "traitements": "Antipsychotiques, psychothérapie de soutien, réhabilitation psychosociale, suivi médical régulier.",
+      "tags": ["psychose", "délire", "hallucination", "adulte"]
+    },
+    {
+      "id": "10",
+      "image": "https://cdn.angermanage.co.uk/wp-content/uploads/2016/09/Anger-and-Addiction.jpg",
+      "nom": "Troubles Addictifs",
+      "description": "Les addictions sont des dépendances pathologiques à des substances (alcool, drogues) ou des comportements (jeux, écrans).",
+      "symptomes": [
+        "Besoin irrépressible de consommer",
+        "Perte de contrôle",
+        "Augmentation de la tolérance",
+        "Symptômes de sevrage",
+        "Négligence des autres activités"
+      ],
+      "causes": "Vulnérabilité génétique, facteurs psychologiques, pression sociale, disponibilité des substances.",
+      "traitements": "Sevrage supervisé, thérapie de groupe, TCC, soutien familial, centres de réhabilitation.",
+      "tags": ["dépendance", "substance", "comportement", "adulte", "jeune"]
+    },
+    {
+      "id": "11",
+      "image": "https://www.shutterstock.com/image-photo/stress-burnout-tired-black-man-600nw-2240694803.jpg",
+      "nom": "Syndrome d'Épuisement Professionnel (Burnout)",
+      "description": "Le burnout est un état d'épuisement émotionnel, physique et mental causé par un stress professionnel prolongé.",
+      "symptomes": [
+        "Fatigue chronique intense",
+        "Cynisme et détachement du travail",
+        "Sentiment d'inefficacité",
+        "Irritabilité accrue",
+        "Problèmes de concentration"
+      ],
+      "causes": "Surcharge de travail, manque de reconnaissance, absence de contrôle, valeurs en conflit.",
+      "traitements": "Repos, psychothérapie, réorganisation du travail, techniques de gestion du stress.",
+      "tags": ["stress", "travail", "épuisement", "adulte"]
+    },
+    {
+      "id": "12",
+      "image": "https://www.shutterstock.com/image-photo/young-lady-having-tiny-serving-600nw-1997866784.jpg",
+      "nom": "Troubles du Comportement Alimentaire (TCA)",
+      "description": "Les TCA incluent l'anorexie, la boulimie et l'hyperphagie, caractérisés par une relation perturbée avec la nourriture et l'image corporelle.",
+      "symptomes": [
+        "Restriction alimentaire sévère",
+        "Crises de boulimie",
+        "Vomissements provoqués",
+        "Préoccupation excessive pour le poids",
+        "Distorsion de l'image corporelle"
+      ],
+      "causes": "Facteurs psychologiques, pression sociale, génétique, traumatismes.",
+      "traitements": "Psychothérapie spécialisée, suivi nutritionnel, hospitalisation si nécessaire, soutien familial.",
+      "tags": ["alimentation", "image corporelle", "adolescent", "jeune adulte"]
+    }
+  ],
+  "articles": [
+    {
+      "id": "1",
+      "troubleId": "1",
+      "titre": "Le TDAH à l'école sénégalaise : entre tabou et réalité",
+      "contenu": "Au Sénégal, un enfant agité est souvent qualifié de 'Turbulent' ou 'Indiscipliné'. Pourtant, derrière ce comportement se cache parfois un TDAH non diagnostiqué. Cet article explore les défis pour les élèves, les parents et les enseignants à Dakar, Thiès et ailleurs, et propose des pistes pour une meilleure inclusion scolaire. Il est crucial de changer le regard de la société pour offrir un avenir à ces enfants.",
+      "auteurId": 101,
+      "tags": ["TDAH", "enfant", "école", "Sénégal"],
+      "createdAt": "2025-10-15T10:00:00Z",
+      "updatedAt": "2025-10-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "troubleId": "2",
+      "titre": "Amour ou illusion ? Plongée au cœur de l'érotomanie",
+      "contenu": "L'érotomanie est une souffrance psychique profonde, bien loin des clichés romantiques. Cet article explique comment ce trouble délirant s'installe et les conséquences dévastatrices qu'il peut avoir sur la vie de la personne atteinte et de son entourage. Reconnaître les signes est le premier pas vers une aide adaptée.",
+      "auteurId": 102,
+      "tags": ["érotomanie", "délire", "psychologie", "société"],
+      "createdAt": "2025-10-18T14:30:00Z",
+      "updatedAt": "2025-10-18T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "troubleId": "3",
+      "titre": "La dépression n'est pas une faiblesse : brisons le silence",
+      "contenu": "Dans nos communautés, la dépression est souvent vue comme un manque de foi ou de courage. Cette stigmatisation empêche des milliers de Sénégalais de chercher l'aide dont ils ont besoin. Cet article démystifie la dépression, explique ses causes biologiques et psychologiques, et encourage les personnes touchées à consulter sans honte.",
+      "auteurId": 101,
+      "tags": ["dépression", "stigmatisation", "santé mentale", "Sénégal"],
+      "createdAt": "2025-09-22T09:00:00Z",
+      "updatedAt": "2025-09-22T09:00:00Z"
+    },
+    {
+      "id": "4",
+      "troubleId": "4",
+      "titre": "Anxiété : quand l'inquiétude devient envahissante",
+      "contenu": "L'anxiété touche de plus en plus de jeunes Sénégalais, particulièrement dans les grandes villes comme Dakar. Entre pression scolaire, chômage et incertitudes économiques, comment reconnaître une anxiété pathologique et que faire pour y remédier ? Des solutions existent et nous les explorons dans cet article.",
+      "auteurId": 103,
+      "tags": ["anxiété", "jeunesse", "stress", "Dakar"],
+      "createdAt": "2025-10-05T11:30:00Z",
+      "updatedAt": "2025-10-05T11:30:00Z"
+    },
+    {
+      "id": "5",
+      "troubleId": "5",
+      "titre": "Vivre avec un trouble bipolaire au Sénégal",
+      "contenu": "Le trouble bipolaire reste méconnu et incompris dans notre société. Les personnes atteintes sont souvent victimes de préjugés. Cet article propose un éclairage médical et humain sur ce trouble, avec des témoignages de patients qui ont appris à gérer leur maladie et à mener une vie épanouie.",
+      "auteurId": 102,
+      "tags": ["bipolaire", "témoignage", "traitement", "espoir"],
+      "createdAt": "2025-09-10T16:00:00Z",
+      "updatedAt": "2025-09-10T16:00:00Z"
+    },
+    {
+      "id": "6",
+      "troubleId": "6",
+      "titre": "L'autisme au Sénégal : comprendre pour mieux accompagner",
+      "contenu": "L'autisme est encore entouré de mythes et de malentendus. Beaucoup d'enfants autistes ne sont pas diagnostiqués ou sont victimes de discriminations. Cet article explique ce qu'est le spectre autistique, comment le reconnaître tôt et quelles ressources sont disponibles au Sénégal pour les familles concernées.",
+      "auteurId": 104,
+      "tags": ["autisme", "enfant", "diagnostic", "inclusion"],
+      "createdAt": "2025-08-28T10:15:00Z",
+      "updatedAt": "2025-08-28T10:15:00Z"
+    },
+    {
+      "id": "7",
+      "troubleId": "7",
+      "titre": "Traumatismes et résilience : guérir après un choc",
+      "contenu": "Accidents, violences, catastrophes... Les traumatismes psychologiques laissent des cicatrices invisibles mais profondes. Le TSPT peut affecter n'importe qui. Comment reconnaître les symptômes et entreprendre un chemin de guérison ? Des thérapies efficaces existent et redonnent espoir aux victimes.",
+      "auteurId": 101,
+      "tags": ["TSPT", "traumatisme", "thérapie", "résilience"],
+      "createdAt": "2025-10-01T14:20:00Z",
+      "updatedAt": "2025-10-01T14:20:00Z"
+    },
+    {
+      "id": "8",
+      "troubleId": "8",
+      "titre": "TOC : ces rituels qui emprisonnent",
+      "contenu": "Vérifier dix fois si la porte est fermée, se laver les mains jusqu'à les blesser... Les TOC peuvent devenir invalidants. Cet article aide à comprendre ce trouble anxieux et présente les traitements qui permettent de reprendre le contrôle de sa vie.",
+      "auteurId": 103,
+      "tags": ["TOC", "anxiété", "compulsion", "traitement"],
+      "createdAt": "2025-09-15T13:00:00Z",
+      "updatedAt": "2025-09-15T13:00:00Z"
+    },
+    {
+      "id": "9",
+      "troubleId": "9",
+      "titre": "Schizophrénie : au-delà des préjugés",
+      "contenu": "La schizophrénie fait peur et est souvent associée à tort à la violence. Pourtant, avec un traitement adapté, les personnes atteintes peuvent mener une vie stable. Cet article déconstruit les mythes et explique l'importance d'un diagnostic et d'un suivi précoces.",
+      "auteurId": 102,
+      "tags": ["schizophrénie", "psychose", "préjugés", "traitement"],
+      "createdAt": "2025-08-20T09:45:00Z",
+      "updatedAt": "2025-08-20T09:45:00Z"
+    },
+    {
+      "id": "10",
+      "troubleId": "10",
+      "titre": "Addictions : sortir de l'engrenage",
+      "contenu": "L'addiction n'est pas un choix ni un manque de volonté. C'est une maladie qui nécessite un accompagnement médical et psychologique. Au Sénégal, alcool, cannabis et autres substances touchent de nombreux jeunes. Comment reconnaître la dépendance et où trouver de l'aide ?",
+      "auteurId": 104,
+      "tags": ["addiction", "dépendance", "jeunesse", "prévention"],
+      "createdAt": "2025-09-28T15:30:00Z",
+      "updatedAt": "2025-09-28T15:30:00Z"
+    },
+    {
+      "id": "11",
+      "troubleId": "11",
+      "titre": "Burnout : quand le travail épuise",
+      "contenu": "Le burnout touche de plus en plus de travailleurs sénégalais, notamment dans les secteurs exigeants. Fatigue chronique, perte de sens, irritabilité... Comment reconnaître l'épuisement professionnel et agir avant qu'il ne soit trop tard ? La prévention est essentielle.",
+      "auteurId": 101,
+      "tags": ["burnout", "travail", "épuisement", "prévention"],
+      "createdAt": "2025-10-12T11:00:00Z",
+      "updatedAt": "2025-10-12T11:00:00Z"
+    },
+    {
+      "id": "12",
+      "troubleId": "12",
+      "titre": "Troubles alimentaires chez les jeunes : un cri silencieux",
+      "contenu": "Anorexie, boulimie... Les troubles du comportement alimentaire touchent de plus en plus d'adolescents sénégalais, souvent en silence. Sous la pression des standards de beauté véhiculés par les réseaux sociaux, certains jeunes mettent leur santé en danger. Comment les détecter et les accompagner ?",
+      "auteurId": 103,
+      "tags": ["TCA", "adolescent", "prévention", "réseaux sociaux"],
+      "createdAt": "2025-10-08T10:00:00Z",
+      "updatedAt": "2025-10-08T10:00:00Z"
+    },
+    {
+      "id": "13",
+      "troubleId": "3",
+      "titre": "Dépression post-partum : les mères aussi ont droit à la tristesse",
+      "contenu": "Après l'accouchement, certaines femmes traversent une période de grande détresse émotionnelle. Loin d'être un échec maternel, la dépression post-partum est une condition médicale qui nécessite soutien et traitement. Brisons le tabou autour de la santé mentale maternelle.",
+      "auteurId": 105,
+      "tags": ["dépression", "post-partum", "maternité", "femmes"],
+      "createdAt": "2025-09-18T14:00:00Z",
+      "updatedAt": "2025-09-18T14:00:00Z"
+    },
+    {
+      "id": "14",
+      "troubleId": "4",
+      "titre": "L'anxiété sociale : plus qu'une simple timidité",
+      "contenu": "Avoir peur de parler en public ou de rencontrer de nouvelles personnes peut sembler banal. Mais pour certains, cette peur devient paralysante et empêche toute vie sociale normale. L'anxiété sociale est un trouble réel qui peut être traité efficacement.",
+      "auteurId": 102,
+      "tags": ["anxiété sociale", "phobie", "jeunesse", "TCC"],
+      "createdAt": "2025-10-20T09:30:00Z",
+      "updatedAt": "2025-10-20T09:30:00Z"
+    },
+    {
+      "id": "15",
+      "troubleId": "1",
+      "titre": "TDAH chez les adultes : un diagnostic souvent tardif",
+      "contenu": "Beaucoup d'adultes découvrent qu'ils ont un TDAH après des années de difficultés professionnelles et relationnelles. Ce diagnostic tardif permet enfin de comprendre leurs défis et d'accéder à des stratégies d'adaptation efficaces.",
+      "auteurId": 104,
+      "tags": ["TDAH", "adulte", "diagnostic", "adaptation"],
+      "createdAt": "2025-10-25T16:45:00Z",
+      "updatedAt": "2025-10-25T16:45:00Z"
+    }
+  ],
+  "histoires": [
+    {
+      "id": "1",
+      "troubleId": 1,
+      "titre": "L'histoire de Binta : mon TDAH, ma force",
+      "recit": "Je m'appelle Binta, j'ai 22 ans et je suis étudiante en droit à l'UCAD. On m'a toujours dit que j'étais 'dans la lune' et que je ne finirais jamais rien. Les remarques des professeurs et même de ma famille étaient difficiles. Quand le diagnostic du TDAH a été posé l'année dernière, tout a changé. Ce n'était pas de la paresse. J'ai appris à travailler avec mon cerveau, pas contre lui. Aujourd'hui, mon hyper-concentration me permet d'exceller dans mes études. C'est une histoire pour dire à tous les jeunes de Dakar qui se sentent différents : votre différence peut être votre plus grande force.",
+      "auteurId": null,
+      "tags": ["TDAH", "jeunesse", "résilience", "UCAD", "témoignage"],
+      "createdAt": "2025-11-02T11:00:00Z",
+      "updatedAt": "2025-11-02T11:00:00Z"
+    },
+    {
+      "id": "2",
+      "troubleId": 3,
+      "titre": "Moussa : sortir du tunnel de la dépression",
+      "recit": "Je suis Moussa, informaticien de 35 ans. Il y a deux ans, j'ai plongé dans une dépression sévère après avoir perdu mon emploi. Je ne sortais plus de chez moi, je ne voyais plus personne. Ma famille pensait que j'étais paresseux. Grâce à un ami qui m'a encouragé à consulter, j'ai commencé une thérapie. Aujourd'hui, je vais mieux. J'ai un nouveau travail et j'ai appris à demander de l'aide sans honte. La dépression n'est pas une faiblesse, c'est une maladie qui se soigne.",
+      "auteurId": null,
+      "tags": ["dépression", "guérison", "travail", "espoir", "témoignage"],
+      "createdAt": "2025-10-28T14:20:00Z",
+      "updatedAt": "2025-10-28T14:20:00Z"
+    },
+    {
+      "id": "3",
+      "troubleId": 4,
+      "titre": "Aïssatou : vaincre l'anxiété sociale",
+      "recit": "Pendant des années, j'ai évité les mariages, les cérémonies familiales, même les réunions au travail. La simple idée d'être observée me paralysait. Je pensais que c'était juste de la timidité. Un jour, j'ai découvert que je souffrais d'anxiété sociale. Avec l'aide d'une psychologue et des exercices progressifs, j'ai réappris à vivre normalement. Aujourd'hui, je peux même faire des présentations devant mes collègues. C'est un combat quotidien, mais je progresse.",
+      "auteurId": null,
+      "tags": ["anxiété sociale", "timidité", "thérapie", "progression", "témoignage"],
+      "createdAt": "2025-10-22T10:00:00Z",
+      "updatedAt": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "4",
+      "troubleId": 6,
+      "titre": "Mamadou : le parcours d'un enfant autiste",
+      "recit": "Je suis Fatou, mère de Mamadou, 8 ans, diagnostiqué autiste à 4 ans. Au début, c'était le choc. Personne dans mon entourage ne comprenait. On me disait qu'il était possédé ou qu'il fallait des prières. Mais j'ai cherché des informations, trouvé des spécialistes. Aujourd'hui, Mamadou va à l'école, progresse chaque jour. Il a sa façon unique de voir le monde et nous l'acceptons. Aux parents qui vivent la même chose : n'abandonnez jamais.",
+      "auteurId": null,
+      "tags": ["autisme", "enfant", "parent", "inclusion", "témoignage"],
+      "createdAt": "2025-10-18T09:15:00Z",
+      "updatedAt": "2025-10-18T09:15:00Z"
+    },
+    {
+      "id": "5",
+      "troubleId": 10,
+      "titre": "Ibrahima : ma victoire sur l'addiction",
+      "recit": "J'avais 17 ans quand j'ai commencé à fumer du cannabis. Ce qui était 'juste pour essayer' est devenu une prison. J'ai perdu mes amis, mes études, la confiance de ma famille. À 25 ans, j'ai touché le fond et j'ai accepté d'aller en cure. Cela fait maintenant 3 ans que je suis sobre. J'ai retrouvé ma dignité, repris mes études. L'addiction peut toucher n'importe qui, mais on peut s'en sortir.",
+      "auteurId": null,
+      "tags": ["addiction", "cannabis", "guérison", "réhabilitation", "témoignage"],
+      "createdAt": "2025-10-14T13:30:00Z",
+      "updatedAt": "2025-10-14T13:30:00Z"
+    },
+    {
+      "id": "6",
+      "troubleId": 11,
+      "titre": "Ndeye : du burnout à l'équilibre",
+      "recit": "En tant qu'infirmière, je pensais que la fatigue faisait partie du métier. Mais j'ai commencé à détester mon travail, à pleurer chaque matin. Mon corps me lâchait. On m'a diagnostiqué un burnout sévère. J'ai dû prendre un arrêt maladie, chose que je n'aurais jamais imaginée faire. Après plusieurs mois de repos et de thérapie, j'ai appris à poser mes limites. Je suis retournée au travail différemment. Prendre soin de soi n'est pas égoïste, c'est nécessaire.",
+      "auteurId": null,
+      "tags": ["burnout", "santé", "équilibre", "soignant", "témoignage"],
+      "createdAt": "2025-10-10T15:45:00Z",
+      "updatedAt": "2025-10-10T15:45:00Z"
+    },
+    {
+      "id": "7",
+      "troubleId": 5,
+      "titre": "Cheikh : vivre avec le trouble bipolaire",
+      "recit": "À 28 ans, j'ai reçu le diagnostic de trouble bipolaire. Pendant des années, j'ai alterné entre des phases où je me sentais invincible et d'autres où je ne voulais plus vivre. Ma famille ne comprenait pas. Le traitement et le suivi régulier m'ont stabilisé. J'ai appris à reconnaître les signes avant-coureurs de mes phases. Aujourd'hui, je travaille, j'ai une famille. Le bipolaire ne définit pas qui je suis.",
+      "auteurId": null,
+      "tags": ["bipolaire", "stabilité", "traitement", "famille", "témoignage"],
+      "createdAt": "2025-10-05T11:20:00Z",
+      "updatedAt": "2025-10-05T11:20:00Z"
+    },
+    {
+      "id": "8",
+      "troubleId": 7,
+      "titre": "Mariama : guérir d'un traumatisme",
+      "recit": "J'ai été victime d'une agression il y a 5 ans. Pendant longtemps, j'ai fait des cauchemars, je sursautais au moindre bruit. Je ne sortais plus seule. Ma vie était devenue une prison. Grâce à la thérapie EMDR, j'ai pu retraiter ce traumatisme. Ce n'est pas de l'oubli, mais j'ai retrouvé ma liberté. On peut guérir des blessures invisibles.",
+      "auteurId": null,
+      "tags": ["TSPT", "traumatisme", "EMDR", "guérison", "témoignage"],
+      "createdAt": "2025-09-30T10:30:00Z",
+      "updatedAt": "2025-09-30T10:30:00Z"
+    },
+    {
+      "id": "9",
+      "troubleId": 12,
+      "titre": "Aminata : mon combat contre l'anorexie",
+      "recit": "À 16 ans, j'ai commencé à me trouver grosse. J'ai réduit progressivement mes repas jusqu'à ne presque plus manger. Je pesais 38 kg pour 1m65. Mes parents affolés m'ont emmenée voir un médecin. L'anorexie a failli me coûter la vie. Après une hospitalisation et un suivi psychologique, j'ai compris que la beauté ne se mesure pas en kilos. Je me reconstruis chaque jour.",
+      "auteurId": null,
+      "tags": ["anorexie", "TCA", "adolescent", "guérison", "témoignage"],
+      "createdAt": "2025-09-25T14:00:00Z",
+      "updatedAt": "2025-09-25T14:00:00Z"
+    },
+    {
+      "id": "10",
+      "troubleId": 8,
+      "titre": "Ousmane : libéré des TOC",
+      "recit": "Je vérifiais 50 fois si la porte était fermée, je me lavais les mains jusqu'à les faire saigner. Mes rituels prenaient 4 heures par jour. Ma vie était contrôlée par mes obsessions. La thérapie comportementale m'a appris à résister progressivement à mes compulsions. C'était dur, mais aujourd'hui je suis libre. Les TOC ne gouvernent plus ma vie.",
+      "auteurId": null,
+      "tags": ["TOC", "compulsion", "thérapie", "libération", "témoignage"],
+      "createdAt": "2025-09-20T09:00:00Z",
+      "updatedAt": "2025-09-20T09:00:00Z"
+    }
+  ]
+}
