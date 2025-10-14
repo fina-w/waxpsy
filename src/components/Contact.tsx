@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaPaperPlane, FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import {  FaPhone, FaEnvelope, FaPaperPlane, FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import Footer from './footer';
 import { Header } from './Header';
@@ -69,18 +69,18 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-white via-white to-blue-50">
-      <Header />
+
       {/* En-tête avec image de fond */}
-      <div className="relative h-80 overflow-hidden">
+      <div className="relative h-100 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: 'url("/images/contact-bg.jpg")',
-            backgroundBlendMode: 'overlay',
-            backgroundColor: 'rgba(22, 101, 52, 0.7)'
+            backgroundImage: 'url("public/contact_us.jpg")',
+            backgroundBlendMode: 'lighten',
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-green-800 to-blue-800 opacity-80"></div>
+          <Header />
         </div>
         
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
@@ -180,7 +180,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-green-600 to-blue-600 text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition flex items-center justify-center space-x-2"
+                  className="w-full bg-[#015635] text-white py-3 px-6 rounded-lg font-medium hover:opacity-90 transition flex items-center justify-center space-x-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -212,18 +212,6 @@ const Contact = () => {
               <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">Nos coordonnées</h2>
               
               <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 bg-green-100 p-3 rounded-full text-green-600">
-                    <FaMapMarkerAlt className="h-6 w-6" />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Adresse</h3>
-                    <p className="mt-1 text-gray-600">
-                      123 Rue du Bien-être<br />
-                      75000 Paris, France
-                    </p>
-                  </div>
-                </div>
                 
                 <div className="flex items-start">
                   <div className="flex-shrink-0 bg-blue-100 p-3 rounded-full text-blue-600">
@@ -245,16 +233,16 @@ const Contact = () => {
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Email</h3>
                     <p className="mt-1 text-gray-600">
-                      contact@waxpsy.com<br />
+                      waxpsy@sn.com<br />
                       Réponse sous 24-48h
                     </p>
                   </div>
                 </div>
               </div>
               
-              <div className="mt-8">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Suivez-nous</h3>
-                <div className="flex space-x-4">
+              <div className="mt-8 text-center">
+                <h3 className="text-lg font-medium text-gray-900 mb-4 ">Suivez-nous</h3>
+                <div className="flex space-x-4  items-center justify-center">
                   <a 
                     href={socialLinks.facebook} 
                     target="_blank" 
@@ -295,7 +283,7 @@ const Contact = () => {
               </div>
             </div>
             
-            <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-xl shadow-lg p-8 text-white">
+            <div className="bg-red-600 rounded-xl shadow-lg p-8 text-white">
               <h2 className="text-2xl font-serif font-semibold mb-4">Besoin d'aide immédiate ?</h2>
               <p className="mb-6">
                 Si vous ou un proche avez besoin d'une aide urgente, contactez immédiatement les services d'urgence ou un professionnel de santé.
