@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = () => {
     ];
 
     const currentPath = window.location.pathname;
-    const isHomePage = currentPath === "/home";
+    const isHomePage = currentPath === "/home" || "contact";
     const textColor = isHomePage ? "text-white" : "text-black";
 
     return (
