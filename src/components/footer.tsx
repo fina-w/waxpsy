@@ -24,7 +24,7 @@ const footerSections = [
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-green-800 text-white font-serif relative pt-20 pb-8">
+    <footer className="bg-[#015635] text-white font-serif relative pt-20 pb-8">
       {/* La vague SVG en haut */}
       <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
         <svg
@@ -33,9 +33,17 @@ const Footer: React.FC = () => {
           preserveAspectRatio="none"
           className="relative block w-full h-[75px] " // Ajustez la hauteur de la vague
         >
+          <defs>
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="60%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+      <stop offset="60%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+      <stop offset="100%" style={{ stopColor: '#dbeafe', stopOpacity: 1 }} />
+    </linearGradient>
+  </defs>
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            className="fill-current text-brand-green bg-green-800"
+            className="text-brand-green "
+            fill="url(#waveGradient)"
           ></path>
         </svg>
       </div>
@@ -72,13 +80,13 @@ const Footer: React.FC = () => {
         {/* Ligne et mentions légales */}
         <hr className="my-8 border-gray-400" />
         <div className="text-center text-sm text-gray-300">
-          <p>© 2025 WaxPsy - Tous droits réservés</p>
+          <p> 2025 WaxPsy - Tous droits réservés</p>
           <div className="mt-2 space-x-2">
-            <a href="#" className="hover:underline">Mentions Légales</a>
+            <a href="/mentions-legales" className="hover:underline">Mentions Légales</a>
             <span>|</span>
-            <a href="#" className="hover:underline">Confidentialité</a>
+            <a href="/confidentialite" className="hover:underline">Confidentialité</a>
             <span>|</span>
-            <a href="#" className="hover:underline">Conditions d'Utilisation</a>
+            <a href="/conditions-utilisation" className="hover:underline">Conditions d'Utilisation</a>
           </div>
         </div>
       </div>

@@ -1,30 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './footer';
+import Header from './Header';
 
 const APropos: React.FC = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
       {/* Header */}
-      <header className="bg-white p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          <Link to="/" className="flex items-center">
-            <img src="/black-logo.png" alt="WaxPsy Logo" className="h-12" />
-          </Link>
-          <nav className="hidden md:flex space-x-6">
-            <Link to="/" className="text-green-700 hover:text-green-900 transition-colors">Accueil</Link>
-            <Link to="/troubles" className="text-green-700 hover:text-green-900 transition-colors">Troubles</Link>
-            <Link to="/articles" className="text-green-700 hover:text-green-900 transition-colors">Articles</Link>
-            <Link to="/temoignages" className="text-green-700 hover:text-green-900 transition-colors">Témoignages</Link>
-            <Link to="/glossaire" className="text-green-700 hover:text-green-900 transition-colors">Glossaire</Link>
-            <Link to="/apropos" className="font-semibold text-green-800 border-b-2 border-green-700">À propos</Link>
-            <Link to="/contact" className="text-green-700 hover:text-green-900 transition-colors">Contact</Link>
-          </nav>
-        </div>
-      </header>
+          <Header />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-50 to-blue-50 py-20">
+      <section className=" py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">À propos de WaxPsy</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -34,15 +20,15 @@ const APropos: React.FC = () => {
       </section>
 
       {/* Notre Mission */}
-      <section className="py-16 bg-white">
+      <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center
+          <div className="flex flex-col md:flex-row items-center justify-center
            gap-12">
-            <div className="md:w-1/2">
+            <div className="pl-30 md:w-1/2">
               <img 
                 src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
                 alt="Notre mission"
-                className="rounded-lg shadow-xl w-full h-auto"
+                className="rounded-lg shadow-xl w-120 h-100 "
               />
             </div>
             <div className="md:w-1/2">
@@ -120,15 +106,15 @@ const APropos: React.FC = () => {
                 name: "Safiétou DIANGAR",
                 role: "Développeuse Full Stack",
                 bio: "Passionnée par la création d'expériences numériques qui améliorent la vie des gens. Spécialisée dans le développement d'applications web réactives et accessibles.",
-                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-                skills: ["React", "Node.js", "TypeScript", "UI/UX"]
+                image: "public/safietoudiangar.jpg",
+                skills: ["React", "Flutter", "Laravel", "UI/UX"]
               },
               {
                 name: "Ndeye Binta BADIANE",
                 role: "Développeuse Full Stack",
                 bio: "Développeuse passionnée par les solutions technologiques innovantes. Expérimentée dans la création d'applications web complètes, du front-end au back-end.",
                 image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
-                skills: ["JavaScript", "Python", "Django", "React Native"]
+                skills: ["JavaScript", "Python", "Django", "React"]
               }
             ].map((member, index) => (
               <div key={index} className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -208,7 +194,7 @@ const APropos: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-green-700 text-white">
+      <section className="py-16 bg-[#015635]  text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">Rejoignez notre communauté</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">Inscrivez-vous dès maintenant pour accéder à toutes nos ressources et faire partie d'une communauté bienveillante.</p>
@@ -221,7 +207,7 @@ const APropos: React.FC = () => {
             </Link>
             <Link 
               to="/contact" 
-              className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:bg-opacity-10 transition-colors"
+              className="border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-opacity-10 transition-colors"
             >
               Nous contacter
             </Link>
