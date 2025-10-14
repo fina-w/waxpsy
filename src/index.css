@@ -15,3 +15,8 @@
 .page-bg {
   background: linear-gradient(to right, white, #D7E3EF);
 }
+
+body {
+  overflow-x: hidden;
+}
+

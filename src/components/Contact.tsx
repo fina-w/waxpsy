@@ -1,17 +1,39 @@
 import { useState } from 'react';
-import {  FaPhone, FaEnvelope, FaPaperPlane, FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaPaperPlane, FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import Footer from './footer';
 import { Header } from './Header';
 
+// Définition du schéma de validation avec Zod
+const contactFormSchema = z.object({
+  name: z.string()
+    .min(2, { message: 'Le nom doit contenir au moins 2 caractères' })
+    .max(50, { message: 'Le nom ne doit pas dépasser 50 caractères' }),
+  email: z.string()
+    .email({ message: 'Veuillez entrer une adresse email valide' }),
+  subject: z.string()
+    .min(5, { message: 'Le sujet doit contenir au moins 5 caractères' })
+    .max(100, { message: 'Le sujet ne doit pas dépasser 100 caractères' }),
+  message: z.string()
+    .min(10, { message: 'Le message doit contenir au moins 10 caractères' })
+    .max(1000, { message: 'Le message ne doit pas dépasser 1000 caractères' })
+});
+
+type ContactFormData = z.infer<typeof contactFormSchema>;
+
 const Contact = () => {
-  const [formData, setFormData] = useState({  
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+  const { 
+    register, 
+    handleSubmit, 
+    reset,
+    formState: { errors, isSubmitting } 
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema)
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
   
   // Liens des réseaux sociaux
@@ -22,18 +44,7 @@ const Contact = () => {
     linkedin: 'https://www.linkedin.com/company/waxpsy'
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
+  const onSubmit = async () => {
     try {
       // Simulation d'envoi de formulaire
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -44,12 +55,7 @@ const Contact = () => {
       });
       
       // Réinitialisation du formulaire
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+      reset();
       
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.';
@@ -58,8 +64,6 @@ const Contact = () => {
         message: errorMessage
       });
     } finally {
-      setIsSubmitting(false);
-      
       // Effacer le message après 5 secondes
       setTimeout(() => {
         setSubmitStatus(null);
@@ -109,22 +113,24 @@ const Contact = () => {
               </div>
             )}
             
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                     Votre nom *
                   </label>
                   <input
-                    type="text"
                     id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                    type="text"
+                    className={`w-full px-4 py-2 border ${
+                      errors.name ? 'border-red-500' : 'border-gray-300'
+                    } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                     placeholder="Votre nom complet"
+                    {...register('name')}
                   />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                  )}
                 </div>
                 
                 <div>
@@ -132,15 +138,17 @@ const Contact = () => {
                     Votre email *
                   </label>
                   <input
-                    type="email"
                     id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                    type="email"
+                    className={`w-full px-4 py-2 border ${
+                      errors.email ? 'border-red-500' : 'border-gray-300'
+                    } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                     placeholder="votre@email.com"
+                    {...register('email')}
                   />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                  )}
                 </div>
               </div>
               
@@ -149,15 +157,17 @@ const Contact = () => {
                   Sujet *
                 </label>
                 <input
-                  type="text"
                   id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                  type="text"
+                  className={`w-full px-4 py-2 border ${
+                    errors.subject ? 'border-red-500' : 'border-gray-300'
+                  } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                   placeholder="Objet de votre message"
+                  {...register('subject')}
                 />
+                {errors.subject && (
+                  <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
+                )}
               </div>
               
               <div>
@@ -166,14 +176,16 @@ const Contact = () => {
                 </label>
                 <textarea
                   id="message"
-                  name="message"
                   rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition"
+                  className={`w-full px-4 py-2 border ${
+                    errors.message ? 'border-red-500' : 'border-gray-300'
+                  } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                   placeholder="Décrivez-nous votre demande..."
+                  {...register('message')}
                 ></textarea>
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                )}
               </div>
               
               <div>
