@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 import Footer from './footer';
 import { Header } from './Header';
 
@@ -34,8 +36,6 @@ const Contact = () => {
     resolver: zodResolver(contactFormSchema)
   });
 
-  const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
-  
   // Liens des réseaux sociaux
   const socialLinks = {
     facebook: 'https://www.facebook.com/waxpsy',
@@ -44,30 +44,68 @@ const Contact = () => {
     linkedin: 'https://www.linkedin.com/company/waxpsy'
   };
 
+  const showSuccessAlert = () => {
+    Swal.fire({
+      title: 'Message envoyé avec succès !',
+      text: 'Nous avons bien reçu votre message et nous vous répondrons dans les plus brefs délais.',
+      icon: 'success',
+      confirmButtonText: 'Parfait',
+      confirmButtonColor: '#015635',
+      background: '#ffffff',
+      backdrop: `
+        rgba(1,86,53,0.1)
+        url("/images/nyan-cat.gif")
+        left top
+        no-repeat
+      `,
+      showConfirmButton: true,
+      timer: 5000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      }
+    });
+  };
+
+  const showErrorAlert = (message: string) => {
+    Swal.fire({
+      title: 'Oups...',
+      text: message,
+      icon: 'error',
+      confirmButtonText: 'D\'accord',
+      confirmButtonColor: '#ef4444',
+      background: '#ffffff',
+      showConfirmButton: true,
+    });
+  };
+
   const onSubmit = async () => {
     try {
-      // Simulation d'envoi de formulaire
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      setSubmitStatus({
-        success: true,
-        message: 'Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.'
+      // Afficher un loader pendant l'envoi
+      const { isDismissed } = await Swal.fire({
+        title: 'Envoi en cours...',
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
       });
+
+      // Simulation d'envoi de formulaire
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Fermer le loader
+      Swal.close();
+      
+      // Afficher le message de succès
+      showSuccessAlert();
       
       // Réinitialisation du formulaire
       reset();
       
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.';
-      setSubmitStatus({
-        success: false,
-        message: errorMessage
-      });
-    } finally {
-      // Effacer le message après 5 secondes
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
+      showErrorAlert(errorMessage);
     }
   };
 
@@ -106,12 +144,6 @@ const Contact = () => {
             className="bg-white rounded-xl shadow-lg p-8"
           >
             <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">Envoyez-nous un message</h2>
-            
-            {submitStatus && (
-              <div className={`mb-6 p-4 rounded-lg ${submitStatus.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                {submitStatus.message}
-              </div>
-            )}
             
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
