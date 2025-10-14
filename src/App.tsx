@@ -7,6 +7,7 @@ import Troubles from "./components/Troubles";
 import Temoignages from "./components/Temoignages";
 import ProfessionalsList from "./components/ProfessionalsList";
 import Articles from "./components/Articles";
+import Histoire from "./components/Histoire";
 import ShareExperience from "./components/ShareExperience";
 import Homepage from "./components/Homepage";
 import Glossaire from "./components/Glossaire";
@@ -42,6 +43,7 @@ function App() {
         <Route path="/glossaire" element={<Glossaire />} />
         <Route path="/apropos" element={<APropos />} />
         <Route path="/articles/:id" element={<Articles />} />
+        <Route path="/histoires/:id" element={<Histoire />} />
       </Routes>
     </Router>
   );
