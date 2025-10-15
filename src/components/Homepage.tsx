@@ -16,7 +16,7 @@ const Homepage: React.FC = () => {
   const [currentTemoignageIndex, setCurrentTemoignageIndex] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
   const [pendingTab, setPendingTab] = useState<string | null>(null);
-
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const nextTroubles = useCallback(() => {
     setCurrentTroubleIndex((prev) =>
       prev + 3 >= troubles.length ? 0 : prev + 3
@@ -43,6 +43,7 @@ const Homepage: React.FC = () => {
   }, [temoignages.length]);
 
   useEffect(() => {
+    console.log("Current user in Homepage:", isAuthenticated);
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -97,7 +98,7 @@ const Homepage: React.FC = () => {
     }
   }, [temoignages.length, currentTemoignageIndex, nextTemoignages]);
 
-  const { isAuthenticated } = useAuthStore();
+
 
   const handleTroubleClick = (id: string) => {
     navigate(`/troubles/${id}`);

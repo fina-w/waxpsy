@@ -7,9 +7,9 @@ const UrgenceSOS: React.FC = () => {
   const { ressourcesSOS } = db;
 
   return (
-    <div>
+    <div className="min-h-screen page-bg">
       <Header />
-      <div className="min-h-screen bg-white text-gray-800 px-4 md:px-20 py-10">
+      <div className="container mx-auto px-4 py-8">
         {/* En-tête */}
         <header className="text-center mb-10">
           <h1 className="text-red-600 text-3xl font-bold">
@@ -29,7 +29,7 @@ const UrgenceSOS: React.FC = () => {
             Numéros d'urgences
           </h2>
 
-          <div className="max-w-xl mx-auto bg-gray-50 border border-gray-300 rounded-lg shadow p-6 text-left">
+          <div className="max-w-xl mx-auto bg-white border border-gray-300 rounded-lg shadow p-6 text-left">
             <h3 className="font-bold text-lg mb-2 text-red-700">SOS</h3>
             <ul className="space-y-3">
               {ressourcesSOS.numerosUrgence.map((urgence, index) => (
@@ -50,7 +50,7 @@ const UrgenceSOS: React.FC = () => {
             Centres spécialisés en santé mentale :
           </h2>
 
-          <div className="max-w-2xl mx-auto bg-gray-50 border border-gray-300 rounded-lg shadow p-6 text-left">
+          <div className="max-w-2xl mx-auto bg-white border border-gray-300 rounded-lg shadow p-6 text-left">
             {ressourcesSOS.centresCrise.map((centre, index) => (
               <div key={index} className="mb-4">
                 <p className="mb-2">
@@ -74,7 +74,7 @@ const UrgenceSOS: React.FC = () => {
             Protocole en cas de crise :
           </h2>
 
-          <div className="max-w-2xl mx-auto bg-gray-50 border border-gray-300 rounded-lg shadow p-6 text-left">
+          <div className="max-w-2xl mx-auto bg-white border border-gray-300 rounded-lg shadow p-6 text-left">
             <p className="text-gray-700">{ressourcesSOS.protocolesCrise}</p>
           </div>
         </section>
@@ -85,7 +85,7 @@ const UrgenceSOS: React.FC = () => {
             Signes qu'une personne est en crise :
           </h2>
 
-          <div className="max-w-2xl mx-auto bg-gray-50 border border-gray-300 rounded-lg shadow p-6 text-left">
+          <div className="max-w-2xl mx-auto bg-white border border-gray-300 rounded-lg shadow p-6 text-left">
             <ul className="space-y-2">
               {ressourcesSOS.signesCrise.map((signe, index) => (
                 <li key={index} className="flex items-start">

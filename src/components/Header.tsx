@@ -1,84 +1,95 @@
-// Header avec animations Framer Motion - Version simple et smooth
-import React from "react";
-import { motion } from "framer-motion";
+
+
+// =================================================================
+// Header.tsx - Version mise à jour sans Framer Motion
+// =================================================================
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../stores/authStore";
+import { AuthModal } from "./AuthModal";
 
 interface HeaderProps {
-    currentPath?: string;
-    onProtectedClick?: (tab: string) => void;
+  currentPath?: string;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onProtectedClick }) => {
-    const navigate = useNavigate();
-    const { isAuthenticated } = useAuthStore();
+export const Header: React.FC<HeaderProps> = ({ currentPath: propCurrentPath }) => {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [attemptedRoute, setAttemptedRoute] = useState("");
 
-    const navItems = [
-        { href: "/home", label: "Accueil", protected: false },
-        { href: "/troubles", label: "Troubles", protected: true },
-        { href: "/temoignages", label: "Témoignages", protected: true },
-        { href: "/professionals", label: "Professionnels", protected: true },
-        { href: "/glossaire", label: "Glossaire", protected: false },
-        { href: "/urgences", label: "Urgences ?", protected: true },
-        { href: "/apropos", label: "A propos", protected: false },
-        { href: "/contact", label: "Contact", protected: false },
-        { href: "/profil", label: "Profil", protected: false }
-    ];
+  const navItems = [
+    { href: "/home", label: "Accueil", protected: false },
+    { href: "/troubles", label: "Troubles", protected: true },
+    { href: "/temoignages", label: "Témoignages", protected: true },
+    { href: "/professionals", label: "Professionnels", protected: true },
+    { href: "/glossaire", label: "Glossaire", protected: false },
+    { href: "/urgences", label: "Urgences ?", protected: true },
+    { href: "/apropos", label: "A propos", protected: false },
+    { href: "/contact", label: "Contact", protected: false },
+    { href: "/profil", label: "Profil", protected: false }
+  ];
 
-    const currentPath = window.location.pathname;
-    const isHomePage = ["/home", "/contact"].includes(currentPath);
-    const textColor = isHomePage ? "text-white" : "text-black";
+  const currentPath = propCurrentPath || window.location.pathname;
+  const isHomePage = ["/home", "/contact"].includes(currentPath);
+  const textColor = isHomePage ? "text-white" : "text-black";
 
-    const handleClick = (item: typeof navItems[0]) => {
-        if (item.protected && !isAuthenticated) {
-            if (onProtectedClick) {
-                onProtectedClick(item.href.slice(1)); // remove leading /
-            }
-        } else {
-            navigate(item.href);
-        }
-    };
+  const handleClick = (item: typeof navItems[0]) => {
+    if (item.protected && !isAuthenticated) {
+      setAttemptedRoute(item.label);
+      setShowAuthModal(true);
+    } else {
+      navigate(item.href);
+    }
+  };
 
-    return (
-        <header className="p-4 flex justify-between items-center shadow-md">
-            <div className="flex items-center">
-                <img
-                    src={isHomePage ? "/white-logo.png" : "/black-logo.png"}
-                    alt="WaxPsy Logo"
-                    className="h-15 w-auto mr-4"
-                />
-            </div>
+  const handleLogin = () => {
+    setShowAuthModal(false);
+    navigate("/login");
+  };
 
-            <nav className=" md:flex space-x-6 text-sm">
-                    {navItems.map((item) => {
-                        const isActive = item.href === currentPath;
-                        return (
+  return (
+    <>
+      <header className="p-4 flex justify-between items-center shadow-md">
+        <div className="flex items-center">
+          <img
+            src={isHomePage ? "/white-logo.png" : "/black-logo.png"}
+            alt="WaxPsy Logo"
+            className="h-15 w-auto mr-4"
+          />
+        </div>
 
-                        <motion.a
-                            key={item.href}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleClick(item);
-                            }}
-                            className={`${textColor} relative py-1 cursor-pointer ${isActive ? "font-bold underline" : ''}`}
-                            whileHover={{ scale: 1.08 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            {item.label}
-                            <motion.div
-                                className={`absolute left-0 right-0 bottom-0 h-0.5`}
-                                initial={{ scaleX: isActive ? 1 : 0 }}
-                                animate={{ scaleX: isActive ? 1 : 0 }}
-                                whileHover={{ scaleX: 1 }}
-                                transition={{ duration: 0.2 }}
-                                style={{ originX: 0 }}
-                            />
-                        </motion.a>
-                        )
-                    })}
-            </nav>
-        </header>
-    );
-}
+        <nav className="md:flex space-x-6 text-sm">
+          {navItems.map((item) => {
+            const isActive = item.href === currentPath;
+            return (
+              <a
+                key={item.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClick(item);
+                }}
+                className={`${textColor} relative py-1 cursor-pointer transition-all hover:scale-105 ${
+                  isActive ? "font-bold underline" : ""
+                }`}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
+      </header>
+
+      {/* Modal d'authentification */}
+      <AuthModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        attemptedRoute={attemptedRoute}
+        onLogin={handleLogin}
+      />
+    </>
+  );
+};
 
 export default Header;
