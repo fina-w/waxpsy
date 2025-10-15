@@ -11,6 +11,10 @@ interface Professionnel {
   description: string;
   verification: boolean;
   langues: string[];
+  diplome: string;
+  experience: string;
+  tarif: string;
+  creneauxDisponibles: { jour: string; heures: string[] }[];
 }
 
 const ProfessionalsList: React.FC = () => {
@@ -20,93 +24,34 @@ const ProfessionalsList: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [expandedPros, setExpandedPros] = useState<string[]>([]);
 
   useEffect(() => {
-    // Temporarily hardcoded data for debugging - remove after confirming render
-    const hardcodedData = [
-      {
-        id: "101",
-        nom: "Cabinet Zeynab Ayub",
-        specialite: "Psychiatre",
-        adresse: "Dakar, Sénégal",
-        telephone: "(221) 77 952 05",
-        email: "zeynab.ayub@psychiatre.sn",
-        description: "Spécialisée en troubles anxieux et dépressifs. Approche intégrative (médicaments + thérapie).",
-        verification: true,
-        langues: ["Français", "Wolof"]
-      },
-      {
-        id: "102",
-        nom: "Dr. Amadou Sow",
-        specialite: "Psychologue",
-        adresse: "Dakar, Sénégal",
-        telephone: "(221) 78 456 78 90",
-        email: "amadou.sow@psy.sn",
-        description: "Psychologue spécialisé en thérapie cognitivo-comportementale pour adultes.",
-        verification: true,
-        langues: ["Français", "Wolof"]
-      },
-      {
-        id: "103",
-        nom: "Dr. Khadija Diallo",
-        specialite: "Psychiatre",
-        adresse: "Cabinet Fann Hock, Dakar",
-        telephone: "+221 77 123 45 67",
-        email: "k.diallo.psy@email.sn",
-        description: "Spécialisée dans les troubles neurodéveloppementaux (TDAH, autisme) chez les enfants et les adultes.",
-        verification: true,
-        langues: ["Français", "Wolof", "Pulaar"]
-      },
-      {
-        id: "104",
-        nom: "M. Seydou Cissé",
-        specialite: "Psychologue clinicien",
-        adresse: "Centre de santé mentale de Grand Yoff, Dakar",
-        telephone: "+221 78 987 65 43",
-        email: "s.cisse.psy@email.sn",
-        description: "Approche humaniste et thérapies cognitivo-comportementales (TCC) pour troubles anxieux.",
-        verification: true,
-        langues: ["Français", "Sérère"]
-      },
-      {
-        id: "105",
-        nom: "Pr. Fatou Ndiaye",
-        specialite: "Psychiatre spécialisée en TDAH",
-        adresse: "Clinique des Almadies, Dakar",
-        telephone: "+221 33 889 01 23",
-        email: "f.ndiaye.tdah@clinique.sn",
-        description: "Expertise en diagnostic et traitement du TDAH chez les enfants et adolescents.",
-        verification: true,
-        langues: ["Français", "Wolof"]
-      },
-      {
-        id: "106",
-        nom: "Dr. Moussa Traoré",
-        specialite: "Psychologue pour adultes",
-        adresse: "Centre Médico-Psychologique, Thiès",
-        telephone: "+221 77 555 66 77",
-        email: "m.traore.adultes@psy.sn",
-        description: "Thérapie pour troubles dépressifs et anxieux chez les adultes.",
-        verification: true,
-        langues: ["Français", "Bambara"]
-      }
-    ];
-    console.log('Using hardcoded data for debugging');
-    setProfessionnels(hardcodedData);
-    setFilteredProfessionnels(hardcodedData);
-    setLoading(false);
-    setError('');
-    
-    // Comment out fetch for now
-    /*
     const fetchProfessionnels = async () => {
       try {
-        const response = await fetch('/api/professionnels');
+        const response = await fetch('/db.json');
         if (!response.ok) throw new Error('Failed to fetch professionals');
         const data = await response.json();
-        console.log('Fetched data:', data);
-        setProfessionnels(data);
-        setFilteredProfessionnels(data);
+        const professionnelsData = data.professionnels.map((pro: unknown) => {
+          const p = pro as Record<string, unknown>;
+          return {
+            id: String(p.id),
+            nom: String(p.nom),
+            specialite: String(p.specialite),
+            adresse: String(p.adresse),
+            telephone: String(p.telephone),
+            email: String(p.email),
+            description: String(p.bio),
+            verification: Boolean(p.verifiee),
+            langues: Array.isArray(p.langues) ? p.langues.map(String) : [],
+            diplome: String(p.diplome),
+            experience: String(p.experience),
+            tarif: String(p.tarif),
+            creneauxDisponibles: Array.isArray(p.creneauxDisponibles) ? p.creneauxDisponibles as { jour: string; heures: string[] }[] : []
+          };
+        });
+        setProfessionnels(professionnelsData);
+        setFilteredProfessionnels(professionnelsData);
       } catch (err) {
         console.error('Fetch error:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');
@@ -115,7 +60,6 @@ const ProfessionalsList: React.FC = () => {
       }
     };
     fetchProfessionnels();
-    */
   }, []);
 
   useEffect(() => {
@@ -216,44 +160,75 @@ const ProfessionalsList: React.FC = () => {
         </div>
 
         {/* Professionals Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 max-w-7xl mx-auto">
           {filteredProfessionnels.map((pro) => {
             const categories = getCategories(pro.description);
             return (
               <div key={pro.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
                 {/* Photo */}
-                <div className="relative h-48 bg-gradient-to-r from-green-50 to-green-100 flex items-center justify-center overflow-hidden">
+                <div className="relative h-16 bg-gradient-to-r from-green-50 to-green-100 flex items-center justify-center overflow-hidden">
                   <img
                     src={`https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80`}
                     alt={pro.nom}
-                    className="w-40 h-32 rounded-lg object-cover shadow-md"
+                    className="w-16 h-12 rounded-lg object-cover shadow-md"
                   />
                 </div>
 
                 {/* Details */}
-                <div className="p-6 space-y-3">
+                <div className="p-3 space-y-1">
                   <div className="flex items-start justify-between">
-                    <h2 className="text-2xl font-bold text-green-800 flex-1">{pro.nom}</h2>
-                    {pro.verification && <span className="bg-green-500 text-white px-3 py-1 rounded-full text-sm ml-2">Vérifié</span>}
+                    <h2 className="text-xl font-bold text-green-800 flex-1">{pro.nom}</h2>
+                    {pro.verification && <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs ml-2">Vérifié</span>}
                   </div>
                   <p className="text-gray-700"><strong>Spécialité:</strong> {pro.specialite}</p>
                   <p className="text-gray-700"><strong>Adresse:</strong> {pro.adresse}</p>
                   <p className="text-gray-700"><strong>Téléphone mobile:</strong> <a href={`tel:${pro.telephone}`} className="text-green-600 hover:underline">{pro.telephone}</a></p>
                   <p className="text-gray-700"><strong>Adresse email:</strong> <a href={`mailto:${pro.email}`} className="text-green-600 hover:underline">{pro.email}</a></p>
                   <p className="text-gray-600 italic">{pro.description}</p>
-                  {pro.langues.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      <span className="text-sm font-medium text-gray-600">Langues:</span>
-                      {pro.langues.map((lang, idx) => (
-                        <span key={idx} className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">{lang}</span>
-                      ))}
-                    </div>
-                  )}
                   <div className="flex flex-wrap gap-2 pt-2">
                     {categories.map((cat, idx) => (
                       <span key={idx} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{cat}</span>
                     ))}
                   </div>
+                  {expandedPros.includes(pro.id) ? (
+                    <>
+                      <p className="text-gray-700"><strong>Diplôme:</strong> {pro.diplome}</p>
+                      <p className="text-gray-700"><strong>Expérience:</strong> {pro.experience}</p>
+                      <p className="text-gray-700"><strong>Tarif:</strong> {pro.tarif}</p>
+                      {pro.creneauxDisponibles.length > 0 && (
+                        <div className="space-y-2">
+                          <span className="text-sm font-medium text-gray-600">Créneaux disponibles:</span>
+                          {pro.creneauxDisponibles.map((creneau, idx) => (
+                            <div key={idx} className="bg-gray-50 p-2 rounded">
+                              <p className="text-sm font-semibold">{creneau.jour}:</p>
+                              <p className="text-sm text-gray-600">{creneau.heures.join(', ')}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {pro.langues.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          <span className="text-sm font-medium text-gray-600">Langues:</span>
+                          {pro.langues.map((lang, idx) => (
+                            <span key={idx} className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">{lang}</span>
+                          ))}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setExpandedPros(expandedPros.filter(id => id !== pro.id))}
+                        className="mt-4 text-green-600 hover:underline text-sm"
+                      >
+                        Voir moins
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => setExpandedPros([...expandedPros, pro.id])}
+                      className="mt-4 text-green-600 hover:underline text-sm"
+                    >
+                      Voir plus
+                    </button>
+                  )}
                 </div>
               </div>
             );

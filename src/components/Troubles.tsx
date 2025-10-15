@@ -22,10 +22,10 @@ const Troubles: React.FC = () => {
   useEffect(() => {
     const fetchTroubles = async () => {
       try {
-        const response = await fetch('/api/troubles');
-        if (!response.ok) throw new Error('Failed to fetch troubles');
+        const response = await fetch('/db.json');
+        if (!response.ok) throw new Error('Failed to fetch data');
         const data = await response.json();
-        setTroubles(data);
+        setTroubles(data.troubles);
       } catch (err) {
         console.error('Fetch error:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');

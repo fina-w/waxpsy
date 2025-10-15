@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useAuthStore } from '../stores/authStore';
 
 interface User {
   id: number;
   nom: string;
   email: string;
   motDePasse: string;
+  role: string;
 }
 
-const Login: React.FC<{ setIsAuthenticated: (value: boolean) => void }> = ({ setIsAuthenticated }) => {
+interface LoginProps {
+  onSuccess?: () => void;
+  onClose?: () => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onSuccess, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
+  const { login } = useAuthStore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,17 +30,20 @@ const Login: React.FC<{ setIsAuthenticated: (value: boolean) => void }> = ({ set
       return;
     }
     try {
-      const response = await fetch('http://localhost:3000/utilisateurs');
+      const response = await fetch('/api/utilisateurs');
       const users = await response.json();
       const user = users.find((u: User) => u.email === email && u.motDePasse === password);
       if (user) {
-        localStorage.setItem('user', JSON.stringify(user));
-        setIsAuthenticated(true);
-        const tab = location.state?.tab;
-        if (tab) {
-          navigate('/', { state: { tab } });
+        login(user);
+        if (onSuccess) {
+          onSuccess();
         } else {
-          navigate('/');
+          const from = location.state?.from;
+          if (from) {
+            navigate(from);
+          } else {
+            navigate('/home');
+          }
         }
       } else {
         setMessage('Invalid credentials');
