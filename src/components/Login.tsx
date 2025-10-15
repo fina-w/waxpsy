@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
+import { useEffect } from 'react';
 
 interface User {
   id: number;
@@ -19,9 +20,21 @@ const Login: React.FC<LoginProps> = ({ onSuccess, onClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuthStore();
+
+  // Load saved email if remember me was checked
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('rememberedEmail');
+    if (savedEmail) {
+      setEmail(savedEmail);
+      setRememberMe(true);
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +48,12 @@ const Login: React.FC<LoginProps> = ({ onSuccess, onClose }) => {
       const user = users.find((u: User) => u.email === email && u.motDePasse === password);
       if (user) {
         login(user);
+        // Handle remember me functionality
+        if (rememberMe) {
+          localStorage.setItem('rememberedEmail', email);
+        } else {
+          localStorage.removeItem('rememberedEmail');
+        }
         if (onSuccess) {
           onSuccess();
         } else {
@@ -94,8 +113,31 @@ const Login: React.FC<LoginProps> = ({ onSuccess, onClose }) => {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 mb-4 rounded-full border border-gray-300 text-sm"
+              className="w-full p-2 mb-2 rounded-full border border-gray-300 text-sm"
             />
+
+            {/* Remember Me Checkbox and Forgot Password Link */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="rememberMe"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="mr-2"
+                />
+                <label htmlFor="rememberMe" className="text-sm text-gray-600">
+                  Se souvenir de moi
+                </label>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowForgotPassword(true)}
+                className="text-sm text-red-600 hover:underline"
+              >
+                Mot de passe oublié ?
+              </button>
+            </div>
 
             <button
               type="submit"
@@ -118,6 +160,52 @@ const Login: React.FC<LoginProps> = ({ onSuccess, onClose }) => {
           </p>
         </div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {showForgotPassword && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <h3 className="text-lg font-semibold mb-4">Mot de passe oublié</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+            </p>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Email</label>
+                <input
+                  type="email"
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
+                  placeholder="votre.email@example.com"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end space-x-3 mt-6">
+              <button
+                onClick={() => {
+                  setShowForgotPassword(false);
+                  setForgotEmail('');
+                }}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200"
+              >
+                Annuler
+              </button>
+              <button
+                onClick={() => {
+                  // TODO: Implement password reset logic
+                  alert(`Un email de réinitialisation a été envoyé à ${forgotEmail}`);
+                  setShowForgotPassword(false);
+                  setForgotEmail('');
+                }}
+                className="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
+              >
+                Envoyer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

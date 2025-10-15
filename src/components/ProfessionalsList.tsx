@@ -160,75 +160,78 @@ const ProfessionalsList: React.FC = () => {
         </div>
 
         {/* Professionals Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
           {filteredProfessionnels.map((pro) => {
             const categories = getCategories(pro.description);
             return (
               <div key={pro.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
-                {/* Photo */}
-                <div className="relative h-16 bg-gradient-to-r from-green-50 to-green-100 flex items-center justify-center overflow-hidden">
-                  <img
-                    src={`https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80`}
-                    alt={pro.nom}
-                    className="w-16 h-12 rounded-lg object-cover shadow-md"
-                  />
-                </div>
+                {/* Photo and Details Row */}
+                <div className="flex items-center p-4 space-x-4">
+                  {/* Photo */}
+                  <div className="flex-shrink-0">
+                    <img
+                      src={`https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80`}
+                      alt={pro.nom}
+                      className="w-28 h-28 rounded-full object-cover shadow-md border-2 border-green-200"
+                    />
+                  </div>
 
-                {/* Details */}
-                <div className="p-3 space-y-1">
-                  <div className="flex items-start justify-between">
-                    <h2 className="text-xl font-bold text-green-800 flex-1">{pro.nom}</h2>
-                    {pro.verification && <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs ml-2">Vérifié</span>}
-                  </div>
-                  <p className="text-gray-700"><strong>Spécialité:</strong> {pro.specialite}</p>
-                  <p className="text-gray-700"><strong>Adresse:</strong> {pro.adresse}</p>
-                  <p className="text-gray-700"><strong>Téléphone mobile:</strong> <a href={`tel:${pro.telephone}`} className="text-green-600 hover:underline">{pro.telephone}</a></p>
-                  <p className="text-gray-700"><strong>Adresse email:</strong> <a href={`mailto:${pro.email}`} className="text-green-600 hover:underline">{pro.email}</a></p>
-                  <p className="text-gray-600 italic">{pro.description}</p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {categories.map((cat, idx) => (
-                      <span key={idx} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{cat}</span>
-                    ))}
-                  </div>
-                  {expandedPros.includes(pro.id) ? (
-                    <>
-                      <p className="text-gray-700"><strong>Diplôme:</strong> {pro.diplome}</p>
-                      <p className="text-gray-700"><strong>Expérience:</strong> {pro.experience}</p>
-                      <p className="text-gray-700"><strong>Tarif:</strong> {pro.tarif}</p>
-                      {pro.creneauxDisponibles.length > 0 && (
-                        <div className="space-y-2">
-                          <span className="text-sm font-medium text-gray-600">Créneaux disponibles:</span>
-                          {pro.creneauxDisponibles.map((creneau, idx) => (
-                            <div key={idx} className="bg-gray-50 p-2 rounded">
-                              <p className="text-sm font-semibold">{creneau.jour}:</p>
-                              <p className="text-sm text-gray-600">{creneau.heures.join(', ')}</p>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                      {pro.langues.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                          <span className="text-sm font-medium text-gray-600">Langues:</span>
-                          {pro.langues.map((lang, idx) => (
-                            <span key={idx} className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">{lang}</span>
-                          ))}
-                        </div>
-                      )}
+                  {/* Details */}
+                  <div className="flex-1 space-y-1">
+                    <div className="flex items-start justify-between">
+                      <h2 className="text-xl font-bold text-green-800 flex-1">{pro.nom}</h2>
+                      {pro.verification && <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs ml-2">Vérifié</span>}
+                    </div>
+                    <p className="text-gray-700"><strong>Spécialité:</strong> {pro.specialite}</p>
+                    <p className="text-gray-700"><strong>Adresse:</strong> {pro.adresse}</p>
+                    <p className="text-gray-700"><strong>Téléphone mobile:</strong> <a href={`tel:${pro.telephone}`} className="text-green-600 hover:underline">{pro.telephone}</a></p>
+                    <p className="text-gray-700"><strong>Adresse email:</strong> <a href={`mailto:${pro.email}`} className="text-green-600 hover:underline">{pro.email}</a></p>
+                    <p className="text-gray-600 italic">{pro.description}</p>
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {categories.map((cat, idx) => (
+                        <span key={idx} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{cat}</span>
+                      ))}
+                    </div>
+                    {expandedPros.includes(pro.id) ? (
+                      <>
+                        <p className="text-gray-700"><strong>Diplôme:</strong> {pro.diplome}</p>
+                        <p className="text-gray-700"><strong>Expérience:</strong> {pro.experience}</p>
+                        <p className="text-gray-700"><strong>Tarif:</strong> {pro.tarif}</p>
+                        {pro.creneauxDisponibles.length > 0 && (
+                          <div className="space-y-2">
+                            <span className="text-sm font-medium text-gray-600">Créneaux disponibles:</span>
+                            {pro.creneauxDisponibles.map((creneau, idx) => (
+                              <div key={idx} className="bg-gray-50 p-2 rounded">
+                                <p className="text-sm font-semibold">{creneau.jour}:</p>
+                                <p className="text-sm text-gray-600">{creneau.heures.join(', ')}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {pro.langues.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            <span className="text-sm font-medium text-gray-600">Langues:</span>
+                            {pro.langues.map((lang, idx) => (
+                              <span key={idx} className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">{lang}</span>
+                            ))}
+                          </div>
+                        )}
+                        <button
+                          onClick={() => setExpandedPros(expandedPros.filter(id => id !== pro.id))}
+                          className="mt-4 text-green-600 hover:underline text-sm"
+                        >
+                          Voir moins
+                        </button>
+                      </>
+                    ) : (
                       <button
-                        onClick={() => setExpandedPros(expandedPros.filter(id => id !== pro.id))}
+                        onClick={() => setExpandedPros([...expandedPros, pro.id])}
                         className="mt-4 text-green-600 hover:underline text-sm"
                       >
-                        Voir moins
+                        Voir plus
                       </button>
-                    </>
-                  ) : (
-                    <button
-                      onClick={() => setExpandedPros([...expandedPros, pro.id])}
-                      className="mt-4 text-green-600 hover:underline text-sm"
-                    >
-                      Voir plus
-                    </button>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             );
