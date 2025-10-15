@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath: propCurrentPath }) 
     { href: "/urgences", label: "Urgences ?", protected: true },
     { href: "/apropos", label: "A propos", protected: false },
     { href: "/contact", label: "Contact", protected: false },
-    { href: "/profil", label: "Profil", protected: false }
+    { href: "/profil", label: "Mon Profil", protected: false }
   ];
 
   const currentPath = propCurrentPath || window.location.pathname;

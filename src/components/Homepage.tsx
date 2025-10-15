@@ -5,6 +5,7 @@ import type { Trouble, Temoignage } from "../types/types";
 import Header from "./Header.tsx";
 import Login from "./Login.tsx";
 import { useAuthStore } from "../stores/authStore";
+import db from "../../db.json";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Homepage: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [pendingTab, setPendingTab] = useState<string | null>(null);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const nextTroubles = useCallback(() => {
     setCurrentTroubleIndex((prev) =>
       prev + 3 >= troubles.length ? 0 : prev + 3
@@ -46,8 +48,6 @@ const Homepage: React.FC = () => {
     console.log("Current user in Homepage:", isAuthenticated);
     const fetchData = async () => {
       try {
-        setLoading(true);
-
         // Récupération des troubles
         const troublesRes = await fetch("/api/troubles");
         if (!troublesRes.ok)
@@ -160,7 +160,7 @@ const Homepage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col container bg-gradient-to-r from-white via-white to-blue-100">
+    <div className="min-h-screen flex flex-col w-full bg-gradient-to-r from-white via-white to-blue-100">
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-[600px] flex flex-col  text-white"
@@ -388,7 +388,10 @@ const Homepage: React.FC = () => {
                 </p>
               </div>
 
-              <div className="border-2 border-black rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow">
+              <div
+                className="border-2 border-black rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow cursor-pointer"
+                onClick={() => navigate('/quizpage')}
+              >
                 <div className="mb-6">
                   <img
                     src="public/quiz.png"
@@ -603,5 +606,5 @@ const Homepage: React.FC = () => {
     </div>
   );
 };
-
+ 
 export default Homepage;

@@ -16,6 +16,8 @@ import MentionsLegales from "./components/MentionsLegales";
 import Confidentialite from "./components/Confidentialite";
 import ConditionsUtilisation from "./components/ConditionsUtilisation";
 import UrgenceSOS from "./components/Urgence-SOS";
+import Profil from "./components/Profil";
+import QuizPage from "./components/QuizPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/confidentialite" element={<Confidentialite />} />
         <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
+        <Route path="/profil" element={<Profil />} />
+        <Route path="/quizpage" element={<QuizPage />} />
       </Routes>
     </Router>
   );

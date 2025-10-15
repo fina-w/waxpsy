@@ -107,6 +107,24 @@
       "nom": "gg",
       "email": "gg@gmail.com",
       "motDePasse": "password123"
+    },
+    {
+      "id": "70fe",
+      "nom": "attou",
+      "email": "sall@gmail.com",
+      "motDePasse": "password123"
+    },
+    {
+      "id": "a2f5",
+      "nom": "bineta badiane",
+      "email": "badiane@gmail.com",
+      "motDePasse": "123456789"
+    },
+    {
+      "id": "af70",
+      "nom": "Awa",
+      "email": "niang@gmail.com",
+      "motDePasse": "123456789"
     }
   ],
   "professionnels": [
