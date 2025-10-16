@@ -1,8 +1,5 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './api/queryClient';
-import { ThemeProvider } from './components/theme/ThemeProvider';
 import './index.css';
 import App from './App';
 
@@ -14,10 +11,6 @@ document.head.appendChild(link);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="waxpsy-theme">
-        <App />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <App />
   </StrictMode>
 );
