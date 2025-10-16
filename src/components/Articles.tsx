@@ -66,7 +66,9 @@ const Articles: React.FC = () => {
   return (
     <div className="min-h-screen page-bg">
       {/* Header */}
-          <Header />
+          <header>
+               <Header /> 
+              </header>
 
       {/* Main Content */}
       <main className="p-8">
