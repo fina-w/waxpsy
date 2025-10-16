@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Troubles from "./components/Troubles";
-import TroubleDetail from "./components/TroubleDetail";
 import Temoignages from "./components/Temoignages";
 import ProfessionalsList from "./components/ProfessionalsList";
 import Articles from "./components/Articles";
@@ -32,7 +31,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/professionals" element={<ProfessionalsList />} />
           <Route path="/troubles" element={<Troubles />} />
-          <Route path="/troubles/:id" element={<TroubleDetail />} />
+          <Route path="/troubles/:id" element={<Troubles />} />
           <Route path="/temoignages" element={<Temoignages />} />
           <Route path="/histoires/:id" element={<Histoire />} />
           <Route path="/urgences" element={<UrgenceSOS />} />

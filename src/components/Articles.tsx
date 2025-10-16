@@ -71,7 +71,7 @@ const Articles: React.FC = () => {
               </header>
 
       {/* Main Content */}
-      <main className="p-8">
+      <main className="pt-24">
         <div className="max-w-4xl mx-auto">
           {/* Breadcrumb/Sub-nav */}
           <nav className="flex items-center space-x-4 mb-6 text-sm text-gray-600">

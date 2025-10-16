@@ -106,7 +106,12 @@ const Troubles: React.FC = () => {
                   </div>
                 )}
                 <button
-                  onClick={() => navigate(`/troubles/${trouble.id}`)}
+                  onClick={() => {
+                    // Rediriger vers la page d'article avec l'ID du trouble
+                    navigate(`/articles/${trouble.id}`);
+                    // Faire défiler vers le haut de la page
+                    window.scrollTo(0, 0);
+                  }}
                   className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors w-full"
                 >
                   En savoir plus
