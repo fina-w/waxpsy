@@ -16,7 +16,7 @@
       "motDePasse": "password123",
       "role": "utilisateur",
       "dateInscription": "2025-09-15T14:30:00Z",
-      "actif": true
+      "actif": false
     },
     {
       "id": "3",
@@ -697,7 +697,7 @@
       "utilisateurId": 2,
       "titre": "Mon anxiété sociale",
       "contenu": "Je n'arrivais plus à sortir de chez moi. Le simple fait d'aller à la boutique du coin était une épreuve. Je suis en thérapie maintenant et je voulais partager mon histoire pour que d'autres sachent qu'ils ne sont pas seuls.",
-      "statut": "approuvé",
+      "statut": "en attente",
       "createdAt": "2025-10-22T16:45:00Z",
       "updatedAt": "2025-10-23T09:00:00Z"
     },
@@ -706,7 +706,7 @@
       "utilisateurId": 3,
       "titre": "Ma bataille contre l'anorexie",
       "contenu": "Pendant 3 ans, j'ai lutté contre l'anorexie. Je pesais 35 kg et mes parents ne savaient plus quoi faire. Grâce à une équipe médicale formidable et à ma détermination, j'ai repris 15 kg et j'apprends à m'aimer comme je suis.",
-      "statut": "approuvé",
+      "statut": "rejeté",
       "createdAt": "2025-10-18T14:20:00Z",
       "updatedAt": "2025-10-19T10:00:00Z"
     },

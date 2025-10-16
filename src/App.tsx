@@ -18,6 +18,7 @@ import ConditionsUtilisation from "./components/ConditionsUtilisation";
 import UrgenceSOS from "./components/Urgence-SOS";
 import Profil from "./components/Profil";
 import QuizPage from "./components/QuizPage";
+import Admin from "./components/Admin";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
         <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/quizpage" element={<QuizPage />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );
