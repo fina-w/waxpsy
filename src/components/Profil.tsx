@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Header from './Header.tsx';
 import { useAuthStore } from '../stores/authStore';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 interface User {
   id: number;
@@ -14,6 +16,7 @@ interface User {
 
 const Profil: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
+  const navigate = useNavigate();
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [editForm, setEditForm] = useState({
@@ -89,9 +92,15 @@ const Profil: React.FC = () => {
                     Changer le mot de passe
                   </button>
                   <button
-                    onClick={() => {
+                    onClick={async () => {
                       logout();
-                      window.location.href = '/';
+                      await Swal.fire({
+                        title: 'Déconnecté',
+                        text: 'Vous avez été déconnecté avec succès.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                      });
+                      navigate('/home');
                     }}
                     className="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
                   >

@@ -43,9 +43,18 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
       return;
     }
     try {
-      const response = await fetch('/api/utilisateurs');
-      const users = await response.json();
-      const user = users.find((u: User) => u.email === email && u.motDePasse === password);
+      // Check utilisateurs
+      const userResponse = await fetch('/api/utilisateurs');
+      const users = await userResponse.json();
+      let user = users.find((u: User) => u.email === email && u.motDePasse === password);
+
+      // If not found in utilisateurs, check administrateurs
+      if (!user) {
+        const adminResponse = await fetch('/api/administrateurs');
+        const admins = await adminResponse.json();
+        user = admins.find((u: User) => u.email === email && u.motDePasse === password);
+      }
+
       if (user) {
         login(user);
         // Handle remember me functionality
@@ -61,7 +70,11 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
           if (from) {
             navigate(from);
           } else {
-            navigate('/home');
+            if (user.role === 'administrateur') {
+              navigate('/admin');
+            } else {
+              navigate('/home');
+            }
           }
         }
       } else {
