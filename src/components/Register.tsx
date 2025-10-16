@@ -22,7 +22,7 @@ const Register: React.FC = () => {
       });
       if (response.ok) {
         setMessage('Registration successful');
-        setTimeout(() => navigate('/'), 2000);
+        setTimeout(() => navigate('/login'), 2000);
       } else {
         setMessage(`Registration failed: ${response.status} ${response.statusText}`);
       }
@@ -97,7 +97,7 @@ const Register: React.FC = () => {
           <p className="mt-4 text-xs">
             Déjà un compte ?{" "}
             <Link
-              to="/"
+              to="/login"
               className="text-green-800 font-bold hover:underline"
             >
               Connectez-vous

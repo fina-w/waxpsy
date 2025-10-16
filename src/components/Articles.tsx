@@ -21,10 +21,12 @@ const Articles: React.FC = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await fetch(`/api/articles/${id}`);
-        if (!response.ok) throw new Error('Failed to fetch article');
+        const response = await fetch('/db.json');
+        if (!response.ok) throw new Error('Failed to fetch data');
         const data = await response.json();
-        setArticle(data);
+        const foundArticle = data.articles.find((article: Article) => article.id === id);
+        if (!foundArticle) throw new Error('Article not found');
+        setArticle(foundArticle);
       } catch (err) {
         console.error('Fetch error:', err);
         setError(err instanceof Error ? err.message : 'Unknown error');

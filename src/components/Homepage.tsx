@@ -1,8 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "./footer.tsx";
 import type { Trouble, Temoignage } from "../types/types";
 import Header from "./Header.tsx";
+import Login from "./Login.tsx";
+import { useAuthStore } from "../stores/authStore";
+import db from "../../db.json";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,46 +15,48 @@ const Homepage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [currentTroubleIndex, setCurrentTroubleIndex] = useState(0);
   const [currentTemoignageIndex, setCurrentTemoignageIndex] = useState(0);
+  const [showLogin, setShowLogin] = useState(false);
+  const [pendingTab, setPendingTab] = useState<string | null>(null);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const nextTroubles = () => {
+  const nextTroubles = useCallback(() => {
     setCurrentTroubleIndex((prev) =>
       prev + 3 >= troubles.length ? 0 : prev + 3
     );
-  };
+  }, [troubles.length]);
 
-  const prevTroubles = () => {
+  const prevTroubles = useCallback(() => {
     setCurrentTroubleIndex((prev) =>
       prev - 3 < 0 ? Math.max(0, troubles.length - 3) : prev - 3
     );
-  };
+  }, [troubles.length]);
 
   // Pour les témoignages
-  const nextTemoignages = () => {
+  const nextTemoignages = useCallback(() => {
     setCurrentTemoignageIndex((prev) =>
       prev + 3 >= temoignages.length ? 0 : prev + 3
     );
-  };
+  }, [temoignages.length]);
 
-  const prevTemoignages = () => {
+  const prevTemoignages = useCallback(() => {
     setCurrentTemoignageIndex((prev) =>
       prev - 3 < 0 ? Math.max(0, temoignages.length - 3) : prev - 3
     );
-  };
+  }, [temoignages.length]);
 
   useEffect(() => {
+    console.log("Current user in Homepage:", isAuthenticated);
     const fetchData = async () => {
       try {
-        setLoading(true);
-
         // Récupération des troubles
-        const troublesRes = await fetch("http://localhost:3000/troubles");
+        const troublesRes = await fetch("/api/troubles");
         if (!troublesRes.ok)
           throw new Error("Erreur lors du chargement des troubles");
         const troublesData = await troublesRes.json();
 
         // Récupération des témoignages approuvés
         const temoignagesRes = await fetch(
-          "http://localhost:3000/temoignages?statut=approuvé"
+          "/api/temoignages?statut=approuvé"
         );
         if (!temoignagesRes.ok)
           throw new Error("Erreur lors du chargement des témoignages");
@@ -81,7 +86,7 @@ const Homepage: React.FC = () => {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [troubles.length, currentTroubleIndex]);
+  }, [troubles.length, currentTroubleIndex, nextTroubles]);
 
   // Auto-scroll pour les témoignages (toutes les 5 secondes)
   useEffect(() => {
@@ -91,10 +96,47 @@ const Homepage: React.FC = () => {
       }, 5000);
       return () => clearInterval(interval);
     }
-  }, [temoignages.length, currentTemoignageIndex]);
+  }, [temoignages.length, currentTemoignageIndex, nextTemoignages]);
+
+
 
   const handleTroubleClick = (id: string) => {
     navigate(`/troubles/${id}`);
+  };
+
+  const handleProfessionalsClick = () => {
+    if (!isAuthenticated) {
+      setPendingTab('professionals');
+      setShowLogin(true);
+    } else {
+      navigate('/professionals');
+    }
+  };
+
+  const handleTemoignagesClick = () => {
+    if (!isAuthenticated) {
+      setPendingTab('temoignages');
+      setShowLogin(true);
+    } else {
+      navigate('/temoignages');
+    }
+  };
+
+  const handleUrgenceClick = () => {
+    navigate('/urgences');
+  };
+
+  const handleLoginSuccess = () => {
+    setShowLogin(false);
+    if (pendingTab) {
+      navigate(`/${pendingTab}`);
+      setPendingTab(null);
+    }
+  };
+
+  const handleLoginClose = () => {
+    setShowLogin(false);
+    setPendingTab(null);
   };
 
   if (loading) {
@@ -118,7 +160,7 @@ const Homepage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col container bg-gradient-to-r from-white via-white to-blue-100">
+    <div className="min-h-screen flex flex-col w-full bg-gradient-to-r from-white via-white to-blue-100">
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-[600px] flex flex-col  text-white"
@@ -350,7 +392,10 @@ const Homepage: React.FC = () => {
                 </p>
               </div>
 
-              <div className="border-2 border-black rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow">
+              <div
+                className="border-2 border-black rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow cursor-pointer"
+                onClick={() => navigate('/quizpage')}
+              >
                 <div className="mb-6">
                   <img
                     src="/quiz.png"
@@ -374,7 +419,7 @@ const Homepage: React.FC = () => {
             <h2 className="text-3xl font-bold text-white">
               Quelques Témoignages
             </h2>
-            <button className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
+            <button onClick={handleTemoignagesClick} className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
               Tout Voir <span className="text-xl">→</span>
             </button>
           </div>
@@ -523,7 +568,7 @@ const Homepage: React.FC = () => {
               spécialiste près de vous
             </p>
             <button
-              onClick={() => navigate("/professionals")}
+              onClick={handleProfessionalsClick}
               className="bg-[#015635] text-white px-6 py-3 rounded-full font-semibold hover:bg-green-700 transition"
             >
               Voir l'Annuaire
@@ -546,7 +591,7 @@ const Homepage: React.FC = () => {
               aux numéros d'urgence 24h/24.
             </p>
             <button
-              onClick={() => navigate("/urgence")}
+              onClick={handleUrgenceClick}
               className="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition"
             >
               Numéros
@@ -558,8 +603,16 @@ const Homepage: React.FC = () => {
       <section className="bg-gradient-to-r from-white to-blue-100">
         <Footer />
       </section>
+
+      {/* Login Modal */}
+      {showLogin && (
+        <Login
+          onSuccess={handleLoginSuccess}
+          onClose={handleLoginClose}
+        />
+      )}
     </div>
   );
 };
-
+ 
 export default Homepage;

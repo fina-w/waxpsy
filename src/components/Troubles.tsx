@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 
@@ -18,59 +18,35 @@ const Troubles: React.FC = () => {
   const [troubles, setTroubles] = useState<Trouble[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState('');
-
-  // Fonction de chargement des troubles
-  const loadTroubles = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch('/api/troubles');
-      if (!response.ok) throw new Error('Erreur lors du chargement des troubles');
-      const data = await response.json();
-      setTroubles(data);
-    } catch (err) {
-      setError('Erreur lors du chargement des troubles');
-      console.error('Erreur:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   // Chargement initial des données
   useEffect(() => {
-    loadTroubles();
+    const fetchTroubles = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/db.json');
+        if (!response.ok) throw new Error('Échec du chargement des données');
+        const data = await response.json();
+        if (data.troubles) {
+          setTroubles(data.troubles);
+        } else {
+          throw new Error('Format de données inattendu');
+        }
+      } catch (err) {
+        console.error('Erreur de chargement:', err);
+        setError('Erreur lors du chargement des troubles. Veuillez réessayer plus tard.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTroubles();
   }, []);
 
-  // Extraction des tags uniques pour les filtres
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    troubles.forEach(trouble => {
-      trouble.tags.forEach(tag => tags.add(tag));
-    });
-    return Array.from(tags);
-  }, [troubles]);
-
-  // Filtrage des troubles en fonction de la recherche et des filtres
-  const filteredTroubles = useMemo(() => {
-    return troubles.filter(trouble => {
-      // Filtre par recherche
-      const matchesSearch = !searchQuery || 
-        trouble.nom.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        trouble.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        trouble.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-      
-      // Filtre par tag
-      const matchesTag = !selectedTag || trouble.tags.includes(selectedTag);
-      
-      return matchesSearch && matchesTag;
-    });
-  }, [troubles, searchQuery, selectedTag]);
-
-  // Fonction pour réinitialiser les filtres
-  const resetFilters = () => {
-    setSearchQuery('');
-    setSelectedTag('');
+  // Gestion des erreurs d'image
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = e.target as HTMLImageElement;
+    target.src = '/placeholder.jpg';
   };
 
   if (error) {
@@ -92,71 +68,21 @@ const Troubles: React.FC = () => {
           Troubles Psychologiques
         </h1>
 
-        {/* Barre de recherche et filtres */}
-        <div className="mb-8 bg-white p-4 rounded-lg shadow-md">
-          <div className="mb-4">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Rechercher un trouble..."
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Filtrer par tag
-              </label>
-              <select
-                value={filters.tag}
-                onChange={(e) => setFilters({...filters, tag: e.target.value})}
-                className="w-full p-2 border rounded"
-              >
-                <option value="">Tous les tags</option>
-                {allTags.map(tag => (
-                  <option key={tag} value={tag}>{tag}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Tri par
-              </label>
-              <select
-                value={`${sortBy}_${sortOrder}`}
-                onChange={(e) => {
-                  const [sort, order] = e.target.value.split('_');
-                  setSortBy(sort);
-                  setSortOrder(order as 'asc' | 'desc');
-                }}
-                className="w-full p-2 border rounded"
-              >
-                <option value="nom_asc">Nom (A-Z)</option>
-                <option value="nom_desc">Nom (Z-A)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
         {/* Liste des troubles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {troubles.map((trouble, index) => (
+          {troubles.map((trouble) => (
             <div 
-              key={trouble.id} 
-              ref={index === troubles.length - 1 ? lastTroubleRef : null}
+              key={trouble.id}
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1"
             >
-              <img 
-                src={trouble.image} 
-                alt={trouble.nom} 
-                className="w-full h-48 object-cover"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = '/placeholder.jpg';
-                }}
-              />
+              <div className="h-48 bg-gray-100 flex items-center justify-center">
+                <img 
+                  src={trouble.image || '/placeholder.jpg'} 
+                  alt={trouble.nom || 'Image non disponible'} 
+                  className="w-full h-full object-cover"
+                  onError={handleImageError}
+                />
+              </div>
               <div className="p-6">
                 <h2 className="text-xl font-bold text-green-800 mb-3">
                   {trouble.nom}
@@ -164,13 +90,12 @@ const Troubles: React.FC = () => {
                 <p className="text-gray-600 mb-4 line-clamp-3">
                   {trouble.description}
                 </p>
-                {trouble.tags.length > 0 && (
+                {trouble.tags && trouble.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-4">
                     {trouble.tags.map((tag, idx) => (
                       <span 
                         key={idx} 
-                        className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs cursor-pointer hover:bg-green-200"
-                        onClick={() => setFilters({...filters, tag})}
+                        className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs"
                       >
                         {tag}
                       </span>
@@ -193,18 +118,6 @@ const Troubles: React.FC = () => {
           <div className="text-center py-8">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-green-600"></div>
             <p className="mt-2 text-gray-600">Chargement des troubles...</p>
-          </div>
-        )}
-
-        {/* Bouton "Charger plus" (optionnel) */}
-        {!loading && hasMore && (
-          <div className="text-center mt-8">
-            <button
-              onClick={() => loadTroubles(page + 1)}
-              className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-            >
-              Charger plus de troubles
-            </button>
           </div>
         )}
 

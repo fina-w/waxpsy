@@ -112,26 +112,26 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-white via-white to-blue-50">
 
-      {/* En-tête avec image de fond */}
-      <div className="relative h-100 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'url("public/contact_us.jpg")',
-            backgroundBlendMode: 'lighten',
-          }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-green-800 to-blue-800 opacity-80"></div>
-          <Header />
-        </div>
-        
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Contactez-nous</h1>
-          <p className="text-xl text-white max-w-2xl">
+      {/* Hero Section */}
+      <section
+        className="relative bg-cover bg-center h-[600px] flex flex-col text-white"
+        style={{ backgroundImage: "url('public/contact_us.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+
+        {/* Header superposé */}
+        <Header />
+
+        {/* Contenu principal du Hero */}
+        <div className="relative z-10 justify-center items-center text-center mt-40">
+          <h1 className="text-5xl font-serif font-bold mb-6 tracking-wide">
+            CONTACTEZ-NOUS
+          </h1>
+          <p className="text-xl text-white max-w-2xl mx-auto">
             Nous sommes là pour répondre à vos questions et vous accompagner dans votre parcours de bien-être mental.
           </p>
         </div>
-      </div>
+      </section>
 
       {/* Contenu principal */}
       <div className="container mx-auto px-4 py-16 flex-1">

@@ -18,16 +18,16 @@ const Glossaire: React.FC = () => {
     const fetchTermes = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/glossaire");
+        const response = await fetch('/db.json');
         if (!response.ok) {
-          throw new Error("Erreur lors du chargement du glossaire");
+          throw new Error('Erreur lors du chargement du glossaire');
         }
         const data = await response.json();
-        setTermes(data);
+        setTermes(data.glossaire);
         setError(null);
       } catch (err) {
-        console.error("Erreur:", err);
-        setError("Impossible de charger le glossaire. Veuillez réessayer plus tard.");
+        console.error('Erreur:', err);
+        setError('Impossible de charger le glossaire. Veuillez réessayer plus tard.');
       } finally {
         setLoading(false);
       }

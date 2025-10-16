@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
-    currentPath?: string;
+  currentPath?: string;
 }
 
 export const Header: React.FC<HeaderProps> = () => {
