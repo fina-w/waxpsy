@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Header } from './Header';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Header } from "./Header";
 
 interface Trouble {
   id: string;
@@ -17,24 +17,26 @@ const Troubles: React.FC = () => {
   const navigate = useNavigate();
   const [troubles, setTroubles] = useState<Trouble[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Chargement initial des données
   useEffect(() => {
     const fetchTroubles = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/db.json');
-        if (!response.ok) throw new Error('Échec du chargement des données');
+        const response = await fetch("/db.json");
+        if (!response.ok) throw new Error("Échec du chargement des données");
         const data = await response.json();
         if (data.troubles) {
           setTroubles(data.troubles);
         } else {
-          throw new Error('Format de données inattendu');
+          throw new Error("Format de données inattendu");
         }
       } catch (err) {
-        console.error('Erreur de chargement:', err);
-        setError('Erreur lors du chargement des troubles. Veuillez réessayer plus tard.');
+        console.error("Erreur de chargement:", err);
+        setError(
+          "Erreur lors du chargement des troubles. Veuillez réessayer plus tard."
+        );
       } finally {
         setLoading(false);
       }
@@ -46,7 +48,7 @@ const Troubles: React.FC = () => {
   // Gestion des erreurs d'image
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
-    target.src = '/placeholder.jpg';
+    target.src = "/placeholder.jpg";
   };
 
   if (error) {
@@ -60,10 +62,11 @@ const Troubles: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen page-bg">
-      <Header />
-      
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <Header />
+
+      <main className="pt-24">
+        <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-8 text-green-800">
           Troubles Psychologiques
         </h1>
@@ -71,14 +74,14 @@ const Troubles: React.FC = () => {
         {/* Liste des troubles */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {troubles.map((trouble) => (
-            <div 
+            <div
               key={trouble.id}
               className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1"
             >
               <div className="h-48 bg-gray-100 flex items-center justify-center">
-                <img 
-                  src={trouble.image || '/placeholder.jpg'} 
-                  alt={trouble.nom || 'Image non disponible'} 
+                <img
+                  src={trouble.image || "/placeholder.jpg"}
+                  alt={trouble.nom || "Image non disponible"}
                   className="w-full h-full object-cover"
                   onError={handleImageError}
                 />
@@ -93,8 +96,8 @@ const Troubles: React.FC = () => {
                 {trouble.tags && trouble.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-4">
                     {trouble.tags.map((tag, idx) => (
-                      <span 
-                        key={idx} 
+                      <span
+                        key={idx}
                         className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs"
                       >
                         {tag}
@@ -123,10 +126,13 @@ const Troubles: React.FC = () => {
 
         {!loading && troubles.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-500">Aucun trouble trouvé pour cette recherche.</p>
+            <p className="text-gray-500">
+              Aucun trouble trouvé pour cette recherche.
+            </p>
           </div>
         )}
       </div>
+      </main>
     </div>
   );
 };

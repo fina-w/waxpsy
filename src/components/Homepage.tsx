@@ -5,7 +5,6 @@ import type { Trouble, Temoignage } from "../types/types";
 import Header from "./Header.tsx";
 import Login from "./Login.tsx";
 import { useAuthStore } from "../stores/authStore";
-import db from "../../db.json";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -31,16 +30,32 @@ const Homepage: React.FC = () => {
     );
   }, [troubles.length]);
 
+  // Gestion du redimensionnement de l'écran
+  useEffect(() => {
+    const handleResize = () => {
+      // Forcer un recalcul des index lors du redimensionnement
+      if (window.innerWidth < 768) {
+        setCurrentTroubleIndex(0);
+        setCurrentTemoignageIndex(0);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Pour les témoignages
   const nextTemoignages = useCallback(() => {
+    const itemsToShow = window.innerWidth < 768 ? 1 : 3;
     setCurrentTemoignageIndex((prev) =>
-      prev + 3 >= temoignages.length ? 0 : prev + 3
+      prev + itemsToShow >= temoignages.length ? 0 : prev + itemsToShow
     );
   }, [temoignages.length]);
 
   const prevTemoignages = useCallback(() => {
+    const itemsToShow = window.innerWidth < 768 ? 1 : 3;
     setCurrentTemoignageIndex((prev) =>
-      prev - 3 < 0 ? Math.max(0, temoignages.length - 3) : prev - 3
+      prev - itemsToShow < 0 ? Math.max(0, temoignages.length - itemsToShow) : prev - itemsToShow
     );
   }, [temoignages.length]);
 
@@ -173,7 +188,7 @@ const Homepage: React.FC = () => {
 
         {/* Contenu principal du Hero */}
         <div className="relative z-10 justify-center items-center text-center mt-50">
-          <h1 className="text-5xl font-serif font-bold mb-6 tracking-wide">
+          <h1 className="text-4xl sm:text-2xl md:text-5xl font-serif font-bold mb-6 tracking-wide">
             COMPRENDRE LA SANTE MENTALE
           </h1>
           <button
@@ -294,7 +309,10 @@ const Homepage: React.FC = () => {
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
               {troubles
-                .slice(currentTroubleIndex, currentTroubleIndex + 3)
+                .slice(
+                  currentTroubleIndex,
+                  window.innerWidth < 768 ? currentTroubleIndex + 1 : currentTroubleIndex + 3
+                )
                 .map((trouble) => (
                   <div
                     key={trouble.id}
@@ -372,7 +390,7 @@ const Homepage: React.FC = () => {
             </svg>
           </div>
           <div className="max-w-5xl mx-auto text-center relative mt-[-500] ">
-            <h2 className="text-3xl font-serif text-white mb-12">
+            <h2 className="text-3xl font-serif text-white mb-12 mt-10">
               Pour mieux comprendres les troubles mentaux,Explorez
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -472,7 +490,10 @@ const Homepage: React.FC = () => {
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
               {temoignages
-                .slice(currentTemoignageIndex, currentTemoignageIndex + 3)
+                .slice(
+                  currentTemoignageIndex,
+                  window.innerWidth < 768 ? currentTemoignageIndex + 1 : currentTemoignageIndex + 3
+                )
                 .map((temoignage) => (
                 <div
                   key={temoignage.id}
@@ -551,7 +572,7 @@ const Homepage: React.FC = () => {
           </h2>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-40">
           <div className=" rounded-3xl p-8 border-2 border-black shadow-lg text-center">
             <div className="bg-transparent">
               <img

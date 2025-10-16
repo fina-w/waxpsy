@@ -25,7 +25,7 @@ export const Header: React.FC<HeaderProps> = () => {
     const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
     const isHomePage = ["/home", "/"].includes(currentPath);
     const textColor = isHomePage && !scrolled ? "text-white" : "text-gray-800";
-    const bgColor = isHomePage && !scrolled ? "bg-transparent" : "bg-white shadow-md";
+    const bgColor = isHomePage && !scrolled ? "bg-transparent" : "bg-gradient-to-r from-white via-white to-blue-100 shadow-md";
 
     useEffect(() => {
         const handleScroll = () => {
