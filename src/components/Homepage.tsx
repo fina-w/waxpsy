@@ -5,7 +5,6 @@ import type { Trouble, Temoignage } from "../types/types";
 import Header from "./Header.tsx";
 import Login from "./Login.tsx";
 import { useAuthStore } from "../stores/authStore";
-import db from "../../db.json";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -31,16 +30,32 @@ const Homepage: React.FC = () => {
     );
   }, [troubles.length]);
 
+  // Gestion du redimensionnement de l'écran
+  useEffect(() => {
+    const handleResize = () => {
+      // Forcer un recalcul des index lors du redimensionnement
+      if (window.innerWidth < 768) {
+        setCurrentTroubleIndex(0);
+        setCurrentTemoignageIndex(0);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Pour les témoignages
   const nextTemoignages = useCallback(() => {
+    const itemsToShow = window.innerWidth < 768 ? 1 : 3;
     setCurrentTemoignageIndex((prev) =>
-      prev + 3 >= temoignages.length ? 0 : prev + 3
+      prev + itemsToShow >= temoignages.length ? 0 : prev + itemsToShow
     );
   }, [temoignages.length]);
 
   const prevTemoignages = useCallback(() => {
+    const itemsToShow = window.innerWidth < 768 ? 1 : 3;
     setCurrentTemoignageIndex((prev) =>
-      prev - 3 < 0 ? Math.max(0, temoignages.length - 3) : prev - 3
+      prev - itemsToShow < 0 ? Math.max(0, temoignages.length - itemsToShow) : prev - itemsToShow
     );
   }, [temoignages.length]);
 
@@ -173,7 +188,7 @@ const Homepage: React.FC = () => {
 
         {/* Contenu principal du Hero */}
         <div className="relative z-10 justify-center items-center text-center mt-50">
-          <h1 className="text-5xl font-serif font-bold mb-6 tracking-wide">
+          <h1 className="text-4xl sm:text-2xl md:text-5xl font-serif font-bold mb-6 tracking-wide">
             COMPRENDRE LA SANTE MENTALE
           </h1>
           <button
@@ -207,15 +222,11 @@ const Homepage: React.FC = () => {
           className="w-70 h-auto"
         />
         <div className="max-w-xl">
-          <h2 className="text-4xl font-serif font-bold mb-4">
-            C'est quoi WaxPsy ?
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+            C'est quoi Waxpsy ?
           </h2>
-          <p className="text-lg leading-relaxed">
-            WaxPsy est une plateforme web sénégalaise dédiée à la
-            sensibilisation aux troubles mentaux méconnus. Elle combine
-            éducation, témoignages authentiques et histoires contextualisées
-            pour démystifier ces troubles dans un contexte culturel africain,
-            mais surtout sénégalais.
+          <p className="text-gray-700 max-w-3xl mx-auto text-lg mb-8">
+            Waxpsy est une plateforme sénégalaise dédiée à la sensibilisation et à l'information sur la santé mentale. Notre mission est de briser les tabous et d'offrir un espace sûr pour parler ouvertement de santé mentale au Sénégal.
           </p>
         </div>
       </section>
@@ -294,7 +305,10 @@ const Homepage: React.FC = () => {
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
               {troubles
-                .slice(currentTroubleIndex, currentTroubleIndex + 3)
+                .slice(
+                  currentTroubleIndex,
+                  window.innerWidth < 768 ? currentTroubleIndex + 1 : currentTroubleIndex + 3
+                )
                 .map((trouble) => (
                   <div
                     key={trouble.id}
@@ -372,7 +386,7 @@ const Homepage: React.FC = () => {
             </svg>
           </div>
           <div className="max-w-5xl mx-auto text-center relative mt-[-500] ">
-            <h2 className="text-3xl font-serif text-white mb-12">
+            <h2 className="text-3xl font-serif text-white mb-12 mt-10">
               Pour mieux comprendres les troubles mentaux,Explorez
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -472,7 +486,10 @@ const Homepage: React.FC = () => {
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
               {temoignages
-                .slice(currentTemoignageIndex, currentTemoignageIndex + 3)
+                .slice(
+                  currentTemoignageIndex,
+                  window.innerWidth < 768 ? currentTemoignageIndex + 1 : currentTemoignageIndex + 3
+                )
                 .map((temoignage) => (
                 <div
                   key={temoignage.id}
@@ -543,6 +560,65 @@ const Homepage: React.FC = () => {
         </div>
       </section>
 
+      {/* Section Statistiques */}
+      <section className="mt-12">
+        {/* Section Statistiques */}
+          <div className="max-w-5xl mx-auto bg-transparent p-8 md:p-12 rounded-xl shadow-lg">
+            <div className="text-center mb-10">
+              <h3 className="text-3xl font-bold text-gray-800 mb-4">
+                La Santé Mentale en Chiffres au Sénégal
+              </h3>
+              <p className="text-gray-600 max-w-3xl mx-auto">
+                Ces chiffres, bien que préoccupants, ne reflètent qu'une partie de la réalité. 
+                Beaucoup de cas ne sont pas déclarés en raison de la stigmatisation et du manque d'accès aux soins.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Carte Statistique 1 */}
+              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+                <div className="text-4xl font-bold text-center text-[#015635] mb-2">9.4%</div>
+                <p className="text-gray-700">des Sénégalais présentent un risque suicidaire</p>
+              </div>
+              
+              {/* Carte Statistique 2 */}
+              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+                <div className="text-4xl font-bold text-center text-[#015635] mb-2">1.5%</div>
+                <p className="text-gray-700">de la population souffre de dépression sévère</p>
+              </div>
+              
+              {/* Carte Statistique 3 */}
+              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+                <div className="text-4xl font-bold text-center text-[#015635] mb-2">3.7%</div>
+                <p className="text-gray-700">de la population est atteinte d'épilepsie</p>
+              </div>
+              
+              {/* Carte Statistique 4 */}
+              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+                <div className="text-4xl font-bold text-center text-[#015635] mb-2">0.7%</div>
+                <p className="text-gray-700">de consommation de cannabis</p>
+              </div>
+              
+              {/* Carte Statistique 5 */}
+              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+                <div className="text-4xl font-bold text-center text-[#015635] mb-2">0.2%</div>
+                <p className="text-gray-700">de consommation de cocaïne</p>
+              </div>
+              
+              {/* Carte Témoignage */}
+              <div className="bg-[#015635] p-6 rounded-lg flex flex-col justify-center hover:shadow-md transition-shadow">
+                <p className="text-white italic text-center">
+                  "Ces chiffres ne sont que la partie visible de l'iceberg. Beaucoup de nos proches souffrent en silence."
+                </p>
+              </div>
+            </div>
+            
+            <p className="text-sm text-gray-500 text-center mt-8">
+              Source : Enquête nationale sur la santé mentale au Sénégal (2023)
+            </p>
+          </div>
+      </section>
+
       {/* Section Besoin d'aide Immédiate */}
       <section className="bg-gradient-to-r from-white via-white to-blue-100 px-6 py-16">
         <div className="max-w-6xl mx-auto text-center mb-40">
@@ -551,7 +627,7 @@ const Homepage: React.FC = () => {
           </h2>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-40">
           <div className=" rounded-3xl p-8 border-2 border-black shadow-lg text-center">
             <div className="bg-transparent">
               <img

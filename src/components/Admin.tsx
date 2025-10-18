@@ -56,8 +56,8 @@ const Admin: React.FC = () => {
   // Pagination states
   const [currentUserPage, setCurrentUserPage] = useState(1);
   const [currentProfessionalPage, setCurrentProfessionalPage] = useState(1);
-  const [totalUsers, setTotalUsers] = useState(0);
-  const [totalProfessionals, setTotalProfessionals] = useState(0);
+ // const [totalUsers, setTotalUsers] = useState(0);
+ // const [totalProfessionals, setTotalProfessionals] = useState(0);
   const itemsPerPage = 4;
 
   // Modal states
@@ -80,13 +80,13 @@ const Admin: React.FC = () => {
 
 
 
-  const handleLoginRedirect = () => {
+ /* const handleLoginRedirect = () => {
     if (user?.role === 'administrateur') {
       navigate('/admin');
     } else {
       navigate('/home');
     }
-  };
+  };*/
 
   const fetchData = async () => {
     try {
@@ -103,8 +103,8 @@ const Admin: React.FC = () => {
       setUsers(usersData);
       setProfessionals(profData);
       setTestimonials(testData);
-      setTotalUsers(usersData.length);
-      setTotalProfessionals(profData.length);
+     // setTotalUsers(usersData.length);
+     // setTotalProfessionals(profData.length);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {

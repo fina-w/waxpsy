@@ -2,12 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from './Header';
 
+interface Trouble {
+  id: string;
+  nom: string;
+  description: string;
+  symptomes: string[];
+  causes: string;
+  traitements: string;
+  tags: string[];
+  image?: string;
+}
+
 interface Article {
   id: string;
+  troubleId: string;
   titre: string;
   contenu: string;
   auteurId: string;
   tags: string[];
+  trouble?: Trouble;
   createdAt: string;
   updatedAt: string;
 }
@@ -22,18 +35,28 @@ const Articles: React.FC = () => {
     const fetchArticle = async () => {
       try {
         const response = await fetch('/db.json');
-        if (!response.ok) throw new Error('Failed to fetch data');
+        if (!response.ok) throw new Error('Échec du chargement des données');
         const data = await response.json();
-        const foundArticle = data.articles.find((article: Article) => article.id === id);
-        if (!foundArticle) throw new Error('Article not found');
-        setArticle(foundArticle);
+        
+        const foundArticle = data.articles.find((a: Article) => a.id === id);
+        if (!foundArticle) throw new Error('Article non trouvé');
+        
+        // Trouver le trouble associé
+        const relatedTrouble = data.troubles.find((t: Trouble) => t.id === foundArticle.troubleId);
+        
+        // Fusionner les données
+        setArticle({
+          ...foundArticle,
+          trouble: relatedTrouble
+        });
       } catch (err) {
-        console.error('Fetch error:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
+        console.error('Erreur:', err);
+        setError(err instanceof Error ? err.message : 'Erreur inconnue');
       } finally {
         setLoading(false);
       }
     };
+    
     if (id) {
       fetchArticle();
     }
@@ -65,35 +88,107 @@ const Articles: React.FC = () => {
 
   return (
     <div className="min-h-screen page-bg">
-      {/* Header */}
-          <header>
-               <Header /> 
-              </header>
+      <header>
+        <Header /> 
+      </header>
 
-      {/* Main Content */}
-      <main className="p-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Breadcrumb/Sub-nav */}
-          <nav className="flex items-center space-x-4 mb-6 text-sm text-gray-600">
+      <main className="pt-24">
+        <div className="max-w-4xl mx-auto px-4">
+          {/* Navigation */}
+          <nav className="flex items-center space-x-4 mb-8 text-sm text-gray-600">
             <span className="font-medium">Lire :</span>
             <a href={`/articles/${id}`} className="bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold">Article</a>
             <a href={`/histoires/${id}`} className="text-gray-500 hover:text-green-700">Histoire</a>
           </nav>
 
-          {/* Article Title */}
-          <h1 className="text-3xl font-bold mb-6 troubles-title text-center">{article.titre}</h1>
+          {/* Titre de l'article */}
+          <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">{article.titre}</h1>
 
-          {/* Article Image */}
-          <div className="mb-6">
-            <img src="/adhd.jpg" alt={`Illustration ${article.titre}`} className="w-full h-64 rounded-lg shadow-md object-cover" />
-          </div>
+          {/* Section Trouble associé */}
+          {article.trouble && (
+            <div className="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
+              <div className="text-center mb-8">
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">{article.trouble.nom}</h1>
+                <div className="w-24 h-1 bg-green-500 mx-auto"></div>
+              </div>
 
-          {/* Article Content */}
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
-            <p className="text-gray-700 leading-relaxed mb-4">
-              {article.contenu}
-            </p>
-          </div>
+              {/* Image du trouble */}
+              {article.trouble.image && (
+                <div className="mb-8 rounded-lg overflow-hidden shadow-md">
+                  <img 
+                    src={article.trouble.image.startsWith('http') ? article.trouble.image : `/${article.trouble.image}`} 
+                    alt={article.trouble.nom}
+                    className="w-full h-80 object-cover"
+                  />
+                </div>
+              )}
+
+              {/* Description */}
+              <section className="mb-10">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                  <span className="w-2 h-6 bg-green-500 mr-2"></span>
+                  Description
+                </h2>
+                <p className="text-gray-700 leading-relaxed">
+                  {article.trouble.description}
+                </p>
+              </section>
+
+              {/* Symptômes */}
+              <section className="mb-10">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                  <span className="w-2 h-6 bg-green-500 mr-2"></span>
+                  Symptômes
+                </h2>
+                <ul className="space-y-2 pl-5">
+                  {article.trouble.symptomes.map((symptome, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-green-500 mr-2">•</span>
+                      <span className="text-gray-700">{symptome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              {/* Causes */}
+              <section className="mb-10">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                  <span className="w-2 h-6 bg-green-500 mr-2"></span>
+                  Causes
+                </h2>
+                <p className="text-gray-700 leading-relaxed">
+                  {article.trouble.causes}
+                </p>
+              </section>
+
+              {/* Traitements */}
+              <section className="mb-10">
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center">
+                  <span className="w-2 h-6 bg-green-500 mr-2"></span>
+                  Traitements
+                </h2>
+                <p className="text-gray-700 leading-relaxed">
+                  {article.trouble.traitements}
+                </p>
+              </section>
+
+              {/* Tags */}
+              {article.trouble.tags && article.trouble.tags.length > 0 && (
+                <section className="pt-6 border-t border-gray-200">
+                  <div className="flex flex-wrap gap-2">
+                    {article.trouble.tags.map((tag, index) => (
+                      <span 
+                        key={index}
+                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+          )}
         </div>
       </main>
     </div>

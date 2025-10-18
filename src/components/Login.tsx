@@ -91,7 +91,7 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
         {/* Image à gauche */}
         <div className="w-1/2 bg-gray-100 flex justify-center items-center rounded-l-[40px] overflow-hidden">
           <img
-            src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTgd5dfmmoo97TJzYwUlvGuTZhfAgUvRVnOgUCLr6efsVYg_aET"
+            src="/login-register.png"
             alt="Mental Health Awareness"
             className="w-[90%] h-[90%] object-contain"
           />

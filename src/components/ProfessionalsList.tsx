@@ -6,6 +6,7 @@ interface Professionnel {
   nom: string;
   specialite: string;
   adresse: string;
+  imageUrl: string;
   telephone: string;
   email: string;
   description: string;
@@ -39,6 +40,7 @@ const ProfessionalsList: React.FC = () => {
             nom: String(p.nom),
             specialite: String(p.specialite),
             adresse: String(p.adresse),
+            imageUrl: String(p.imageUrl),
             telephone: String(p.telephone),
             email: String(p.email),
             description: String(p.bio),
@@ -172,7 +174,7 @@ const ProfessionalsList: React.FC = () => {
                   {/* Photo */}
                   <div className="flex-shrink-0">
                     <img
-                      src={`https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=150&h=200&q=80`}
+                      src={pro.imageUrl}
                       alt={pro.nom}
                       className="w-28 h-28 rounded-full object-cover shadow-md border-2 border-green-200"
                     />

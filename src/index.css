@@ -13,7 +13,7 @@
 }
 
 .page-bg {
-  background: linear-gradient(to right, white, #D7E3EF);
+  background: linear-gradient(to right, white, white, hsl(225, 100%, 94%));
 }
 
 body {
