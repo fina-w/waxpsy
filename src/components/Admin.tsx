@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../stores/authStore';
 import { useNavigate } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
+import {
+  useUtilisateurs,
+  useProfessionnels,
+  useTemoignages,
+  useUpdateUtilisateur,
+  useDeleteUtilisateur,
+  useCreateUtilisateur,
+  useUpdateProfessionnel,
+  useDeleteProfessionnel,
+  useCreateProfessionnel,
+  useUpdateTemoignageStatus,
+} from '../hooks/useApi';
+import type { User, Professional, Testimonial } from '../hooks/useApi';
 import {
   TrashIcon,
   PencilIcon,
@@ -14,50 +28,28 @@ import {
   ChevronRightIcon
 } from '@heroicons/react/24/outline';
 
-interface User {
-  id: string | number;
-  nom: string;
-  email: string;
-  role: string;
-  actif?: boolean;
-  dateInscription?: string;
-}
-
-interface Professional {
-  id: string | number;
-  nom: string;
-  email: string;
-  role: string;
-  specialite: string;
-  verifiee: boolean;
-  dateInscription: string;
-}
-
-interface Testimonial {
-  id: string | number;
-  titre: string;
-  contenu: string;
-  statut: string;
-  createdAt: string;
-  utilisateurId: string | number;
-}
-
 const Admin: React.FC = () => {
   const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState('users');
-  const [users, setUsers] = useState<User[]>([]);
-  const [professionals, setProfessionals] = useState<Professional[]>([]);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: users = [], isLoading: usersLoading } = useUtilisateurs();
+  const { data: professionals = [], isLoading: professionalsLoading } = useProfessionnels();
+  const { data: testimonials = [], isLoading: testimonialsLoading } = useTemoignages(1, 1000);
+  const updateUtilisateur = useUpdateUtilisateur();
+  const deleteUtilisateur = useDeleteUtilisateur();
+  const createUtilisateur = useCreateUtilisateur();
+  const updateProfessionnel = useUpdateProfessionnel();
+  const deleteProfessionnel = useDeleteProfessionnel();
+  const createProfessionnel = useCreateProfessionnel();
+  const updateTemoignageStatus = useUpdateTemoignageStatus();
+  const loading = usersLoading || professionalsLoading || testimonialsLoading;
   const [userSearch, setUserSearch] = useState('');
   const [professionalSearch, setProfessionalSearch] = useState('');
 
   // Pagination states
   const [currentUserPage, setCurrentUserPage] = useState(1);
   const [currentProfessionalPage, setCurrentProfessionalPage] = useState(1);
-  const [totalUsers, setTotalUsers] = useState(0);
-  const [totalProfessionals, setTotalProfessionals] = useState(0);
   const itemsPerPage = 4;
 
   // Modal states
@@ -75,10 +67,7 @@ const Admin: React.FC = () => {
       navigate('/login');
       return;
     }
-    fetchData();
   }, [isAuthenticated, user, navigate]);
-
-
 
   const handleLoginRedirect = () => {
     if (user?.role === 'administrateur') {
@@ -88,110 +77,30 @@ const Admin: React.FC = () => {
     }
   };
 
-  const fetchData = async () => {
-    try {
-      const [usersRes, profRes, testRes] = await Promise.all([
-        fetch('/api/utilisateurs'),
-        fetch('/api/professionnels'),
-        fetch('/api/temoignages')
-      ]);
-
-      const usersData = await usersRes.json();
-      const profData = await profRes.json();
-      const testData = await testRes.json();
-
-      setUsers(usersData);
-      setProfessionals(profData);
-      setTestimonials(testData);
-      setTotalUsers(usersData.length);
-      setTotalProfessionals(profData.length);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    } finally {
-      setLoading(false);
-    }
+  const toggleUserStatus = (userId: string | number) => {
+    const user = users.find(u => u.id === userId);
+    if (!user) return;
+    updateUtilisateur.mutate({ id: userId, data: { actif: !user.actif } });
   };
 
-  const toggleUserStatus = async (userId: string | number) => {
-    try {
-      const user = users.find(u => u.id === userId);
-      if (!user) return;
-
-      const updatedUser = { ...user, actif: !user.actif };
-      await fetch(`/api/utilisateurs/${userId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedUser)
-      });
-
-      setUsers(users.map(u => u.id === userId ? updatedUser : u));
-    } catch (error) {
-      console.error('Error updating user:', error);
-    }
-  };
-
-  const deleteUser = async (userId: string | number) => {
+  const deleteUser = (userId: string | number) => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) return;
-
-    try {
-      await fetch(`/api/utilisateurs/${userId}`, {
-        method: 'DELETE'
-      });
-
-      setUsers(users.filter(u => u.id !== userId));
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
+    deleteUtilisateur.mutate(userId);
   };
 
-  const deleteProfessional = async (profId: string | number) => {
+  const deleteProfessional = (profId: string | number) => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer ce professionnel ?')) return;
-
-    try {
-      await fetch(`/api/professionnels/${profId}`, {
-        method: 'DELETE'
-      });
-
-      setProfessionals(professionals.filter(p => p.id !== profId));
-    } catch (error) {
-      console.error('Error deleting professional:', error);
-    }
+    deleteProfessionnel.mutate(profId);
   };
 
-  const toggleProfessionalVerification = async (profId: string | number) => {
-    try {
-      const prof = professionals.find(p => p.id === profId);
-      if (!prof) return;
-
-      const updatedProf = { ...prof, verifiee: !prof.verifiee };
-      await fetch(`/api/professionnels/${profId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedProf)
-      });
-
-      setProfessionals(professionals.map(p => p.id === profId ? updatedProf : p));
-    } catch (error) {
-      console.error('Error updating professional:', error);
-    }
+  const toggleProfessionalVerification = (profId: string | number) => {
+    const prof = professionals.find(p => p.id === profId);
+    if (!prof) return;
+    updateProfessionnel.mutate({ id: profId, data: { verifiee: !prof.verifiee } });
   };
 
-  const updateTestimonialStatus = async (testId: string | number, newStatus: string) => {
-    try {
-      const test = testimonials.find(t => t.id === testId);
-      if (!test) return;
-
-      const updatedTest = { ...test, statut: newStatus };
-      await fetch(`/api/temoignages/${testId}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedTest)
-      });
-
-      setTestimonials(testimonials.map(t => t.id === testId ? updatedTest : t));
-    } catch (error) {
-      console.error('Error updating testimonial:', error);
-    }
+  const updateTestimonialStatus = (testId: string | number, newStatus: string) => {
+    updateTemoignageStatus.mutate({ id: testId, statut: newStatus });
   };
 
   const filteredUsers = users.filter(user =>
@@ -255,62 +164,24 @@ const Admin: React.FC = () => {
     setProfessionalForm({ nom: '', email: '', role: 'professionnel', specialite: '', verifiee: false });
   };
 
-  const handleUserSubmit = async (e: React.FormEvent) => {
+  const handleUserSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      if (editingUser) {
-        // Update existing user
-        const updatedUser = { ...editingUser, ...userForm };
-        await fetch(`/api/utilisateurs/${editingUser.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updatedUser)
-        });
-        setUsers(users.map(u => u.id === editingUser.id ? updatedUser : u));
-      } else {
-        // Create new user
-        const newUser = { ...userForm, dateInscription: new Date().toISOString() };
-        const response = await fetch('/api/utilisateurs', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newUser)
-        });
-        const createdUser = await response.json();
-        setUsers([...users, createdUser]);
-      }
-      closeUserModal();
-    } catch (error) {
-      console.error('Error saving user:', error);
+    if (editingUser) {
+      updateUtilisateur.mutate({ id: editingUser.id, data: userForm });
+    } else {
+      createUtilisateur.mutate(userForm);
     }
+    closeUserModal();
   };
 
-  const handleProfessionalSubmit = async (e: React.FormEvent) => {
+  const handleProfessionalSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      if (editingProfessional) {
-        // Update existing professional
-        const updatedProf = { ...editingProfessional, ...professionalForm };
-        await fetch(`/api/professionnels/${editingProfessional.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updatedProf)
-        });
-        setProfessionals(professionals.map(p => p.id === editingProfessional.id ? updatedProf : p));
-      } else {
-        // Create new professional
-        const newProf = { ...professionalForm, dateInscription: new Date().toISOString() };
-        const response = await fetch('/api/professionnels', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newProf)
-        });
-        const createdProf = await response.json();
-        setProfessionals([...professionals, createdProf]);
-      }
-      closeProfessionalModal();
-    } catch (error) {
-      console.error('Error saving professional:', error);
+    if (editingProfessional) {
+      updateProfessionnel.mutate({ id: editingProfessional.id, data: professionalForm });
+    } else {
+      createProfessionnel.mutate({ ...professionalForm, dateInscription: new Date().toISOString() });
     }
+    closeProfessionalModal();
   };
 
   if (loading) {
@@ -675,6 +546,9 @@ const Admin: React.FC = () => {
                           <p className="text-sm text-gray-500">
                             Soumis le: {new Date(test.createdAt).toLocaleDateString('fr-FR')}
                           </p>
+                          <p className="text-sm text-gray-500">
+                            Statut: {test.statut}
+                          </p>
                         </div>
                         <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                           test.statut === 'approuvé' ? 'bg-green-100 text-green-800' :
@@ -686,33 +560,42 @@ const Admin: React.FC = () => {
                       </div>
                       <p className="text-sm text-gray-700 line-clamp-3">{test.contenu}</p>
                       <div className="flex space-x-2">
-                        {test.statut === 'en attente' && (
-                          <>
-                            <button
-                              onClick={() => updateTestimonialStatus(test.id, 'approuvé')}
-                              className="p-2 bg-green-100 text-green-800 rounded-md hover:bg-green-200"
-                              title="Approuver"
-                            >
-                              <CheckCircleIcon className="h-4 w-4" />
-                            </button>
-                            <button
-                              onClick={() => updateTestimonialStatus(test.id, 'rejeté')}
-                              className="p-2 bg-red-100 text-red-800 rounded-md hover:bg-red-200"
-                              title="Rejeter"
-                            >
-                              <XCircleIcon className="h-4 w-4" />
-                            </button>
-                          </>
-                        )}
-                        {test.statut === 'approuvé' && (
-                          <button
-                            onClick={() => updateTestimonialStatus(test.id, 'en attente')}
-                            className="p-2 bg-yellow-100 text-yellow-800 rounded-md hover:bg-yellow-200"
-                            title="Remettre en attente"
-                          >
-                            <XMarkIcon className="h-4 w-4" />
-                          </button>
-                        )}
+                        <button
+                          onClick={() => updateTestimonialStatus(test.id, 'approuvé')}
+                          className={`p-2 rounded-md ${
+                            test.statut === 'approuvé'
+                              ? 'bg-green-200 text-green-900 cursor-not-allowed'
+                              : 'bg-green-100 text-green-800 hover:bg-green-200'
+                          }`}
+                          title="Approuver"
+                          disabled={test.statut === 'approuvé'}
+                        >
+                          <CheckCircleIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => updateTestimonialStatus(test.id, 'rejeté')}
+                          className={`p-2 rounded-md ${
+                            test.statut === 'rejeté'
+                              ? 'bg-red-200 text-red-900 cursor-not-allowed'
+                              : 'bg-red-100 text-red-800 hover:bg-red-200'
+                          }`}
+                          title="Rejeter"
+                          disabled={test.statut === 'rejeté'}
+                        >
+                          <XCircleIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => updateTestimonialStatus(test.id, 'en attente')}
+                          className={`p-2 rounded-md ${
+                            test.statut === 'en attente'
+                              ? 'bg-yellow-200 text-yellow-900 cursor-not-allowed'
+                              : 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200'
+                          }`}
+                          title="Remettre en attente"
+                          disabled={test.statut === 'en attente'}
+                        >
+                          <XMarkIcon className="h-4 w-4" />
+                        </button>
                       </div>
                     </div>
                   </li>

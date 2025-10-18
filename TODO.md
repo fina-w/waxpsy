@@ -8,3 +8,9 @@
 - [x] Update App.tsx to wrap protected routes with ProtectedRoute.
 - [x] Simplify Homepage.tsx handlers since protection is now at route level.
 - [x] Fix dynamic routes: Protect /troubles/:id and /histoires/:id routes.
+
+## Additional Tasks: Update Testimonial Management
+- [x] Update useCreateTemoignage hook: Change statut from 'en_attente' to 'en attente', add createdAt and updatedAt fields.
+- [x] Add useUpdateTemoignageStatus hook for updating testimonial status via PATCH.
+- [x] Update Admin.tsx: Change testimonial status update method from PUT to PATCH.
+- [x] Update Admin.tsx: Add status display line in testimonials section for better visibility.

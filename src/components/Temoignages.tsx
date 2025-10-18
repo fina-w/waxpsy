@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
+import { useTemoignages, type Testimonial } from '../hooks/useApi';
 
 interface Temoignage {
   id: string;
@@ -14,32 +15,14 @@ interface Temoignage {
 
 const Temoignages: React.FC = () => {
   const navigate = useNavigate();
-  const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
-  const [filteredTemoignages, setFilteredTemoignages] = useState<Temoignage[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { data: temoignages, isLoading: loading, error } = useTemoignages(1, 1000, 'approuvé');
+  const [filteredTemoignages, setFilteredTemoignages] = useState<Testimonial[]>([]);
   const [selectedSort, setSelectedSort] = useState('recent');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   useEffect(() => {
-    const fetchTemoignages = async () => {
-      try {
-        const response = await fetch('/db.json');
-        if (!response.ok) throw new Error('Failed to fetch testimonials');
-        const data = await response.json();
-        const temoignagesData = data.temoignages.filter((t: Temoignage) => t.statut === 'approuvé');
-        setTemoignages(temoignagesData);
-      } catch (err) {
-        console.error('Fetch error:', err);
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchTemoignages();
-  }, []);
+    if (!temoignages || !Array.isArray(temoignages)) return;
 
-  useEffect(() => {
     let filtered = [...temoignages];
 
     // Apply category filter
@@ -69,7 +52,7 @@ const Temoignages: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error}</div>
+        <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error.message}</div>
       </div>
     );
   }
