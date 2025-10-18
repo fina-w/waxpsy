@@ -61,7 +61,10 @@ const Glossaire: React.FC = () => {
   return (
     <div className="bg-gradient-to-r from-white via-white to-blue-100">
     {/* Header */}
-    <Header />
+    <header>
+     <Header /> 
+    </header>
+    
     <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-4xl mx-auto">
         {/* En-tête */}

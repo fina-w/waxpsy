@@ -172,7 +172,7 @@ const Homepage: React.FC = () => {
         <Header />
 
         {/* Contenu principal du Hero */}
-        <div className="relative z-10 justify-center items-center text-center mt-40">
+        <div className="relative z-10 justify-center items-center text-center mt-50">
           <h1 className="text-5xl font-serif font-bold mb-6 tracking-wide">
             COMPRENDRE LA SANTE MENTALE
           </h1>
@@ -202,7 +202,7 @@ const Homepage: React.FC = () => {
       {/* Section A propos */}
       <section className="flex flex-col justify-center items-center md:flex-row bg-gradient-to-r from-white via-white to-blue-100 px-6 py-12 space-y-8 md:space-y-0 md:space-x-12">
         <img
-          src="/public/c-est-quoi-waxpsy.png"
+          src="/c-est-quoi-waxpsy.png"
           alt="Green Ribbon"
           className="w-70 h-auto"
         />
@@ -246,82 +246,86 @@ const Homepage: React.FC = () => {
               </svg>
             </a>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
-            {troubles
-              .slice(currentTroubleIndex, currentTroubleIndex + 3)
-              .map((trouble) => (
-                <div
-                  key={trouble.id}
-                  className="bg-transparent cursor-pointer group"
-                  onClick={() => handleTroubleClick(trouble.id)}
+          <div className="relative px-16">
+            {/* Boutons de navigation */}
+            {troubles.length > 3 && (
+              <>
+                <button
+                  onClick={prevTroubles}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 bg-[#015635] rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                  aria-label="Trouble précédent"
                 >
-                  <div className="relative h-50 overflow-hidden">
-                    <img
-                      src={trouble.image}
-                      alt={trouble.nom}
-                      className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-sm"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = "public/adhd.jpg";
-                      }}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
                     />
-                    {/* Bouton Lire qui apparaît au survol */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <button className="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors duration-300">
-                        Lire
-                      </button>
+                  </svg>
+                </button>
+                <button
+                  onClick={nextTroubles}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 bg-[#015635] rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                  aria-label="Trouble suivant"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-white"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
+              {troubles
+                .slice(currentTroubleIndex, currentTroubleIndex + 3)
+                .map((trouble) => (
+                  <div
+                    key={trouble.id}
+                    className="bg-transparent cursor-pointer group"
+                    onClick={() => handleTroubleClick(trouble.id)}
+                  >
+                    <div className="relative h-50 overflow-hidden">
+                      <img
+                        src={trouble.image}
+                        alt={trouble.nom}
+                        className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-sm"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = "/adhd.jpg";
+                        }}
+                      />
+                      {/* Bouton Lire qui apparaît au survol */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <button className="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors duration-300">
+                          Lire
+                        </button>
+                      </div>
+                    </div>
+                    <div className="p-auto">
+                      <h3 className="font-serif text-xl font-medium mb-2">
+                        {trouble.nom}
+                      </h3>
                     </div>
                   </div>
-                  <div className="p-auto">
-                    <h3 className="font-serif text-xl font-medium mb-2">
-                      {trouble.nom}
-                    </h3>
-                  </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
-          {/* Boutons de navigation */}
-          {troubles.length > 3 && (
-            <>
-              <button
-                onClick={prevTroubles}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-              <button
-                onClick={nextTroubles}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </>
-          )}
         </div>
       </section>
 
@@ -368,14 +372,14 @@ const Homepage: React.FC = () => {
             </svg>
           </div>
           <div className="max-w-5xl mx-auto text-center relative mt-[-500] ">
-            <h2 className="text-3xl font-serif text-black mb-12">
+            <h2 className="text-3xl font-serif text-white mb-12">
               Pour mieux comprendres les troubles mentaux,Explorez
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="border-2 border-black rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow">
                 <div className="mb-6">
                   <img
-                    src="public/histoires.png"
+                    src="/histoires.png"
                     alt="Story Book"
                     className="w-32 h-32 mx-auto"
                   />
@@ -394,7 +398,7 @@ const Homepage: React.FC = () => {
               >
                 <div className="mb-6">
                   <img
-                    src="public/quiz.png"
+                    src="/quiz.png"
                     alt="Quiz"
                     className="w-32 h-32 mx-auto"
                   />
@@ -420,10 +424,56 @@ const Homepage: React.FC = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
-            {temoignages
-              .slice(currentTemoignageIndex, currentTemoignageIndex + 3)
-              .map((temoignage) => (
+          <div className="relative px-16">
+            {/* Boutons de navigation pour les témoignages */}
+            {temoignages.length > 3 && (
+              <>
+                <button
+                  onClick={prevTemoignages}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                  aria-label="Témoignage précédent"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-gray-700"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={nextTemoignages}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                  aria-label="Témoignage suivant"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-gray-700"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </>
+            )}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
+              {temoignages
+                .slice(currentTemoignageIndex, currentTemoignageIndex + 3)
+                .map((temoignage) => (
                 <div
                   key={temoignage.id}
                   className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col"
@@ -472,49 +522,7 @@ const Homepage: React.FC = () => {
                 </div>
               ))}
           </div>
-          {/* Boutons de navigation */}
-          {temoignages.length > 3 && (
-            <>
-              <button
-                onClick={prevTemoignages}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-gray-700"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </button>
-              <button
-                onClick={nextTemoignages}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-gray-700"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </button>
-            </>
-          )}
+        </div>
         </div>
         {/* La vague SVG en bas */}
         <div

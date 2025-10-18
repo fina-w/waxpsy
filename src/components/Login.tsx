@@ -16,7 +16,7 @@ interface LoginProps {
   onClose?: () => void;
 }
 
-const Login: React.FC<LoginProps> = ({ onSuccess, onClose }) => {
+const Login: React.FC<LoginProps> = ({ onSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');

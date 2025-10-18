@@ -122,7 +122,9 @@ const ProfessionalsList: React.FC = () => {
   return (
     <div className="min-h-screen page-bg">
       {/* Header */}
-      <Header />
+      <header>
+           <Header /> 
+          </header>
 
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-12 text-green-800">Liste des psychologues et psychiatres</h1>

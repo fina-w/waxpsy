@@ -7,6 +7,7 @@ import { useAuthStore } from '../stores/authStore';
 const ShareExperience: React.FC = () => {
   const [experience, setExperience] = useState('');
   const [titre, setTitre] = useState('');
+  const [email, setEmail] = useState('');
   const navigate = useNavigate();
   const { user } = useAuthStore();
   const createTemoignageMutation = useCreateTemoignage();
@@ -52,7 +53,7 @@ const ShareExperience: React.FC = () => {
       <main className="p-8">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold text-center mb-8 troubles-title">Partager mon expérience</h1>
-          
+
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-6 space-y-6">
             {/* Titre Input */}
             <div>
@@ -66,6 +67,18 @@ const ShareExperience: React.FC = () => {
                 required
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Ex: Mon parcours avec l'anxiété"
+              />
+            </div>
+
+            {/* Email Input */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Votre email (optionnel)</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="exemple@email.com"
               />
             </div>
 
