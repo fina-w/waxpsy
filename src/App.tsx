@@ -19,6 +19,8 @@ import UrgenceSOS from "./components/Urgence-SOS";
 import Profil from "./components/Profil";
 import QuizPage from "./components/QuizPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CalendrierEvenements from "./components/CalendrierEvenements";
+import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -48,8 +50,10 @@ function App() {
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/confidentialite" element={<Confidentialite />} />
         <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
+        <Route path="/calendrier-evenements" element={<CalendrierEvenements />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/quizpage" element={<QuizPage />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

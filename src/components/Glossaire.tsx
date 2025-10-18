@@ -18,7 +18,7 @@ const Glossaire: React.FC = () => {
     const fetchTermes = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/db.json');
+        const response = await fetch('db.json');
         if (!response.ok) {
           throw new Error('Erreur lors du chargement du glossaire');
         }
@@ -65,7 +65,8 @@ const Glossaire: React.FC = () => {
      <Header /> 
     </header>
     
-    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 ">
+    <main className="pt-20">
+      <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-4xl mx-auto">
         {/* En-tête */}
         <div className="text-center mb-12">
@@ -152,6 +153,7 @@ const Glossaire: React.FC = () => {
         </div>
       </div>
     </div>
+    </main>
     </div>
   );
 };

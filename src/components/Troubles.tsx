@@ -10,7 +10,6 @@ interface Trouble {
   symptomes: string[];
   causes: string;
   traitements: string;
-  tags: string[];
 }
 
 const Troubles: React.FC = () => {
@@ -24,18 +23,14 @@ const Troubles: React.FC = () => {
     const fetchTroubles = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/db.json");
+        const response = await fetch("http://localhost:3000/troubles");
         if (!response.ok) throw new Error("Échec du chargement des données");
         const data = await response.json();
-        if (data.troubles) {
-          setTroubles(data.troubles);
-        } else {
-          throw new Error("Format de données inattendu");
-        }
+        setTroubles(data);
       } catch (err) {
         console.error("Erreur de chargement:", err);
         setError(
-          "Erreur lors du chargement des troubles. Veuillez réessayer plus tard."
+          "Erreur lors du chargement des troubles. Veuillez vérifier que le serveur JSON est en cours d'exécution."
         );
       } finally {
         setLoading(false);
@@ -51,11 +46,60 @@ const Troubles: React.FC = () => {
     target.src = "/placeholder.jpg";
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <Header />
+        <div className="container mx-auto px-4 py-8 text-center">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[...Array(6)].map((_, index) => (
+                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
+                  <div className="h-48 bg-gray-200"></div>
+                  <div className="p-6">
+                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
+                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-5/6 mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3 mb-4"></div>
+                    <div className="h-8 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (error) {
     return (
-      <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center text-red-600">
-          Erreur: {error}
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <Header />
+        <div className="container mx-auto px-4 py-8 text-center">
+          <div className="bg-red-50 border-l-4 border-red-400 p-4">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm text-red-700">
+                  {error}
+                </p>
+                <div className="mt-4">
+                  <button
+                    onClick={() => window.location.reload()}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  >
+                    Réessayer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -93,18 +137,6 @@ const Troubles: React.FC = () => {
                 <p className="text-gray-600 mb-4 line-clamp-3">
                   {trouble.description}
                 </p>
-                {trouble.tags && trouble.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {trouble.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
                 <button
                   onClick={() => {
                     // Rediriger vers la page d'article avec l'ID du trouble

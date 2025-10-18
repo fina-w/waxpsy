@@ -15,6 +15,7 @@ export const Header: React.FC<HeaderProps> = () => {
         { href: "/troubles", label: "Troubles" },
         { href: "/temoignages", label: "Témoignages" },
         { href: "/professionals", label: "Professionnels" },
+        { href: "/calendrier-evenements", label: "Événements" },
         { href: "/glossaire", label: "Glossaire" },
         { href: "/urgences", label: "Urgences ?" },
         { href: "/apropos", label: "A propos" },
