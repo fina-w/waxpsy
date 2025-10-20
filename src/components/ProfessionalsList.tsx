@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Header from './Header';
+import React, { useState, useEffect, useCallback } from 'react';
+import { ProfileSkeletonList } from './skeletons';
+import SearchFilters from './ui/SearchFilters';
 
 interface Professionnel {
   id: string;
@@ -23,9 +24,41 @@ const ProfessionalsList: React.FC = () => {
   const [filteredProfessionnels, setFilteredProfessionnels] = useState<Professionnel[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
+  
+  // Configuration des filtres pour SearchFilters
+  const filters = [
+    {
+      name: 'categorie',
+      label: 'catégories',
+      type: 'select' as const,
+      options: [
+        { value: 'all', label: 'Toutes les catégories' },
+        { value: 'adulte', label: 'Adultes' },
+        { value: 'tdah', label: 'TDAH' }
+      ],
+      placeholder: 'Filtrer par catégorie',
+      defaultValue: 'all'
+    }
+  ];
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [expandedPros, setExpandedPros] = useState<string[]>([]);
+  
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9; // 3 colonnes x 3 lignes
+  
+  // Calcul de la pagination
+  const totalPages = Math.ceil(filteredProfessionnels.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredProfessionnels.slice(indexOfFirstItem, indexOfLastItem);
+  
+  // Gestion du changement de page
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const fetchProfessionnels = async () => {
@@ -94,6 +127,20 @@ const ProfessionalsList: React.FC = () => {
     setFilteredProfessionnels(filtered);
   }, [searchTerm, selectedFilter, professionnels]);
 
+  // Gestion de la recherche
+  const handleSearch = useCallback((term: string) => {
+    setSearchTerm(term);
+    setCurrentPage(1); // Reset à la première page lors d'une nouvelle recherche
+  }, []);
+
+  // Gestion du changement de filtre
+  const handleFilterChange = useCallback((filterName: string, value: any) => {
+    if (filterName === 'categorie') {
+      setSelectedFilter(value || 'all');
+      setCurrentPage(1); // Reset à la première page lors d'un changement de filtre
+    }
+  }, []);
+
   // Extract categories from description (simple keyword-based)
   const getCategories = (description: string) => {
     const lowerDesc = description.toLowerCase();
@@ -106,9 +153,12 @@ const ProfessionalsList: React.FC = () => {
   };
 
   if (loading) {
-  return (
-    <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center">Loading professionals...</div>
+    return (
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <div className="container mx-auto px-4 py-8">
+          <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8 animate-pulse"></div>
+          <ProfileSkeletonList count={6} />
+        </div>
       </div>
     );
   }
@@ -123,49 +173,23 @@ const ProfessionalsList: React.FC = () => {
 
   return (
     <div className="min-h-screen page-bg">
-      {/* Header */}
-      <header>
-           <Header /> 
-          </header>
-
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-center mb-12 text-green-800">Liste des psychologues et psychiatres</h1>
 
-        {/* Search */}
-        <div className="flex justify-center mb-6">
-          <div className="relative w-full max-w-md">
-            <input
-              type="text"
-              placeholder="Rechercher spécialiste"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-            />
-            <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Filter */}
-        <div className="flex justify-center mb-8">
-          <label className="flex items-center space-x-2 text-sm text-gray-600">
-            <span>Filtre par:</span>
-            <select
-              value={selectedFilter}
-              onChange={(e) => setSelectedFilter(e.target.value)}
-              className="ml-2 px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
-            >
-              <option value="all">Tous</option>
-              <option value="adulte">Adulte</option>
-              <option value="tdah">TDAH</option>
-            </select>
-          </label>
+        {/* Composant de recherche et filtres */}
+        <div className="mb-8 max-w-3xl mx-auto">
+          <SearchFilters
+            onSearch={handleSearch}
+            onFilterChange={handleFilterChange}
+            filters={filters}
+            searchPlaceholder="Rechercher un professionnel..."
+            className="space-y-4"
+          />
         </div>
 
         {/* Professionals Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-          {filteredProfessionnels.map((pro) => {
+          {currentItems.map((pro: Professionnel) => {
             const categories = getCategories(pro.description);
             return (
               <div key={pro.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
@@ -176,6 +200,7 @@ const ProfessionalsList: React.FC = () => {
                     <img
                       src={pro.imageUrl}
                       alt={pro.nom}
+                      loading="lazy"
                       className="w-28 h-28 rounded-full object-cover shadow-md border-2 border-green-200"
                     />
                   </div>
@@ -204,7 +229,7 @@ const ProfessionalsList: React.FC = () => {
                         {pro.creneauxDisponibles.length > 0 && (
                           <div className="space-y-2">
                             <span className="text-sm font-medium text-gray-600">Créneaux disponibles:</span>
-                            {pro.creneauxDisponibles.map((creneau, idx) => (
+                            {pro.creneauxDisponibles.map((creneau: { jour: string; heures: string[] }, idx: number) => (
                               <div key={idx} className="bg-gray-50 p-2 rounded">
                                 <p className="text-sm font-semibold">{creneau.jour}:</p>
                                 <p className="text-sm text-gray-600">{creneau.heures.join(', ')}</p>
@@ -215,7 +240,7 @@ const ProfessionalsList: React.FC = () => {
                         {pro.langues.length > 0 && (
                           <div className="flex flex-wrap gap-2">
                             <span className="text-sm font-medium text-gray-600">Langues:</span>
-                            {pro.langues.map((lang, idx) => (
+                            {pro.langues.map((lang: string, idx: number) => (
                               <span key={idx} className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">{lang}</span>
                             ))}
                           </div>
@@ -242,6 +267,46 @@ const ProfessionalsList: React.FC = () => {
           })}
         </div>
 
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-12">
+            {/* Bouton Précédent */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 rounded-lg border border-green-600 text-green-600 hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Précédent
+            </button>
+
+            {/* Numéros de page */}
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageChange(pageNumber)}
+                  className={`w-10 h-10 rounded-lg transition-colors ${
+                    currentPage === pageNumber
+                      ? 'bg-green-600 text-white'
+                      : 'border border-green-600 text-green-600 hover:bg-green-50'
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+            </div>
+
+            {/* Bouton Suivant */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 rounded-lg border border-green-600 text-green-600 hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Suivant
+            </button>
+          </div>
+        )}
+        
         {filteredProfessionnels.length === 0 && (
           <p className="text-center text-gray-500 mt-12 text-lg">Aucun professionnel trouvé.</p>
         )}

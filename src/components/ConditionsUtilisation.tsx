@@ -1,12 +1,9 @@
 import React from 'react';
-import Header from './Header';
 
 
 const ConditionsUtilisation: React.FC = () => {
   return (
     <div className='bg-gradient-to-r from-white via-white to-blue-100"'>
-     {/* Header */}
-    <Header />
     <div className="max-w-4xl mx-auto p-6 rounded-lg shadow-md my-8 ">
      
       <h1 className="text-3xl font-bold text-teal-700 mb-6">Conditions Générales d'Utilisation</h1>

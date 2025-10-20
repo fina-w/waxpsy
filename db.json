@@ -1884,6 +1884,27 @@
       "description": "Formation destinée aux enseignants pour mieux comprendre et accompagner les élèves avec TDAH.",
       "lieu": "Inspections d'Académie, Dakar",
       "public": "Enseignants"
+    },
+    {
+      "id": "6",
+      "titre": "Soirée ciné-débat : Le poids des mots",
+      "date": "2025-12-10T18:30:00Z",
+      "type": "Projection",
+      "description": "Projection suivie d'un débat sur l'impact des mots sur la santé mentale.",
+      "lieu": "Institut Français de Dakar",
+      "gratuit": true
+    },
+    {
+      "id": "7",
+      "titre": "Atelier d'art-thérapie",
+      "date": "2025-12-15T15:00:00Z",
+      "id": "3",
+      "titre": "Atelier de gestion du stress",
+      "date": "2025-11-20T10:00:00Z",
+      "type": "Atelier",
+      "description": "Atelier pratique sur les techniques de gestion du stress et de l'anxiété.",
+      "lieu": "Centre culturel Douta Seck, Dakar",
+      "places": 30
     }
   ],
   "videos": [
@@ -2114,9 +2135,24 @@
     "inscriptionsOuvertes": true,
     "moderationActive": true
   },
+  "categoriesTroubles": [
+    { "id": 1, "libelle": "Troubles neurodéveloppementaux" },
+    { "id": 2, "libelle": "Troubles psychotiques" },
+    { "id": 3, "libelle": "Troubles de l'humeur" },
+    { "id": 4, "libelle": "Troubles anxieux" },
+    { "id": 5, "libelle": "Troubles de la personnalité" },
+    { "id": 6, "libelle": "Troubles des conduites alimentaires" },
+    { "id": 7, "libelle": "Troubles addictifs" },
+    { "id": 8, "libelle": "Troubles du sommeil" },
+    { "id": 9, "libelle": "Troubles du comportement" },
+    { "id": 10, "libelle": "Troubles du stress" },
+    { "id": 11, "libelle": "Troubles de l'enfance" },
+    { "id": 12, "libelle": "Troubles neurologiques" }
+  ],
   "troubles": [
     {
       "id": "1",
+      "categorieId": 1,
       "image": "adhd.jpg",
       "nom": "TDAH (Trouble du Déficit de l'Attention avec ou sans Hyperactivité)",
       "description": "Le Trouble du Déficit de l'Attention avec ou sans Hyperactivité (TDAH) est une condition neurodéveloppementale complexe qui affecte le fonctionnement exécutif du cerveau. Il se manifeste par une triade de symptômes principaux : inattention persistante, hyperactivité motrice et impulsivité. Ce trouble apparaît généralement pendant l'enfance et peut persister à l'âge adulte, affectant considérablement les performances scolaires, professionnelles et les relations interpersonnelles. Le TDAH n'est pas simplement un manque de volonté ou de discipline, mais une véritable condition médicale qui nécessite une compréhension et une prise en charge adaptées.",
@@ -2134,6 +2170,7 @@
     },
     {
       "id": "2",
+      "categorieId": 2,
       "image": "https://hookedonhopementalhealth.com/wp-content/uploads/2025/04/What-Is-Erotomania.jpg",
       "nom": "Érotomanie",
       "description": "L'érotomanie, également connue sous le nom de syndrome de Clérambault, est un trouble délirant rare caractérisé par la conviction inébranlable qu'une personne, généralement d'un statut social plus élevé, est secrètement amoureuse du patient. Ce trouble appartient à la catégorie des délires passionnels et peut avoir des conséquences graves sur la vie sociale et professionnelle de la personne affectée. Contrairement à une simple illusion romantique, l'érotomanie est une véritable pathologie psychiatrique qui nécessite une prise en charge spécialisée. Les personnes atteintes interprètent souvent des comportements neutres ou anodins comme des preuves d'amour et peuvent développer des comportements d'approche persistants envers l'objet de leur délire.",
@@ -2181,6 +2218,7 @@
     },
     {
       "id": "5",
+      "categorieId": 3,
       "image": "https://static.cnews.fr/sites/default/files/styles/image_750_422/public/kanye_west_bipolaire_maladie_5f169923715c5.jpg?itok=xjeLitLQ",
       "nom": "Trouble Bipolaire",
       "description": "Le trouble bipolaire se caractérise par des alternances entre des phases de manie (excitation) et de dépression.",
@@ -2271,6 +2309,7 @@
     },
     {
       "id": "11",
+      "categorieId": 10,
       "image": "https://www.shutterstock.com/image-photo/stress-burnout-tired-black-man-600nw-2240694803.jpg",
       "nom": "Syndrome d'Épuisement Professionnel (Burnout)",
       "description": "Le burnout est un état d'épuisement émotionnel, physique et mental causé par un stress professionnel prolongé.",

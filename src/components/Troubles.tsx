@@ -1,6 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { Header } from "./Header";
+import { CardSkeletonGrid } from "./skeletons";
+import SearchFilters from "./ui/SearchFilters";
+
+interface CategorieTrouble {
+  id: number;
+  libelle: string;
+}
 
 interface Trouble {
   id: string;
@@ -10,6 +16,7 @@ interface Trouble {
   symptomes: string[];
   causes: string;
   traitements: string;
+  categorieId: number;
 }
 
 const Troubles: React.FC = () => {
@@ -17,28 +24,79 @@ const Troubles: React.FC = () => {
   const [troubles, setTroubles] = useState<Trouble[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<number | "">("");
+  const [categories, setCategories] = useState<CategorieTrouble[]>([]);
+  const itemsPerPage = 6;
 
   // Chargement initial des données
   useEffect(() => {
-    const fetchTroubles = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/troubles");
-        if (!response.ok) throw new Error("Échec du chargement des données");
-        const data = await response.json();
-        setTroubles(data);
+        
+        // Charger les catégories
+        const catResponse = await fetch("http://localhost:3000/categoriesTroubles");
+        if (!catResponse.ok) throw new Error("Échec du chargement des catégories");
+        const categoriesData = await catResponse.json();
+        setCategories(categoriesData);
+        
+        // Charger les troubles
+        const troublesResponse = await fetch("http://localhost:3000/troubles");
+        if (!troublesResponse.ok) throw new Error("Échec du chargement des troubles");
+        const troublesData = await troublesResponse.json();
+        setTroubles(troublesData);
+        
       } catch (err) {
         console.error("Erreur de chargement:", err);
         setError(
-          "Erreur lors du chargement des troubles. Veuillez vérifier que le serveur JSON est en cours d'exécution."
+          "Erreur lors du chargement des données. Veuillez vérifier que le serveur JSON est en cours d'exécution."
         );
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTroubles();
+    fetchData();
   }, []);
+
+  // Gestion de la recherche
+  const handleSearch = useCallback((searchTerm: string) => {
+    setSearchTerm(searchTerm);
+    setCurrentPage(1);
+  }, []);
+
+  // Gestion du changement de filtre
+  const handleFilterChange = useCallback((filterName: string, value: any) => {
+    if (filterName === 'categorie') {
+      setSelectedCategory(value === '' ? '' : Number(value));
+      setCurrentPage(1);
+    }
+  }, []);
+  
+  // Filtrer les troubles en fonction de la recherche et de la catégorie sélectionnée
+  const filteredTroubles = React.useMemo(() => {
+    return troubles.filter(trouble => {
+      const matchesSearch = !searchTerm || 
+        trouble.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        trouble.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = !selectedCategory || trouble.categorieId === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [troubles, searchTerm, selectedCategory]);
+
+  // Calcul de la pagination
+  const totalPages = Math.ceil(filteredTroubles.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentTroubles = filteredTroubles.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Gestion du changement de page
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // Gestion des erreurs d'image
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -49,25 +107,9 @@ const Troubles: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-        <Header />
-        <div className="container mx-auto px-4 py-8 text-center">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...Array(6)].map((_, index) => (
-                <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
-                  <div className="h-48 bg-gray-200"></div>
-                  <div className="p-6">
-                    <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-5/6 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-2/3 mb-4"></div>
-                    <div className="h-8 bg-gray-200 rounded w-1/2"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8 animate-pulse"></div>
+          <CardSkeletonGrid count={6} />
         </div>
       </div>
     );
@@ -76,7 +118,6 @@ const Troubles: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-        <Header />
         <div className="container mx-auto px-4 py-8 text-center">
           <div className="bg-red-50 border-l-4 border-red-400 p-4">
             <div className="flex">
@@ -105,53 +146,68 @@ const Troubles: React.FC = () => {
     );
   }
 
+  // Configuration des filtres pour SearchFilters
+  const filters = [
+    {
+      name: 'categorie',
+      label: 'catégories',
+      type: 'select' as const,
+      options: categories.map(cat => ({
+        value: cat.id,
+        label: cat.libelle
+      })),
+      placeholder: 'Toutes les catégories'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-        <Header />
-
-      <main className="pt-24">
-        <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8 text-green-800">
-          Troubles Psychologiques
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+          Troubles de santé mentale
         </h1>
-
-        {/* Liste des troubles */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {troubles.map((trouble) => (
-            <div
-              key={trouble.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1"
-            >
-              <div className="h-48 bg-gray-100 flex items-center justify-center">
-                <img
-                  src={trouble.image || "/placeholder.jpg"}
-                  alt={trouble.nom || "Image non disponible"}
-                  className="w-full h-full object-cover"
-                  onError={handleImageError}
-                />
-              </div>
-              <div className="p-6">
-                <h2 className="text-xl font-bold text-green-800 mb-3">
-                  {trouble.nom}
-                </h2>
-                <p className="text-gray-600 mb-4 line-clamp-3">
-                  {trouble.description}
-                </p>
-                <button
-                  onClick={() => {
-                    // Rediriger vers la page d'article avec l'ID du trouble
-                    navigate(`/articles/${trouble.id}`);
-                    // Faire défiler vers le haut de la page
-                    window.scrollTo(0, 0);
-                  }}
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors w-full"
-                >
-                  En savoir plus
-                </button>
-              </div>
-            </div>
-          ))}
+        <p className="text-center text-gray-600 mb-8">
+          Explorez notre base de données complète des troubles de santé mentale
+        </p>
+        
+        {/* Composant de recherche et filtres simplifié */}
+        <div className="mb-8 max-w-3xl mx-auto">
+          <SearchFilters
+            onSearch={handleSearch}
+            onFilterChange={handleFilterChange}
+            filters={filters}
+            searchPlaceholder="Rechercher un trouble..."
+            className="space-y-4"
+          />
         </div>
+
+        {/* Filtres actifs */}
+        {(searchTerm || selectedCategory) && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {searchTerm && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                Recherche : {searchTerm}
+                <button
+                  onClick={() => handleSearch('')}
+                  className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-green-200 text-green-600 hover:bg-green-300 focus:outline-none"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+            {selectedCategory && (
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                Catégorie : {categories.find(c => c.id === selectedCategory)?.libelle}
+                <button
+                  onClick={() => handleFilterChange('categorie', '')}
+                  className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-200 text-blue-600 hover:bg-blue-300 focus:outline-none"
+                >
+                  ×
+                </button>
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Indicateur de chargement */}
         {loading && (
@@ -161,15 +217,95 @@ const Troubles: React.FC = () => {
           </div>
         )}
 
+        {/* Liste des troubles */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {currentTroubles.map((trouble) => (
+            <div
+              key={trouble.id}
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1 h-full flex flex-col"
+            >
+              <div className="h-48 bg-gray-100 flex items-center justify-center">
+                <img
+                  src={trouble.image || "/placeholder.jpg"}
+                  alt={trouble.nom || "Image non disponible"}
+                  loading="lazy"
+                  className="w-full h-full object-cover"
+                  onError={handleImageError}
+                />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <h2 className="text-xl font-bold text-green-800 mb-3 line-clamp-2">
+                  {trouble.nom}
+                </h2>
+                <p className="text-gray-600 mb-4 line-clamp-3 flex-grow">
+                  {trouble.description}
+                </p>
+                <button
+                  onClick={() => {
+                    // Rediriger vers la page d'article avec l'ID du trouble
+                    navigate(`/articles/${trouble.id}`);
+                    // Faire défiler vers le haut de la page
+                    window.scrollTo(0, 0);
+                  }}
+                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors w-full mt-auto"
+                >
+                  En savoir plus
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Pagination */}
+        {!loading && (
+          <div>
+          </div>
+        )}
+
         {!loading && troubles.length === 0 && (
           <div className="text-center py-12">
             <p className="text-gray-500">
               Aucun trouble trouvé pour cette recherche.
             </p>
+          <div className="flex justify-center items-center gap-2 mt-12">
+            {/* Bouton Précédent */}
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="px-4 py-2 rounded-lg border border-green-600 text-green-600 hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Précédent
+            </button>
+
+            {/* Numéros de page */}
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageChange(pageNumber)}
+                  className={`w-10 h-10 rounded-lg transition-colors ${
+                    currentPage === pageNumber
+                      ? 'bg-green-600 text-white'
+                      : 'border border-green-600 text-green-600 hover:bg-green-50'
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+            </div>
+
+            {/* Bouton Suivant */}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="px-4 py-2 rounded-lg border border-green-600 text-green-600 hover:bg-green-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            >
+              Suivant
+            </button>
+          </div>
           </div>
         )}
       </div>
-      </main>
     </div>
   );
 };

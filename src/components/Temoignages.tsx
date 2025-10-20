@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import type { User } from '../stores/authStore';
+import { TemoignageSkeletonGrid } from './skeletons';
 
 interface UtilisateurTemoignage {
   id?: number;
@@ -122,25 +121,9 @@ const Temoignages: React.FC = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-        <Header />
-        <div className="container mx-auto px-4 py-8 text-center">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[...Array(4)].map((_, index) => (
-                <div key={index} className="bg-white rounded-lg shadow-md p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 bg-gray-200 rounded-full mr-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-                  </div>
-                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
-                  <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="container mx-auto px-4 py-8">
+          <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8 animate-pulse"></div>
+          <TemoignageSkeletonGrid count={6} />
         </div>
       </div>
     );
@@ -149,7 +132,6 @@ const Temoignages: React.FC = () => {
   if (error) {
     return (
       <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-        <Header />
         <div className="container mx-auto px-4 py-8 text-center">
           <div className="bg-red-50 border-l-4 border-red-400 p-4 max-w-2xl mx-auto">
             <div className="flex">
@@ -179,11 +161,6 @@ const Temoignages: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      {/* Header */}
-      <header>
-     <Header /> 
-    </header>
-
       {/* Main Content */}
       <main className="pt-24">
         <h1 className="text-4xl font-bold text-center mb-8 troubles-title">Les témoignages</h1>
@@ -221,7 +198,8 @@ const Temoignages: React.FC = () => {
                 <div className="relative">
                   <img 
                     src={`/avatars/${temoignage.utilisateur?.avatar || DEFAULT_AVATARS[0]}`} 
-                    alt={temoignage.utilisateur?.nom || 'Utilisateur'} 
+                    alt={temoignage.utilisateur?.nom || 'Utilisateur'}
+                    loading="lazy"
                     className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md relative z-10 -mt-4"
                     onError={(e) => {
                       // En cas d'erreur de chargement de l'image, utiliser un avatar par défaut

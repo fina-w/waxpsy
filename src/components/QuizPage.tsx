@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header.tsx';
+import { QuizListSkeleton } from './skeletons';
 
 interface Question {
   id: number;
@@ -109,10 +109,9 @@ const QuizPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen page-bg">
-        <Header />
-        <div className="container mx-auto px-4 py-8 text-center">
-          Chargement des quiz...
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+        <div className="container mx-auto px-4 py-8">
+          <QuizListSkeleton />
         </div>
       </div>
     );
@@ -120,9 +119,7 @@ const QuizPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-10">
-      <Header />
-
-      <main className="container mx-auto px-4 py-8 pt-20">
+      <div className="container mx-auto px-4 py-8">
         {!selectedQuiz ? (
           // Page d'accueil des quiz
           <div className="max-w-4xl mx-auto">
@@ -292,7 +289,7 @@ const QuizPage: React.FC = () => {
             </div>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 };
