@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import Footer from "./footer.tsx";
 import type { Trouble, Temoignage } from "../types/types";
-import Header from "./Header.tsx";
-import Login from "./Login.tsx";
+import { Header } from "./Header";
+import Login from "./Login";
+import Footer from "./footer";
+import { TroublesCarouselSkeleton, TemoignagesCarouselSkeleton } from "./skeletons";
 import { useAuthStore } from "../stores/authStore";
 
 const Homepage: React.FC = () => {
@@ -154,25 +155,7 @@ const Homepage: React.FC = () => {
     setPendingTab(null);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-2xl font-serif">
-          Chargement des données en cours...
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-red-600 text-lg p-4 border border-red-300 rounded bg-red-50">
-          {error}
-        </div>
-      </div>
-    );
-  }
+  // Suppression du loading global - on affiche la page avec des skeletons partiels
 
   return (
     <div className="min-h-screen flex flex-col w-full bg-gradient-to-r from-white via-white to-blue-100">
@@ -219,6 +202,7 @@ const Homepage: React.FC = () => {
         <img
           src="/c-est-quoi-waxpsy.png"
           alt="Green Ribbon"
+          loading="lazy"
           className="w-70 h-auto"
         />
         <div className="max-w-xl">
@@ -232,34 +216,37 @@ const Homepage: React.FC = () => {
       </section>
 
       {/* Section Découvrez - DYNAMIQUE */}
-      <section className="px-6 py-6 bg-gradient-to-r from-white via-white to-blue-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-serif">Découvrez</h2>
-            <a
-              href="/troubles"
-              className="text-green-700 font-semibold flex items-center hover:text-[#015635] transition"
-            >
-              Voir tous les troubles
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 ml-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+      {loading || troubles.length === 0 ? (
+        <TroublesCarouselSkeleton />
+      ) : (
+        <section className="px-6 py-6 bg-gradient-to-r from-white via-white to-blue-100">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-serif">Découvrez</h2>
+              <a
+                href="/troubles"
+                className="text-green-700 font-semibold flex items-center hover:text-[#015635] transition"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </a>
-          </div>
-          <div className="relative px-16">
-            {/* Boutons de navigation */}
-            {troubles.length > 3 && (
+                Voir tous les troubles
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 ml-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </div>
+            <div className="relative px-16">
+              {/* Boutons de navigation */}
+              {troubles.length > 3 && (
               <>
                 <button
                   onClick={prevTroubles}
@@ -319,6 +306,7 @@ const Homepage: React.FC = () => {
                       <img
                         src={trouble.image}
                         alt={trouble.nom}
+                        loading="lazy"
                         className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-sm"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = "/adhd.jpg";
@@ -342,6 +330,7 @@ const Homepage: React.FC = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* Section Pour mieux comprendre */}
       <section className="bg-[#015635] text-white px-6 py-16 relative ">
@@ -395,6 +384,7 @@ const Homepage: React.FC = () => {
                   <img
                     src="/histoires.png"
                     alt="Story Book"
+                    loading="lazy"
                     className="w-32 h-32 mx-auto"
                   />
                 </div>
@@ -414,6 +404,7 @@ const Homepage: React.FC = () => {
                   <img
                     src="/quiz.png"
                     alt="Quiz"
+                    loading="lazy"
                     className="w-32 h-32 mx-auto"
                   />
                 </div>
@@ -428,19 +419,24 @@ const Homepage: React.FC = () => {
           </div>
         </div>
         {/* Témoignages */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-bold text-white">
-              Quelques Témoignages
-            </h2>
-            <button onClick={handleTemoignagesClick} className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
-              Tout Voir <span className="text-xl">→</span>
-            </button>
+        {loading || temoignages.length === 0 ? (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <TemoignagesCarouselSkeleton />
           </div>
+        ) : (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-bold text-white">
+                Quelques Témoignages
+              </h2>
+              <button onClick={handleTemoignagesClick} className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
+                Tout Voir <span className="text-xl">→</span>
+              </button>
+            </div>
 
-          <div className="relative px-16">
-            {/* Boutons de navigation pour les témoignages */}
-            {temoignages.length > 3 && (
+            <div className="relative px-16">
+              {/* Boutons de navigation pour les témoignages */}
+              {temoignages.length > 3 && (
               <>
                 <button
                   onClick={prevTemoignages}
@@ -541,6 +537,7 @@ const Homepage: React.FC = () => {
           </div>
         </div>
         </div>
+        )}
         {/* La vague SVG en bas */}
         <div
           className="absolute bottom-0 left-0 w-full bg-gradient-to-r from-white via-white to-blue-100  overflow-hidden leading-none"
@@ -633,6 +630,7 @@ const Homepage: React.FC = () => {
               <img
                 src="/doctor.png"
                 alt="Doctor"
+                loading="lazy"
                 className="w-45 h-60 mx-auto mt-[-160px] mb-2 shadow-neutral-400 "
               />
             </div>
@@ -656,6 +654,7 @@ const Homepage: React.FC = () => {
               <img
                 src="/sos_button.png"
                 alt="SOS Button"
+                loading="lazy"
                 className="w-60 h-auto mx-auto mt-[-140px]"
               />
             </div>

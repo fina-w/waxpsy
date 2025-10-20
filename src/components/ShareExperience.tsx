@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header } from './Header';
 
 const ShareExperience: React.FC = () => {
   const [experience, setExperience] = useState('');
@@ -22,11 +21,8 @@ const ShareExperience: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      {/* Header */}
-      <Header />
-
       {/* Main Content */}
-      <main className="p-8">
+      <div className="p-8">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold text-center mb-8 troubles-title">Partager mon expérience</h1>
           
@@ -79,7 +75,7 @@ const ShareExperience: React.FC = () => {
             </button>
           </form>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

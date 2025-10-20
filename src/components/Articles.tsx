@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from './Header';
+import { ArticleDetailSkeleton } from './skeletons';
 
 interface Trouble {
   id: string;
@@ -64,8 +64,10 @@ const Articles: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center">Loading article...</div>
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <div className="p-8">
+          <ArticleDetailSkeleton />
+        </div>
       </div>
     );
   }
@@ -88,11 +90,6 @@ const Articles: React.FC = () => {
 
   return (
     <div className="min-h-screen page-bg">
-      <header>
-        <Header /> 
-      </header>
-
-      <main className="pt-24">
         <div className="max-w-4xl mx-auto px-4">
           {/* Navigation */}
           <nav className="flex items-center space-x-4 mb-8 text-sm text-gray-600">
@@ -190,7 +187,6 @@ const Articles: React.FC = () => {
             </div>
           )}
         </div>
-      </main>
     </div>
   );
 };

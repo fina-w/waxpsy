@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Header } from "./Header";
+import { GlossaireSkeleton } from "./skeletons";
 
 interface TermeGlossaire {
   id: string;
@@ -44,8 +44,10 @@ const Glossaire: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-2xl font-serif">Chargement du glossaire...</div>
+      <div className="bg-gradient-to-r from-white via-white to-blue-100 min-h-screen">
+        <div className="py-12 px-4 sm:px-6 lg:px-8">
+          <GlossaireSkeleton />
+        </div>
       </div>
     );
   }
@@ -60,12 +62,6 @@ const Glossaire: React.FC = () => {
 
   return (
     <div className="bg-gradient-to-r from-white via-white to-blue-100">
-    {/* Header */}
-    <header>
-     <Header /> 
-    </header>
-    
-    <main className="pt-20">
       <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-4xl mx-auto">
         {/* En-tête */}
@@ -152,8 +148,7 @@ const Glossaire: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
-    </main>
+      </div>
     </div>
   );
 };

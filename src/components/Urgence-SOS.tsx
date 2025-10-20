@@ -1,5 +1,4 @@
 import React from "react";
-import { Header } from "./Header";
 import { PhoneIcon, ExclamationTriangleIcon, ShieldExclamationIcon, HeartIcon, UserGroupIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
 import db from "../../db.json";
 import Footer from "./footer";
@@ -13,8 +12,6 @@ const UrgenceSOS: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      <Header />
-      <main className="pt-20">
         {/* Bannière d'urgence */}
         <div className="bg-red-600 text-white py-4 px-4">
           <div className="container mx-auto flex items-center justify-center">
@@ -169,7 +166,7 @@ const UrgenceSOS: React.FC = () => {
                     <span className="bg-red-100 text-red-600 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">
                       <ExclamationTriangleIcon className="h-3 w-3" />
                     </span>
-                    <span className="texttext-[#015635]-gray-700">{signe}</span>
+                    <span className="text-[#015635]-gray-700">{signe}</span>
                   </li>
                 ))}
               </ul>
@@ -229,7 +226,6 @@ const UrgenceSOS: React.FC = () => {
 
         {/* Pied de page */}
         <Footer />
-      </main>
     </div>
   );
 };
