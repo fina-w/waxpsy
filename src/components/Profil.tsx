@@ -1,24 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Header.tsx';
 import { useAuthStore } from '../stores/authStore';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-interface User {
-  id: number;
-  nom: string;
-  email: string;
-  motDePasse?: string;
-  role: string;
-  dateInscription?: string;
-  actif?: boolean;
-}
+// Liste des avatars disponibles
+const AVATARS = [
+  'avatar1.png',
+  'avatar4.png',
+  'avatar5.png',
+  'avatar6.png',
+  'avatar7.png',
+  'avatar8.png',
+  'avatar9.png',
+  'avatar10.png'
+];
+
+import type { User } from '../stores/authStore';
 
 const Profil: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
   const navigate = useNavigate();
   const [showEditModal, setShowEditModal] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showAvatarModal, setShowAvatarModal] = useState(false);
   const [editForm, setEditForm] = useState({
     nom: user?.nom || '',
     email: user?.email || ''
@@ -28,17 +33,76 @@ const Profil: React.FC = () => {
     newPassword: '',
     confirmPassword: ''
   });
+  const [selectedAvatar, setSelectedAvatar] = useState(user?.avatar || AVATARS[0]);
+
+  // Mettre à jour l'avatar sélectionné quand l'utilisateur change
+  useEffect(() => {
+    if (user?.avatar) {
+      setSelectedAvatar(user.avatar);
+    }
+  }, [user]);
+
+  const handleAvatarSelect = async (avatar: string) => {
+    if (!user) return;
+    
+    try {
+      // Mettre à jour l'état local immédiatement pour un retour visuel rapide
+      setSelectedAvatar(avatar);
+      
+      // Créer un utilisateur mis à jour avec les champs obligatoires
+      const updatedUser: User = {
+        id: user.id,
+        nom: user.nom,
+        email: user.email,
+        role: user.role,
+        avatar: avatar
+      };
+      
+      // Mettre à jour l'utilisateur dans le store
+      useAuthStore.getState().setUser(updatedUser);
+      
+      // Mettre à jour dans la base de données (simulé ici avec un timeout)
+      // Dans une vraie application, vous feriez un appel API ici
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      // Mettre à jour la liste des utilisateurs dans le localStorage
+      const db = JSON.parse(localStorage.getItem('db') || '{}');
+      if (db.utilisateurs) {
+        db.utilisateurs = db.utilisateurs.map((u: any) => 
+          u.id === user.id ? { ...u, avatar } : u
+        );
+        localStorage.setItem('db', JSON.stringify(db));
+      }
+      
+      await Swal.fire({
+        title: 'Succès',
+        text: 'Votre avatar a été mis à jour avec succès !',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      
+      setShowAvatarModal(false);
+    } catch (error) {
+      console.error('Erreur lors de la mise à jour de l\'avatar :', error);
+      Swal.fire({
+        title: 'Erreur',
+        text: 'Une erreur est survenue lors de la mise à jour de l\'avatar.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  };
 
   if (!isAuthenticated || !user) {
     return (
-      <div className="min-h-screen page-bg">
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
         <div className="container mx-auto px-4 py-8 text-center">Utilisateur non trouvé</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen page-bg">
+    <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
       <Header currentPath="/profil" />
 
       {/* Main Content */}
@@ -72,6 +136,23 @@ const Profil: React.FC = () => {
                     <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${(user as any).actif ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                       {(user as any).actif !== undefined ? ((user as any).actif ? 'Actif' : 'Inactif') : 'Non disponible'}
                     </span>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Avatar</label>
+                    <div className="flex items-center space-x-4">
+                      <img 
+                        src={`/avatars/${user.avatar || AVATARS[0]}`} 
+                        alt="Avatar" 
+                        className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowAvatarModal(true)}
+                        className="text-sm text-blue-600 hover:text-blue-800"
+                      >
+                        Changer d'avatar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -115,7 +196,7 @@ const Profil: React.FC = () => {
 
       {/* Edit Profile Modal */}
       {showEditModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-transparent bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h3 className="text-lg font-semibold mb-4">Modifier le profil</h3>
             <div className="space-y-4">
@@ -210,6 +291,59 @@ const Profil: React.FC = () => {
                 className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
               >
                 Changer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Avatar Selection Modal */}
+      {showAvatarModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/30 backdrop-blur-sm">
+          <div className="bg-white rounded-xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">Choisissez votre avatar</h2>
+              <button 
+                onClick={() => setShowAvatarModal(false)}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+                aria-label="Fermer"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-4 gap-4">
+              {AVATARS.map((avatar) => (
+                <button
+                  key={avatar}
+                  onClick={() => handleAvatarSelect(avatar)}
+                  className={`p-1 rounded-full transition-all duration-200 transform hover:scale-105 ${
+                    selectedAvatar === avatar 
+                      ? 'ring-3 ring-blue-500 ring-offset-2' 
+                      : 'hover:ring-2 hover:ring-blue-200'
+                  }`}
+                >
+                  <img 
+                    src={`/avatars/${avatar}`} 
+                    alt={avatar} 
+                    className="w-16 h-16 rounded-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = `/avatars/avatar1.png`;
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+            
+            <div className="mt-8 flex justify-end">
+              <button
+                onClick={() => setShowAvatarModal(false)}
+                className="px-5 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200"
+              >
+                Annuler
               </button>
             </div>
           </div>

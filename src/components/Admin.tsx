@@ -47,9 +47,19 @@ const Admin: React.FC = () => {
   const [userSearch, setUserSearch] = useState('');
   const [professionalSearch, setProfessionalSearch] = useState('');
 
+// const [totalUsers, setTotalUsers] = useState(0);
+// const [totalProfessionals, setTotalProfessionals] = useState(0);
+>>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
+  const itemsPerPage = 4;
+=======
   // Pagination states
   const [currentUserPage, setCurrentUserPage] = useState(1);
   const [currentProfessionalPage, setCurrentProfessionalPage] = useState(1);
+  const itemsPerPage = 4;
+=======
+ // const [totalUsers, setTotalUsers] = useState(0);
+ // const [totalProfessionals, setTotalProfessionals] = useState(0);
+>>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
   const itemsPerPage = 4;
 
   // Modal states
@@ -69,18 +79,49 @@ const Admin: React.FC = () => {
     }
   }, [isAuthenticated, user, navigate]);
 
+<<<<<<< HEAD
   const handleLoginRedirect = () => {
+=======
+
+
+ /* const handleLoginRedirect = () => {
+>>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
     if (user?.role === 'administrateur') {
       navigate('/admin');
     } else {
       navigate('/home');
     }
-  };
+  };*/
 
+<<<<<<< HEAD
   const toggleUserStatus = (userId: string | number) => {
     const user = users.find(u => u.id === userId);
     if (!user) return;
     updateUtilisateur.mutate({ id: userId, data: { actif: !user.actif } });
+=======
+  const fetchData = async () => {
+    try {
+      const [usersRes, profRes, testRes] = await Promise.all([
+        fetch('/api/utilisateurs'),
+        fetch('/api/professionnels'),
+        fetch('/api/temoignages')
+      ]);
+
+      const usersData = await usersRes.json();
+      const profData = await profRes.json();
+      const testData = await testRes.json();
+
+      setUsers(usersData);
+      setProfessionals(profData);
+      setTestimonials(testData);
+     // setTotalUsers(usersData.length);
+     // setTotalProfessionals(profData.length);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+>>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
   };
 
   const deleteUser = (userId: string | number) => {

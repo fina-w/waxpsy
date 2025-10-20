@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
 import { useTemoignages, type Testimonial } from '../hooks/useApi';
+import { TemoignageSkeletonGrid } from './skeletons';
+
+interface UtilisateurTemoignage {
+  id?: number;
+  nom?: string;
+  email?: string;
+  role?: string;
+  avatar?: string;
+}
 
 interface Temoignage {
   id: string;
@@ -11,7 +19,20 @@ interface Temoignage {
   statut: string;
   createdAt: string;
   updatedAt: string;
+  utilisateur?: UtilisateurTemoignage;
 }
+
+// Liste des avatars par défaut au cas où l'utilisateur n'en a pas
+const DEFAULT_AVATARS = [
+  'avatar1.png',
+  'avatar2.png',
+  'avatar3.png',
+  'avatar4.png',
+  'avatar5.png',
+  'avatar6.png',
+  'avatar7.png',
+  'avatar8.png'
+];
 
 const Temoignages: React.FC = () => {
   const navigate = useNavigate();
@@ -43,27 +64,48 @@ const Temoignages: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center">Loading testimonials...</div>
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <div className="container mx-auto px-4 py-8">
+          <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8 animate-pulse"></div>
+          <TemoignageSkeletonGrid count={6} />
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error.message}</div>
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <div className="container mx-auto px-4 py-8 text-center">
+          <div className="bg-red-50 border-l-4 border-red-400 p-4 max-w-2xl mx-auto">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-red-700">{error}</p>
+                <div className="mt-4">
+                  <button
+                    onClick={() => window.location.reload()}
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                  >
+                    Réessayer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen page-bg">
-      {/* Header */}
-      <Header />
-
+    <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
       {/* Main Content */}
-      <main className="p-8">
+      <main className="pt-24">
         <h1 className="text-4xl font-bold text-center mb-8 troubles-title">Les témoignages</h1>
 
         {/* Filters */}
@@ -96,9 +138,24 @@ const Temoignages: React.FC = () => {
           {filteredTemoignages.map((temoignage, index) => (
             <div key={temoignage.id} className={`bg-white rounded-xl shadow-lg p-6 relative border border-green-200 z-${index % 10}`}>
               <div className="flex items-start gap-4">
-                <img src={`https://via.placeholder.com/80x80?text=User`} alt="User" className="w-20 h-20 rounded-full object-cover relative z-10 -mt-4 border-4 border-white shadow-md" />
+                <div className="relative">
+                  <img
+                    src={`/avatars/${temoignage.utilisateur?.avatar || DEFAULT_AVATARS[0]}`}
+                    alt={temoignage.utilisateur?.nom || 'Utilisateur'}
+                    loading="lazy"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md relative z-10 -mt-4"
+                    onError={(e) => {
+                      // En cas d'erreur de chargement de l'image, utiliser un avatar par défaut
+                      const target = e.target as HTMLImageElement;
+                      target.src = `/avatars/${DEFAULT_AVATARS[0]}`;
+                    }}
+                  />
+                </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-semibold troubles-title">{temoignage.titre}</h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold troubles-title">{temoignage.titre}</h3>
+                    <span className="text-sm text-gray-500">{temoignage.utilisateur?.nom}</span>
+                  </div>
                   <p className="text-gray-700 mt-2">{temoignage.contenu}</p>
                   <p className="text-sm text-gray-500 mt-2">Publié le {new Date(temoignage.createdAt).toLocaleDateString('fr-FR')}</p>
                 </div>

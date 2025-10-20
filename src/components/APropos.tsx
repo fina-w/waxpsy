@@ -1,14 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from './footer';
-import Header from './Header';
 
 const APropos: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      {/* Header */}
-          <Header />
-
       {/* Hero Section */}
       <section className=" py-20">
         <div className="container mx-auto px-4 text-center">

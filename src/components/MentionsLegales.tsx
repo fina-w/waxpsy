@@ -10,7 +10,6 @@ import {
   Server,
   ShieldCheck,
 } from "lucide-react";
-import Header from "./Header";
 
 const MentionsLegales: React.FC = () => {
   const developpeurs = [
@@ -28,8 +27,6 @@ const MentionsLegales: React.FC = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      {/* Header */}
-          <Header />
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
         {/* En-tête avec dégradé */}
         <div className="bg-gradient-to-r from-teal-600 to-teal-800 p-8 text-white">

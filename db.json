@@ -1,25 +1,26 @@
 {
   "utilisateurs": [
     {
-      "id": "1",
+      "id": 1,
       "nom": "Aminata Diallo",
       "email": "aminata.diallo@email.com",
       "motDePasse": "password123",
       "role": "utilisateur",
       "dateInscription": "2025-09-10T10:00:00Z",
-      "actif": true
+      "actif": true,
+      "avatar": "avatar1.png"
     },
     {
-      "id": "2",
+      "id": 2,
       "nom": "Moussa Sarr",
       "email": "moussa.sarr@email.com",
       "motDePasse": "password123",
       "role": "utilisateur",
       "dateInscription": "2025-09-15T14:30:00Z",
-      "actif": false
+      "actif": true
     },
     {
-      "id": "3",
+      "id": 3,
       "nom": "Fatou Ndiaye",
       "email": "fatou.ndiaye@email.com",
       "motDePasse": "password123",
@@ -28,7 +29,7 @@
       "actif": true
     },
     {
-      "id": "4",
+      "id": 4,
       "nom": "Cheikh Ba",
       "email": "cheikh.ba@email.com",
       "motDePasse": "password123",
@@ -37,7 +38,7 @@
       "actif": true
     },
     {
-      "id": "5",
+      "id": 5,
       "nom": "Mariama Seck",
       "email": "mariama.seck@email.com",
       "motDePasse": "password123",
@@ -46,7 +47,7 @@
       "actif": true
     },
     {
-      "id": "6",
+      "id": 6,
       "nom": "Ibrahima Fall",
       "email": "ibrahima.fall@email.com",
       "motDePasse": "password123",
@@ -54,17 +55,9 @@
       "dateInscription": "2025-10-05T13:00:00Z",
       "actif": true
     },
+    
     {
-      "id": "7",
-      "nom": "Khadim Diop",
-      "email": "khadim.diop@email.com",
-      "motDePasse": "password123",
-      "role": "utilisateur",
-      "dateInscription": "2025-10-10T12:00:00Z",
-      "actif": true
-    },
-    {
-      "id": "8",
+      "id": 8,
       "nom": "Ousmane Cissé",
       "email": "ousmane.cisse@email.com",
       "motDePasse": "password123",
@@ -73,7 +66,7 @@
       "actif": true
     },
     {
-      "id": "9",
+      "id": 9,
       "nom": "Aïssatou Sy",
       "email": "aissatou.sy@email.com",
       "motDePasse": "password123",
@@ -82,49 +75,13 @@
       "actif": true
     },
     {
-      "id": "10",
+      "id": 10,
       "nom": "Demba Gueye",
       "email": "demba.gueye@email.com",
       "motDePasse": "password123",
       "role": "utilisateur",
       "dateInscription": "2025-10-18T09:30:00Z",
       "actif": true
-    },
-    {
-      "id": "a8e4",
-      "nom": "nn",
-      "email": "aminata.diallo@email.com",
-      "motDePasse": "password123"
-    },
-    {
-      "id": "c18f",
-      "nom": ",,",
-      "email": "aminata.diallo@email.com",
-      "motDePasse": "password123"
-    },
-    {
-      "id": "e728",
-      "nom": "gg",
-      "email": "gg@gmail.com",
-      "motDePasse": "password123"
-    },
-    {
-      "id": "70fe",
-      "nom": "attou",
-      "email": "sall@gmail.com",
-      "motDePasse": "password123"
-    },
-    {
-      "id": "a2f5",
-      "nom": "bineta badiane",
-      "email": "badiane@gmail.com",
-      "motDePasse": "123456789"
-    },
-    {
-      "id": "af70",
-      "nom": "Awa",
-      "email": "niang@gmail.com",
-      "motDePasse": "123456789"
     }
   ],
   "professionnels": [
@@ -133,6 +90,7 @@
       "nom": "Dr. Khadija Diallo",
       "email": "khadija.diallo@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "https://img.freepik.com/free-photo/black-businesswoman-smiling_74855-1086.jpg?semt=ais_hybrid&w=740&q=80",
       "role": "professionnel",
       "specialite": "Psychiatre",
       "diplome": "Doctorat en Psychiatrie - Université Cheikh Anta Diop",
@@ -185,6 +143,7 @@
       "nom": "M. Seydou Cissé",
       "email": "seydou.cisse@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "https://media.istockphoto.com/id/1372065700/photo/portrait-of-a-confident-young-businessman-working-in-a-modern-office.jpg?s=612x612&w=0&k=20&c=oPRp9aiGEb_00Y0Q_eR40MiOisM2eFfeP7lDf0IqJDw=",
       "role": "professionnel",
       "specialite": "Psychologue Clinicien",
       "diplome": "Master en Psychologie Clinique - UCAD",
@@ -236,6 +195,7 @@
       "nom": "Mme Awa Mbaye",
       "email": "awa.mbaye@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "https://img.freepik.com/premium-photo/closeup-portrait-confident-smiling-muslim-student-wearing-black-hijab-education-concept_207258-998.jpg",
       "role": "professionnel",
       "specialite": "Psychologue",
       "diplome": "Master en Psychologie - Université Gaston Berger",
@@ -284,6 +244,7 @@
       "id": "104",
       "nom": "Dr. Mamadou Diop",
       "email": "mamadou.diop@waxpsy.sn",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyWHMmPOmID3R7dUPCcy5g1kzDETvkVt6ZrQ&s",
       "motDePasse": "profpassword123",
       "role": "professionnel",
       "specialite": "Addictologue",
@@ -333,6 +294,7 @@
       "nom": "Dr. Bineta Sow",
       "email": "bineta.sow@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "data:image/jpeg;base64,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",
       "role": "professionnel",
       "specialite": "Psychiatre",
       "diplome": "Doctorat en Psychiatrie - Université de Bordeaux",
@@ -382,6 +344,7 @@
       "nom": "M. Alioune Ndiaye",
       "email": "alioune.ndiaye@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKP17zrMK3L-zUu_Gc8BBVOG2L6xyYSICxyAShv-by2bUujBuevPv-ZUQ36S34e_YYA8c&usqp=CAU",
       "role": "professionnel",
       "specialite": "Psychologue",
       "diplome": "Master en Psychologie - UCAD",
@@ -430,6 +393,7 @@
       "nom": "Dr. Aïda Thiam",
       "email": "aida.thiam@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlU0hcsBcihwEJSNUZ5C_en-mSrzzfmnWO1A&s",
       "role": "professionnel",
       "specialite": "Pédopsychiatre",
       "diplome": "Doctorat en Pédopsychiatrie - UCAD",
@@ -479,6 +443,7 @@
       "nom": "Mme Coumba Dieng",
       "email": "coumba.dieng@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsABDhXvvIKCKc3fPxTwEOEHzMpQHfsBW5qg&s",
       "role": "professionnel",
       "specialite": "Psychothérapeute EMDR",
       "diplome": "Certification EMDR - Institut EMDR France",
@@ -528,6 +493,7 @@
       "nom": "Dr. Omar Kane",
       "email": "omar.kane@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "imageUrl": "https://www.breakfreepsychologyservices.com.au/thumbnaillarge/iStock-1326420590.jpg",
       "role": "professionnel",
       "specialite": "Psychiatre",
       "diplome": "Doctorat en Psychiatrie - Université de Dakar",
@@ -576,6 +542,7 @@
       "nom": "Dr. Fatima Diallo",
       "email": "fatima.diallo@waxpsy.sn",
       "motDePasse": "profpassword123",
+      "im": "https://dy7glz37jgl0b.cloudfront.net/advice/images/regain/39687c58ed6b4c20fa226c9c4a102bf6-therapist-takes-notes-on-a-clipboard-while-listening-to-her-client_l.jpg",
       "role": "professionnel",
       "specialite": "Psychiatre - TCA",
       "diplome": "Doctorat en Psychiatrie, Spécialisation TCA",
@@ -622,60 +589,55 @@
   ],
   "administrateurs": [
     {
-      "id": "1",
+      "id": 1,
       "nom": "Admin Principal",
       "email": "admin@waxpsy.sn",
       "motDePasse": "adminpassword123",
       "role": "administrateur",
-      "permissions": [
-        "all"
-      ],
+      "permissions": ["all"],
       "dateCreation": "2025-08-01T00:00:00Z"
     },
     {
-      "id": "2",
+      "id": 2,
       "nom": "Moderateur",
       "email": "moderateur@waxpsy.sn",
       "motDePasse": "modpassword123",
       "role": "moderateur",
-      "permissions": [
-        "moderation",
-        "validation"
-      ],
+      "permissions": ["moderation", "validation"],
       "dateCreation": "2025-08-01T00:00:00Z"
     }
   ],
   "favoris": [
     {
-      "id": "1",
+      "id": 1,
       "utilisateurId": 1,
       "typeContenu": "article",
       "contenuId": 1,
       "dateAjout": "2025-10-16T10:00:00Z"
     },
     {
-      "id": "2",
+      "id": 2,
       "utilisateurId": 1,
       "typeContenu": "temoignage",
       "contenuId": 3,
       "dateAjout": "2025-10-20T14:00:00Z"
     },
     {
-      "id": "3",
+      "id": 3,
       "utilisateurId": 2,
       "typeContenu": "article",
       "contenuId": 4,
       "dateAjout": "2025-10-18T11:30:00Z"
     },
     {
-      "id": "4",
+      "id": 4,
       "utilisateurId": 3,
       "typeContenu": "histoire",
       "contenuId": 3,
       "dateAjout": "2025-10-22T09:15:00Z"
     },
     {
-      "id": "5",
+      "id": 5,
       "utilisateurId": 5,
       "typeContenu": "article",
       "contenuId": 13,
@@ -1093,194 +1055,510 @@
       "createdAt": "2025-11-11T11:20:00Z"
     }
   ],
-  "quiz": [
+  "quizzes": [
     {
-      "id": "1",
-      "titre": "Quiz : Démystifier le TDAH",
-      "troubleId": 1,
+      "id": 1,
+      "theme": "Comment allez-vous vraiment ?",
+      "description": "Ce quiz général aide à faire le point sur votre bien-être émotionnel. Il ne remplace pas un avis médical.",
       "questions": [
         {
           "id": 1,
-          "question": "Le TDAH ne touche que les enfants.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Faux",
-          "explication": "Le TDAH peut persister à l'âge adulte et est souvent sous-diagnostiqué chez les adultes, en particulier les femmes."
+          "text": "Vous sentez-vous souvent fatigué(e) ou sans énergie ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 2,
-          "question": "Quel est l'un des symptômes principaux du TDAH ?",
-          "options": [
-            "Tristesse constante",
-            "Inattention",
-            "Délires"
-          ],
-          "reponseCorrecte": "Inattention",
-          "explication": "L'inattention, l'hyperactivité et l'impulsivité sont les trois symptômes cardinaux du TDAH."
+          "text": "Avez-vous du mal à dormir ou à trouver la motivation de faire vos activités quotidiennes ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 3,
-          "question": "Le TDAH est causé par une mauvaise éducation.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Faux",
-          "explication": "Le TDAH est un trouble neurodéveloppemental d'origine génétique et neurologique, pas un problème d'éducation."
+          "text": "Vous arrive-t-il de vous sentir triste, nerveux(se) ou irritable sans raison claire ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Avez-vous du mal à vous concentrer ou à rester positif(ve) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         }
-      ]
+      ],
+      "interpretation": {
+        "0-3": "Votre bien-être global semble bon.",
+        "4-7": "Vous traversez peut-être une période de fatigue ou de stress léger.",
+        "8-12": "Vous semblez fragilisé(e). Prenez du temps pour vous et n’hésitez pas à parler à un proche ou à un professionnel."
+      }
     },
     {
-      "id": "2",
-      "titre": "Quiz : Connaissez-vous la dépression ?",
-      "troubleId": 3,
+      "id": 2,
+      "theme": "Comprendre ce que je ressens",
+      "description": "Ce quiz aide à identifier les émotions dominantes et à orienter vers le trouble le plus probable.",
       "questions": [
         {
           "id": 1,
-          "question": "La dépression est juste une phase de tristesse passagère.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Faux",
-          "explication": "La dépression est une maladie sérieuse qui nécessite souvent un traitement professionnel."
+          "text": "Vous sentez-vous souvent inquiet(e) sans raison particulière ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 2,
-          "question": "Quelle est la durée minimale des symptômes pour diagnostiquer une dépression ?",
-          "options": [
-            "1 semaine",
-            "2 semaines",
-            "1 mois"
-          ],
-          "reponseCorrecte": "2 semaines",
-          "explication": "Les symptômes doivent persister au moins 2 semaines pour un diagnostic de dépression."
+          "text": "Vous arrive-t-il de perdre l’envie de faire les choses que vous aimiez ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 3,
-          "question": "La dépression peut avoir des causes biologiques.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Vrai",
-          "explication": "Un déséquilibre chimique dans le cerveau peut contribuer à la dépression."
+          "text": "Avez-vous souvent du mal à gérer votre colère ou vos émotions ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Vous arrive-t-il de vous sentir seul(e), incompris(e) ou isolé(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         }
-      ]
+      ],
+      "interpretation": {
+        "0-3": "Vous semblez émotionnellement stable.",
+        "4-7": "Vos émotions varient, cela peut être passager.",
+        "8-12": "Vos réponses indiquent une gêne importante. Consultez la rubrique des troubles pour identifier ce qui pourrait vous correspondre."
+      }
     },
     {
-      "id": "3",
-      "titre": "Quiz : Les troubles anxieux",
-      "troubleId": 4,
+      "id": 3,
+      "theme": "Anxiété généralisée",
+      "description": "Ce quiz explore les signes d’anxiété quotidienne et leur intensité.",
       "questions": [
         {
           "id": 1,
-          "question": "L'anxiété est toujours pathologique.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Faux",
-          "explication": "L'anxiété normale est adaptative. Elle devient pathologique quand elle est excessive et handicapante."
+          "text": "Vous inquiétez-vous souvent même sans raison claire ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 2,
-          "question": "Quel traitement est efficace pour les troubles anxieux ?",
-          "options": [
-            "TCC",
-            "Homéopathie seule",
-            "Aucun traitement"
-          ],
-          "reponseCorrecte": "TCC",
-          "explication": "La thérapie cognitivo-comportementale est un traitement validé scientifiquement pour l'anxiété."
+          "text": "Avez-vous des symptômes physiques (palpitations, tremblements, sueurs) lors de moments de stress ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 3,
-          "question": "Les attaques de panique peuvent donner l'impression de faire une crise cardiaque.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Vrai",
-          "explication": "Les symptômes physiques d'une attaque de panique peuvent ressembler à ceux d'une crise cardiaque."
+          "text": "Avez-vous du mal à contrôler vos pensées anxieuses ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Évitez-vous certaines situations par peur ou inquiétude ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         }
-      ]
+      ],
+      "interpretation": {
+        "0-3": "Votre anxiété semble faible.",
+        "4-7": "Vous ressentez un certain niveau d’anxiété. Essayez des techniques de relaxation.",
+        "8-12": "Votre anxiété semble élevée. En parler à un professionnel pourrait vous aider à la gérer."
+      }
     },
     {
-      "id": "4",
-      "titre": "Quiz : Comprendre l'autisme",
-      "troubleId": 6,
+      "id": 4,
+      "theme": "Dépression",
+      "description": "Ce quiz évalue certains signes de dépression légère ou modérée.",
       "questions": [
         {
           "id": 1,
-          "question": "L'autisme est causé par les vaccins.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Faux",
-          "explication": "Aucune étude scientifique n'a établi de lien entre les vaccins et l'autisme. Cette théorie a été totalement discréditée."
+          "text": "Vous sentez-vous souvent triste, sans énergie ou découragé(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 2,
-          "question": "Toutes les personnes autistes ont les mêmes difficultés.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Faux",
-          "explication": "L'autisme est un spectre avec une grande diversité de profils et de capacités."
+          "text": "Avez-vous perdu l’intérêt pour des choses qui vous plaisaient ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 3,
-          "question": "Une intervention précoce peut améliorer le développement des enfants autistes.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Vrai",
-          "explication": "Les interventions précoces et adaptées améliorent significativement le développement et l'autonomie."
+          "text": "Avez-vous du mal à vous lever ou à commencer la journée ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Vous sentez-vous inutile ou coupable sans raison ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         }
-      ]
+      ],
+      "interpretation": {
+        "0-3": "Aucun signe particulier de dépression.",
+        "4-7": "Vous traversez peut-être une période difficile.",
+        "8-12": "Votre niveau de découragement semble élevé. Parlez-en à quelqu’un de confiance."
+      }
     },
     {
-      "id": "5",
-      "titre": "Quiz : Les addictions",
-      "troubleId": 10,
+      "id": 5,
+      "theme": "Stress et burn-out",
+      "description": "Ce test aide à évaluer votre niveau de stress et de fatigue mentale.",
       "questions": [
         {
           "id": 1,
-          "question": "L'addiction est un manque de volonté.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Faux",
-          "explication": "L'addiction est une maladie chronique du cerveau, pas un problème de caractère."
+          "text": "Vous sentez-vous souvent sous pression ou débordé(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 2,
-          "question": "On peut être dépendant à un comportement (jeux, écrans).",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Vrai",
-          "explication": "Les addictions comportementales activent les mêmes circuits cérébraux que les addictions aux substances."
+          "text": "Même après du repos, vous vous sentez toujours fatigué(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         },
         {
           "id": 3,
-          "question": "La rechute fait partie du processus de guérison.",
-          "options": [
-            "Vrai",
-            "Faux"
-          ],
-          "reponseCorrecte": "Vrai",
-          "explication": "La rechute est fréquente et ne signifie pas l'échec. Elle fait souvent partie du parcours de rétablissement."
+          "text": "Vous manquez de motivation pour vos tâches habituelles ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Vous êtes irritable ou impatient sans raison ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
         }
-      ]
+      ],
+      "interpretation": {
+        "0-3": "Votre stress semble gérable.",
+        "4-7": "Vous commencez à accumuler du stress, attention au surmenage.",
+        "8-12": "Votre stress semble élevé, ce qui peut mener à un burn-out."
+      }
+    },
+    {
+      "id": 6,
+      "theme": "Troubles du sommeil",
+      "description": "Ce quiz sensibilise aux signes d’un sommeil perturbé.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Avez-vous du mal à vous endormir ou à rester endormi(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Vous réveillez-vous souvent fatigué(e) malgré une nuit complète ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Vos pensées vous empêchent-elles de dormir ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Avez-vous besoin d’écrans ou d’une distraction pour vous endormir ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Votre sommeil semble équilibré.",
+        "4-7": "Votre sommeil est parfois perturbé.",
+        "8-12": "Vous présentez un trouble du sommeil notable. Consultez un professionnel si cela persiste."
+      }
+    },
+    {
+      "id": 7,
+      "theme": "Trouble panique et crises d’angoisse",
+      "description": "Ce quiz explore les symptômes liés aux crises d’angoisse.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Avez-vous déjà ressenti une peur soudaine accompagnée de palpitations ou tremblements ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Avez-vous peur de faire une crise dans un lieu public ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Avez-vous l’impression de perdre le contrôle lors de fortes peurs ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Ces sensations vous poussent-elles à éviter certaines situations ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Aucun signe de trouble panique.",
+        "4-7": "Des épisodes d’anxiété ponctuels existent.",
+        "8-12": "Vos réponses suggèrent des signes de crises d’angoisse. En parler pourrait vous aider."
+      }
+    },
+    {
+      "id": 8,
+      "theme": "Trouble obsessionnel-compulsif (TOC)",
+      "description": "Ce quiz aide à repérer les comportements répétitifs ou les pensées envahissantes.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Avez-vous des pensées qui reviennent sans cesse malgré vos efforts ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Effectuez-vous certains gestes répétitifs pour vous rassurer (vérifier, ranger, nettoyer...) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Ces gestes prennent-ils beaucoup de temps ou d’énergie ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Ces pensées ou gestes vous stressent-ils quand vous ne pouvez pas les faire ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Aucun signe significatif de TOC.",
+        "4-7": "Quelques comportements répétitifs, sans gravité.",
+        "8-12": "Des pensées ou rituels envahissants sont présents. Un professionnel peut aider à les gérer."
+      }
+    },
+    {
+      "id": 9,
+      "theme": "Troubles alimentaires",
+      "description": "Ce quiz explore la relation à l’alimentation et à l’image corporelle.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Vous préoccupez-vous souvent de votre poids ou de votre apparence ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Évitez-vous certains repas ou aliments pour contrôler votre poids ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Avez-vous déjà mangé beaucoup en peu de temps, puis ressenti de la culpabilité ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Vos pensées autour de la nourriture occupent-elles beaucoup de place ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Votre rapport à l’alimentation semble sain.",
+        "4-7": "Quelques préoccupations alimentaires à surveiller.",
+        "8-12": "Des signes de trouble alimentaire apparaissent. Consultez un professionnel si cela vous pèse."
+      }
+    },
+    {
+      "id": 10,
+      "theme": "Trouble bipolaire",
+      "description": "Ce quiz sensibilise aux changements d’humeur marqués et fréquents.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Vos émotions passent-elles parfois de l’euphorie à la tristesse très rapidement ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Avez-vous parfois beaucoup d’énergie, besoin de peu de sommeil, puis ensuite de fortes baisses de moral ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Vos proches remarquent-ils des changements d’humeur marqués chez vous ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Ces variations affectent-elles votre vie quotidienne ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Vos émotions semblent stables.",
+        "4-7": "Des variations émotionnelles existent mais restent modérées.",
+        "8-12": "Vos humeurs changent fortement. Une aide spécialisée pourrait vous éclairer."
+      }
+    },
+    {
+      "id": 11,
+      "theme": "Trouble de la concentration (TDAH)",
+      "description": "Ce test explore la difficulté à se concentrer ou à rester organisé(e).",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Avez-vous du mal à rester concentré(e) sur une tâche ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Vous arrive-t-il d’oublier des choses importantes ou de vous disperser facilement ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Vous sentez-vous souvent agité(e) ou impatient(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Avez-vous du mal à terminer ce que vous commencez ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Votre concentration semble bonne.",
+        "4-7": "Vous avez parfois du mal à vous concentrer.",
+        "8-12": "Ces signes évoquent des difficultés d’attention importantes."
+      }
+    },
+    {
+      "id": 12,
+      "theme": "Trouble borderline (instabilité émotionnelle)",
+      "description": "Ce quiz aide à repérer une forte instabilité émotionnelle et relationnelle.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Vos émotions changent-elles rapidement (colère, tristesse, joie intense) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Craignez-vous souvent d’être abandonné(e) ou rejeté(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Vos relations sont-elles parfois intenses et conflictuelles ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Avez-vous parfois des comportements impulsifs que vous regrettez ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Vos émotions semblent stables.",
+        "4-7": "Vos émotions sont parfois intenses.",
+        "8-12": "Une forte instabilité émotionnelle est perceptible. Chercher un soutien pourrait vous apaiser."
+      }
+    },
+    {
+      "id": 13,
+      "theme": "Addictions et dépendances",
+      "description": "Ce test sensibilise aux comportements de dépendance (écrans, alcool, jeux, substances...).",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Vous avez du mal à réduire votre utilisation ou votre consommation habituelle ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Vous ressentez un manque ou une nervosité quand vous n’y avez pas accès ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Votre entourage s’inquiète-t-il de vos habitudes ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Cette activité ou consommation affecte-t-elle votre vie quotidienne ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Aucun signe de dépendance.",
+        "4-7": "Des habitudes à surveiller.",
+        "8-12": "Des signes de dépendance sont présents. Parlez-en pour trouver de l’aide."
+      }
+    },
+    {
+      "id": 14,
+      "theme": "Phobie sociale et isolement",
+      "description": "Ce quiz explore la peur du regard des autres et la tendance à s’isoler.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Avez-vous peur de parler ou d’agir devant les autres ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 2,
+          "text": "Évitez-vous les événements sociaux à cause du stress ou du jugement ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 3,
+          "text": "Vous sentez-vous souvent seul(e) ou rejeté(e) ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        },
+        {
+          "id": 4,
+          "text": "Ces situations vous causent-elles une grande détresse ?",
+          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
+          "scores": [0, 1, 2, 3]
+        }
+      ],
+      "interpretation": {
+        "0-3": "Votre aisance sociale semble bonne.",
+        "4-7": "Certaines situations vous mettent mal à l’aise.",
+        "8-12": "Vous semblez éviter le contact social. Des solutions existent pour retrouver confiance."
+      }
     }
   ],
   "glossaire": [
@@ -1633,6 +1911,27 @@
       "description": "Formation destinée aux enseignants pour mieux comprendre et accompagner les élèves avec TDAH.",
       "lieu": "Inspections d'Académie, Dakar",
       "public": "Enseignants"
+    },
+    {
+      "id": "6",
+      "titre": "Soirée ciné-débat : Le poids des mots",
+      "date": "2025-12-10T18:30:00Z",
+      "type": "Projection",
+      "description": "Projection suivie d'un débat sur l'impact des mots sur la santé mentale.",
+      "lieu": "Institut Français de Dakar",
+      "gratuit": true
+    },
+    {
+      "id": "7",
+      "titre": "Atelier d'art-thérapie",
+      "date": "2025-12-15T15:00:00Z",
+      "id": "3",
+      "titre": "Atelier de gestion du stress",
+      "date": "2025-11-20T10:00:00Z",
+      "type": "Atelier",
+      "description": "Atelier pratique sur les techniques de gestion du stress et de l'anxiété.",
+      "lieu": "Centre culturel Douta Seck, Dakar",
+      "places": 30
     }
   ],
   "videos": [
@@ -1677,130 +1976,6 @@
       "description": "Documentaire sur le processus de guérison de l'addiction."
     }
   ],
-  "newsletters": [
-    {
-      "id": "1",
-      "email": "awa.gueye@email.com",
-      "dateInscription": "2025-09-15T10:00:00Z",
-      "actif": true
-    },
-    {
-      "id": "2",
-      "email": "demba.fall@email.com",
-      "dateInscription": "2025-09-20T14:30:00Z",
-      "actif": true
-    },
-    {
-      "id": "3",
-      "email": "mariama.seck@email.com",
-      "dateInscription": "2025-10-01T09:15:00Z",
-      "actif": true
-    },
-    {
-      "id": "4",
-      "email": "ousmane.diop@email.com",
-      "dateInscription": "2025-10-05T16:45:00Z",
-      "actif": false
-    },
-    {
-      "id": "5",
-      "email": "fatou.thiam@email.com",
-      "dateInscription": "2025-10-10T11:20:00Z",
-      "actif": true
-    }
-  ],
-  "partenaires": [
-    {
-      "id": "1",
-      "nom": "Ministère de la Santé et de l'Action Sociale",
-      "type": "Institution publique",
-      "logo": "public/partners/msas.png",
-      "lien": "https://sante.gouv.sn"
-    },
-    {
-      "id": "2",
-      "nom": "OMS Sénégal",
-      "type": "Organisation internationale",
-      "logo": "public/partners/oms.png",
-      "lien": "https://who.int"
-    },
-    {
-      "id": "3",
-      "nom": "Université Cheikh Anta Diop",
-      "type": "Institution académique",
-      "logo": "public/partners/ucad.png",
-      "lien": "https://ucad.sn"
-    },
-    {
-      "id": "4",
-      "nom": "Croix Rouge Sénégal",
-      "type": "ONG",
-      "logo": "public/partners/croixrouge.png",
-      "lien": "https://croixrouge.sn"
-    },
-    {
-      "id": "5",
-      "nom": "Association Sénégalaise de Psychiatrie",
-      "type": "Association professionnelle",
-      "logo": "public/partners/asp.png",
-      "lien": "#"
-    }
-  ],
-  "notifications": [
-    {
-      "id": "1",
-      "utilisateurId": 1,
-      "type": "rendez-vous",
-      "titre": "Rappel de rendez-vous",
-      "message": "Votre rendez-vous avec Dr. Khadija Diallo est prévu demain à 10h.",
-      "lu": false,
-      "dateCreation": "2025-11-09T09:00:00Z"
-    },
-    {
-      "id": "2",
-      "utilisateurId": 2,
-      "type": "commentaire",
-      "titre": "Nouveau commentaire",
-      "message": "Quelqu'un a répondu à votre commentaire sur l'article TDAH.",
-      "lu": true,
-      "dateCreation": "2025-11-08T14:30:00Z"
-    },
-    {
-      "id": "3",
-      "utilisateurId": 3,
-      "type": "article",
-      "titre": "Nouvel article publié",
-      "message": "Un nouvel article sur l'anxiété sociale vient d'être publié.",
-      "lu": false,
-      "dateCreation": "2025-11-10T10:00:00Z"
-    }
-  ],
-  "donations": [
-    {
-      "id": "1",
-      "montant": 50000,
-      "devise": "FCFA",
-      "donateur": "Anonyme",
-      "date": "2025-10-15T12:00:00Z",
-      "message": "Pour soutenir votre belle initiative"
-    },
-    {
-      "id": "2",
-      "montant": 100000,
-      "devise": "FCFA",
-      "donateur": "Entreprise ABC",
-      "date": "2025-10-20T15:30:00Z",
-      "message": "Don d'entreprise pour la santé mentale"
-    },
-    {
-      "id": "3",
-      "montant": 25000,
-      "devise": "FCFA",
-      "donateur": "Awa G.",
-      "date": "2025-10-25T09:15:00Z",
-      "message": "Continuez ce travail important"
-    }
-  ],
   "blogs": [
     {
       "id": "1",
@@ -1808,11 +1983,6 @@
       "auteur": "Équipe WaxPsy",
       "contenu": "La santé mentale reste un défi majeur au Sénégal. Avec seulement une quinzaine de psychiatres pour 17 millions d'habitants, l'accès aux soins est limité. De plus, la stigmatisation empêche de nombreuses personnes de consulter. Pourtant, des initiatives prometteuses émergent...",
       "image": "public/blog/sante-mentale-senegal.jpg",
-      "tags": [
-        "santé mentale",
-        "Sénégal",
-        "accès aux soins"
-      ],
       "vues": 1250,
       "likes": 89,
       "datePublication": "2025-10-01T10:00:00Z"
@@ -1823,11 +1993,6 @@
       "auteur": "Dr. Khadija Diallo",
       "contenu": "Mythe 1 : La thérapie, c'est pour les fous. FAUX ! La thérapie aide toute personne traversant des difficultés. Mythe 2 : Ça dure des années. FAUX ! Certaines thérapies sont brèves et ciblées...",
       "image": "public/blog/mythes-therapie.jpg",
-      "tags": [
-        "psychothérapie",
-        "mythes",
-        "éducation"
-      ],
       "vues": 890,
       "likes": 67,
       "datePublication": "2025-09-15T14:00:00Z"
@@ -1838,11 +2003,6 @@
       "auteur": "M. Seydou Cissé",
       "contenu": "La santé mentale se cultive chaque jour. Voici 7 habitudes à adopter : 1. Dormir suffisamment (7-8h), 2. Pratiquer une activité physique régulière, 3. Maintenir des liens sociaux...",
       "image": "public/blog/soin-quotidien.jpg",
-      "tags": [
-        "bien-être",
-        "prévention",
-        "habitudes"
-      ],
       "vues": 1450,
       "likes": 123,
       "datePublication": "2025-10-10T09:00:00Z"
@@ -1855,10 +2015,7 @@
       "type": "Respiration",
       "difficulte": "Facile",
       "duree": "5 minutes",
-      "troubleCible": [
-        "anxiété",
-        "stress"
-      ],
+      "troubleCible": ["anxiété", "stress"],
       "instructions": [
         "Asseyez-vous confortablement",
         "Inspirez par le nez pendant 4 secondes",
@@ -1874,10 +2031,7 @@
       "type": "Écriture",
       "difficulte": "Facile",
       "duree": "10 minutes",
-      "troubleCible": [
-        "dépression",
-        "anxiété"
-      ],
+      "troubleCible": ["dépression", "anxiété"],
       "instructions": [
         "Chaque soir, notez 3 choses positives de votre journée",
         "Soyez précis et détaillé",
@@ -1891,11 +2045,7 @@
       "type": "Méditation",
       "difficulte": "Moyenne",
       "duree": "15 minutes",
-      "troubleCible": [
-        "anxiété",
-        "stress",
-        "burn-out"
-      ],
+      "troubleCible": ["anxiété", "stress", "burn-out"],
       "instructions": [
         "Allongez-vous confortablement",
         "Fermez les yeux",
@@ -1911,11 +2061,7 @@
       "type": "Réflexion",
       "difficulte": "Moyenne",
       "duree": "20 minutes",
-      "troubleCible": [
-        "dépression",
-        "anxiété",
-        "TOC"
-      ],
+      "troubleCible": ["dépression", "anxiété", "TOC"],
       "instructions": [
         "Identifiez une pensée négative récurrente",
         "Notez les preuves pour et contre cette pensée",
@@ -1930,11 +2076,7 @@
       "type": "Mouvement",
       "difficulte": "Facile",
       "duree": "20 minutes",
-      "troubleCible": [
-        "anxiété",
-        "dépression",
-        "stress"
-      ],
+      "troubleCible": ["anxiété", "dépression", "stress"],
       "instructions": [
         "Marchez lentement",
         "Concentrez-vous sur chaque pas",
@@ -2020,45 +2162,56 @@
     "inscriptionsOuvertes": true,
     "moderationActive": true
   },
+  "categoriesTroubles": [
+    { "id": 1, "libelle": "Troubles neurodéveloppementaux" },
+    { "id": 2, "libelle": "Troubles psychotiques" },
+    { "id": 3, "libelle": "Troubles de l'humeur" },
+    { "id": 4, "libelle": "Troubles anxieux" },
+    { "id": 5, "libelle": "Troubles de la personnalité" },
+    { "id": 6, "libelle": "Troubles des conduites alimentaires" },
+    { "id": 7, "libelle": "Troubles addictifs" },
+    { "id": 8, "libelle": "Troubles du sommeil" },
+    { "id": 9, "libelle": "Troubles du comportement" },
+    { "id": 10, "libelle": "Troubles du stress" },
+    { "id": 11, "libelle": "Troubles de l'enfance" },
+    { "id": 12, "libelle": "Troubles neurologiques" }
+  ],
   "troubles": [
     {
       "id": "1",
-      "image": "public/adhd.jpg",
+      "categorieId": 1,
+      "image": "adhd.jpg",
       "nom": "TDAH (Trouble du Déficit de l'Attention avec ou sans Hyperactivité)",
-      "description": "Le TDAH est un trouble neurodéveloppemental qui se caractérise par des difficultés de concentration, de l'hyperactivité et de l'impulsivité, impactant le fonctionnement quotidien.",
+      "description": "Le Trouble du Déficit de l'Attention avec ou sans Hyperactivité (TDAH) est une condition neurodéveloppementale complexe qui affecte le fonctionnement exécutif du cerveau. Il se manifeste par une triade de symptômes principaux : inattention persistante, hyperactivité motrice et impulsivité. Ce trouble apparaît généralement pendant l'enfance et peut persister à l'âge adulte, affectant considérablement les performances scolaires, professionnelles et les relations interpersonnelles. Le TDAH n'est pas simplement un manque de volonté ou de discipline, mais une véritable condition médicale qui nécessite une compréhension et une prise en charge adaptées.",
       "symptomes": [
-        "Difficulté à prêter attention aux détails",
-        "Tendance à perdre ses affaires",
-        "Gigote souvent des mains ou des pieds",
-        "Interrompt souvent les autres"
+        "Inattention marquée avec difficulté à se concentrer sur des tâches prolongées",
+        "Oublis fréquents et difficulté d'organisation dans la vie quotidienne",
+        "Agitation motrice excessive (se tortille, bouge constamment les jambes, se lève fréquemment)",
+        "Impulsivité verbale (répond avant la fin des questions, interrompt les conversations)",
+        "Difficulté à attendre son tour dans les jeux ou les situations de groupe",
+        "Évitement des tâches nécessitant un effort mental soutenu",
+        "Perte fréquente d'objets nécessaires aux activités quotidiennes"
       ],
-      "causes": "Combinaison de facteurs génétiques, neurologiques et environnementaux. Un déséquilibre des neurotransmetteurs joue un rôle clé.",
-      "traitements": "Approche multimodale incluant thérapie comportementale, soutien scolaire et, si nécessaire, un traitement médicamenteux.",
-      "tags": [
-        "neurodéveloppemental",
-        "concentration",
-        "enfant",
-        "adulte"
-      ]
+      "causes": "L'étiologie du TDAH implique une interaction complexe entre facteurs génétiques (héritabilité estimée à 70-80%), neurologiques (dysfonctionnements des neurotransmetteurs comme la dopamine et la noradrénaline) et environnementaux (exposition prénatale à des substances toxiques, naissance prématurée, faible poids à la naissance). Les recherches en imagerie cérébrale ont mis en évidence des différences structurelles et fonctionnelles dans les régions préfrontales du cerveau, impliquées dans le contrôle des impulsions et l'attention.",
+      "traitements": "La prise en charge optimale du TDAH repose sur une approche multimodale combinant : 1) Interventions psychologiques (thérapie cognitivo-comportementale, psychoéducation, formation aux habiletés parentales) ; 2) Aménagements scolaires et professionnels (plan d'accompagnement personnalisé, outils de compensation) ; 3) Traitement médicamenteux (psychostimulants comme le méthylphénidate ou atomoxétine) si nécessaire ; 4) Stratégies de gestion du temps et d'organisation ; 5) Activité physique régulière et hygiène de vie équilibrée. Le suivi doit être régulier et adapté à l'évolution des symptômes."
     },
     {
       "id": "2",
+      "categorieId": 2,
       "image": "https://hookedonhopementalhealth.com/wp-content/uploads/2025/04/What-Is-Erotomania.jpg",
       "nom": "Érotomanie",
-      "description": "L'érotomanie est un trouble délirant rare où une personne est convaincue qu'une autre personne, souvent d'un statut social plus élevé, est secrètement amoureuse d'elle.",
+      "description": "L'érotomanie, également connue sous le nom de syndrome de Clérambault, est un trouble délirant rare caractérisé par la conviction inébranlable qu'une personne, généralement d'un statut social plus élevé, est secrètement amoureuse du patient. Ce trouble appartient à la catégorie des délires passionnels et peut avoir des conséquences graves sur la vie sociale et professionnelle de la personne affectée. Contrairement à une simple illusion romantique, l'érotomanie est une véritable pathologie psychiatrique qui nécessite une prise en charge spécialisée. Les personnes atteintes interprètent souvent des comportements neutres ou anodins comme des preuves d'amour et peuvent développer des comportements d'approche persistants envers l'objet de leur délire.",
       "symptomes": [
-        "Conviction inébranlable et non fondée d'être aimé",
-        "Interprétation de signaux neutres comme des preuves d'amour",
-        "Tentatives répétées d'entrer en contact avec la personne",
-        "Peu de remise en question de cette croyance, même face à des preuves contraires"
+        "Conviction inébranlable et non fondée d'être aimé par une personne spécifique",
+        "Interprétation erronée de signaux neutres ou ambigus comme des preuves d'amour",
+        "Tentatives répétées et inappropriées d'entrer en contact avec la personne concernée",
+        "Absence de remise en question malgré les preuves contraires et le rejet",
+        "Élaboration d'un système de croyances complexe pour expliquer les contradictions",
+        "Isolement social progressif dû à l'obsession",
+        "Risque de comportements de harcèlement ou de persécution en cas de rejet"
       ],
-      "causes": "Les causes exactes sont mal comprises, mais des facteurs de stress importants ou des traumatismes peuvent en être des déclencheurs.",
-      "traitements": "Psychothérapie et médicaments antipsychotiques pour gérer les délires.",
-      "tags": [
-        "trouble délirant",
-        "relationnel",
-        "adulte"
-      ]
+      "causes": "L'étiologie de l'érotomanie est multifactorielle et peut inclure : 1) Facteurs biologiques (anomalies des neurotransmetteurs, lésions cérébrales) ; 2) Facteurs psychologiques (traumatismes relationnels précoces, personnalité paranoïaque ou schizoïde) ; 3) Facteurs sociaux (isolement, manque de relations significatives). Certaines études suggèrent une prédisposition génétique ou familiale aux troubles psychotiques. Les événements stressants de la vie peuvent précipiter l'apparition des symptômes chez les personnes vulnérables.",
+      "traitements": "La prise en charge de l'érotomanie est complexe et nécessite une approche pluridisciplinaire : 1) Traitement médicamenteux (antipsychotiques atypiques pour réduire les symptômes délirants, stabilisateurs de l'humeur si nécessaire) ; 2) Psychothérapie individuelle (thérapie cognitive et comportementale pour remettre en question les croyances délirantes) ; 3) Thérapie familiale pour soutenir l'entourage ; 4) Mesures de protection juridiques si nécessaire pour la personne cible du délire ; 5) Hospitalisation en cas de risque pour soi ou pour autrui. Le pronostic est variable et dépend de l'adhésion au traitement."
     },
     {
       "id": "3",
@@ -2073,13 +2226,7 @@
         "Pensées de mort ou idées suicidaires"
       ],
       "causes": "Combinaison de facteurs biologiques (déséquilibre chimique cérébral), psychologiques (traumatismes), et sociaux (isolement, stress).",
-      "traitements": "Psychothérapie (TCC, thérapie interpersonnelle), antidépresseurs, soutien social, activité physique régulière.",
-      "tags": [
-        "humeur",
-        "tristesse",
-        "adulte",
-        "adolescent"
-      ]
+      "traitements": "Psychothérapie (TCC, thérapie interpersonnelle), antidépresseurs, soutien social, activité physique régulière."
     },
     {
       "id": "4",
@@ -2094,16 +2241,11 @@
         "Évitement de situations anxiogènes"
       ],
       "causes": "Facteurs génétiques, expériences traumatisantes, stress chronique, déséquilibres neurochimiques.",
-      "traitements": "Thérapie cognitivo-comportementale, techniques de relaxation, médication anxiolytique si nécessaire.",
-      "tags": [
-        "anxiété",
-        "stress",
-        "adulte",
-        "adolescent"
-      ]
+      "traitements": "Thérapie cognitivo-comportementale, techniques de relaxation, médication anxiolytique si nécessaire."
     },
     {
       "id": "5",
+      "categorieId": 3,
       "image": "https://static.cnews.fr/sites/default/files/styles/image_750_422/public/kanye_west_bipolaire_maladie_5f169923715c5.jpg?itok=xjeLitLQ",
       "nom": "Trouble Bipolaire",
       "description": "Le trouble bipolaire se caractérise par des alternances entre des phases de manie (excitation) et de dépression.",
@@ -2115,13 +2257,7 @@
         "Pensées accélérées"
       ],
       "causes": "Prédisposition génétique forte, déséquilibres neurochimiques, événements de vie stressants.",
-      "traitements": "Stabilisateurs de l'humeur, psychothérapie, régularité du sommeil, soutien familial.",
-      "tags": [
-        "humeur",
-        "manie",
-        "dépression",
-        "adulte"
-      ]
+      "traitements": "Stabilisateurs de l'humeur, psychothérapie, régularité du sommeil, soutien familial."
     },
     {
       "id": "6",
@@ -2136,13 +2272,7 @@
         "Intérêts très spécifiques et intenses"
       ],
       "causes": "Facteurs génétiques et neurologiques complexes présents dès la naissance.",
-      "traitements": "Interventions comportementales précoces, thérapie du langage, soutien éducatif adapté, accompagnement familial.",
-      "tags": [
-        "neurodéveloppemental",
-        "enfant",
-        "communication",
-        "social"
-      ]
+      "traitements": "Interventions comportementales précoces, thérapie du langage, soutien éducatif adapté, accompagnement familial."
     },
     {
       "id": "7",
@@ -2157,33 +2287,313 @@
         "Détachement émotionnel"
       ],
       "causes": "Exposition à un événement traumatisant (violence, accident, catastrophe naturelle, guerre).",
-      "traitements": "EMDR (désensibilisation et retraitement par mouvements oculaires), TCC centrée sur le trauma, thérapie de groupe.",
-      "tags": [
-        "traumatisme",
-        "stress",
-        "adulte",
-        "réfugié"
-      ]
+      "traitements": "EMDR (désensibilisation et retraitement par mouvements oculaires), TCC centrée sur le trauma, thérapie de groupe."
     },
     {
       "id": "8",
-      "image": "public/toc.jpg",
+      "image": "https://cdn.psychologytoday.com/sites/default/files/styles/article-inline-half-caption/public/field_blog_entry_images/2020-09/istock_000011269785xsmall.jpg?itok=44Mh-AdQ",
       "nom": "Trouble Obsessionnel Compulsif (TOC)",
-      "description": "Le TOC est un trouble anxieux caractérisé par des obsessions (pensées intrusives) et des compulsions (comportements répétitifs pour réduire l'anxiété).",
+      "description": "Le TOC se caractérise par des obsessions (pensées intrusives) et des compulsions (comportements répétitifs) visant à réduire l'anxiété.",
       "symptomes": [
-        "Pensées intrusives et obsédantes",
-        "Comportements compulsifs (vérifications répétées, rituels)",
-        "Anxiété intense si les rituels ne sont pas accomplis",
-        "Conscience que les pensées/compulsions sont irrationnelles mais impossibilité de les contrôler"
+        "Obsessions récurrentes et envahissantes",
+        "Compulsions ritualisées",
+        "Vérifications excessives",
+        "Peur de la contamination",
+        "Besoin d'ordre et de symétrie"
       ],
-      "causes": "Facteurs génétiques, neurologiques et environnementaux. Un dysfonctionnement des circuits cérébraux impliquant la sérotonine.",
-      "traitements": "Thérapie cognitivo-comportementale (TCC), médicaments sérotoninergiques (ISRS), thérapie d'exposition avec prévention de la réponse.",
-      "tags": [
-        "anxiété",
-        "obsessions",
-        "compulsions",
-        "adulte"
-      ]
+      "causes": "Facteurs neurobiologiques, génétiques et environnementaux.",
+      "traitements": "TCC avec exposition et prévention de la réponse, médicaments ISRS."
+    },
+    {
+      "id": "9",
+      "image": "https://www.shutterstock.com/image-photo/schizophrenia-fear-black-woman-on-260nw-2385072745.jpg",
+      "nom": "Schizophrénie",
+      "description": "La schizophrénie est un trouble psychotique grave affectant la pensée, les perceptions et le comportement.",
+      "symptomes": [
+        "Hallucinations (auditives principalement)",
+        "Délires",
+        "Discours désorganisé",
+        "Retrait social",
+        "Manque de motivation"
+      ],
+      "causes": "Facteurs génétiques, anomalies cérébrales, stress environnemental.",
+      "traitements": "Antipsychotiques, psychothérapie de soutien, réhabilitation psychosociale, suivi médical régulier."
+    },
+    {
+      "id": "10",
+      "image": "https://cdn.angermanage.co.uk/wp-content/uploads/2016/09/Anger-and-Addiction.jpg",
+      "nom": "Troubles Addictifs",
+      "description": "Les addictions sont des dépendances pathologiques à des substances (alcool, drogues) ou des comportements (jeux, écrans).",
+      "symptomes": [
+        "Besoin irrépressible de consommer",
+        "Perte de contrôle",
+        "Augmentation de la tolérance",
+        "Symptômes de sevrage",
+        "Négligence des autres activités"
+      ],
+      "causes": "Vulnérabilité génétique, facteurs psychologiques, pression sociale, disponibilité des substances.",
+      "traitements": "Sevrage supervisé, thérapie de groupe, TCC, soutien familial, centres de réhabilitation."
+    },
+    {
+      "id": "11",
+      "categorieId": 10,
+      "image": "https://www.shutterstock.com/image-photo/stress-burnout-tired-black-man-600nw-2240694803.jpg",
+      "nom": "Syndrome d'Épuisement Professionnel (Burnout)",
+      "description": "Le burnout est un état d'épuisement émotionnel, physique et mental causé par un stress professionnel prolongé.",
+      "symptomes": [
+        "Fatigue chronique intense",
+        "Cynisme et détachement du travail",
+        "Sentiment d'inefficacité",
+        "Irritabilité accrue",
+        "Problèmes de concentration"
+      ],
+      "causes": "Surcharge de travail, manque de reconnaissance, absence de contrôle, valeurs en conflit.",
+      "traitements": "Repos, psychothérapie, réorganisation du travail, techniques de gestion du stress."
+    },
+    {
+      "id": "12",
+      "image": "https://www.shutterstock.com/image-photo/young-lady-having-tiny-serving-600nw-1997866784.jpg",
+      "nom": "Troubles du Comportement Alimentaire (TCA)",
+      "description": "Les TCA incluent l'anorexie, la boulimie et l'hyperphagie, caractérisés par une relation perturbée avec la nourriture et l'image corporelle.",
+      "symptomes": [
+        "Restriction alimentaire sévère",
+        "Crises de boulimie",
+        "Vomissements provoqués",
+        "Préoccupation excessive pour le poids",
+        "Distorsion de l'image corporelle"
+      ],
+      "causes": "Facteurs psychologiques, pression sociale, génétique, traumatismes.",
+      "traitements": "Psychothérapie spécialisée, suivi nutritionnel, hospitalisation si nécessaire, soutien familial."
+    }
+  ],
+  "articles": [
+    {
+      "id": "1",
+      "troubleId": "1",
+      "titre": "Le TDAH à l'école sénégalaise : entre tabou et réalité",
+      "contenu": "Au Sénégal, un enfant agité est souvent qualifié de 'Turbulent' ou 'Indiscipliné'. Pourtant, derrière ce comportement se cache parfois un TDAH non diagnostiqué. Cet article explore les défis pour les élèves, les parents et les enseignants à Dakar, Thiès et ailleurs, et propose des pistes pour une meilleure inclusion scolaire. Il est crucial de changer le regard de la société pour offrir un avenir à ces enfants.",
+      "auteurId": 101,
+      "createdAt": "2025-10-15T10:00:00Z",
+      "updatedAt": "2025-10-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "troubleId": "2",
+      "titre": "Amour ou illusion ? Plongée au cœur de l'érotomanie",
+      "contenu": "L'érotomanie est une souffrance psychique profonde, bien loin des clichés romantiques. Cet article explique comment ce trouble délirant s'installe et les conséquences dévastatrices qu'il peut avoir sur la vie de la personne atteinte et de son entourage. Reconnaître les signes est le premier pas vers une aide adaptée.",
+      "auteurId": 102,
+      "createdAt": "2025-10-18T14:30:00Z",
+      "updatedAt": "2025-10-18T14:30:00Z"
+    },
+    {
+      "id": "3",
+      "troubleId": "3",
+      "titre": "La dépression n'est pas une faiblesse : brisons le silence",
+      "contenu": "Dans nos communautés, la dépression est souvent vue comme un manque de foi ou de courage. Cette stigmatisation empêche des milliers de Sénégalais de chercher l'aide dont ils ont besoin. Cet article démystifie la dépression, explique ses causes biologiques et psychologiques, et encourage les personnes touchées à consulter sans honte.",
+      "auteurId": 101,
+      "createdAt": "2025-09-22T09:00:00Z",
+      "updatedAt": "2025-09-22T09:00:00Z"
+    },
+    {
+      "id": "4",
+      "troubleId": "4",
+      "titre": "Anxiété : quand l'inquiétude devient envahissante",
+      "contenu": "L'anxiété touche de plus en plus de jeunes Sénégalais, particulièrement dans les grandes villes comme Dakar. Entre pression scolaire, chômage et incertitudes économiques, comment reconnaître une anxiété pathologique et que faire pour y remédier ? Des solutions existent et nous les explorons dans cet article.",
+      "auteurId": 103,
+      "createdAt": "2025-10-05T11:30:00Z",
+      "updatedAt": "2025-10-05T11:30:00Z"
+    },
+    {
+      "id": "5",
+      "troubleId": "5",
+      "titre": "Vivre avec un trouble bipolaire au Sénégal",
+      "contenu": "Le trouble bipolaire reste méconnu et incompris dans notre société. Les personnes atteintes sont souvent victimes de préjugés. Cet article propose un éclairage médical et humain sur ce trouble, avec des témoignages de patients qui ont appris à gérer leur maladie et à mener une vie épanouie.",
+      "auteurId": 102,
+      "createdAt": "2025-09-10T16:00:00Z",
+      "updatedAt": "2025-09-10T16:00:00Z"
+    },
+    {
+      "id": "6",
+      "troubleId": "6",
+      "titre": "L'autisme au Sénégal : comprendre pour mieux accompagner",
+      "contenu": "L'autisme est encore entouré de mythes et de malentendus. Beaucoup d'enfants autistes ne sont pas diagnostiqués ou sont victimes de discriminations. Cet article explique ce qu'est le spectre autistique, comment le reconnaître tôt et quelles ressources sont disponibles au Sénégal pour les familles concernées.",
+      "auteurId": 104,
+      "createdAt": "2025-08-28T10:15:00Z",
+      "updatedAt": "2025-08-28T10:15:00Z"
+    },
+    {
+      "id": "7",
+      "troubleId": "7",
+      "titre": "Traumatismes et résilience : guérir après un choc",
+      "contenu": "Accidents, violences, catastrophes... Les traumatismes psychologiques laissent des cicatrices invisibles mais profondes. Le TSPT peut affecter n'importe qui. Comment reconnaître les symptômes et entreprendre un chemin de guérison ? Des thérapies efficaces existent et redonnent espoir aux victimes.",
+      "auteurId": 101,
+      "createdAt": "2025-10-01T14:20:00Z",
+      "updatedAt": "2025-10-01T14:20:00Z"
+    },
+    {
+      "id": "8",
+      "troubleId": "8",
+      "titre": "TOC : ces rituels qui emprisonnent",
+      "contenu": "Vérifier dix fois si la porte est fermée, se laver les mains jusqu'à les blesser... Les TOC peuvent devenir invalidants. Cet article aide à comprendre ce trouble anxieux et présente les traitements qui permettent de reprendre le contrôle de sa vie.",
+      "auteurId": 103,
+      "createdAt": "2025-09-15T13:00:00Z",
+      "updatedAt": "2025-09-15T13:00:00Z"
+    },
+    {
+      "id": "9",
+      "troubleId": "9",
+      "titre": "Schizophrénie : au-delà des préjugés",
+      "contenu": "La schizophrénie fait peur et est souvent associée à tort à la violence. Pourtant, avec un traitement adapté, les personnes atteintes peuvent mener une vie stable. Cet article déconstruit les mythes et explique l'importance d'un diagnostic et d'un suivi précoces.",
+      "auteurId": 102,
+      "createdAt": "2025-08-20T09:45:00Z",
+      "updatedAt": "2025-08-20T09:45:00Z"
+    },
+    {
+      "id": "10",
+      "troubleId": "10",
+      "titre": "Addictions : sortir de l'engrenage",
+      "contenu": "L'addiction n'est pas un choix ni un manque de volonté. C'est une maladie qui nécessite un accompagnement médical et psychologique. Au Sénégal, alcool, cannabis et autres substances touchent de nombreux jeunes. Comment reconnaître la dépendance et où trouver de l'aide ?",
+      "auteurId": 104,
+      "createdAt": "2025-09-28T15:30:00Z",
+      "updatedAt": "2025-09-28T15:30:00Z"
+    },
+    {
+      "id": "11",
+      "troubleId": "11",
+      "titre": "Burnout : quand le travail épuise",
+      "contenu": "Le burnout touche de plus en plus de travailleurs sénégalais, notamment dans les secteurs exigeants. Fatigue chronique, perte de sens, irritabilité... Comment reconnaître l'épuisement professionnel et agir avant qu'il ne soit trop tard ? La prévention est essentielle.",
+      "auteurId": 101,
+      "createdAt": "2025-10-12T11:00:00Z",
+      "updatedAt": "2025-10-12T11:00:00Z"
+    },
+    {
+      "id": "12",
+      "troubleId": "12",
+      "titre": "Troubles alimentaires chez les jeunes : un cri silencieux",
+      "contenu": "Anorexie, boulimie... Les troubles du comportement alimentaire touchent de plus en plus d'adolescents sénégalais, souvent en silence. Sous la pression des standards de beauté véhiculés par les réseaux sociaux, certains jeunes mettent leur santé en danger. Comment les détecter et les accompagner ?",
+      "auteurId": 103,
+      "createdAt": "2025-10-08T10:00:00Z",
+      "updatedAt": "2025-10-08T10:00:00Z"
+    },
+    {
+      "id": "13",
+      "troubleId": "3",
+      "titre": "Dépression post-partum : les mères aussi ont droit à la tristesse",
+      "contenu": "Après l'accouchement, certaines femmes traversent une période de grande détresse émotionnelle. Loin d'être un échec maternel, la dépression post-partum est une condition médicale qui nécessite soutien et traitement. Brisons le tabou autour de la santé mentale maternelle.",
+      "auteurId": 105,
+      "createdAt": "2025-09-18T14:00:00Z",
+      "updatedAt": "2025-09-18T14:00:00Z"
+    },
+    {
+      "id": "14",
+      "troubleId": "4",
+      "titre": "L'anxiété sociale : plus qu'une simple timidité",
+      "contenu": "Avoir peur de parler en public ou de rencontrer de nouvelles personnes peut sembler banal. Mais pour certains, cette peur devient paralysante et empêche toute vie sociale normale. L'anxiété sociale est un trouble réel qui peut être traité efficacement.",
+      "auteurId": 102,
+      "createdAt": "2025-10-20T09:30:00Z",
+      "updatedAt": "2025-10-20T09:30:00Z"
+    },
+    {
+      "id": "15",
+      "troubleId": "1",
+      "titre": "TDAH chez les adultes : un diagnostic souvent tardif",
+      "contenu": "Beaucoup d'adultes découvrent qu'ils ont un TDAH après des années de difficultés professionnelles et relationnelles. Ce diagnostic tardif permet enfin de comprendre leurs défis et d'accéder à des stratégies d'adaptation efficaces.",
+      "auteurId": 104,
+      "createdAt": "2025-10-25T16:45:00Z",
+      "updatedAt": "2025-10-25T16:45:00Z"
+    }
+  ],
+  "histoires": [
+    {
+      "id": "1",
+      "troubleId": 1,
+      "titre": "L'histoire de Binta : mon TDAH, ma force",
+      "recit": "Je m'appelle Binta, j'ai 22 ans et je suis étudiante en droit à l'UCAD. On m'a toujours dit que j'étais 'dans la lune' et que je ne finirais jamais rien. Les remarques des professeurs et même de ma famille étaient difficiles. Quand le diagnostic du TDAH a été posé l'année dernière, tout a changé. Ce n'était pas de la paresse. J'ai appris à travailler avec mon cerveau, pas contre lui. Aujourd'hui, mon hyper-concentration me permet d'exceller dans mes études. C'est une histoire pour dire à tous les jeunes de Dakar qui se sentent différents : votre différence peut être votre plus grande force.",
+      "auteurId": null,
+      "createdAt": "2025-11-02T11:00:00Z",
+      "updatedAt": "2025-11-02T11:00:00Z"
+    },
+    {
+      "id": "2",
+      "troubleId": 3,
+      "titre": "Moussa : sortir du tunnel de la dépression",
+      "recit": "Je suis Moussa, informaticien de 35 ans. Il y a deux ans, j'ai plongé dans une dépression sévère après avoir perdu mon emploi. Je ne sortais plus de chez moi, je ne voyais plus personne. Ma famille pensait que j'étais paresseux. Grâce à un ami qui m'a encouragé à consulter, j'ai commencé une thérapie. Aujourd'hui, je vais mieux. J'ai un nouveau travail et j'ai appris à demander de l'aide sans honte. La dépression n'est pas une faiblesse, c'est une maladie qui se soigne.",
+      "auteurId": null,
+      "createdAt": "2025-10-28T14:20:00Z",
+      "updatedAt": "2025-10-28T14:20:00Z"
+    },
+    {
+      "id": "3",
+      "troubleId": 4,
+      "titre": "Aïssatou : vaincre l'anxiété sociale",
+      "recit": "Pendant des années, j'ai évité les mariages, les cérémonies familiales, même les réunions au travail. La simple idée d'être observée me paralysait. Je pensais que c'était juste de la timidité. Un jour, j'ai découvert que je souffrais d'anxiété sociale. Avec l'aide d'une psychologue et des exercices progressifs, j'ai réappris à vivre normalement. Aujourd'hui, je peux même faire des présentations devant mes collègues. C'est un combat quotidien, mais je progresse.",
+      "auteurId": null,
+      "tags": ["anxiété sociale", "timidité", "thérapie", "progression", "témoignage"],
+      "createdAt": "2025-10-22T10:00:00Z",
+      "updatedAt": "2025-10-22T10:00:00Z"
+    },
+    {
+      "id": "4",
+      "troubleId": 6,
+      "titre": "Mamadou : le parcours d'un enfant autiste",
+      "recit": "Je suis Fatou, mère de Mamadou, 8 ans, diagnostiqué autiste à 4 ans. Au début, c'était le choc. Personne dans mon entourage ne comprenait. On me disait qu'il était possédé ou qu'il fallait des prières. Mais j'ai cherché des informations, trouvé des spécialistes. Aujourd'hui, Mamadou va à l'école, progresse chaque jour. Il a sa façon unique de voir le monde et nous l'acceptons. Aux parents qui vivent la même chose : n'abandonnez jamais.",
+      "auteurId": null,
+      "createdAt": "2025-10-18T09:15:00Z",
+      "updatedAt": "2025-10-18T09:15:00Z"
+    },
+    {
+      "id": "5",
+      "troubleId": 10,
+      "titre": "Ibrahima : ma victoire sur l'addiction",
+      "recit": "J'avais 17 ans quand j'ai commencé à fumer du cannabis. Ce qui était 'juste pour essayer' est devenu une prison. J'ai perdu mes amis, mes études, la confiance de ma famille. À 25 ans, j'ai touché le fond et j'ai accepté d'aller en cure. Cela fait maintenant 3 ans que je suis sobre. J'ai retrouvé ma dignité, repris mes études. L'addiction peut toucher n'importe qui, mais on peut s'en sortir.",
+      "auteurId": null,
+      "createdAt": "2025-10-14T13:30:00Z",
+      "updatedAt": "2025-10-14T13:30:00Z"
+    },
+    {
+      "id": "6",
+      "troubleId": 11,
+      "titre": "Ndeye : du burnout à l'équilibre",
+      "recit": "En tant qu'infirmière, je pensais que la fatigue faisait partie du métier. Mais j'ai commencé à détester mon travail, à pleurer chaque matin. Mon corps me lâchait. On m'a diagnostiqué un burnout sévère. J'ai dû prendre un arrêt maladie, chose que je n'aurais jamais imaginée faire. Après plusieurs mois de repos et de thérapie, j'ai appris à poser mes limites. Je suis retournée au travail différemment. Prendre soin de soi n'est pas égoïste, c'est nécessaire.",
+      "auteurId": null,
+      "createdAt": "2025-10-10T15:45:00Z",
+      "updatedAt": "2025-10-10T15:45:00Z"
+    },
+    {
+      "id": "7",
+      "troubleId": 5,
+      "titre": "Cheikh : vivre avec le trouble bipolaire",
+      "recit": "À 28 ans, j'ai reçu le diagnostic de trouble bipolaire. Pendant des années, j'ai alterné entre des phases où je me sentais invincible et d'autres où je ne voulais plus vivre. Ma famille ne comprenait pas. Le traitement et le suivi régulier m'ont stabilisé. J'ai appris à reconnaître les signes avant-coureurs de mes phases. Aujourd'hui, je travaille, j'ai une famille. Le bipolaire ne définit pas qui je suis.",
+      "auteurId": null,
+      "createdAt": "2025-10-05T11:20:00Z",
+      "updatedAt": "2025-10-05T11:20:00Z"
+    },
+    {
+      "id": "8",
+      "troubleId": 7,
+      "titre": "Mariama : guérir d'un traumatisme",
+      "recit": "J'ai été victime d'une agression il y a 5 ans. Pendant longtemps, j'ai fait des cauchemars, je sursautais au moindre bruit. Je ne sortais plus seule. Ma vie était devenue une prison. Grâce à la thérapie EMDR, j'ai pu retraiter ce traumatisme. Ce n'est pas de l'oubli, mais j'ai retrouvé ma liberté. On peut guérir des blessures invisibles.",
+      "auteurId": null,
+      "createdAt": "2025-09-30T10:30:00Z",
+      "updatedAt": "2025-09-30T10:30:00Z"
+    },
+    {
+      "id": "9",
+      "troubleId": 12,
+      "titre": "Aminata : mon combat contre l'anorexie",
+      "recit": "À 16 ans, j'ai commencé à me trouver grosse. J'ai réduit progressivement mes repas jusqu'à ne presque plus manger. Je pesais 38 kg pour 1m65. Mes parents affolés m'ont emmenée voir un médecin. L'anorexie a failli me coûter la vie. Après une hospitalisation et un suivi psychologique, j'ai compris que la beauté ne se mesure pas en kilos. Je me reconstruis chaque jour.",
+      "auteurId": null,
+      "createdAt": "2025-09-25T14:00:00Z",
+      "updatedAt": "2025-09-25T14:00:00Z"
+    },
+    {
+      "id": "10",
+      "troubleId": 8,
+      "titre": "Ousmane : libéré des TOC",
+      "recit": "Je vérifiais 50 fois si la porte était fermée, je me lavais les mains jusqu'à les faire saigner. Mes rituels prenaient 4 heures par jour. Ma vie était contrôlée par mes obsessions. La thérapie comportementale m'a appris à résister progressivement à mes compulsions. C'était dur, mais aujourd'hui je suis libre. Les TOC ne gouvernent plus ma vie.",
+      "auteurId": null,
+      "createdAt": "2025-09-20T09:00:00Z",
+      "updatedAt": "2025-09-20T09:00:00Z"
     }
   ]
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header } from './Header';
 import { useCreateTemoignage } from '../hooks/useApi';
 import { useAuthStore } from '../stores/authStore';
 
@@ -36,7 +35,7 @@ const ShareExperience: React.FC = () => {
         alert('Votre témoignage a été soumis avec succès et est en attente de modération !');
         navigate('/temoignages');
       },
-      onError: (error) => {
+      onError: (error: any) => {
         console.error('Erreur lors de la soumission:', error);
         alert('Une erreur est survenue lors de la soumission de votre témoignage.');
       }
@@ -45,14 +44,11 @@ const ShareExperience: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      {/* Header */}
-      <Header />
-
       {/* Main Content */}
-      <main className="p-8">
+      <div className="p-8">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold text-center mb-8 troubles-title">Partager mon expérience</h1>
-          
+
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-6 space-y-6">
             {/* Titre Input */}
             <div>
@@ -93,7 +89,7 @@ const ShareExperience: React.FC = () => {
             </button>
           </form>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { ArticleDetailSkeleton } from './skeletons';
 
 interface Histoire {
   id: string;
@@ -40,8 +41,10 @@ const Histoire: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center">Chargement de l'histoire...</div>
+      <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
+        <div className="p-8">
+          <ArticleDetailSkeleton />
+        </div>
       </div>
     );
   }
@@ -64,24 +67,6 @@ const Histoire: React.FC = () => {
 
   return (
     <div className="min-h-screen page-bg">
-      {/* Header */}
-      <header className="troubles-header p-4 flex justify-between items-center shadow-md">
-        <div className="flex items-center">
-          <img src="/black-logo.png" alt="WaxPsy Logo" className="h-10 mr-4" />
-        </div>
-        <nav className="hidden md:flex space-x-4 text-sm">
-          <a href="/" className="text-green-700 hover:text-green-900">Accueil</a>
-          <a href="/troubles" className="text-green-700 hover:text-green-900">Troubles</a>
-          <a href="/articles" className="text-green-700 hover:text-green-900">Articles</a>
-          <a href="/temoignages" className="text-green-700 hover:text-green-900">Témoignages</a>
-          <a href="/professionals" className="text-green-700 hover:text-green-900">Professionnels</a>
-          <a href="/glossaire" className="text-green-700 hover:text-green-900">Glossaire</a>
-          <a href="/apropos" className="text-green-700 hover:text-green-900">A propos</a>
-          <a href="/contact" className="text-green-700 hover:text-green-900">Contact</a>
-          <a href="/profil" className="text-green-700 hover:text-green-900">Profil</a>
-        </nav>
-      </header>
-
       {/* Main Content */}
       <main className="p-8">
         <div className="max-w-4xl mx-auto">

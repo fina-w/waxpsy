@@ -1,6 +1,5 @@
 import React from 'react';
 import { Shield, Mail, Users, Database, Server, ArrowUpRight, ShieldCheck, UserCheck } from 'lucide-react';
-import { Header } from './Header';
 
 const Confidentialite: React.FC = () => {
   const developpeurs = [
@@ -40,8 +39,7 @@ const Confidentialite: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <Header />  
+    <div>  
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Section Développeurs */}
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
