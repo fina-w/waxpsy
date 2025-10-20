@@ -1,5 +1,5 @@
 import React from "react";
-import { PhoneIcon, ExclamationTriangleIcon, ShieldExclamationIcon, HeartIcon, UserGroupIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
+import { PhoneIcon, ExclamationTriangleIcon, ShieldExclamationIcon, HeartIcon, UserGroupIcon, ChatBubbleLeftRightIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import db from "../../db.json";
 import Footer from "./footer";
 
@@ -35,12 +35,11 @@ const UrgenceSOS: React.FC = () => {
                 </h1>
               </div>
               <p className="text-gray-700 text-lg">
-                  Si vous ou un proche êtes en situation de détresse ou de danger immédiat, 
-                  contactez immédiatement les services d'urgence. Vous n'êtes pas seul(e), 
+                  Si vous ou un proche êtes en situation de détresse ou de danger immédiat,
+                  contactez immédiatement les services d'urgence. Vous n'êtes pas seul(e),
                   de l'aide est disponible 24h/24.
               </p>
             </div>
-          </div>
           </div>
 
         {/* Numéros d'urgence */}
@@ -166,7 +165,7 @@ const UrgenceSOS: React.FC = () => {
                     <span className="bg-red-100 text-red-600 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">
                       <ExclamationTriangleIcon className="h-3 w-3" />
                     </span>
-                    <span className="text-[#015635]-gray-700">{signe}</span>
+                    <span className="text-gray-700">{signe}</span>
                   </li>
                 ))}
               </ul>
@@ -218,7 +217,7 @@ const UrgenceSOS: React.FC = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="bg-[#015635] hover:bg-[#015635] text-white font-bold py-2 px-6 rounded-full inline-flex items-center transition-colors duration-200"
             >
-              <ArrowUpIcon className="h-4 w-4 mr-2" />
+              <ChevronUpIcon className="h-4 w-4 mr-2" />
               Voir les numéros d'urgence
             </button>
           </div>
@@ -229,23 +228,5 @@ const UrgenceSOS: React.FC = () => {
     </div>
   );
 };
-
-// Composant pour l'icône de flèche vers le haut (ajoutez-le à la fin du fichier)
-const ArrowUpIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    {...props}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M5 10l7-7m0 0l7 7m-7-7v18"
-    />
-  </svg>
-);
 
 export default UrgenceSOS;

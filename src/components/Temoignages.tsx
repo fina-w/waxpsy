@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTemoignages, type Testimonial } from '../hooks/useApi';
 import { TemoignageSkeletonGrid } from './skeletons';
 
 interface UtilisateurTemoignage {
@@ -36,10 +35,35 @@ const DEFAULT_AVATARS = [
 
 const Temoignages: React.FC = () => {
   const navigate = useNavigate();
-  const { data: temoignages, isLoading: loading, error } = useTemoignages(1, 1000, 'approuvé');
-  const [filteredTemoignages, setFilteredTemoignages] = useState<Testimonial[]>([]);
+  const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [filteredTemoignages, setFilteredTemoignages] = useState<Temoignage[]>([]);
   const [selectedSort, setSelectedSort] = useState('recent');
   const [selectedCategory, setSelectedCategory] = useState('all');
+
+  // Chargement initial des données
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+
+        // Charger les témoignages
+        const response = await fetch("http://localhost:3000/temoignages");
+        if (!response.ok) throw new Error("Échec du chargement des témoignages");
+        const data = await response.json();
+        setTemoignages(data);
+
+      } catch (err) {
+        console.error("Erreur de chargement:", err);
+        setError("Erreur lors du chargement des données. Veuillez vérifier que le serveur JSON est en cours d'exécution.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (!temoignages || !Array.isArray(temoignages)) return;
