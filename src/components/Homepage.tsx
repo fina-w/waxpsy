@@ -6,6 +6,7 @@ import Login from "./Login";
 import Footer from "./footer";
 import { TroublesCarouselSkeleton, TemoignagesCarouselSkeleton } from "./skeletons";
 import { useAuthStore } from "../stores/authStore";
+import db from "../../db.json";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const Homepage: React.FC = () => {
     console.log("Current user in Homepage:", isAuthenticated);
     // Load data from imported db.json
     const troublesData = db.troubles;
-    const temoignagesData = db.temoignages.filter(t => t.statut === 'approuvé');
+    const temoignagesData = db.temoignages.filter((t: any) => t.statut === 'approuvé');
 
     setTroubles(troublesData);
     setTemoignages(temoignagesData);
