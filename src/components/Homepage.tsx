@@ -46,36 +46,14 @@ const Homepage: React.FC = () => {
 
   useEffect(() => {
     console.log("Current user in Homepage:", isAuthenticated);
-    const fetchData = async () => {
-      try {
-        // Récupération des troubles
-        const troublesRes = await fetch("/api/troubles");
-        if (!troublesRes.ok)
-          throw new Error("Erreur lors du chargement des troubles");
-        const troublesData = await troublesRes.json();
+    // Load data from imported db.json
+    const troublesData = db.troubles;
+    const temoignagesData = db.temoignages.filter(t => t.statut === 'approuvé');
 
-        // Récupération des témoignages approuvés
-        const temoignagesRes = await fetch(
-          "/api/temoignages?statut=approuvé"
-        );
-        if (!temoignagesRes.ok)
-          throw new Error("Erreur lors du chargement des témoignages");
-        const temoignagesData = await temoignagesRes.json();
-
-        setTroubles(troublesData); // NOUVEAU - charge tous les troubles
-        setTemoignages(temoignagesData); // NOUVEAU - charge tous les témoignages
-        setError(null);
-      } catch (err) {
-        console.error("Erreur lors du chargement des données:", err);
-        setError(
-          "Une erreur est survenue lors du chargement des données. Veuillez réessayer plus tard."
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    setTroubles(troublesData);
+    setTemoignages(temoignagesData);
+    setError(null);
+    setLoading(false);
   }, []);
 
   // Auto-scroll pour les troubles (toutes les 5 secondes)

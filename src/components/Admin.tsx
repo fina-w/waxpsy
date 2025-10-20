@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuthStore } from '../stores/authStore';
 import { useNavigate } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
+
 import {
   useUtilisateurs,
   useProfessionnels,
@@ -14,7 +14,7 @@ import {
   useCreateProfessionnel,
   useUpdateTemoignageStatus,
 } from '../hooks/useApi';
-import type { User, Professional, Testimonial } from '../hooks/useApi';
+import type { User, Professional } from '../hooks/useApi';
 import {
   TrashIcon,
   PencilIcon,
@@ -31,7 +31,7 @@ import {
 const Admin: React.FC = () => {
   const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+
   const [activeTab, setActiveTab] = useState('users');
   const { data: users = [], isLoading: usersLoading } = useUtilisateurs();
   const { data: professionals = [], isLoading: professionalsLoading } = useProfessionnels();

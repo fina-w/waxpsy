@@ -22,12 +22,13 @@ export interface Article {
 
 export interface Temoignage {
   id: string;
-  utilisateurId: number;
+  utilisateurId: number | string;
   titre: string;
   contenu: string;
   statut: string;
-  createdAt: string;
+  createdAt?: string;
   updatedAt: string;
+  dateCreation?: string;
 }
 
 export interface Utilisateur {
