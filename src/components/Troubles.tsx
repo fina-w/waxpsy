@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Header } from './Header';
-import { useTroubles } from '../hooks/useApi';
-=======
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { CardSkeletonGrid } from "./skeletons";
@@ -13,7 +7,6 @@ interface CategorieTrouble {
   id: number;
   libelle: string;
 }
->>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
 
 interface Trouble {
   id: string;
@@ -28,9 +21,6 @@ interface Trouble {
 
 const Troubles: React.FC = () => {
   const navigate = useNavigate();
-<<<<<<< HEAD
-  const { data: troubles, isLoading: loading, error } = useTroubles();
-=======
   const [troubles, setTroubles] = useState<Trouble[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -45,19 +35,19 @@ const Troubles: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        
+
         // Charger les catégories
         const catResponse = await fetch("http://localhost:3000/categoriesTroubles");
         if (!catResponse.ok) throw new Error("Échec du chargement des catégories");
         const categoriesData = await catResponse.json();
         setCategories(categoriesData);
-        
+
         // Charger les troubles
         const troublesResponse = await fetch("http://localhost:3000/troubles");
         if (!troublesResponse.ok) throw new Error("Échec du chargement des troubles");
         const troublesData = await troublesResponse.json();
         setTroubles(troublesData);
-        
+
       } catch (err) {
         console.error("Erreur de chargement:", err);
         setError(
@@ -70,7 +60,6 @@ const Troubles: React.FC = () => {
 
     fetchData();
   }, []);
->>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
 
   // Gestion de la recherche
   const handleSearch = useCallback((searchTerm: string) => {
@@ -85,11 +74,11 @@ const Troubles: React.FC = () => {
       setCurrentPage(1);
     }
   }, []);
-  
+
   // Filtrer les troubles en fonction de la recherche et de la catégorie sélectionnée
   const filteredTroubles = React.useMemo(() => {
     return troubles.filter(trouble => {
-      const matchesSearch = !searchTerm || 
+      const matchesSearch = !searchTerm ||
         trouble.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
         trouble.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = !selectedCategory || trouble.categorieId === selectedCategory;
@@ -128,10 +117,6 @@ const Troubles: React.FC = () => {
 
   if (error) {
     return (
-<<<<<<< HEAD
-      <div className="min-h-screen page-bg">
-        <div className="container mx-auto px-4 py-8 text-center text-red-600">Error: {error.message}</div>
-=======
       <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
         <div className="container mx-auto px-4 py-8 text-center">
           <div className="bg-red-50 border-l-4 border-red-400 p-4">
@@ -157,7 +142,6 @@ const Troubles: React.FC = () => {
             </div>
           </div>
         </div>
->>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
       </div>
     );
   }
@@ -185,7 +169,7 @@ const Troubles: React.FC = () => {
         <p className="text-center text-gray-600 mb-8">
           Explorez notre base de données complète des troubles de santé mentale
         </p>
-        
+
         {/* Composant de recherche et filtres simplifié */}
         <div className="mb-8 max-w-3xl mx-auto">
           <SearchFilters
@@ -197,30 +181,12 @@ const Troubles: React.FC = () => {
           />
         </div>
 
-<<<<<<< HEAD
-        {/* Troubles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {(troubles as Trouble[]).map((trouble: Trouble) => (
-            <div key={trouble.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
-              <img src={trouble.image} alt={trouble.nom} className="w-full h-48 object-cover" />
-              <div className="p-6">
-                <h2 className="text-xl font-bold text-green-800 mb-3">{trouble.nom}</h2>
-                <p className="text-gray-600 mb-4">{trouble.description}</p>
-                {trouble.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {trouble.tags.map((tag: string, idx: number) => (
-                      <span key={idx} className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">{tag}</span>
-                    ))}
-                  </div>
-                )}
-=======
         {/* Filtres actifs */}
         {(searchTerm || selectedCategory) && (
           <div className="flex flex-wrap gap-2 mb-6">
             {searchTerm && (
               <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                 Recherche : {searchTerm}
->>>>>>> fc7e6fa13199e9b3312c3fed936811230ea10cb7
                 <button
                   onClick={() => handleSearch('')}
                   className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-green-200 text-green-600 hover:bg-green-300 focus:outline-none"
@@ -291,16 +257,7 @@ const Troubles: React.FC = () => {
         </div>
 
         {/* Pagination */}
-        {!loading && (
-          <div>
-          </div>
-        )}
-
-        {!loading && troubles.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">
-              Aucun trouble trouvé pour cette recherche.
-            </p>
+        {!loading && totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-12">
             {/* Bouton Précédent */}
             <button
@@ -337,6 +294,13 @@ const Troubles: React.FC = () => {
               Suivant
             </button>
           </div>
+        )}
+
+        {!loading && troubles.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500">
+              Aucun trouble trouvé pour cette recherche.
+            </p>
           </div>
         )}
       </div>

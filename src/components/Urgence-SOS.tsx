@@ -35,11 +35,12 @@ const UrgenceSOS: React.FC = () => {
                 </h1>
               </div>
               <p className="text-gray-700 text-lg">
-                  Si vous ou un proche êtes en situation de détresse ou de danger immédiat,
-                  contactez immédiatement les services d'urgence. Vous n'êtes pas seul(e),
+                  Si vous ou un proche êtes en situation de détresse ou de danger immédiat, 
+                  contactez immédiatement les services d'urgence. Vous n'êtes pas seul(e), 
                   de l'aide est disponible 24h/24.
               </p>
             </div>
+          </div>
           </div>
 
         {/* Numéros d'urgence */}
@@ -136,7 +137,7 @@ const UrgenceSOS: React.FC = () => {
                   <p className="text-gray-700">{ressourcesSOS.protocolesCrise}</p>
                 ) : (
                   <ul className="space-y-3">
-                    {ressourcesSOS.protocolesCrise.map((etape, i) => (
+                    {(ressourcesSOS.protocolesCrise as string[]).map((etape: string, i: number) => (
                       <li key={i} className="flex items-start">
                         <span className="bg-amber-100 text-amber-700 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">
                           {i + 1}
@@ -228,5 +229,6 @@ const UrgenceSOS: React.FC = () => {
     </div>
   );
 };
+
 
 export default UrgenceSOS;

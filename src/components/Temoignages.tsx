@@ -36,38 +36,70 @@ const DEFAULT_AVATARS = [
 const Temoignages: React.FC = () => {
   const navigate = useNavigate();
   const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const [filteredTemoignages, setFilteredTemoignages] = useState<Temoignage[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [selectedSort, setSelectedSort] = useState('recent');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  // Chargement initial des données
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchTemoignages = async () => {
       try {
         setLoading(true);
-
-        // Charger les témoignages
-        const response = await fetch("http://localhost:3000/temoignages");
-        if (!response.ok) throw new Error("Échec du chargement des témoignages");
-        const data = await response.json();
-        setTemoignages(data);
-
+        
+        // Récupérer les témoignages
+        const [temoignagesResponse, utilisateursResponse] = await Promise.all([
+          fetch('http://localhost:3000/temoignages'),
+          fetch('http://localhost:3000/utilisateurs')
+        ]);
+        
+        if (!temoignagesResponse.ok) throw new Error('Échec du chargement des témoignages');
+        if (!utilisateursResponse.ok) throw new Error('Échec du chargement des utilisateurs');
+        
+        const [temoignagesData, utilisateurs] = await Promise.all([
+          temoignagesResponse.json(),
+          utilisateursResponse.json()
+        ]);
+        
+        // Filtrer et enrichir les témoignages avec les données utilisateur
+        const temoignagesTraites: Temoignage[] = Array.isArray(temoignagesData) 
+          ? temoignagesData
+              .filter((t: Temoignage) => t.statut === 'approuvé')
+              .map((temoignage: Temoignage) => {
+                const utilisateur = Array.isArray(utilisateurs) 
+                  ? utilisateurs.find((u: UtilisateurTemoignage) => u.id === temoignage.utilisateurId) 
+                  : null;
+                
+                const temoignageAvecUtilisateur: Temoignage = {
+                  ...temoignage,
+                  utilisateur: {
+                    id: utilisateur?.id,
+                    nom: utilisateur?.nom || 'Utilisateur inconnu',
+                    email: utilisateur?.email,
+                    role: utilisateur?.role,
+                    avatar: utilisateur?.avatar ||
+                      `/avatars/${DEFAULT_AVATARS[Math.floor(Math.random() * DEFAULT_AVATARS.length)]}`
+                  }
+                };
+                
+                return temoignageAvecUtilisateur;
+              })
+          : [];
+          
+        setTemoignages(temoignagesTraites);
+        setError('');
       } catch (err) {
-        console.error("Erreur de chargement:", err);
-        setError("Erreur lors du chargement des données. Veuillez vérifier que le serveur JSON est en cours d'exécution.");
+        console.error('Erreur de chargement:', err);
+        setError('Erreur lors du chargement des témoignages. Veuillez réessayer plus tard.');
       } finally {
         setLoading(false);
       }
     };
-
-    fetchData();
+    
+    fetchTemoignages();
   }, []);
 
   useEffect(() => {
-    if (!temoignages || !Array.isArray(temoignages)) return;
-
     let filtered = [...temoignages];
 
     // Apply category filter
@@ -126,6 +158,7 @@ const Temoignages: React.FC = () => {
     );
   }
 
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
       {/* Main Content */}
@@ -163,8 +196,8 @@ const Temoignages: React.FC = () => {
             <div key={temoignage.id} className={`bg-white rounded-xl shadow-lg p-6 relative border border-green-200 z-${index % 10}`}>
               <div className="flex items-start gap-4">
                 <div className="relative">
-                  <img
-                    src={`/avatars/${temoignage.utilisateur?.avatar || DEFAULT_AVATARS[0]}`}
+                  <img 
+                    src={`/avatars/${temoignage.utilisateur?.avatar || DEFAULT_AVATARS[0]}`} 
                     alt={temoignage.utilisateur?.nom || 'Utilisateur'}
                     loading="lazy"
                     className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md relative z-10 -mt-4"
