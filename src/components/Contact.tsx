@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { FaPhone, FaEnvelope, FaPaperPlane, FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaPaperPlane, FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import Header from './Header';
 import Footer from './footer';
-import { Header } from './Header';
 
 // Définition du schéma de validation avec Zod
 const contactFormSchema = z.object({
@@ -26,12 +26,12 @@ const contactFormSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
-const Contact = () => {
-  const { 
-    register, 
-    handleSubmit, 
+const Contact: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
     reset,
-    formState: { errors, isSubmitting } 
+    formState: { errors, isSubmitting }
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema)
   });
@@ -93,16 +93,16 @@ const Contact = () => {
 
       // Simulation d'envoi de formulaire
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       // Fermer le loader
       Swal.close();
-      
+
       // Afficher le message de succès
       showSuccessAlert();
-      
+
       // Réinitialisation du formulaire
       reset();
-      
+
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.';
       showErrorAlert(errorMessage);
@@ -115,7 +115,7 @@ const Contact = () => {
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-[600px] flex flex-col text-white"
-        style={{ backgroundImage: "url('public/contact_us.jpg')" }}
+        style={{ backgroundImage: "url('/contact_us.jpg')" }}
       >
         <div className="absolute inset-0 bg-black opacity-40"></div>
 
@@ -137,14 +137,14 @@ const Contact = () => {
       <div className="container mx-auto px-4 py-16 flex-1">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Formulaire de contact */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             className="bg-white rounded-xl shadow-lg p-8"
           >
             <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">Envoyez-nous un message</h2>
-            
+
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -164,7 +164,7 @@ const Contact = () => {
                     <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
                   )}
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                     Votre email *
@@ -183,7 +183,7 @@ const Contact = () => {
                   )}
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
                   Sujet *
@@ -201,7 +201,7 @@ const Contact = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
                 )}
               </div>
-              
+
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                   Votre message *
@@ -219,7 +219,7 @@ const Contact = () => {
                   <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
                 )}
               </div>
-              
+
               <div>
                 <button
                   type="submit"
@@ -244,9 +244,9 @@ const Contact = () => {
               </div>
             </form>
           </motion.div>
-          
+
           {/* Informations de contact */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -254,9 +254,9 @@ const Contact = () => {
           >
             <div className="bg-white rounded-xl shadow-lg p-8">
               <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">Nos coordonnées</h2>
-              
+
               <div className="space-y-6">
-                
+
                 <div className="flex items-start">
                   <div className="flex-shrink-0 bg-blue-100 p-3 rounded-full text-blue-600">
                     <FaPhone className="h-6 w-6" />
@@ -269,7 +269,7 @@ const Contact = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="flex-shrink-0 bg-purple-100 p-3 rounded-full text-purple-600">
                     <FaEnvelope className="h-6 w-6" />
@@ -283,40 +283,40 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-8 text-center">
                 <h3 className="text-lg font-medium text-gray-900 mb-4 ">Suivez-nous</h3>
                 <div className="flex space-x-4  items-center justify-center">
-                  <a 
-                    href={socialLinks.facebook} 
-                    target="_blank" 
+                  <a
+                    href={socialLinks.facebook}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-blue-600 transition"
                     aria-label="Facebook de WaxPsy"
                   >
                     <FaFacebook className="h-6 w-6" />
                   </a>
-                  <a 
-                    href={socialLinks.instagram} 
-                    target="_blank" 
+                  <a
+                    href={socialLinks.instagram}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-pink-600 transition"
                     aria-label="Instagram de WaxPsy"
                   >
                     <FaInstagram className="h-6 w-6" />
                   </a>
-                  <a 
-                    href={socialLinks.twitter} 
-                    target="_blank" 
+                  <a
+                    href={socialLinks.twitter}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-blue-400 transition"
                     aria-label="Twitter de WaxPsy"
                   >
                     <FaTwitter className="h-6 w-6" />
                   </a>
-                  <a 
-                    href={socialLinks.linkedin} 
-                    target="_blank" 
+                  <a
+                    href={socialLinks.linkedin}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-blue-700 transition"
                     aria-label="LinkedIn de WaxPsy"
@@ -326,7 +326,7 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="bg-red-600 rounded-xl shadow-lg p-8 text-white">
               <h2 className="text-2xl font-serif font-semibold mb-4">Besoin d'aide immédiate ?</h2>
               <p className="mb-6">
@@ -350,7 +350,7 @@ const Contact = () => {
           </motion.div>
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );

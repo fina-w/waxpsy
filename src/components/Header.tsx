@@ -60,17 +60,36 @@ export const Header: React.FC<HeaderProps> = () => {
                     <nav className="hidden md:flex space-x-6 text-sm">
                         {navItems.map((item) => {
                             const isActive = item.href === currentPath;
+                            if (item.label === "Contact") {
+                                return (
+                                    <motion.a
+                                        key={item.href}
+                                        href={item.href}
+                                        className={`${textColor} relative py-2 px-1 ${isActive ? 'font-bold' : 'hover:opacity-80'}`}
+                                        whileHover={{ scale: 1.05 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        {item.label}
+                                        {isActive && (
+                                            <motion.div
+                                                className="absolute left-0 right-0 bottom-0 h-0.5 bg-current"
+                                                layoutId="underline"
+                                            />
+                                        )}
+                                    </motion.a>
+                                );
+                            }
                             return (
-                                <motion.a 
+                                <motion.a
                                     key={item.href}
-                                    href={item.href} 
+                                    href={item.href}
                                     className={`${textColor} relative py-2 px-1 ${isActive ? 'font-bold' : 'hover:opacity-80'}`}
                                     whileHover={{ scale: 1.05 }}
                                     transition={{ duration: 0.2 }}
                                 >
                                     {item.label}
                                     {isActive && (
-                                        <motion.div 
+                                        <motion.div
                                             className="absolute left-0 right-0 bottom-0 h-0.5 bg-current"
                                             layoutId="underline"
                                         />
@@ -97,7 +116,7 @@ export const Header: React.FC<HeaderProps> = () => {
                 {/* Menu Mobile */}
                 <AnimatePresence>
                     {isMenuOpen && (
-                        <motion.nav 
+                        <motion.nav
                             className="md:hidden mt-4 pb-4"
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: 'auto' }}
@@ -107,6 +126,19 @@ export const Header: React.FC<HeaderProps> = () => {
                             <div className="flex flex-col space-y-2">
                                 {navItems.map((item) => {
                                     const isActive = item.href === currentPath;
+                                    if (item.label === "Contact") {
+                                        return (
+                                            <motion.a
+                                                key={item.href}
+                                                href={item.href}
+                                                className={`${textColor} py-2 px-4 rounded-lg ${isActive ? 'bg-gray-100' : 'hover:bg-gray-50'}`}
+                                                onClick={() => setIsMenuOpen(false)}
+                                                whileTap={{ scale: 0.98 }}
+                                            >
+                                                {item.label}
+                                            </motion.a>
+                                        );
+                                    }
                                     return (
                                         <motion.a
                                             key={item.href}
@@ -124,6 +156,8 @@ export const Header: React.FC<HeaderProps> = () => {
                     )}
                 </AnimatePresence>
             </div>
+
+
         </header>
     );
 }

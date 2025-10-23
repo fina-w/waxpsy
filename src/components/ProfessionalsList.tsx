@@ -24,7 +24,7 @@ const ProfessionalsList: React.FC = () => {
   const [filteredProfessionnels, setFilteredProfessionnels] = useState<Professionnel[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
-  
+
   // Configuration des filtres pour SearchFilters
   const filters = [
     {

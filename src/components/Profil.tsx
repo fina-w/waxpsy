@@ -3,6 +3,7 @@ import Header from './Header.tsx';
 import { useAuthStore } from '../stores/authStore';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Bars3Icon, HomeIcon, UserIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 // Liste des avatars disponibles
 const AVATARS = [
@@ -44,11 +45,11 @@ const Profil: React.FC = () => {
 
   const handleAvatarSelect = async (avatar: string) => {
     if (!user) return;
-    
+
     try {
       // Mettre à jour l'état local immédiatement pour un retour visuel rapide
       setSelectedAvatar(avatar);
-      
+
       // Créer un utilisateur mis à jour avec les champs obligatoires
       const updatedUser: User = {
         id: user.id,
@@ -57,30 +58,30 @@ const Profil: React.FC = () => {
         role: user.role,
         avatar: avatar
       };
-      
+
       // Mettre à jour l'utilisateur dans le store
       useAuthStore.getState().setUser(updatedUser);
-      
+
       // Mettre à jour dans la base de données (simulé ici avec un timeout)
       // Dans une vraie application, vous feriez un appel API ici
       await new Promise(resolve => setTimeout(resolve, 500));
-      
+
       // Mettre à jour la liste des utilisateurs dans le localStorage
       const db = JSON.parse(localStorage.getItem('db') || '{}');
       if (db.utilisateurs) {
-        db.utilisateurs = db.utilisateurs.map((u: any) => 
+        db.utilisateurs = db.utilisateurs.map((u: any) =>
           u.id === user.id ? { ...u, avatar } : u
         );
         localStorage.setItem('db', JSON.stringify(db));
       }
-      
+
       await Swal.fire({
         title: 'Succès',
         text: 'Votre avatar a été mis à jour avec succès !',
         icon: 'success',
         confirmButtonText: 'OK'
       });
-      
+
       setShowAvatarModal(false);
     } catch (error) {
       console.error('Erreur lors de la mise à jour de l\'avatar :', error);
@@ -103,12 +104,10 @@ const Profil: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      <Header currentPath="/profil" />
-
       {/* Main Content */}
-      <main className="p-8">
+      <main className="p-8 md:p-12">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6 troubles-title text-center">Mon Profil</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-800">Mon Profil</h1>
 
           <div className="bg-white rounded-xl shadow-lg p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -140,9 +139,9 @@ const Profil: React.FC = () => {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Avatar</label>
                     <div className="flex items-center space-x-4">
-                      <img 
-                        src={`/avatars/${user.avatar || AVATARS[0]}`} 
-                        alt="Avatar" 
+                      <img
+                        src={`/avatars/${user.avatar || AVATARS[0]}`}
+                        alt="Avatar"
                         className="w-16 h-16 rounded-full object-cover border-2 border-gray-200"
                       />
                       <button
@@ -303,7 +302,7 @@ const Profil: React.FC = () => {
           <div className="bg-white rounded-xl p-6 max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-100">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Choisissez votre avatar</h2>
-              <button 
+              <button
                 onClick={() => setShowAvatarModal(false)}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
                 aria-label="Fermer"
@@ -313,21 +312,21 @@ const Profil: React.FC = () => {
                 </svg>
               </button>
             </div>
-            
+
             <div className="grid grid-cols-4 gap-4">
               {AVATARS.map((avatar) => (
                 <button
                   key={avatar}
                   onClick={() => handleAvatarSelect(avatar)}
                   className={`p-1 rounded-full transition-all duration-200 transform hover:scale-105 ${
-                    selectedAvatar === avatar 
-                      ? 'ring-3 ring-blue-500 ring-offset-2' 
+                    selectedAvatar === avatar
+                      ? 'ring-3 ring-blue-500 ring-offset-2'
                       : 'hover:ring-2 hover:ring-blue-200'
                   }`}
                 >
-                  <img 
-                    src={`/avatars/${avatar}`} 
-                    alt={avatar} 
+                  <img
+                    src={`/avatars/${avatar}`}
+                    alt={avatar}
                     className="w-16 h-16 rounded-full object-cover"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -337,7 +336,7 @@ const Profil: React.FC = () => {
                 </button>
               ))}
             </div>
-            
+
             <div className="mt-8 flex justify-end">
               <button
                 onClick={() => setShowAvatarModal(false)}

@@ -28,6 +28,7 @@ const Troubles: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<number | "">("");
   const [categories, setCategories] = useState<CategorieTrouble[]>([]);
+
   const itemsPerPage = 6;
 
   // Chargement initial des données
@@ -163,15 +164,12 @@ const Troubles: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
-          Troubles de santé mentale
-        </h1>
         <p className="text-center text-gray-600 mb-8">
           Explorez notre base de données complète des troubles de santé mentale
         </p>
 
         {/* Composant de recherche et filtres simplifié */}
-        <div className="mb-8 max-w-3xl mx-auto">
+        <div className="mb-8 max-w-xl mx-auto">
           <SearchFilters
             onSearch={handleSearch}
             onFilterChange={handleFilterChange}
@@ -202,7 +200,7 @@ const Troubles: React.FC = () => {
                   onClick={() => handleFilterChange('categorie', '')}
                   className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-200 text-blue-600 hover:bg-blue-300 focus:outline-none"
                 >
-                  ×
+                  
                 </button>
               </span>
             )}

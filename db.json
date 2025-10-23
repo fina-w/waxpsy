@@ -668,7 +668,8 @@
       "contenu": "J'ai souffert de dépression post-partum après la naissance de mon fils. Dans mon quartier, on disait que c'était 'le mauvais œil'. Trouver des mots sur ma souffrance et lire d'autres histoires m'a sauvée. N'ayez pas honte de demander de l'aide.",
       "statut": "approuvé",
       "createdAt": "2025-10-20T11:00:00Z",
-      "updatedAt": "2025-10-21T08:00:00Z"
+      "updatedAt": "2025-10-21T08:00:00Z",
+      "status": "approved"
     },
     {
       "id": "2",
@@ -677,7 +678,8 @@
       "contenu": "Je n'arrivais plus à sortir de chez moi. Le simple fait d'aller à la boutique du coin était une épreuve. Je suis en thérapie maintenant et je voulais partager mon histoire pour que d'autres sachent qu'ils ne sont pas seuls.",
       "statut": "approuvé",
       "createdAt": "2025-10-22T16:45:00Z",
-      "updatedAt": "2025-10-18T15:23:14.555Z"
+      "updatedAt": "2025-10-18T15:23:14.555Z",
+      "status": "approved"
     },
     {
       "id": "3",
@@ -1013,7 +1015,7 @@
       "professionnelId": 104,
       "date": "2025-11-22T16:00:00Z",
       "motif": "Consultation addiction alcool",
-      "statut": "confirmé",
+      "statut": "confirmed",
       "createdAt": "2025-11-08T09:45:00Z"
     },
     {

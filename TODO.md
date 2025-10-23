@@ -1,7 +1,8 @@
-# TODO: Fix Professional Dashboard Display Issues
+# TODO: Convertir les formulaires en modaux responsives
 
-## Tasks
-- [x] Change appointments list to a responsive table layout to prevent overflow
-- [x] Replace text buttons with icons in appointments: CheckIcon for confirm, XMarkIcon for cancel, TrashIcon for delete
-- [x] Ensure profile tab buttons use icons (modify and delete)
-- [x] Test the dashboard for proper display and responsiveness
+## Étapes à suivre :
+- [ ] Modifier Contact.tsx pour créer une modal de contact responsive
+- [ ] Ajouter un bouton déclencheur dans Header.tsx pour ouvrir la modal de contact
+- [ ] Vérifier la responsivité de tous les modaux existants (Login.tsx, dashbordprofessionnal.tsx)
+- [ ] Tester la modal sur différentes tailles d'écran
+- [ ] Vérifier que la soumission du formulaire fonctionne toujours

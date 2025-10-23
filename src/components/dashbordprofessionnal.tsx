@@ -10,7 +10,9 @@ import {
   UserIcon,
   BriefcaseIcon,
   TrashIcon,
-  ChartBarIcon
+  ChartBarIcon,
+  EyeIcon,
+  Bars3Icon
 } from '@heroicons/react/24/outline';
 
 interface RendezVous {
@@ -47,6 +49,7 @@ const DashbordProfessionnal: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedRdv, setSelectedRdv] = useState<RendezVous | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Modal states
   const [showProfileModal, setShowProfileModal] = useState(false);
@@ -280,23 +283,29 @@ const DashbordProfessionnal: React.FC = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 shadow-lg border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
+          <div className="flex justify-between items-center py-4 sm:py-6">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
-                <BriefcaseIcon className="h-6 w-6 text-white" />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 bg-white/20 rounded-lg text-white hover:bg-white/30 transition-colors"
+              >
+                <Bars3Icon className="h-6 w-6" />
+              </button>
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                <BriefcaseIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-white">Tableau de Bord Professionnel</h1>
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">Tableau de Bord Professionnel</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <UserIcon className="h-4 w-4 text-white" />
+              <div className="flex items-center space-x-2 bg-white/10 px-3 sm:px-4 py-2 rounded-full">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 rounded-full flex items-center justify-center">
+                  <UserIcon className="h-3 w-3 sm:h-4 sm:w-4 text-white" />
                 </div>
-                <span className="text-sm text-white font-medium">Connecté: {user?.nom}</span>
+                <span className="text-xs sm:text-sm text-white font-medium truncate">Connecté: {user?.nom}</span>
               </div>
               <button
                 onClick={() => navigate('/home')}
-                className="px-6 py-2 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-all duration-200 backdrop-blur-sm border border-white/30"
+                className="px-4 sm:px-6 py-2 bg-white/20 text-white rounded-lg hover:bg-white/30 transition-all duration-200 backdrop-blur-sm border border-white/30 text-sm sm:text-base"
               >
                 Retour au site
               </button>
@@ -306,8 +315,46 @@ const DashbordProfessionnal: React.FC = () => {
       </div>
 
       <div className="flex min-h-[calc(100vh-80px)]">
-        {/* Sidebar */}
-        <div className="w-64 bg-white shadow-lg border-r border-gray-200 sticky top-20 h-screen overflow-y-auto">
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden fixed inset-0 z-40">
+            <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setIsMobileMenuOpen(false)}></div>
+            <div className="relative w-64 bg-white/95 backdrop-blur-sm shadow-lg border-r border-gray-200 h-full">
+              <div className="p-6">
+                <nav className="space-y-2">
+                  {[
+                    { id: 'statistics', label: 'Statistiques', icon: ChartBarIcon },
+                    { id: 'profile', label: 'À propos de moi', icon: UserIcon },
+                    { id: 'appointments', label: 'Rendez-vous', icon: BriefcaseIcon, count: rendezVous.length },
+                    { id: 'subscription', label: 'Abonnement Pro', icon: ChartBarIcon }
+                  ].map((tab) => {
+                    const Icon = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => {
+                          setActiveTab(tab.id);
+                          setIsMobileMenuOpen(false); // Close mobile menu on tab select
+                        }}
+                        className={`w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors duration-200 ${
+                          activeTab === tab.id
+                            ? 'bg-green-50 text-green-700 border-r-4 border-green-500'
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        }`}
+                      >
+                        <Icon className="h-5 w-5 mr-3" />
+                        {tab.label} {tab.count !== undefined ? `(${tab.count})` : ''}
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Sidebar - Hidden on mobile */}
+        <div className="hidden md:block w-64 bg-white shadow-lg border-r border-gray-200 sticky top-20 h-screen overflow-y-auto">
           <div className="p-6">
             <nav className="space-y-2">
               {[
@@ -320,7 +367,10 @@ const DashbordProfessionnal: React.FC = () => {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
+                    onClick={() => {
+                      setActiveTab(tab.id);
+                      setIsMobileMenuOpen(false); // Close mobile menu on tab select
+                    }}
                     className={`w-full flex items-center px-4 py-3 text-left rounded-lg transition-colors duration-200 ${
                       activeTab === tab.id
                         ? 'bg-green-50 text-green-700 border-r-4 border-green-500'
@@ -337,7 +387,7 @@ const DashbordProfessionnal: React.FC = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-4 md:p-8">
           {activeTab === 'profile' && (
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
               <div className="px-4 py-5 sm:px-6">
@@ -495,6 +545,13 @@ const DashbordProfessionnal: React.FC = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <div className="flex space-x-2">
+                            <button
+                              onClick={() => setSelectedRdv(r)}
+                              className="text-blue-600 hover:text-blue-900 p-1"
+                              title="Détails"
+                            >
+                              <EyeIcon className="h-5 w-5" />
+                            </button>
                             <button
                               onClick={() => updateRendezVousStatus(r.id, 'confirmed')}
                               className="text-green-600 hover:text-green-900 p-1"
