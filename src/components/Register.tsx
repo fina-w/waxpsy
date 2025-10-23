@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { API_BASE_URL } from '../config';
 import { Link, useNavigate } from "react-router-dom";
 
 const Register: React.FC = () => {
@@ -15,7 +16,7 @@ const Register: React.FC = () => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:3000/utilisateurs', {
+      const response = await fetch(`${API_BASE_URL}/utilisateurs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nom: name, email, motDePasse: password }),

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { API_BASE_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import { CardSkeletonGrid } from "./skeletons";
 import SearchFilters from "./ui/SearchFilters";
+import Footer from "./footer";
 
 interface CategorieTrouble {
   id: number;
@@ -37,13 +39,13 @@ const Troubles: React.FC = () => {
         setLoading(true);
         
         // Charger les catégories
-        const catResponse = await fetch("http://localhost:3000/categoriesTroubles");
+        const catResponse = await fetch(`${API_BASE_URL}/categoriesTroubles`);
         if (!catResponse.ok) throw new Error("Échec du chargement des catégories");
         const categoriesData = await catResponse.json();
         setCategories(categoriesData);
         
         // Charger les troubles
-        const troublesResponse = await fetch("http://localhost:3000/troubles");
+        const troublesResponse = await fetch(`${API_BASE_URL}/troubles`);
         if (!troublesResponse.ok) throw new Error("Échec du chargement des troubles");
         const troublesData = await troublesResponse.json();
         setTroubles(troublesData);
@@ -68,7 +70,7 @@ const Troubles: React.FC = () => {
   }, []);
 
   // Gestion du changement de filtre
-  const handleFilterChange = useCallback((filterName: string, value: any) => {
+  const handleFilterChange = useCallback((filterName: string, value: string | number) => {
     if (filterName === 'categorie') {
       setSelectedCategory(value === '' ? '' : Number(value));
       setCurrentPage(1);
@@ -257,16 +259,7 @@ const Troubles: React.FC = () => {
         </div>
 
         {/* Pagination */}
-        {!loading && (
-          <div>
-          </div>
-        )}
-
-        {!loading && troubles.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-500">
-              Aucun trouble trouvé pour cette recherche.
-            </p>
+        {!loading && totalPages > 1 && (
           <div className="flex justify-center items-center gap-2 mt-12">
             {/* Bouton Précédent */}
             <button
@@ -303,8 +296,20 @@ const Troubles: React.FC = () => {
               Suivant
             </button>
           </div>
+        )}
+
+        {!loading && troubles.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500">
+              Aucun trouble trouvé pour cette recherche.
+            </p>
           </div>
         )}
+      </div>
+      
+      {/* Ajout du Footer */}
+      <div className="mt-12">
+        <Footer />
       </div>
     </div>
   );

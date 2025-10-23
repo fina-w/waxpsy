@@ -31,7 +31,8 @@ const CalendrierEvenements: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOrder, setSortOrder] = useState<'recent' | 'ancien'>('recent');
+  type SortOrder = 'recent' | 'ancien';
+  const [sortOrder, setSortOrder] = useState<SortOrder>('recent');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // 6 événements par page
 
@@ -56,9 +57,9 @@ const CalendrierEvenements: React.FC = () => {
   }, []);
 
   // Gestion du changement de filtre
-  const handleFilterChange = useCallback((filterName: string, value: any) => {
-    if (filterName === 'tri') {
-      setSortOrder(value);
+  const handleFilterChange = useCallback((filterName: string, value: string | number) => {
+    if (filterName === 'tri' && (value === 'recent' || value === 'ancien')) {
+      setSortOrder(value as 'recent' | 'ancien');
       setCurrentPage(1); // Reset à la première page lors d'un changement de filtre
     }
   }, []);

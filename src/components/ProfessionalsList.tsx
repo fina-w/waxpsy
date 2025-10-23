@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { ProfileSkeletonList } from './skeletons';
 import SearchFilters from './ui/SearchFilters';
 
@@ -134,9 +135,9 @@ const ProfessionalsList: React.FC = () => {
   }, []);
 
   // Gestion du changement de filtre
-  const handleFilterChange = useCallback((filterName: string, value: any) => {
+  const handleFilterChange = useCallback((filterName: string, value: string | number) => {
     if (filterName === 'categorie') {
-      setSelectedFilter(value || 'all');
+      setSelectedFilter(value ? value.toString() : 'all');
       setCurrentPage(1); // Reset à la première page lors d'un changement de filtre
     }
   }, []);
@@ -197,18 +198,22 @@ const ProfessionalsList: React.FC = () => {
                 <div className="flex items-center p-4 space-x-4">
                   {/* Photo */}
                   <div className="flex-shrink-0">
-                    <img
-                      src={pro.imageUrl}
-                      alt={pro.nom}
-                      loading="lazy"
-                      className="w-28 h-28 rounded-full object-cover shadow-md border-2 border-green-200"
-                    />
+                    <Link to={`/professionals/${pro.id}`} className="block">
+                      <img
+                        src={pro.imageUrl}
+                        alt={pro.nom}
+                        loading="lazy"
+                        className="w-28 h-28 rounded-full object-cover shadow-md border-2 border-green-200"
+                      />
+                    </Link>
                   </div>
 
                   {/* Details */}
                   <div className="flex-1 space-y-1">
                     <div className="flex items-start justify-between">
-                      <h2 className="text-xl font-bold text-green-800 flex-1">{pro.nom}</h2>
+                      <Link to={`/professionals/${pro.id}`} className="block">
+                        <h2 className="text-xl font-bold text-green-800 flex-1 hover:underline">{pro.nom}</h2>
+                      </Link>
                       {pro.verification && <span className="bg-green-500 text-white px-2 py-1 rounded-full text-xs ml-2">Vérifié</span>}
                     </div>
                     <p className="text-gray-700"><strong>Spécialité:</strong> {pro.specialite}</p>
@@ -222,7 +227,7 @@ const ProfessionalsList: React.FC = () => {
                       ))}
                     </div>
                     {expandedPros.includes(pro.id) ? (
-                      <>
+                      <div className="px-4 pb-4">
                         <p className="text-gray-700"><strong>Diplôme:</strong> {pro.diplome}</p>
                         <p className="text-gray-700"><strong>Expérience:</strong> {pro.experience}</p>
                         <p className="text-gray-700"><strong>Tarif:</strong> {pro.tarif}</p>
@@ -246,20 +251,34 @@ const ProfessionalsList: React.FC = () => {
                           </div>
                         )}
                         <button
-                          onClick={() => setExpandedPros(expandedPros.filter(id => id !== pro.id))}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setExpandedPros(expandedPros.filter(id => id !== pro.id));
+                          }}
                           className="mt-4 text-green-600 hover:underline text-sm"
                         >
                           Voir moins
                         </button>
-                      </>
+                      </div>
                     ) : (
                       <button
-                        onClick={() => setExpandedPros([...expandedPros, pro.id])}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setExpandedPros([...expandedPros, pro.id]);
+                        }}
                         className="mt-4 text-green-600 hover:underline text-sm"
                       >
                         Voir plus
                       </button>
                     )}
+                    <div className="mt-4">
+                      <Link 
+                        to={`/professionals/${pro.id}`}
+                        className="inline-block bg-[#015635] text-white px-4 py-2 rounded-md hover:bg-[#014429] transition-colors"
+                      >
+                        Voir le profil complet
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -5,6 +5,7 @@ export interface User {
   id: number;
   nom: string;
   email: string;
+  telephone?: string;
   role: string;
   avatar?: string;
   // Ajoutez d'autres propriétés utilisateur si nécessaire

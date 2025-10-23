@@ -1,7 +1,7 @@
 {
   "utilisateurs": [
     {
-      "id": 1,
+      "id": "1",
       "nom": "Aminata Diallo",
       "email": "aminata.diallo@email.com",
       "motDePasse": "password123",
@@ -11,7 +11,7 @@
       "avatar": "avatar1.png"
     },
     {
-      "id": 2,
+      "id": "2",
       "nom": "Moussa Sarr",
       "email": "moussa.sarr@email.com",
       "motDePasse": "password123",
@@ -20,7 +20,7 @@
       "actif": true
     },
     {
-      "id": 3,
+      "id": "3",
       "nom": "Fatou Ndiaye",
       "email": "fatou.ndiaye@email.com",
       "motDePasse": "password123",
@@ -29,7 +29,7 @@
       "actif": true
     },
     {
-      "id": 4,
+      "id": "4",
       "nom": "Cheikh Ba",
       "email": "cheikh.ba@email.com",
       "motDePasse": "password123",
@@ -38,7 +38,7 @@
       "actif": true
     },
     {
-      "id": 5,
+      "id": "5",
       "nom": "Mariama Seck",
       "email": "mariama.seck@email.com",
       "motDePasse": "password123",
@@ -47,7 +47,7 @@
       "actif": true
     },
     {
-      "id": 6,
+      "id": "6",
       "nom": "Ibrahima Fall",
       "email": "ibrahima.fall@email.com",
       "motDePasse": "password123",
@@ -55,9 +55,8 @@
       "dateInscription": "2025-10-05T13:00:00Z",
       "actif": true
     },
-    
     {
-      "id": 8,
+      "id": "8",
       "nom": "Ousmane Cissé",
       "email": "ousmane.cisse@email.com",
       "motDePasse": "password123",
@@ -66,7 +65,7 @@
       "actif": true
     },
     {
-      "id": 9,
+      "id": "9",
       "nom": "Aïssatou Sy",
       "email": "aissatou.sy@email.com",
       "motDePasse": "password123",
@@ -75,7 +74,7 @@
       "actif": true
     },
     {
-      "id": 10,
+      "id": "10",
       "nom": "Demba Gueye",
       "email": "demba.gueye@email.com",
       "motDePasse": "password123",
@@ -589,55 +588,60 @@
   ],
   "administrateurs": [
     {
-      "id": 1,
+      "id": "1",
       "nom": "Admin Principal",
       "email": "admin@waxpsy.sn",
       "motDePasse": "adminpassword123",
       "role": "administrateur",
-      "permissions": ["all"],
+      "permissions": [
+        "all"
+      ],
       "dateCreation": "2025-08-01T00:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "nom": "Moderateur",
       "email": "moderateur@waxpsy.sn",
       "motDePasse": "modpassword123",
       "role": "moderateur",
-      "permissions": ["moderation", "validation"],
+      "permissions": [
+        "moderation",
+        "validation"
+      ],
       "dateCreation": "2025-08-01T00:00:00Z"
     }
   ],
   "favoris": [
     {
-      "id": 1,
+      "id": "1",
       "utilisateurId": 1,
       "typeContenu": "article",
       "contenuId": 1,
       "dateAjout": "2025-10-16T10:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "utilisateurId": 1,
       "typeContenu": "temoignage",
       "contenuId": 3,
       "dateAjout": "2025-10-20T14:00:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "utilisateurId": 2,
       "typeContenu": "article",
       "contenuId": 4,
       "dateAjout": "2025-10-18T11:30:00Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "utilisateurId": 3,
       "typeContenu": "histoire",
       "contenuId": 3,
       "dateAjout": "2025-10-22T09:15:00Z"
     },
     {
-      "id": 5,
+      "id": "5",
       "utilisateurId": 5,
       "typeContenu": "article",
       "contenuId": 13,
@@ -1026,37 +1030,106 @@
       "motif": "Trouble alimentaire",
       "statut": "confirmé",
       "createdAt": "2025-11-11T11:20:00Z"
+    },
+    {
+      "id": "rdv-1761149648360",
+      "utilisateurId": "1",
+      "professionnelId": "105",
+      "date": "2025-10-31",
+      "heure": "10:00",
+      "statut": "en_attente",
+      "createdAt": "2025-10-22T16:14:08.360Z",
+      "message": ""
+    },
+    {
+      "id": "cb22df1c-7071-46de-b549-091a8b766dd7",
+      "utilisateurId": "1",
+      "utilisateurNom": "Aminata Diallo",
+      "utilisateurEmail": "aminata.diallo@email.com",
+      "professionnelId": "102",
+      "professionnelNom": "M. Seydou Cissé",
+      "professionnelEmail": "seydou.cisse@waxpsy.sn",
+      "date": "2025-11-04",
+      "heure": "14:00",
+      "statut": "confirmé",
+      "createdAt": "2025-10-23T11:46:16.416Z",
+      "message": "",
+      "telephone": "",
+      "paiement": {
+        "statut": "payé",
+        "date": "2025-10-23T11:46:16.416Z"
+      }
     }
   ],
   "quizzes": [
     {
-      "id": 1,
+      "id": "1",
       "theme": "Comment allez-vous vraiment ?",
       "description": "Ce quiz général aide à faire le point sur votre bien-être émotionnel. Il ne remplace pas un avis médical.",
       "questions": [
         {
           "id": 1,
           "text": "Vous sentez-vous souvent fatigué(e) ou sans énergie ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Avez-vous du mal à dormir ou à trouver la motivation de faire vos activités quotidiennes ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Vous arrive-t-il de vous sentir triste, nerveux(se) ou irritable sans raison claire ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Avez-vous du mal à vous concentrer ou à rester positif(ve) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1066,33 +1139,73 @@
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "theme": "Comprendre ce que je ressens",
       "description": "Ce quiz aide à identifier les émotions dominantes et à orienter vers le trouble le plus probable.",
       "questions": [
         {
           "id": 1,
           "text": "Vous sentez-vous souvent inquiet(e) sans raison particulière ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Vous arrive-t-il de perdre l’envie de faire les choses que vous aimiez ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Avez-vous souvent du mal à gérer votre colère ou vos émotions ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Vous arrive-t-il de vous sentir seul(e), incompris(e) ou isolé(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1102,33 +1215,73 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "theme": "Anxiété généralisée",
       "description": "Ce quiz explore les signes d’anxiété quotidienne et leur intensité.",
       "questions": [
         {
           "id": 1,
           "text": "Vous inquiétez-vous souvent même sans raison claire ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Avez-vous des symptômes physiques (palpitations, tremblements, sueurs) lors de moments de stress ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Avez-vous du mal à contrôler vos pensées anxieuses ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Évitez-vous certaines situations par peur ou inquiétude ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1138,33 +1291,73 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "theme": "Dépression",
       "description": "Ce quiz évalue certains signes de dépression légère ou modérée.",
       "questions": [
         {
           "id": 1,
           "text": "Vous sentez-vous souvent triste, sans énergie ou découragé(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Avez-vous perdu l’intérêt pour des choses qui vous plaisaient ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Avez-vous du mal à vous lever ou à commencer la journée ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Vous sentez-vous inutile ou coupable sans raison ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1174,33 +1367,73 @@
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "theme": "Stress et burn-out",
       "description": "Ce test aide à évaluer votre niveau de stress et de fatigue mentale.",
       "questions": [
         {
           "id": 1,
           "text": "Vous sentez-vous souvent sous pression ou débordé(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Même après du repos, vous vous sentez toujours fatigué(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Vous manquez de motivation pour vos tâches habituelles ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Vous êtes irritable ou impatient sans raison ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1210,33 +1443,73 @@
       }
     },
     {
-      "id": 6,
+      "id": "6",
       "theme": "Troubles du sommeil",
       "description": "Ce quiz sensibilise aux signes d’un sommeil perturbé.",
       "questions": [
         {
           "id": 1,
           "text": "Avez-vous du mal à vous endormir ou à rester endormi(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Vous réveillez-vous souvent fatigué(e) malgré une nuit complète ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Vos pensées vous empêchent-elles de dormir ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Avez-vous besoin d’écrans ou d’une distraction pour vous endormir ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1246,33 +1519,73 @@
       }
     },
     {
-      "id": 7,
+      "id": "7",
       "theme": "Trouble panique et crises d’angoisse",
       "description": "Ce quiz explore les symptômes liés aux crises d’angoisse.",
       "questions": [
         {
           "id": 1,
           "text": "Avez-vous déjà ressenti une peur soudaine accompagnée de palpitations ou tremblements ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Avez-vous peur de faire une crise dans un lieu public ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Avez-vous l’impression de perdre le contrôle lors de fortes peurs ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Ces sensations vous poussent-elles à éviter certaines situations ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1282,33 +1595,73 @@
       }
     },
     {
-      "id": 8,
+      "id": "8",
       "theme": "Trouble obsessionnel-compulsif (TOC)",
       "description": "Ce quiz aide à repérer les comportements répétitifs ou les pensées envahissantes.",
       "questions": [
         {
           "id": 1,
           "text": "Avez-vous des pensées qui reviennent sans cesse malgré vos efforts ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Effectuez-vous certains gestes répétitifs pour vous rassurer (vérifier, ranger, nettoyer...) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Ces gestes prennent-ils beaucoup de temps ou d’énergie ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Ces pensées ou gestes vous stressent-ils quand vous ne pouvez pas les faire ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1318,33 +1671,73 @@
       }
     },
     {
-      "id": 9,
+      "id": "9",
       "theme": "Troubles alimentaires",
       "description": "Ce quiz explore la relation à l’alimentation et à l’image corporelle.",
       "questions": [
         {
           "id": 1,
           "text": "Vous préoccupez-vous souvent de votre poids ou de votre apparence ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Évitez-vous certains repas ou aliments pour contrôler votre poids ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Avez-vous déjà mangé beaucoup en peu de temps, puis ressenti de la culpabilité ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Vos pensées autour de la nourriture occupent-elles beaucoup de place ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1354,33 +1747,73 @@
       }
     },
     {
-      "id": 10,
+      "id": "10",
       "theme": "Trouble bipolaire",
       "description": "Ce quiz sensibilise aux changements d’humeur marqués et fréquents.",
       "questions": [
         {
           "id": 1,
           "text": "Vos émotions passent-elles parfois de l’euphorie à la tristesse très rapidement ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Avez-vous parfois beaucoup d’énergie, besoin de peu de sommeil, puis ensuite de fortes baisses de moral ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Vos proches remarquent-ils des changements d’humeur marqués chez vous ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Ces variations affectent-elles votre vie quotidienne ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1390,33 +1823,73 @@
       }
     },
     {
-      "id": 11,
+      "id": "11",
       "theme": "Trouble de la concentration (TDAH)",
       "description": "Ce test explore la difficulté à se concentrer ou à rester organisé(e).",
       "questions": [
         {
           "id": 1,
           "text": "Avez-vous du mal à rester concentré(e) sur une tâche ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Vous arrive-t-il d’oublier des choses importantes ou de vous disperser facilement ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Vous sentez-vous souvent agité(e) ou impatient(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Avez-vous du mal à terminer ce que vous commencez ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1426,33 +1899,73 @@
       }
     },
     {
-      "id": 12,
+      "id": "12",
       "theme": "Trouble borderline (instabilité émotionnelle)",
       "description": "Ce quiz aide à repérer une forte instabilité émotionnelle et relationnelle.",
       "questions": [
         {
           "id": 1,
           "text": "Vos émotions changent-elles rapidement (colère, tristesse, joie intense) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Craignez-vous souvent d’être abandonné(e) ou rejeté(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Vos relations sont-elles parfois intenses et conflictuelles ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Avez-vous parfois des comportements impulsifs que vous regrettez ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1462,33 +1975,73 @@
       }
     },
     {
-      "id": 13,
+      "id": "13",
       "theme": "Addictions et dépendances",
       "description": "Ce test sensibilise aux comportements de dépendance (écrans, alcool, jeux, substances...).",
       "questions": [
         {
           "id": 1,
           "text": "Vous avez du mal à réduire votre utilisation ou votre consommation habituelle ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Vous ressentez un manque ou une nervosité quand vous n’y avez pas accès ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Votre entourage s’inquiète-t-il de vos habitudes ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Cette activité ou consommation affecte-t-elle votre vie quotidienne ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1498,33 +2051,73 @@
       }
     },
     {
-      "id": 14,
+      "id": "14",
       "theme": "Phobie sociale et isolement",
       "description": "Ce quiz explore la peur du regard des autres et la tendance à s’isoler.",
       "questions": [
         {
           "id": 1,
           "text": "Avez-vous peur de parler ou d’agir devant les autres ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 2,
           "text": "Évitez-vous les événements sociaux à cause du stress ou du jugement ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 3,
           "text": "Vous sentez-vous souvent seul(e) ou rejeté(e) ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         },
         {
           "id": 4,
           "text": "Ces situations vous causent-elles une grande détresse ?",
-          "options": ["Jamais", "Parfois", "Souvent", "Très souvent"],
-          "scores": [0, 1, 2, 3]
+          "options": [
+            "Jamais",
+            "Parfois",
+            "Souvent",
+            "Très souvent"
+          ],
+          "scores": [
+            0,
+            1,
+            2,
+            3
+          ]
         }
       ],
       "interpretation": {
@@ -1895,9 +2488,6 @@
       "gratuit": true
     },
     {
-      "id": "7",
-      "titre": "Atelier d'art-thérapie",
-      "date": "2025-12-15T15:00:00Z",
       "id": "3",
       "titre": "Atelier de gestion du stress",
       "date": "2025-11-20T10:00:00Z",
@@ -1988,7 +2578,10 @@
       "type": "Respiration",
       "difficulte": "Facile",
       "duree": "5 minutes",
-      "troubleCible": ["anxiété", "stress"],
+      "troubleCible": [
+        "anxiété",
+        "stress"
+      ],
       "instructions": [
         "Asseyez-vous confortablement",
         "Inspirez par le nez pendant 4 secondes",
@@ -2004,7 +2597,10 @@
       "type": "Écriture",
       "difficulte": "Facile",
       "duree": "10 minutes",
-      "troubleCible": ["dépression", "anxiété"],
+      "troubleCible": [
+        "dépression",
+        "anxiété"
+      ],
       "instructions": [
         "Chaque soir, notez 3 choses positives de votre journée",
         "Soyez précis et détaillé",
@@ -2018,7 +2614,11 @@
       "type": "Méditation",
       "difficulte": "Moyenne",
       "duree": "15 minutes",
-      "troubleCible": ["anxiété", "stress", "burn-out"],
+      "troubleCible": [
+        "anxiété",
+        "stress",
+        "burn-out"
+      ],
       "instructions": [
         "Allongez-vous confortablement",
         "Fermez les yeux",
@@ -2034,7 +2634,11 @@
       "type": "Réflexion",
       "difficulte": "Moyenne",
       "duree": "20 minutes",
-      "troubleCible": ["dépression", "anxiété", "TOC"],
+      "troubleCible": [
+        "dépression",
+        "anxiété",
+        "TOC"
+      ],
       "instructions": [
         "Identifiez une pensée négative récurrente",
         "Notez les preuves pour et contre cette pensée",
@@ -2049,7 +2653,11 @@
       "type": "Mouvement",
       "difficulte": "Facile",
       "duree": "20 minutes",
-      "troubleCible": ["anxiété", "dépression", "stress"],
+      "troubleCible": [
+        "anxiété",
+        "dépression",
+        "stress"
+      ],
       "instructions": [
         "Marchez lentement",
         "Concentrez-vous sur chaque pas",
@@ -2136,18 +2744,54 @@
     "moderationActive": true
   },
   "categoriesTroubles": [
-    { "id": 1, "libelle": "Troubles neurodéveloppementaux" },
-    { "id": 2, "libelle": "Troubles psychotiques" },
-    { "id": 3, "libelle": "Troubles de l'humeur" },
-    { "id": 4, "libelle": "Troubles anxieux" },
-    { "id": 5, "libelle": "Troubles de la personnalité" },
-    { "id": 6, "libelle": "Troubles des conduites alimentaires" },
-    { "id": 7, "libelle": "Troubles addictifs" },
-    { "id": 8, "libelle": "Troubles du sommeil" },
-    { "id": 9, "libelle": "Troubles du comportement" },
-    { "id": 10, "libelle": "Troubles du stress" },
-    { "id": 11, "libelle": "Troubles de l'enfance" },
-    { "id": 12, "libelle": "Troubles neurologiques" }
+    {
+      "id": "1",
+      "libelle": "Troubles neurodéveloppementaux"
+    },
+    {
+      "id": "2",
+      "libelle": "Troubles psychotiques"
+    },
+    {
+      "id": "3",
+      "libelle": "Troubles de l'humeur"
+    },
+    {
+      "id": "4",
+      "libelle": "Troubles anxieux"
+    },
+    {
+      "id": "5",
+      "libelle": "Troubles de la personnalité"
+    },
+    {
+      "id": "6",
+      "libelle": "Troubles des conduites alimentaires"
+    },
+    {
+      "id": "7",
+      "libelle": "Troubles addictifs"
+    },
+    {
+      "id": "8",
+      "libelle": "Troubles du sommeil"
+    },
+    {
+      "id": "9",
+      "libelle": "Troubles du comportement"
+    },
+    {
+      "id": "10",
+      "libelle": "Troubles du stress"
+    },
+    {
+      "id": "11",
+      "libelle": "Troubles de l'enfance"
+    },
+    {
+      "id": "12",
+      "libelle": "Troubles neurologiques"
+    }
   ],
   "troubles": [
     {
@@ -2501,7 +3145,13 @@
       "titre": "Aïssatou : vaincre l'anxiété sociale",
       "recit": "Pendant des années, j'ai évité les mariages, les cérémonies familiales, même les réunions au travail. La simple idée d'être observée me paralysait. Je pensais que c'était juste de la timidité. Un jour, j'ai découvert que je souffrais d'anxiété sociale. Avec l'aide d'une psychologue et des exercices progressifs, j'ai réappris à vivre normalement. Aujourd'hui, je peux même faire des présentations devant mes collègues. C'est un combat quotidien, mais je progresse.",
       "auteurId": null,
-      "tags": ["anxiété sociale", "timidité", "thérapie", "progression", "témoignage"],
+      "tags": [
+        "anxiété sociale",
+        "timidité",
+        "thérapie",
+        "progression",
+        "témoignage"
+      ],
       "createdAt": "2025-10-22T10:00:00Z",
       "updatedAt": "2025-10-22T10:00:00Z"
     },

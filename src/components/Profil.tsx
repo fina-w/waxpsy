@@ -68,8 +68,8 @@ const Profil: React.FC = () => {
       // Mettre à jour la liste des utilisateurs dans le localStorage
       const db = JSON.parse(localStorage.getItem('db') || '{}');
       if (db.utilisateurs) {
-        db.utilisateurs = db.utilisateurs.map((u: any) => 
-          u.id === user.id ? { ...u, avatar } : u
+        db.utilisateurs = db.utilisateurs.map((u: User) => 
+          u.id === user?.id ? { ...u, avatar } : u
         );
         localStorage.setItem('db', JSON.stringify(db));
       }
