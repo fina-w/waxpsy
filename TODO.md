@@ -1,8 +1,9 @@
-# TODO: Convertir les formulaires en modaux responsives
+# TODO: Implémenter la mise à jour du profil
 
 ## Étapes à suivre :
-- [ ] Modifier Contact.tsx pour créer une modal de contact responsive
-- [ ] Ajouter un bouton déclencheur dans Header.tsx pour ouvrir la modal de contact
-- [ ] Vérifier la responsivité de tous les modaux existants (Login.tsx, dashbordprofessionnal.tsx)
-- [ ] Tester la modal sur différentes tailles d'écran
-- [ ] Vérifier que la soumission du formulaire fonctionne toujours
+- [x] Modifier la logique du bouton "Sauvegarder" dans la modal d'édition de Profil.tsx pour mettre à jour le nom et l'email
+- [x] Mettre à jour l'utilisateur dans le store d'authentification
+- [x] Mettre à jour les données dans le localStorage
+- [x] Afficher un message de succès ou d'erreur avec Swal
+- [x] Fermer la modal après la mise à jour
+- [ ] Tester la fonctionnalité de mise à jour du profil
