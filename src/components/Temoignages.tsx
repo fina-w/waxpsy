@@ -78,7 +78,7 @@ const Temoignages: React.FC = () => {
                     nom: utilisateur?.nom || 'Utilisateur inconnu',
                     email: utilisateur?.email,
                     role: utilisateur?.role,
-                    avatar: utilisateur?.avatar || 
+                    avatar: utilisateur?.avatar ||
                       `/avatars/${DEFAULT_AVATARS[Math.floor(Math.random() * DEFAULT_AVATARS.length)]}`
                   }
                 };

@@ -37,19 +37,19 @@ const Troubles: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        
+
         // Charger les catégories
         const catResponse = await fetch(`${API_BASE_URL}/categoriesTroubles`);
         if (!catResponse.ok) throw new Error("Échec du chargement des catégories");
         const categoriesData = await catResponse.json();
         setCategories(categoriesData);
-        
+
         // Charger les troubles
         const troublesResponse = await fetch(`${API_BASE_URL}/troubles`);
         if (!troublesResponse.ok) throw new Error("Échec du chargement des troubles");
         const troublesData = await troublesResponse.json();
         setTroubles(troublesData);
-        
+
       } catch (err) {
         console.error("Erreur de chargement:", err);
         setError(
@@ -76,11 +76,11 @@ const Troubles: React.FC = () => {
       setCurrentPage(1);
     }
   }, []);
-  
+
   // Filtrer les troubles en fonction de la recherche et de la catégorie sélectionnée
   const filteredTroubles = React.useMemo(() => {
     return troubles.filter(trouble => {
-      const matchesSearch = !searchTerm || 
+      const matchesSearch = !searchTerm ||
         trouble.nom.toLowerCase().includes(searchTerm.toLowerCase()) ||
         trouble.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = !selectedCategory || trouble.categorieId === selectedCategory;
@@ -171,7 +171,7 @@ const Troubles: React.FC = () => {
         <p className="text-center text-gray-600 mb-8">
           Explorez notre base de données complète des troubles de santé mentale
         </p>
-        
+
         {/* Composant de recherche et filtres simplifié */}
         <div className="mb-8 max-w-3xl mx-auto">
           <SearchFilters

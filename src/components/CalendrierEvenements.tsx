@@ -229,13 +229,13 @@ const CalendrierEvenements: React.FC = () => {
                   
                   <div className="p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-semibold text-gray-800">{evenement.titre}</h3>
+                      <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">{evenement.titre}</h3>
                       <span className={`text-xs px-2 py-1 rounded-full ${getTypeBadgeClass(evenement.type)}`}>
                         {evenement.type}
                       </span>
                     </div>
                     
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{evenement.description}</p>
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-1">{evenement.description}</p>
                     
                     <div className="space-y-2 text-sm text-gray-700">
                       <div className="flex items-center">

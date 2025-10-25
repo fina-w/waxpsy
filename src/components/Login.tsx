@@ -1,15 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
-import { useEffect } from 'react';
-
-interface User {
-  id: number;
-  nom: string;
-  email: string;
-  motDePasse: string;
-  role: string;
-}
 
 interface LoginProps {
   onSuccess?: () => void;
@@ -43,42 +34,65 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
       return;
     }
     try {
-      // Check utilisateurs
-      const userResponse = await fetch('/api/utilisateurs');
-      const users = await userResponse.json();
-      let user = users.find((u: User) => u.email === email && u.motDePasse === password);
+      // Load data from db.json and try to identify the user in utilisateurs, administrateurs or professionnels
+      const resp = await fetch('/db.json');
+      if (!resp.ok) throw new Error('Impossible de charger les données de connexion');
+      const data = await resp.json();
 
-      // If not found in utilisateurs, check administrateurs
-      if (!user) {
-        const adminResponse = await fetch('/api/administrateurs');
-        const admins = await adminResponse.json();
-        user = admins.find((u: User) => u.email === email && u.motDePasse === password);
+      const utilisateurs = Array.isArray(data.utilisateurs) ? data.utilisateurs : [];
+      const administrateurs = Array.isArray(data.administrateurs) ? data.administrateurs : [];
+      const professionnels = Array.isArray(data.professionnels) ? data.professionnels : [];
+
+      let found: any = utilisateurs.find((u: any) => u.email === email && u.motDePasse === password);
+      let role = 'utilisateur';
+
+      if (!found) {
+        found = administrateurs.find((u: any) => u.email === email && u.motDePasse === password);
+        if (found) role = 'administrateur';
       }
 
-      if (user) {
-        login(user);
+      if (!found) {
+        found = professionnels.find((u: any) => u.email === email && u.motDePasse === password);
+        if (found) role = 'professionnel';
+      }
+
+      if (found) {
+        // Normalize the user object stored in the auth store
+        const userToStore = {
+          id: Number(found.id),
+          nom: found.nom || found.name || '',
+          email: found.email,
+          role: role,
+          avatar: found.imageUrl || found.avatar || undefined,
+        };
+        login(userToStore);
+
         // Handle remember me functionality
         if (rememberMe) {
           localStorage.setItem('rememberedEmail', email);
         } else {
           localStorage.removeItem('rememberedEmail');
         }
+
         if (onSuccess) {
           onSuccess();
         } else {
-          const from = location.state?.from;
+          const from = (location.state as any)?.from;
           if (from) {
             navigate(from);
           } else {
-            if (user.role === 'administrateur') {
+            // Redirect based on detected role
+            if (role === 'administrateur') {
               navigate('/admin');
+            } else if (role === 'professionnel') {
+              navigate('/dashbordprofessionnal');
             } else {
               navigate('/home');
             }
           }
         }
       } else {
-        setMessage('Invalid credentials');
+        setMessage('Identifiants invalides');
       }
     } catch {
       setMessage('Error logging in');

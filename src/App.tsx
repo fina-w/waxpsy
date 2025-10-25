@@ -18,6 +18,8 @@ import Histoire from "./components/Histoire";
 import Glossaire from "./components/Glossaire";
 import QuizPage from "./components/QuizPage";
 import CalendrierEvenements from "./components/CalendrierEvenements";
+import DashbordProfessionnal from "./components/dashbordprofessionnal";
+import DahsbordAdmin from "./components/dahsbordAdmin";
 
 // Lazy loading UNIQUEMENT pour les pages SANS skeletons (pages statiques)
 const ShareExperience = lazy(() => import("./components/ShareExperience"));
@@ -28,7 +30,7 @@ const Confidentialite = lazy(() => import("./components/Confidentialite"));
 const ConditionsUtilisation = lazy(() => import("./components/ConditionsUtilisation"));
 const UrgenceSOS = lazy(() => import("./components/Urgence-SOS"));
 const Profil = lazy(() => import("./components/Profil"));
-const Admin = lazy(() => import("./components/Admin"));
+
 
 // Composant de fallback pour le chargement - Simple et rapide
 const PageLoader = () => (
@@ -60,6 +62,8 @@ function App() {
             <Route path="/temoignages" element={<Layout><Temoignages /></Layout>} />
             <Route path="/histoires/:id" element={<Layout><Histoire /></Layout>} />
             <Route path="/urgences" element={<Layout><UrgenceSOS /></Layout>} />
+            <Route path="/DashbordProfessionnal" element={<DashbordProfessionnal />} />
+            <Route path="/admin" element={<Layout><DahsbordAdmin /></Layout>} />
           </Route>
           
           {/* Route de détail du professionnel (temporairement en dehors de la protection) */}
@@ -78,7 +82,8 @@ function App() {
           <Route path="/calendrier-evenements" element={<Layout><CalendrierEvenements /></Layout>} />
           <Route path="/profil" element={<Profil />} />
           <Route path="/quizpage" element={<Layout><QuizPage /></Layout>} />
-          <Route path="/admin" element={<Layout><Admin /></Layout>} />
+
+          
         </Routes>
       </Suspense>
     </Router>

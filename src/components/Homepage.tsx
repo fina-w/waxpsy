@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_BASE_URL } from "../config";
 import type { Trouble, Temoignage } from "../types/types";
 import { Header } from "./Header";
 import Footer from "./footer";
 import { TroublesCarouselSkeleton, TemoignagesCarouselSkeleton } from "./skeletons";
 import { useAuthStore } from "../stores/authStore";
+import db from "../../db.json";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
   const [troubles, setTroubles] = useState<Trouble[]>([]);
   const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
-  const [faqs, setFaqs] = useState<Array<{id: string, question: string, reponse: string}>>([]);
+  const [faqs] = useState<Array<{id: string, question: string, reponse: string}>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentTroubleIndex, setCurrentTroubleIndex] = useState(0);
@@ -61,38 +61,14 @@ const Homepage: React.FC = () => {
 
   useEffect(() => {
     console.log("Current user in Homepage:", isAuthenticated);
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [troublesRes, temoignagesRes, faqsRes] = await Promise.all([
-          fetch(`${API_BASE_URL}/troubles`),
-          fetch(`${API_BASE_URL}/temoignages`),
-          fetch(`${API_BASE_URL}/faq`)
-        ]);
+    // Load data from imported db.json
+    const troublesData = db.troubles;
+    const temoignagesData = db.temoignages.filter((t: any) => t.statut === 'approuvé');
 
-        if (!troublesRes.ok || !temoignagesRes.ok || !faqsRes.ok) {
-          throw new Error('Erreur lors du chargement des données');
-        }
-
-        const [troublesData, temoignagesData, faqsData] = await Promise.all([
-          troublesRes.json(),
-          temoignagesRes.json(),
-          faqsRes.json()
-        ]);
-
-        setTroubles(troublesData);
-        setTemoignages(temoignagesData);
-        setFaqs(faqsData);
-        setError(null);
-      } catch (err) {
-        console.error("Erreur lors du chargement des données:", err);
-        setError("Une erreur est survenue lors du chargement des données. Veuillez réessayer plus tard.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    setTroubles(troublesData);
+    setTemoignages(temoignagesData);
+    setError(null);
+    setLoading(false);
   }, []);
 
   // Auto-scroll pour les troubles (toutes les 5 secondes)

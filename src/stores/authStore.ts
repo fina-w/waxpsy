@@ -8,6 +8,17 @@ export interface User {
   telephone?: string;
   role: string;
   avatar?: string;
+  imageUrl?: string;
+  specialite?: string;
+  diplome?: string;
+  experience?: string;
+  adresse?: string;
+  telephone?: string;
+  tarif?: string;
+  bio?: string;
+  langues?: string[];
+  creneauxDisponibles?: { jour: string; heures: string[] }[];
+  subscription?: 'free' | 'pro';
   // Ajoutez d'autres propriétés utilisateur si nécessaire
 }
 

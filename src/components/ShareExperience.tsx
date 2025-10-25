@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 const ShareExperience: React.FC = () => {
   const [experience, setExperience] = useState('');
-  const [name, setName] = useState('');
+  const [titre, setTitre] = useState('');
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
@@ -14,7 +13,7 @@ const ShareExperience: React.FC = () => {
       return;
     }
     // Simulate submission
-    console.log('Témoignage soumis:', { name, email, experience });
+    console.log('Témoignage soumis:', { titre, email, experience });
     alert('Votre témoignage a été soumis avec succès !');
     navigate('/temoignages');
   };
@@ -25,17 +24,17 @@ const ShareExperience: React.FC = () => {
       <div className="p-8">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl font-bold text-center mb-8 troubles-title">Partager mon expérience</h1>
-          
+
           <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-6 space-y-6">
-            {/* Name Input */}
+            {/* Titre Input */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Votre nom (optionnel)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Titre de votre expérience (optionnel)</label>
               <input
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={titre}
+                onChange={(e) => setTitre(e.target.value)}
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                placeholder="Ex: Aminata Mbengue"
+                placeholder="Ex: Mon parcours avec l'anxiété"
               />
             </div>
 

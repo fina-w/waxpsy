@@ -81,11 +81,49 @@
       "role": "utilisateur",
       "dateInscription": "2025-10-18T09:30:00Z",
       "actif": true
+    },
+    {
+      "id": "605b",
+      "nom": "khady",
+      "email": "nia@gmail.com",
+      "motDePasse": "password123"
+    },
+    {
+      "id": "d7c3",
+      "nom": "fatim",
+      "email": "fatima.diallo@waxpsy.sn",
+      "motDePasse": "profpassword123"
     }
   ],
   "professionnels": [
     {
       "id": "101",
+      "avis": [
+        {
+          "id": "1",
+          "utilisateurId": "1",
+          "utilisateurNom": "Aminata Diallo",
+          "note": 5,
+          "commentaire": "Excellent professionnel, très à l'écoute et compétent.",
+          "date": "2025-10-20T10:30:00Z"
+        },
+        {
+          "id": "2",
+          "utilisateurId": "2",
+          "utilisateurNom": "Moussa Sarr",
+          "note": 4,
+          "commentaire": "Très bon suivi, je recommande fortement.",
+          "date": "2025-10-15T14:45:00Z"
+        },
+        {
+          "id": "1761353030499",
+          "utilisateurId": "1",
+          "utilisateurNom": "Aminata Diallo",
+          "note": 4,
+          "commentaire": "hi, i'm me",
+          "date": "2025-10-25T00:43:50.499Z"
+        }
+      ],
       "nom": "Dr. Khadija Diallo",
       "email": "khadija.diallo@waxpsy.sn",
       "motDePasse": "profpassword123",
@@ -135,7 +173,8 @@
         }
       ],
       "verifiee": true,
-      "dateInscription": "2025-08-01T10:00:00Z"
+      "dateInscription": "2025-08-01T10:00:00Z",
+      "note": 4.3
     },
     {
       "id": "102",
@@ -665,7 +704,7 @@
       "contenu": "Je n'arrivais plus à sortir de chez moi. Le simple fait d'aller à la boutique du coin était une épreuve. Je suis en thérapie maintenant et je voulais partager mon histoire pour que d'autres sachent qu'ils ne sont pas seuls.",
       "statut": "approuvé",
       "createdAt": "2025-10-22T16:45:00Z",
-      "updatedAt": "2025-10-23T09:00:00Z"
+      "updatedAt": "2025-10-18T15:23:14.555Z"
     },
     {
       "id": "3",
@@ -674,7 +713,7 @@
       "contenu": "Pendant 3 ans, j'ai lutté contre l'anorexie. Je pesais 35 kg et mes parents ne savaient plus quoi faire. Grâce à une équipe médicale formidable et à ma détermination, j'ai repris 15 kg et j'apprends à m'aimer comme je suis.",
       "statut": "approuvé",
       "createdAt": "2025-10-18T14:20:00Z",
-      "updatedAt": "2025-10-19T10:00:00Z"
+      "updatedAt": "2025-10-18T15:22:51.075Z"
     },
     {
       "id": "4",
@@ -744,7 +783,7 @@
       "utilisateurId": 3,
       "titre": "Ma phobie sociale vaincue",
       "contenu": "J'ai évité toutes les interactions sociales pendant des années. Aujourd'hui, grâce à la TCC, je peux aller à des événements sans paniquer. C'est un combat quotidien mais j'avance.",
-      "statut": "en attente",
+      "statut": "approuvé",
       "createdAt": "2025-10-28T14:00:00Z",
       "updatedAt": "2025-10-28T14:00:00Z"
     },
@@ -756,6 +795,33 @@
       "statut": "en attente",
       "createdAt": "2025-10-30T10:00:00Z",
       "updatedAt": "2025-10-30T10:00:00Z"
+    },
+    {
+      "id": "9c97",
+      "utilisateurId": "1",
+      "titre": "bn,",
+      "contenu": "xcfhjguhj",
+      "statut": "rejeté",
+      "dateCreation": "2025-10-18T14:58:34.229Z",
+      "updatedAt": "2025-10-18T15:22:38.278Z"
+    },
+    {
+      "id": "79fe",
+      "utilisateurId": "1",
+      "titre": "Sortir du silence",
+      "contenu": "Pendant longtemps, je n’ai pas compris ce qui m’arrivait. Je me sentais vide, fatigué(e), sans envie. Chaque matin, me lever était une épreuve. Je souriais devant les autres, mais à l’intérieur, tout semblait s’éteindre peu à peu.\n\nJ’avais honte d’en parler, peur qu’on me juge ou qu’on me dise simplement “ça va passer”. Mais non, ça n’allait pas. J’avais l’impression d’être enfermé(e) dans une bulle, isolé(e) du monde, même entouré(e) de gens.\n\nUn jour, j’ai compris que je ne pouvais plus continuer comme ça. J’ai osé parler à un proche, puis à un professionnel. Ce n’était pas facile, mais ce fut le début d’un long chemin vers la guérison.\n\nJ’ai appris à reconnaître mes émotions, à accepter mes fragilités et à demander de l’aide sans culpabilité. Aujourd’hui, tout n’est pas parfait, mais je vais mieux. Je reprends goût aux choses simples.\n\nSi je partage mon histoire, c’est pour dire à ceux qui traversent la dépression qu’ils ne sont pas seuls. Parler, c’est déjà un premier pas. Et ce pas peut tout changer.",
+      "statut": "approuvé",
+      "createdAt": "2025-10-18T15:25:21.221Z",
+      "updatedAt": "2025-10-18T15:29:45.513Z"
+    },
+    {
+      "id": "f6f6",
+      "utilisateurId": "1",
+      "titre": "Je vois le monde autrement",
+      "contenu": "J’ai toujours su que j’étais différent(e), sans vraiment comprendre pourquoi. Les sons étaient parfois trop forts, les lumières trop vives, et les conversations trop rapides pour que je puisse tout suivre. J’aimais la routine, les détails, les choses bien ordonnées. Mais souvent, les autres me trouvaient “étrange”.\n\nPendant longtemps, je me suis senti(e) à part, comme si je devais jouer un rôle pour être “normal(e)”. J’observais les gens pour apprendre à faire comme eux — quand rire, quand parler, comment regarder quelqu’un dans les yeux — des choses qui semblent simples pour la plupart, mais qui pour moi demandaient un effort immense.\n\nLe jour où j’ai su que j’étais autiste, tout a pris un sens. Ce n’était pas une faiblesse, juste une autre façon de percevoir le monde. J’ai appris à mieux me comprendre, à poser mes limites et à accepter que ma différence est aussi une richesse.\n\nAujourd’hui, je veux que les gens sachent que l’autisme, ce n’est pas seulement ce qu’on voit dans les films. C’est une réalité pleine de nuances, de forces et de défis.\n\nJe ne cherche plus à être comme tout le monde. Je cherche simplement à être moi — avec ma sensibilité, ma logique et ma façon unique de voir la vie",
+      "statut": "approuvé",
+      "createdAt": "2025-10-18T15:31:59.540Z",
+      "updatedAt": "2025-10-18T15:32:37.111Z"
     }
   ],
   "commentaires": [
@@ -938,7 +1004,7 @@
       "professionnelId": 102,
       "date": "2025-11-12T15:00:00Z",
       "motif": "Suivi pour anxiété",
-      "statut": "confirmé",
+      "statut": "confirmed",
       "createdAt": "2025-11-03T18:00:00Z"
     },
     {
@@ -983,7 +1049,7 @@
       "professionnelId": 102,
       "date": "2025-11-25T10:30:00Z",
       "motif": "Burn-out professionnel",
-      "statut": "confirmé",
+      "statut": "confirmed",
       "createdAt": "2025-11-09T13:20:00Z"
     },
     {
@@ -1010,7 +1076,7 @@
       "professionnelId": 108,
       "date": "2025-12-05T14:00:00Z",
       "motif": "Séance EMDR traumatisme",
-      "statut": "confirmé",
+      "statut": "pending",
       "createdAt": "2025-11-10T16:30:00Z"
     },
     {
