@@ -1,9 +1,8 @@
-import { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import type { Trouble, Temoignage } from "../types/types";
 import { Header } from "./Header";
-import Login from "./Login";
 import Footer from "./footer";
 import { TroublesCarouselSkeleton, TemoignagesCarouselSkeleton } from "./skeletons";
 import { useAuthStore } from "../stores/authStore";
@@ -13,12 +12,11 @@ const Homepage: React.FC = () => {
   const navigate = useNavigate();
   const [troubles, setTroubles] = useState<Trouble[]>([]);
   const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
+  const [faqs] = useState<Array<{id: string, question: string, reponse: string}>>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentTroubleIndex, setCurrentTroubleIndex] = useState(0);
   const [currentTemoignageIndex, setCurrentTemoignageIndex] = useState(0);
-  const [showLogin, setShowLogin] = useState(false);
-  const [pendingTab, setPendingTab] = useState<string | null>(null);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const nextTroubles = useCallback(() => {
@@ -101,38 +99,15 @@ const Homepage: React.FC = () => {
   };
 
   const handleProfessionalsClick = () => {
-    if (!isAuthenticated) {
-      setPendingTab('professionals');
-      setShowLogin(true);
-    } else {
-      navigate('/professionals');
-    }
+    navigate('/professionals');
   };
 
   const handleTemoignagesClick = () => {
-    if (!isAuthenticated) {
-      setPendingTab('temoignages');
-      setShowLogin(true);
-    } else {
-      navigate('/temoignages');
-    }
+    navigate('/temoignages');
   };
 
   const handleUrgenceClick = () => {
     navigate('/urgences');
-  };
-
-  const handleLoginSuccess = () => {
-    setShowLogin(false);
-    if (pendingTab) {
-      navigate(`/${pendingTab}`);
-      setPendingTab(null);
-    }
-  };
-
-  const handleLoginClose = () => {
-    setShowLogin(false);
-    setPendingTab(null);
   };
 
   // Suppression du loading global - on affiche la page avec des skeletons partiels
@@ -744,19 +719,49 @@ const Homepage: React.FC = () => {
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-white to-blue-100">
+      {/* Section FAQ */}
+      <section className="py-12 ">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Questions fréquemment posées</h2>
+          {loading ? (
+            <div className="text-center">Chargement des questions...</div>
+          ) : error ? (
+            <div className="text-center text-red-500">{error}</div>
+          ) : (
+            <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
+                <div className="divide-y divide-gray-100">
+                  {faqs.map((faq) => (
+                    <details key={faq.id} className="group">
+                      <summary className="flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50">
+                        <span className="text-base font-medium text-gray-900">{faq.question}</span>
+                        <span className="ml-2 text-[#015635] text-xl transition-transform duration-200 group-open:rotate-180">+</span>
+                      </summary>
+                      <div className="px-4 pb-4 pt-2 text-gray-600 bg-gray-50">
+                        <p>{faq.reponse}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+                <div className="p-6 text-center bg-gray-50 border-t border-gray-100">
+                  <p className="text-gray-600 mb-4">Vous ne trouvez pas de réponse à votre question ?</p>
+                  <button
+                    onClick={() => navigate('/contact')}
+                    className="bg-[#015635] text-white px-6 py-2 rounded-md hover:bg-[#014429] transition-colors"
+                  >
+                    Contactez-nous
+                  </button>
+                </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="bg-gradient-to-r from-white via-white to-blue-100">
         <Footer />
       </section>
 
-      {/* Login Modal */}
-      {showLogin && (
-        <Login
-          onSuccess={handleLoginSuccess}
-          onClose={handleLoginClose}
-        />
-      )}
     </div>
   );
 };
- 
+
 export default Homepage;

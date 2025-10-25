@@ -1,52 +1,73 @@
-export interface Trouble {
+import { BaseEntity } from './common';
+
+export type UserRole = 'utilisateur' | 'professionnel' | 'administrateur';
+
+export interface Utilisateur extends BaseEntity {
+  nom: string;
+  prenom?: string;
+  email: string;
+  motDePasse?: string;
+  role: UserRole;
+  dateInscription?: string;
+  actif?: boolean;
+  avatar?: string;
+  telephone?: string;
+  bio?: string;
+}
+
+export interface Trouble extends BaseEntity {
   id: string;
+  categorieId: number;
   image: string;
   nom: string;
   description: string;
   symptomes?: string[];
-  causes?: string;
-  traitements?: string;
+  causes?: string[];
+  traitements?: string[];
   tags?: string[];
+  conseils?: string[];
+  ressourcesUtiles?: Array<{
+    titre: string;
+    url: string;
+    type: 'article' | 'video' | 'lien';
+  }>;
 }
 
-export interface Article {
-  id: string;
+export interface Article extends BaseEntity {
   troubleId: string;
   titre: string;
   contenu: string;
-  auteurId?: number;
+  auteurId?: string;
+  imageUrl?: string;
   tags?: string[];
-  createdAt?: string;
-  updatedAt?: string;
+  statut?: 'brouillon' | 'publié' | 'archivé';
+  datePublication?: string;
+  vues?: number;
+  tempsLecture?: number; // en minutes
 }
 
-export interface Temoignage {
-  id: string;
-  utilisateurId: number | string;
+export interface Temoignage extends BaseEntity {
+  utilisateurId: string;
   titre: string;
   contenu: string;
-  statut: string;
-  createdAt?: string;
-  updatedAt: string;
+  note?: number;
+  statut: 'en_attente' | 'approuvé' | 'rejeté';
   dateCreation?: string;
+  metadonnees?: {
+    anonyme?: boolean;
+    troubleId?: string;
+    professionnelId?: string;
+  };
 }
 
-export interface Utilisateur {
-  id: string;
-  nom: string;
-  email?: string;
-  motDePasse?: string;
-  role?: string;
-  createdAt?: string;
-}
-
-export interface Histoire {
-  id: string;
-  troubleId: number;
+export interface Histoire extends BaseEntity {
+  troubleId: string;
   titre: string;
   recit: string;
-  auteurId?: number;
-  statut?: string;
-  createdAt?: string;
+  auteurId?: string;
+  statut?: 'brouillon' | 'publié' | 'archivé';
+  imageUrl?: string;
+  extrait?: string;
+  motsCles?: string[];
   updatedAt?: string;
 }

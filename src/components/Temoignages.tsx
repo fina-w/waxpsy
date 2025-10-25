@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
 import { TemoignageSkeletonGrid } from './skeletons';
 
@@ -49,8 +50,8 @@ const Temoignages: React.FC = () => {
         
         // Récupérer les témoignages
         const [temoignagesResponse, utilisateursResponse] = await Promise.all([
-          fetch('http://localhost:3000/temoignages'),
-          fetch('http://localhost:3000/utilisateurs')
+          fetch(`${API_BASE_URL}/temoignages`),
+          fetch(`${API_BASE_URL}/utilisateurs`)
         ]);
         
         if (!temoignagesResponse.ok) throw new Error('Échec du chargement des témoignages');

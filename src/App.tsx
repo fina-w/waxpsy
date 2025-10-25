@@ -12,6 +12,7 @@ import { Layout } from "./components/Layout";
 import Troubles from "./components/Troubles";
 import Temoignages from "./components/Temoignages";
 import ProfessionalsList from "./components/ProfessionalsList";
+import ProfessionnelDetail from "./components/ProfessionnelDetail";
 import Articles from "./components/Articles";
 import Histoire from "./components/Histoire";
 import Glossaire from "./components/Glossaire";
@@ -64,6 +65,9 @@ function App() {
             <Route path="/DashbordProfessionnal" element={<DashbordProfessionnal />} />
             <Route path="/admin" element={<Layout><DahsbordAdmin /></Layout>} />
           </Route>
+          
+          {/* Route de détail du professionnel (temporairement en dehors de la protection) */}
+          <Route path="/professionals/:id" element={<Layout><ProfessionnelDetail /></Layout>} />
           
           {/* Routes publiques avec Layout */}
           <Route path="/share-experience" element={<Layout><ShareExperience /></Layout>} />
