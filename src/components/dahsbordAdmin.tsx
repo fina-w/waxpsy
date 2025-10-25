@@ -15,7 +15,8 @@ import {
   ClockIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  MagnifyingGlassIcon
+  MagnifyingGlassIcon,
+  Bars3Icon
 } from '@heroicons/react/24/outline';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
@@ -28,6 +29,7 @@ const DahsbordAdmin: React.FC = () => {
   const [temoignages, setTemoignages] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('statistiques');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Modal / form state for Add / Edit
   const [modalOpen, setModalOpen] = useState(false);
@@ -257,9 +259,57 @@ const DahsbordAdmin: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-800">
+      {/* Mobile Menu Button */}
+      <div className="md:hidden fixed top-4 left-4 z-50">
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="bg-white p-2 rounded-md shadow-lg"
+        >
+          <Bars3Icon className="h-6 w-6 text-gray-600" />
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-40">
+          <div className="absolute inset-0 bg-black bg-opacity-50" onClick={() => setIsMobileMenuOpen(false)}></div>
+          <div className="relative w-72 bg-white/95 backdrop-blur-sm shadow-lg border-r border-gray-200 h-full">
+            <div className="p-6">
+              <nav className="space-y-2">
+                {[
+                  { id: 'statistiques', label: 'Statistiques', icon: ChartBarIcon },
+                  { id: 'utilisateurs', label: 'Gestion utilisateurs', icon: UsersIcon, count: utilisateurs.length },
+                  { id: 'professionnels', label: 'Gestion professionnels', icon: BriefcaseIcon, count: professionnels.length },
+                  { id: 'temoignages', label: 'Gestion des témoignages', icon: ChatBubbleLeftRightIcon, count: temoignages.length }
+                ].map((tab) => {
+                  const Icon = tab.icon;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => { setActiveTab(tab.id); setIsMobileMenuOpen(false); }}
+                      className={`w-full flex items-center px-4 py-3 text-left rounded-xl transition-all duration-200 transform ${
+                        activeTab === tab.id
+                          ? 'bg-white shadow-sm text-blue-700 translate-x-1 border-l-4 border-blue-500'
+                          : 'text-gray-600 hover:bg-gray-100 hover:translate-x-0'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5 mr-3 text-indigo-500" />
+                      <div className="flex-1 flex justify-between items-center">
+                        <span>{tab.label}</span>
+                        {tab.count !== undefined && <span className="text-xs text-gray-500">{tab.count}</span>}
+                      </div>
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="flex min-h-screen">
-        {/* Sidebar */}
-        <div className="w-72 bg-white/80 backdrop-blur-sm shadow-lg border-r border-gray-200">
+        {/* Sidebar - Hidden on mobile */}
+        <div className="hidden md:block w-72 bg-white/80 backdrop-blur-sm shadow-lg border-r border-gray-200">
           <div className="p-6">
             <nav className="space-y-2">
               {[
@@ -292,7 +342,7 @@ const DahsbordAdmin: React.FC = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
+        <div className="flex-1 p-4 md:p-8">
           {activeTab === 'statistiques' && (
             <div>
               <header className="flex items-center justify-between mb-6">
@@ -402,7 +452,7 @@ const DahsbordAdmin: React.FC = () => {
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
               <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
                 <div>
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">Gestion des Utilisateurs</h3>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">Utilisateurs</h3>
                   <p className="mt-1 max-w-2xl text-sm text-gray-500">
                     Gérez les comptes utilisateurs.
                   </p>
@@ -491,7 +541,7 @@ const DahsbordAdmin: React.FC = () => {
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
               <div className="px-4 py-5 sm:px-6 flex justify-between items-center">
                 <div>
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">Gestion des Professionnels</h3>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">Professionnels</h3>
                   <p className="mt-1 max-w-2xl text-sm text-gray-500">
                     Gérez les comptes professionnels.
                   </p>

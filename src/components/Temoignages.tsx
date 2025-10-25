@@ -162,17 +162,16 @@ const Temoignages: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      {/* Main Content */}
-      <main className="pt-24">
-        <h1 className="text-4xl font-bold text-center mb-8 troubles-title">Les témoignages</h1>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-center mb-12 text-green-800">Les témoignages</h1>
 
         {/* Filters */}
-        <div className="flex flex-row items-center justify-between bg-gray-100 rounded-lg px-4 py-3 mb-8 max-w-4xl mx-auto">
-          <div className="flex items-center space-x-4">
+        <div className="flex flex-col md:flex-row items-center justify-between bg-gray-100 rounded-lg px-4 py-3 mb-8 max-w-4xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto">
             <select
               value={selectedSort}
               onChange={(e) => setSelectedSort(e.target.value)}
-              className="border border-gray-300 rounded px-3 py-2 bg-white text-sm"
+              className="border border-gray-300 rounded px-3 py-2 bg-white text-sm w-full md:w-auto"
             >
               <option value="recent">Filtrer par les plus récents</option>
               <option value="all">Tous</option>
@@ -180,7 +179,7 @@ const Temoignages: React.FC = () => {
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
-              className="border border-gray-300 rounded px-3 py-2 bg-white text-sm"
+              className="border border-gray-300 rounded px-3 py-2 bg-white text-sm w-full md:w-auto"
             >
               <option value="all">Toutes les catégories</option>
               <option value="anxiété">Anxiété</option>
@@ -236,7 +235,7 @@ const Temoignages: React.FC = () => {
             Témoigner
           </button>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

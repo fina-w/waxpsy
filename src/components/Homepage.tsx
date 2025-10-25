@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import type { Trouble, Temoignage } from "../types/types";
 import { Header } from "./Header";
 import Footer from "./footer";
@@ -115,7 +116,7 @@ const Homepage: React.FC = () => {
     <div className="min-h-screen flex flex-col w-full bg-gradient-to-r from-white via-white to-blue-100">
       {/* Hero Section */}
       <section
-        className="relative bg-cover bg-center h-[600px] flex flex-col  text-white"
+        className="relative bg-cover bg-center h-[400px] sm:h-[500px] md:h-[600px] flex flex-col  text-white"
         style={{ backgroundImage: "url('/homepage-img.jpg')" }}
       >
         <div className="absolute inset-0 bg-black opacity-40"></div>
@@ -124,58 +125,147 @@ const Homepage: React.FC = () => {
         <Header />
 
         {/* Contenu principal du Hero */}
-        <div className="relative z-10 justify-center items-center text-center mt-50">
-          <h1 className="text-4xl sm:text-2xl md:text-5xl font-serif font-bold mb-6 tracking-wide">
-            COMPRENDRE LA SANTE MENTALE
-          </h1>
-          <button
-            onClick={() => navigate("/glossaire")}
-            className="border-2 border-white rounded-full px-8 py-3 flex items-center space-x-2 hover:bg-white hover:text-black transition mx-auto"
+        <div className="relative z-10 flex flex-col justify-center items-center text-center mt-16 sm:mt-24 md:mt-32 lg:mt-40">
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 tracking-wide"
           >
-            <span className="text-lg">Lire le Glossaire</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            COMPRENDRE LA SANTE MENTALE
+          </motion.h1>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          >
+            <button
+              onClick={() => navigate("/glossaire")}
+              className="border-2 border-white rounded-full px-6 sm:px-8 py-3 flex items-center space-x-2 hover:bg-white hover:text-black transition text-sm sm:text-lg"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+              <span>Lire le Glossaire</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 sm:h-5 sm:w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => navigate("/professionals")}
+              className="border-2 border-white rounded-full px-6 sm:px-8 py-3 flex items-center space-x-2 hover:bg-white hover:text-black transition text-sm sm:text-lg"
+            >
+              <span>Prendre Rendez-vous</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 sm:h-5 sm:w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </button>
+          </motion.div>
+          {/* Indicateur de scroll */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1.5 }}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="flex flex-col items-center text-white cursor-pointer"
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            >
+              <span className="text-sm mb-2">Scroll pour découvrir</span>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                />
+              </svg>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Section A propos */}
-      <section className="flex flex-col justify-center items-center md:flex-row bg-gradient-to-r from-white via-white to-blue-100 px-6 py-12 space-y-8 md:space-y-0 md:space-x-12">
-        <img
+      <motion.section
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        viewport={{ once: true }}
+        className="flex flex-col justify-center items-center md:flex-row bg-gradient-to-r from-white via-white to-blue-100 px-6 py-12 space-y-8 md:space-y-0 md:space-x-12"
+      >
+        <motion.img
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
           src="/c-est-quoi-waxpsy.png"
           alt="Green Ribbon"
           loading="lazy"
           className="w-70 h-auto"
         />
-        <div className="max-w-xl">
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="max-w-xl"
+        >
           <h2 className="text-3xl font-bold text-gray-800 mb-6">
             C'est quoi Waxpsy ?
           </h2>
           <p className="text-gray-700 max-w-3xl mx-auto text-lg mb-8">
             Waxpsy est une plateforme sénégalaise dédiée à la sensibilisation et à l'information sur la santé mentale. Notre mission est de briser les tabous et d'offrir un espace sûr pour parler ouvertement de santé mentale au Sénégal.
           </p>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Section Découvrez - DYNAMIQUE */}
       {loading || troubles.length === 0 ? (
         <TroublesCarouselSkeleton />
       ) : (
-        <section className="px-6 py-6 bg-gradient-to-r from-white via-white to-blue-100">
+        <motion.section
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="px-6 py-6 bg-gradient-to-r from-white via-white to-blue-100"
+        >
           <div className="max-w-7xl mx-auto">
-            <div className="flex justify-between items-center mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex justify-between items-center mb-8"
+            >
               <h2 className="text-3xl font-serif">Découvrez</h2>
               <a
                 href="/troubles"
@@ -197,7 +287,7 @@ const Homepage: React.FC = () => {
                   />
                 </svg>
               </a>
-            </div>
+            </motion.div>
             <div className="relative px-16">
               {/* Boutons de navigation */}
               {troubles.length > 3 && (
@@ -283,7 +373,7 @@ const Homepage: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
       )}
 
       {/* Section Pour mieux comprendre */}

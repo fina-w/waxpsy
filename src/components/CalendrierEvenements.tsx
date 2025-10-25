@@ -5,6 +5,8 @@ import { fr } from 'date-fns/locale';
 import Footer from './footer';
 import { CalendrierSkeleton } from './skeletons';
 import SearchFilters from './ui/SearchFilters';
+import { Bars3Icon, HomeIcon, UserIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 
 interface Evenement {
   id: string;
@@ -26,6 +28,7 @@ interface Evenement {
 }
 
 const CalendrierEvenements: React.FC = () => {
+  const navigate = useNavigate();
   // États
   const [evenements, setEvenements] = useState<Evenement[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -67,25 +70,25 @@ const CalendrierEvenements: React.FC = () => {
   // Filtrer et trier les événements
   const filteredAndSortedEvents = useMemo(() => {
     let result = [...evenements];
-    
+
     // Filtrer par terme de recherche
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      result = result.filter(evt => 
-        evt.titre.toLowerCase().includes(term) || 
+      result = result.filter(evt =>
+        evt.titre.toLowerCase().includes(term) ||
         evt.description.toLowerCase().includes(term) ||
         evt.lieu?.toLowerCase().includes(term) ||
         evt.type.toLowerCase().includes(term)
       );
     }
-    
+
     // Trier par date
     result.sort((a, b) => {
-      return sortOrder === 'recent' 
-        ? compareDesc(a.date, b.date) 
+      return sortOrder === 'recent'
+        ? compareDesc(a.date, b.date)
         : compareAsc(a.date, b.date);
     });
-    
+
     return result;
   }, [evenements, searchTerm, sortOrder]);
 
@@ -101,7 +104,7 @@ const CalendrierEvenements: React.FC = () => {
           date: new Date(evt.date)
         }));
         // Trier par date décroissante par défaut
-        evenementsAvecDates.sort((a: Evenement, b: Evenement) => 
+        evenementsAvecDates.sort((a: Evenement, b: Evenement) =>
           compareDesc(a.date, b.date)
         );
         setEvenements(evenementsAvecDates);
@@ -138,13 +141,13 @@ const CalendrierEvenements: React.FC = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const evenementsAffiches = filteredAndSortedEvents.slice(indexOfFirstItem, indexOfLastItem);
-  
+
   // Log pour débogage
   console.log('Total événements:', filteredAndSortedEvents.length);
   console.log('Événements par page:', itemsPerPage);
   console.log('Nombre total de pages:', totalPages);
   console.log('Événements affichés:', evenementsAffiches.length);
-  
+
   // Gestion du changement de page
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -172,14 +175,14 @@ const CalendrierEvenements: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-2">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-2">
           Calendrier des Événements
         </h1>
         <p className="text-center text-gray-600 mb-8">
           Découvrez nos prochains événements et ateliers sur la santé mentale
         </p>
-        
+
         {/* Barre de recherche et filtres */}
         <div className="mb-8 max-w-3xl mx-auto">
           <SearchFilters
@@ -190,29 +193,29 @@ const CalendrierEvenements: React.FC = () => {
             className="space-y-4"
           />
         </div>
-        
+
         <div className="p-6 mb-8">
           {evenementsAffiches.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {evenementsAffiches.map((evenement) => (
-                <div 
-                  key={evenement.id} 
+                <div
+                  key={evenement.id}
                   className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-transform duration-300 hover:-translate-y-1"
                 >
                   <div className="w-full h-48 bg-gray-100 flex items-center justify-center">
                     {evenement.imageUrl ? (
-                      <img 
-                        src={evenement.imageUrl} 
-                        alt={evenement.titre} 
+                      <img
+                        src={evenement.imageUrl}
+                        alt={evenement.titre}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/placeholder-event.jpg';
                         }}
                       />
                     ) : evenement.image ? (
-                      <img 
-                        src={evenement.image} 
-                        alt={evenement.titre} 
+                      <img
+                        src={evenement.image}
+                        alt={evenement.titre}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = '/placeholder-event.jpg';
@@ -226,7 +229,7 @@ const CalendrierEvenements: React.FC = () => {
                       </div>
                     )}
                   </div>
-                  
+
                   <div className="p-4">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">{evenement.titre}</h3>
@@ -244,7 +247,7 @@ const CalendrierEvenements: React.FC = () => {
                         </svg>
                         {format(evenement.date, 'PPP', { locale: fr })}
                       </div>
-                      
+
                       {evenement.heureDebut && evenement.heureFin && (
                         <div className="flex items-center">
                           <svg className="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -253,7 +256,7 @@ const CalendrierEvenements: React.FC = () => {
                           {evenement.heureDebut} - {evenement.heureFin}
                         </div>
                       )}
-                      
+
                       {evenement.lieu && (
                         <div className="flex items-start">
                           <svg className="w-4 h-4 mr-2 mt-0.5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -264,11 +267,11 @@ const CalendrierEvenements: React.FC = () => {
                         </div>
                       )}
                     </div>
-                    
+
                     <div className="mt-4">
-                      <a 
-                        href={evenement.lien || '#'} 
-                        target="_blank" 
+                      <a
+                        href={evenement.lien || '#'}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 transition-colors"
                       >
@@ -288,7 +291,7 @@ const CalendrierEvenements: React.FC = () => {
               <p className="text-sm text-gray-400 mt-1">Essayez de modifier vos critères de recherche.</p>
             </div>
           )}
-          
+
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="flex justify-center items-center gap-2 mt-12">
@@ -329,14 +332,14 @@ const CalendrierEvenements: React.FC = () => {
             </div>
           )}
         </div>
-        
+
         <div className="bg-blue-50 rounded-lg p-6 text-center">
           <h2 className="text-2xl font-semibold mb-4 text-[#015635">Proposez un événement</h2>
           <p className="text-gray-700 mb-4">
             Vous organisez un événement en lien avec la santé mentale ? Faites-le nous savoir !
           </p>
-          <a 
-            href="mailto:contact@waxpsy.fr" 
+          <a
+            href="mailto:contact@waxpsy.fr"
             className="inline-flex items-center px-6 py-2 border border-transparent text-base font-medium rounded-md text-white bg-[#038855] hover:bg-[#015635]"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -346,8 +349,8 @@ const CalendrierEvenements: React.FC = () => {
           </a>
         </div>
       </div>
-      
-      
+
+
       <Footer/>
     </div>
   );

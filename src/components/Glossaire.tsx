@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { GlossaireSkeleton } from "./skeletons";
+import { Bars3Icon, HomeIcon, UserIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 
 interface TermeGlossaire {
   id: string;
@@ -9,6 +11,7 @@ interface TermeGlossaire {
 }
 
 const Glossaire: React.FC = () => {
+  const navigate = useNavigate();
   const [termes, setTermes] = useState<TermeGlossaire[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
@@ -62,19 +65,19 @@ const Glossaire: React.FC = () => {
 
   return (
     <div className="bg-gradient-to-r from-white via-white to-blue-100">
-      <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8 ">
-      <div className="max-w-4xl mx-auto">
-        {/* En-tête */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">Glossaire de termes psychologiques</h1>
-          
+      <div className="min-h-screen py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* En-tête */}
+          <div className="text-center mb-12">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Glossaire de termes psychologiques</h1>
+
           <div className="bg-white p-6 rounded-lg shadow-md mb-8">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Qu'est-ce qu'une maladie mentale ?</h2>
             <p className="text-gray-600">
-              Une maladie mentale est une maladie physique du cerveau qui provoque des perturbations dans la pensée, le comportement, 
-              l'énergie ou l'émotion qui rendent difficile de faire face aux exigences ordinaires de la vie. 
-              La recherche commence à découvrir les causes compliquées de ces maladies qui peuvent inclure la génétique, 
-              la chimie du cerveau, la structure du cerveau, le traumatisme et / ou le fait d'avoir une autre condition médicale, 
+              Une maladie mentale est une maladie physique du cerveau qui provoque des perturbations dans la pensée, le comportement,
+              l'énergie ou l'émotion qui rendent difficile de faire face aux exigences ordinaires de la vie.
+              La recherche commence à découvrir les causes compliquées de ces maladies qui peuvent inclure la génétique,
+              la chimie du cerveau, la structure du cerveau, le traumatisme et / ou le fait d'avoir une autre condition médicale,
               comme les maladies cardiaques.
             </p>
           </div>
@@ -102,14 +105,14 @@ const Glossaire: React.FC = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Terme
                   </th>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Définition
                   </th>
                   {termes.some(t => t.categorie) && (
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Catégorie
                     </th>
                   )}
@@ -119,14 +122,14 @@ const Glossaire: React.FC = () => {
                 {filteredTermes.length > 0 ? (
                   filteredTermes.map((terme) => (
                     <tr key={terme.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                         <div className="font-medium text-gray-900">{terme.terme}</div>
                       </td>
-                      <td className="px-6 py-4">
-                        <div className="text-gray-600">{terme.definition}</div>
+                      <td className="px-4 md:px-6 py-4">
+                        <div className="text-gray-600 text-sm md:text-base">{terme.definition}</div>
                       </td>
                       {termes.some(t => t.categorie) && (
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                           {terme.categorie && (
                             <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800">
                               {terme.categorie}
@@ -138,7 +141,7 @@ const Glossaire: React.FC = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={termes.some(t => t.categorie) ? 3 : 2} className="px-6 py-4 text-center text-gray-500">
+                    <td colSpan={termes.some(t => t.categorie) ? 3 : 2} className="px-4 md:px-6 py-4 text-center text-gray-500">
                       Aucun terme trouvé pour "{searchTerm}"
                     </td>
                   </tr>
