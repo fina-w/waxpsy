@@ -1,181 +1,267 @@
 import React from "react";
 import { PhoneIcon, ExclamationTriangleIcon, ShieldExclamationIcon, HeartIcon, UserGroupIcon, ChatBubbleLeftRightIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
-import db from "../../db.json";
 import Footer from "./footer";
 
-const UrgenceSOS: React.FC = () => {
-  const { ressourcesSOS } = db;
+const UrgenceSOS = () => {
+  // Données réelles des urgences au Sénégal
+  const ressourcesSOS = {
+    numerosUrgence: [
+      { nom: "SAMU National", numero: "1515" },
+      { nom: "Police Secours", numero: "17" },
+      { nom: "Pompiers", numero: "18" },
+      { nom: "SOS Médecins", numero: "33 889 15 15" },
+      { nom: "Division Santé Mentale", numero: "33 869 42 92" }
+    ],
+    centresCrise: [
+      { 
+        nom: "Hôpital Psychiatrique de Thiaroye", 
+        adresse: "Thiaroye, banlieue de Dakar",
+        telephone: "33 834 08 81",
+        horaires: "Urgences 24h/24, 7j/7"
+      },
+      { 
+        nom: "Service Psychiatrie CHNU Fann", 
+        adresse: "Avenue Cheikh Anta Diop, Fann",
+        telephone: "33 869 18 18",
+        horaires: "Lundi - Vendredi: 8h - 17h"
+      },
+      { 
+        nom: "Centre Dalal Xel Thiès", 
+        adresse: "Route de Saint-Louis, Km 4, Thiès",
+        telephone: "33 951 61 69",
+        horaires: "Lundi - Samedi: 8h - 18h"
+      },
+      { 
+        nom: "Centre Dalal Xel Fatick", 
+        adresse: "Route nationale 1, Fatick",
+        telephone: "33 949 21 57",
+        horaires: "Lundi - Samedi: 8h - 18h"
+      },
+      { 
+        nom: "Hôpital Principal de Dakar", 
+        adresse: "1, Avenue Nelson Mandela, Plateau",
+        telephone: "33 839 50 50",
+        horaires: "Urgences 24h/24"
+      }
+    ],
+    protocolesCrise: [
+      "Assurez la sécurité immédiate de la personne",
+      "Restez calme et rassurant",
+      "Appelez les services d'urgence",
+      "Ne laissez pas la personne seule",
+      "Écoutez sans juger"
+    ],
+    signesCrise: [
+      "Pensées suicidaires exprimées",
+      "Comportement autodestructeur",
+      "Isolement social soudain",
+      "Changements d'humeur extrêmes",
+      "Consommation excessive de substances"
+    ]
+  };
 
   const handleCall = (phoneNumber: string) => {
-    window.location.href = `tel:${phoneNumber}`;
+    window.location.href = `tel:${phoneNumber.replace(/\s+/g, '')}`;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
-        {/* Bannière d'urgence */}
-        <div className="bg-red-600 text-white py-4 px-4">
-          <div className="container mx-auto flex items-center justify-center">
-            <ExclamationTriangleIcon className="h-8 w-8 mr-2 text-white" />
-            <h1 className="text-2xl md:text-3xl font-bold text-center">
-              URGENCE - AIDE IMMÉDIATE DISPONIBLE
-            </h1>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Bannière d'urgence épurée */}
+      <div className="bg-gradient-to-r from-red-600 to-red-700 text-white py-4 shadow-lg">
+        <div className="container mx-auto px-4 flex items-center justify-center gap-3">
+          <ExclamationTriangleIcon className="h-7 w-7 animate-pulse" />
+          <h1 className="text-xl md:text-2xl font-bold tracking-wide">
+            URGENCE - AIDE IMMÉDIATE DISPONIBLE
+          </h1>
         </div>
+      </div>
 
-        <div className="container mx-auto px-4 py-8">
-          {/* En-tête */}
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-8 border-l-4 border-red-500">
-            <div className="flex items-center text-center flex-col mx-10">
-              <div className="ml-4 flex flex-row">
-                <div className="flex-shrink-0">
-                <ShieldExclamationIcon className="h-10 w-10 text-red-600" />
-              </div>
-                <h1 className="text-2xl md:text-3xl font-bold text-red-700 mb-2">
-                  Vous avez besoin d'aide immédiate ?
-                </h1>
-              </div>
-              <p className="text-gray-700 text-lg">
-                  Si vous ou un proche êtes en situation de détresse ou de danger immédiat, 
-                  contactez immédiatement les services d'urgence. Vous n'êtes pas seul(e), 
-                  de l'aide est disponible 24h/24.
+      {/* En-tête simplifié */}
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
+        <div className="bg-white rounded-2xl shadow-sm p-8 border-l-4 border-red-500">
+          <div className="flex items-start gap-4">
+            <div className="bg-red-50 p-3 rounded-xl">
+              <ShieldExclamationIcon className="h-8 w-8 text-red-600" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                Vous avez besoin d'aide immédiate ?
+              </h2>
+              <p className="text-gray-600 leading-relaxed">
+                Si vous ou un proche êtes en situation de détresse ou de danger immédiat, 
+                contactez immédiatement les services d'urgence. Vous n'êtes pas seul(e), 
+                de l'aide est disponible 24h/24.
               </p>
             </div>
           </div>
-          </div>
+        </div>
+      </div>
 
-        {/* Numéros d'urgence */}
-        <section className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-red-700 mb-2">
-              <PhoneIcon className="h-8 w-8 inline-block mr-2" />
-              NUMÉROS D'URGENCE
-            </h2>
-            <p className="text-gray-600">Appelez immédiatement en cas de détresse ou de danger</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {ressourcesSOS.numerosUrgence.map((urgence, index) => (
-              <div 
-                key={index} 
-                className="bg-white rounded-xl shadow-md overflow-hidden border-l-4 border-red-500 hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-red-100 p-3 rounded-full">
-                      <PhoneIcon className="h-6 w-6 text-red-600" />
-                    </div>
-                    <h3 className="ml-3 text-lg font-bold text-gray-900">{urgence.nom}</h3>
-                  </div>
-                  <p className="text-gray-700 mb-4">{urgence.description || 'Service d\'urgence disponible 24h/24'}</p>
-                  <button
-                    onClick={() => handleCall(urgence.numero.replace(/\s+/g, ''))}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center transition-colors duration-200"
-                  >
-                    <PhoneIcon className="h-5 w-5 mr-2" />
-                    Appeler le {urgence.numero}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Centres spécialisés */}
-        <section className="mb-12">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#015635] mb-2">
-              <UserGroupIcon className="h-8 w-8 inline-block mr-2" />
-              CENTRES DE CRISE ET SOUTIEN
-            </h2>
-            <p className="text-gray-600">Centres spécialisés en santé mentale et soutien psychologique</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {ressourcesSOS.centresCrise.map((centre, index) => (
-              <div 
-                key={index} 
-                className="bg-white rounded-xl shadow-md overflow-hidden border-l-4 border-[#037147] hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="bg-blue-100 p-3 rounded-full">
-                      <HeartIcon className="h-6 w-6 text-[#015635]" />
-                    </div>
-                    <h3 className="ml-3 text-lg font-bold text-gray-900">{centre.nom}</h3>
-                  </div>
-                  <div className="space-y-2 text-gray-700">
-                    <p><span className="font-semibold">Adresse :</span> {centre.adresse}</p>
-                    <p><span className="font-semibold">Téléphone :</span> {centre.telephone}</p>
-                    <p><span className="font-semibold">Horaires :</span> {centre.horaires}</p>
-                  </div>
-                  <button
-                    onClick={() => handleCall(centre.telephone.replace(/\s+/g, ''))}
-                    className="mt-4 w-full bg-[#015635] hover:bg-[#013f27] text-white font-bold py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-200 text-sm"
-                  >
-                    <PhoneIcon className="h-4 w-4 mr-2" />
-                    Appeler ce centre
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Protocole et signes de crise */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
-          {/* Protocole de crise */}
-          <div className="bg-white rounded-xl shadow-md overflow-hidden border-l-4 border-amber-500">
-            <div className="bg-amber-100 px-6 py-4">
-              <h2 className="text-xl font-bold text-amber-800">
-                <ExclamationTriangleIcon className="h-6 w-6 inline-block mr-2" />
-                QUE FAIRE EN CAS DE CRISE ?
+      {/* Conteneur principal avec espacement amélioré */}
+      <div className="container mx-auto px-4 pb-12 max-w-6xl">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          
+          {/* Numéros d'urgence - Design épuré */}
+          <section className="lg:sticky lg:top-4">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <PhoneIcon className="h-6 w-6 text-red-600" />
+                Numéros d'urgence
               </h2>
+              <p className="text-gray-500 text-sm">Disponibles 24h/24, 7j/7</p>
             </div>
-            <div className="p-6">
-              <div className="prose max-w-none">
-                {typeof ressourcesSOS.protocolesCrise === 'string' ? (
-                  <p className="text-gray-700">{ressourcesSOS.protocolesCrise}</p>
-                ) : (
-                  <ul className="space-y-3">
-                    {(ressourcesSOS.protocolesCrise as string[]).map((etape: string, i: number) => (
-                      <li key={i} className="flex items-start">
-                        <span className="bg-amber-100 text-amber-700 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">
-                          {i + 1}
+
+            <div className="space-y-3">
+              {ressourcesSOS.numerosUrgence.map((urgence, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleCall(urgence.numero)}
+                  className="w-full group"
+                >
+                  <div className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md border border-gray-100 hover:border-red-200 transition-all duration-200">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="bg-red-50 p-2.5 rounded-lg group-hover:bg-red-100 transition-colors flex-shrink-0">
+                          <PhoneIcon className="h-5 w-5 text-red-600" />
+                        </div>
+                        <div className="text-left min-w-0">
+                          <p className="font-semibold text-gray-900 text-sm truncate">{urgence.nom}</p>
+                          <p className="text-xs text-gray-500">Gratuit</p>
+                        </div>
+                      </div>
+                      <div className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold text-base whitespace-nowrap flex-shrink-0">
+                        {urgence.numero}
+                      </div>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </section>
+
+          {/* Centres spécialisés - Design moderne */}
+          <section>
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <UserGroupIcon className="h-6 w-6 text-teal-700" />
+                Centres de crise
+              </h2>
+              <p className="text-gray-500 text-sm">Accompagnement professionnel</p>
+            </div>
+
+            <div className="space-y-4">
+              {ressourcesSOS.centresCrise.map((centre, index) => (
+                <div 
+                  key={index} 
+                  className="bg-white rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-teal-200 transition-all duration-200"
+                >
+                  <div className="p-4">
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="bg-teal-50 p-2 rounded-lg flex-shrink-0">
+                        <HeartIcon className="h-5 w-5 text-teal-700" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-gray-900 text-sm mb-1">
+                          {centre.nom}
+                        </h3>
+                        <span className="inline-block px-2 py-0.5 bg-teal-50 text-teal-700 text-xs font-medium rounded-full">
+                          Santé mentale
                         </span>
-                        <span>{etape}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            </div>
-          </div>
+                      </div>
+                    </div>
 
-          {/* Signes de crise */}
-          <div className="bg-white rounded-xl shadow-md overflow-hidden border-l-4 border-red-500">
-            <div className="bg-red-100 px-6 py-4">
-              <h2 className="text-xl font-bold text-red-800">
-                <ExclamationTriangleIcon className="h-6 w-6 inline-block mr-2" />
-                SIGNES D'UNE CRISE
-              </h2>
+                    <div className="space-y-2 mb-3 text-sm">
+                      <div className="flex items-start gap-2 text-gray-600">
+                        <svg className="h-4 w-4 text-teal-700 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span className="text-xs">{centre.adresse}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 text-gray-900 font-medium">
+                        <PhoneIcon className="h-4 w-4 text-teal-700 flex-shrink-0" />
+                        <span className="text-xs">{centre.telephone}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 text-gray-600">
+                        <svg className="h-4 w-4 text-teal-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="text-xs">{centre.horaires}</span>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => handleCall(centre.telephone)}
+                      className="w-full bg-teal-700 hover:bg-teal-800 text-white font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors duration-200 text-sm"
+                    >
+                      <PhoneIcon className="h-4 w-4" />
+                      <span>Appeler</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="p-6">
+          </section>
+        </div>
+      </div>
+
+      {/* Protocole et signes - Design épuré */}
+      <div className="bg-white border-y border-gray-200 py-12">
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-8">
+           
+            {/* Signes de crise */}
+            <div className="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl p-6 border border-red-100">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="bg-red-100 p-2 rounded-lg">
+                  <ExclamationTriangleIcon className="h-6 w-6 text-red-700" />
+                </div>
+                <h2 className="text-xl font-bold text-red-900">
+                  Signes d'une crise
+                </h2>
+              </div>
               <ul className="space-y-3">
                 {ressourcesSOS.signesCrise.map((signe, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="bg-red-100 text-red-600 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 mt-1 mr-2">
-                      <ExclamationTriangleIcon className="h-3 w-3" />
-                    </span>
-                    <span className="text-gray-700">{signe}</span>
+                  <li key={index} className="flex items-start gap-3">
+                    <div className="bg-red-200 rounded-full w-7 h-7 flex items-center justify-center flex-shrink-0">
+                      <ExclamationTriangleIcon className="h-4 w-4 text-red-700" />
+                    </div>
+                    <span className="text-gray-800 pt-0.5">{signe}</span>
                   </li>
                 ))}
               </ul>
             </div>
+
+            {/* Protocole de crise */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="bg-amber-100 p-2 rounded-lg">
+                  <ExclamationTriangleIcon className="h-6 w-6 text-amber-700" />
+                </div>
+                <h2 className="text-xl font-bold text-amber-900">
+                  Que faire en cas de crise ?
+                </h2>
+              </div>
+              <ul className="space-y-3">
+                {ressourcesSOS.protocolesCrise.map((etape, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="bg-amber-200 text-amber-900 font-bold rounded-full w-7 h-7 flex items-center justify-center flex-shrink-0 text-sm">
+                      {i + 1}
+                    </span>
+                    <span className="text-gray-800 pt-0.5">{etape}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
         </div>
+      </div>
 
-        {/* Ressources supplémentaires */}
-        <section className="bg-blue-50 rounded-xl p-8 max-w-5xl mx-auto mb-12 border border-blue-200">
+      {/* Section "Besoin de parler?" - NON MODIFIÉE */}
+      <div className="container mx-auto px-4 sm:px-6 py-6 max-w-7xl">
+        <section className="bg-blue-50 rounded-lg p-6 border border-blue-100">
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold ">
               <ChatBubbleLeftRightIcon className="h-8 w-8 inline-block mr-2" />
@@ -223,12 +309,10 @@ const UrgenceSOS: React.FC = () => {
             </button>
           </div>
         </section>
-
-        {/* Pied de page */}
-        <Footer />
+      </div>
+      <Footer/>
     </div>
   );
 };
-
 
 export default UrgenceSOS;

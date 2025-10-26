@@ -34,7 +34,8 @@ const CalendrierEvenements: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortOrder, setSortOrder] = useState<'recent' | 'ancien'>('recent');
+  type SortOrder = 'recent' | 'ancien';
+  const [sortOrder, setSortOrder] = useState<SortOrder>('recent');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // 6 événements par page
 
@@ -59,9 +60,9 @@ const CalendrierEvenements: React.FC = () => {
   }, []);
 
   // Gestion du changement de filtre
-  const handleFilterChange = useCallback((filterName: string, value: any) => {
-    if (filterName === 'tri') {
-      setSortOrder(value);
+  const handleFilterChange = useCallback((filterName: string, value: string | number) => {
+    if (filterName === 'tri' && (value === 'recent' || value === 'ancien')) {
+      setSortOrder(value as 'recent' | 'ancien');
       setCurrentPage(1); // Reset à la première page lors d'un changement de filtre
     }
   }, []);
@@ -231,14 +232,14 @@ const CalendrierEvenements: React.FC = () => {
 
                   <div className="p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-lg font-semibold text-gray-800">{evenement.titre}</h3>
+                      <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">{evenement.titre}</h3>
                       <span className={`text-xs px-2 py-1 rounded-full ${getTypeBadgeClass(evenement.type)}`}>
                         {evenement.type}
                       </span>
                     </div>
-
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">{evenement.description}</p>
-
+                    
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-1">{evenement.description}</p>
+                    
                     <div className="space-y-2 text-sm text-gray-700">
                       <div className="flex items-center">
                         <svg className="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

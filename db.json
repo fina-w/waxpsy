@@ -98,6 +98,32 @@
   "professionnels": [
     {
       "id": "101",
+      "avis": [
+        {
+          "id": "1",
+          "utilisateurId": "1",
+          "utilisateurNom": "Aminata Diallo",
+          "note": 5,
+          "commentaire": "Excellent professionnel, très à l'écoute et compétent.",
+          "date": "2025-10-20T10:30:00Z"
+        },
+        {
+          "id": "2",
+          "utilisateurId": "2",
+          "utilisateurNom": "Moussa Sarr",
+          "note": 4,
+          "commentaire": "Très bon suivi, je recommande fortement.",
+          "date": "2025-10-15T14:45:00Z"
+        },
+        {
+          "id": "1761353030499",
+          "utilisateurId": "1",
+          "utilisateurNom": "Aminata Diallo",
+          "note": 4,
+          "commentaire": "hi, i'm me",
+          "date": "2025-10-25T00:43:50.499Z"
+        }
+      ],
       "nom": "Dr. Khadija Diallo",
       "email": "khadija.diallo@waxpsy.sn",
       "motDePasse": "profpassword123",
@@ -147,7 +173,8 @@
         }
       ],
       "verifiee": true,
-      "dateInscription": "2025-08-01T10:00:00Z"
+      "dateInscription": "2025-08-01T10:00:00Z",
+      "note": 4.3
     },
     {
       "id": "102",
@@ -1071,6 +1098,35 @@
       "motif": "Trouble alimentaire",
       "statut": "confirmé",
       "createdAt": "2025-11-11T11:20:00Z"
+    },
+    {
+      "id": "rdv-1761149648360",
+      "utilisateurId": "1",
+      "professionnelId": "105",
+      "date": "2025-10-31",
+      "heure": "10:00",
+      "statut": "en_attente",
+      "createdAt": "2025-10-22T16:14:08.360Z",
+      "message": ""
+    },
+    {
+      "id": "cb22df1c-7071-46de-b549-091a8b766dd7",
+      "utilisateurId": "1",
+      "utilisateurNom": "Aminata Diallo",
+      "utilisateurEmail": "aminata.diallo@email.com",
+      "professionnelId": "102",
+      "professionnelNom": "M. Seydou Cissé",
+      "professionnelEmail": "seydou.cisse@waxpsy.sn",
+      "date": "2025-11-04",
+      "heure": "14:00",
+      "statut": "confirmé",
+      "createdAt": "2025-10-23T11:46:16.416Z",
+      "message": "",
+      "telephone": "",
+      "paiement": {
+        "statut": "payé",
+        "date": "2025-10-23T11:46:16.416Z"
+      }
     }
   ],
   "quizzes": [

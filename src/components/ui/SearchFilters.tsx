@@ -7,7 +7,7 @@ interface Option {
 
 interface SearchFiltersProps {
   onSearch: (searchTerm: string) => void;
-  onFilterChange: (filterName: string, value: any) => void;
+  onFilterChange: (filterName: string, value: string | number) => void;
   filters: {
     name: string;
     label: string;
