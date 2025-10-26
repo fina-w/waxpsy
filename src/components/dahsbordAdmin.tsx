@@ -37,6 +37,11 @@ const DahsbordAdmin: React.FC = () => {
   const [modalMode, setModalMode] = useState<'add' | 'edit'>('add');
   const [formData, setFormData] = useState<any>(null);
 
+  // Delete modal state
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteEntity, setDeleteEntity] = useState<'utilisateur' | 'professionnel' | 'temoignage' | null>(null);
+  const [deleteItem, setDeleteItem] = useState<any>(null);
+
   const [utilisateursPage, setUtilisateursPage] = useState(1);
   const [professionnelsPage, setProfessionnelsPage] = useState(1);
   const [temoignagesPage, setTemoignagesPage] = useState(1);
@@ -166,10 +171,22 @@ const DahsbordAdmin: React.FC = () => {
     setModalOpen(true);
   };
 
+  const openDelete = (entity: 'utilisateur' | 'professionnel' | 'temoignage', item: any) => {
+    setDeleteEntity(entity);
+    setDeleteItem(item);
+    setDeleteModalOpen(true);
+  };
+
   const closeModal = () => {
     setModalOpen(false);
     setModalEntity(null);
     setFormData(null);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
+    setDeleteEntity(null);
+    setDeleteItem(null);
   };
 
   const saveEntity = async () => {
@@ -213,21 +230,30 @@ const DahsbordAdmin: React.FC = () => {
   };
 
   const deleteUtilisateur = async (id: string | number) => {
-    if (!confirm('Supprimer cet utilisateur ?')) return;
     await tryDelete(`/api/utilisateurs/${id}`);
     setUtilisateurs(prev => prev.filter(u => u.id !== id));
   };
 
   const deleteProfessionnel = async (id: string | number) => {
-    if (!confirm('Supprimer ce professionnel ?')) return;
     await tryDelete(`/api/professionnels/${id}`);
     setProfessionnels(prev => prev.filter(p => p.id !== id));
   };
 
   const deleteTemoignage = async (id: string | number) => {
-    if (!confirm('Supprimer ce témoignage ?')) return;
     await tryDelete(`/api/temoignages/${id}`);
     setTemoignages(prev => prev.filter(t => t.id !== id));
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteEntity || !deleteItem) return;
+    if (deleteEntity === 'utilisateur') {
+      await deleteUtilisateur(deleteItem.id);
+    } else if (deleteEntity === 'professionnel') {
+      await deleteProfessionnel(deleteItem.id);
+    } else if (deleteEntity === 'temoignage') {
+      await deleteTemoignage(deleteItem.id);
+    }
+    closeDeleteModal();
   };
 
   const approveTemoignage = async (id: string | number) => {
@@ -501,7 +527,7 @@ const DahsbordAdmin: React.FC = () => {
                               <PencilIcon className="h-5 w-5" />
                             </button>
                             <button
-                              onClick={() => deleteUtilisateur(u.id)}
+                              onClick={() => openDelete('utilisateur', u)}
                               className="text-red-600 hover:text-red-900 flex items-center"
                             >
                               <TrashIcon className="h-5 w-5" />
@@ -603,7 +629,7 @@ const DahsbordAdmin: React.FC = () => {
                               <PencilIcon className="h-5 w-5" />
                             </button>
                             <button
-                              onClick={() => deleteProfessionnel(p.id)}
+                              onClick={() => openDelete('professionnel', p)}
                               className="text-red-600 hover:text-red-900 flex items-center"
                             >
                               <TrashIcon className="h-5 w-5" />
@@ -715,7 +741,7 @@ const DahsbordAdmin: React.FC = () => {
                               </button>
                               <button
                                 title="Supprimer"
-                                onClick={() => deleteTemoignage(t.id)}
+                                onClick={() => openDelete('temoignage', t)}
                                 className="px-2 py-1 bg-red-50 text-red-700 rounded hover:bg-red-100 text-sm flex items-center transition transform active:scale-95"
                               >
                                 <TrashIcon className="h-4 w-4" />
@@ -785,6 +811,24 @@ const DahsbordAdmin: React.FC = () => {
               </div>
             </div>
           )}
+
+          {/* Delete Modal */}
+          {deleteModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+              <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                <h3 className="text-lg font-medium mb-4">Confirmer la suppression</h3>
+                <p className="mb-4">Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+                {deleteEntity === 'utilisateur' && <p><strong>Utilisateur:</strong> {deleteItem?.nom}</p>}
+                {deleteEntity === 'professionnel' && <p><strong>Professionnel:</strong> {deleteItem?.nom}</p>}
+                {deleteEntity === 'temoignage' && <p><strong>Témoignage:</strong> {deleteItem?.titre}</p>}
+                <div className="mt-4 flex justify-end space-x-2">
+                  <button onClick={closeDeleteModal} className="px-4 py-2 bg-gray-200 rounded">Annuler</button>
+                  <button onClick={confirmDelete} className="px-4 py-2 bg-red-600 text-white rounded">Supprimer</button>
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
     </div>
