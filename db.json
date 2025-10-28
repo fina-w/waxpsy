@@ -524,7 +524,18 @@
         }
       ],
       "verifiee": true,
-      "dateInscription": "2025-08-22T14:00:00Z"
+      "dateInscription": "2025-08-22T14:00:00Z",
+      "avis": [
+        {
+          "id": "1761420984964",
+          "utilisateurId": "1",
+          "utilisateurNom": "Aminata Diallo",
+          "note": 2,
+          "commentaire": "hey",
+          "date": "2025-10-25T19:36:24.964Z"
+        }
+      ],
+      "note": 2
     },
     {
       "id": "109",
@@ -573,14 +584,25 @@
         }
       ],
       "verifiee": true,
-      "dateInscription": "2025-08-25T10:30:00Z"
+      "dateInscription": "2025-08-25T10:30:00Z",
+      "avis": [
+        {
+          "id": "1761421763994",
+          "utilisateurId": "1",
+          "utilisateurNom": "Aminata Diallo",
+          "note": 4,
+          "commentaire": "haha",
+          "date": "2025-10-25T19:49:23.994Z"
+        }
+      ],
+      "note": 4
     },
     {
       "id": "110",
       "nom": "Dr. Fatima Diallo",
       "email": "fatima.diallo@waxpsy.sn",
       "motDePasse": "profpassword123",
-      "im": "https://dy7glz37jgl0b.cloudfront.net/advice/images/regain/39687c58ed6b4c20fa226c9c4a102bf6-therapist-takes-notes-on-a-clipboard-while-listening-to-her-client_l.jpg",
+      "imageUrl": "https://dy7glz37jgl0b.cloudfront.net/advice/images/regain/39687c58ed6b4c20fa226c9c4a102bf6-therapist-takes-notes-on-a-clipboard-while-listening-to-her-client_l.jpg",
       "role": "professionnel",
       "specialite": "Psychiatre - TCA",
       "diplome": "Doctorat en Psychiatrie, Spécialisation TCA",

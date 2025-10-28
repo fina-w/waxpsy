@@ -11,6 +11,7 @@ import { Layout } from "./components/Layout";
 // Import direct pour les pages AVEC skeletons (pour éviter double loading)
 import Troubles from "./components/Troubles";
 import Temoignages from "./components/Temoignages";
+import TemoignageDetail from "./components/TemoignageDetail";
 import ProfessionalsList from "./components/ProfessionalsList";
 import ProfessionnelDetail from "./components/ProfessionnelDetail";
 import Articles from "./components/Articles";
@@ -60,6 +61,7 @@ function App() {
             <Route path="/troubles" element={<Layout><Troubles /></Layout>} />
             <Route path="/troubles/:id" element={<Layout><Troubles /></Layout>} />
             <Route path="/temoignages" element={<Layout><Temoignages /></Layout>} />
+            <Route path="/temoignages/:id" element={<Layout><TemoignageDetail /></Layout>} />
             <Route path="/histoires/:id" element={<Layout><Histoire /></Layout>} />
             <Route path="/urgences" element={<Layout><UrgenceSOS /></Layout>} />
             <Route path="/DashbordProfessionnal" element={<DashbordProfessionnal />} />

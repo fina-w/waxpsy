@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuthStore } from '../stores/authStore';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuthStore } from "../stores/authStore";
+import { loginUser } from "../services/api";
 
 interface LoginProps {
   onSuccess?: () => void;
@@ -8,19 +9,19 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ onSuccess }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [forgotEmail, setForgotEmail] = useState('');
+  const [forgotEmail, setForgotEmail] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const { login } = useAuthStore();
 
   // Load saved email if remember me was checked
   useEffect(() => {
-    const savedEmail = localStorage.getItem('rememberedEmail');
+    const savedEmail = localStorage.getItem("rememberedEmail");
     if (savedEmail) {
       setEmail(savedEmail);
       setRememberMe(true);
@@ -30,77 +31,56 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
-      setMessage('All fields are required');
+      setMessage("All fields are required");
       return;
     }
     try {
-      // Load data from db.json and try to identify the user in utilisateurs, administrateurs or professionnels
-      const resp = await fetch('/db.json');
-      if (!resp.ok) throw new Error('Impossible de charger les données de connexion');
-      const data = await resp.json();
+      const user = await loginUser(email, password);
 
-      const utilisateurs = Array.isArray(data.utilisateurs) ? data.utilisateurs : [];
-      const administrateurs = Array.isArray(data.administrateurs) ? data.administrateurs : [];
-      const professionnels = Array.isArray(data.professionnels) ? data.professionnels : [];
+      // Normalize the user object stored in the auth store
+      const userToStore = {
+        id: Number(user.id),
+        nom: user.nom || user.name || "",
+        email: user.email,
+        role: user.role,
+        avatar: user.imageUrl || user.avatar || undefined,
+      };
+      login(userToStore);
 
-      let found: any = utilisateurs.find((u: any) => u.email === email && u.motDePasse === password);
-      let role = 'utilisateur';
-
-      if (!found) {
-        found = administrateurs.find((u: any) => u.email === email && u.motDePasse === password);
-        if (found) role = 'administrateur';
+      // Handle remember me functionality
+      if (rememberMe) {
+        localStorage.setItem("rememberedEmail", email);
+      } else {
+        localStorage.removeItem("rememberedEmail");
       }
 
-      if (!found) {
-        found = professionnels.find((u: any) => u.email === email && u.motDePasse === password);
-        if (found) role = 'professionnel';
-      }
-
-      if (found) {
-        // Normalize the user object stored in the auth store
-        const userToStore = {
-          id: Number(found.id),
-          nom: found.nom || found.name || '',
-          email: found.email,
-          role: role,
-          avatar: found.imageUrl || found.avatar || undefined,
-        };
-        login(userToStore);
-
-        // Handle remember me functionality
-        if (rememberMe) {
-          localStorage.setItem('rememberedEmail', email);
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        const from = (location.state as Record<string, unknown>)
+          ?.from as string;
+        if (from) {
+          navigate(from);
         } else {
-          localStorage.removeItem('rememberedEmail');
-        }
-
-        if (onSuccess) {
-          onSuccess();
-        } else {
-          const from = (location.state as any)?.from;
-          if (from) {
-            navigate(from);
+          // Redirect based on detected role
+          if (user.role === "administrateur") {
+            navigate("/admin");
+          } else if (user.role === "professionnel") {
+            navigate("/dashbordprofessionnal");
           } else {
-            // Redirect based on detected role
-            if (role === 'administrateur') {
-              navigate('/admin');
-            } else if (role === 'professionnel') {
-              navigate('/dashbordprofessionnal');
-            } else {
-              navigate('/home');
-            }
+            navigate("/home");
           }
         }
-      } else {
-        setMessage('Identifiants invalides');
       }
-    } catch {
-      setMessage('Error logging in');
+    } catch (error) {
+      setMessage(
+        error instanceof Error ? error.message : "Erreur lors de la connexion"
+      );
     }
   };
 
   return (
-    <div className="flex h-screen bg-[#C8FACC] justify-center items-center font-sans">
+    <div className="flex h-screen bg-[#C8FACC]  justify-center items-center font-sans">
       <div className="flex bg-white shadow-lg overflow-hidden w-[900px] h-[550px] rounded-[40px]">
         {/* Image à gauche */}
         <div className="w-1/2 bg-gray-100 flex justify-center items-center rounded-l-[40px] overflow-hidden">
@@ -108,6 +88,7 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
             src="/login-register.png"
             alt="Mental Health Awareness"
             className="w-[90%] h-[90%] object-contain"
+            loading="lazy"
           />
         </div>
 
@@ -115,13 +96,11 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
         <div className="w-1/2 flex flex-col items-center justify-center p-10 rounded-r-[40px]">
           {/* Logo */}
           <div className="flex items-center mb-5">
-            <img src="https://previews.123rf.com/images/tmricons/tmricons1510/tmricons151000371/45812514-brain-icon.jpg" alt="Logo" className="w-10 h-10 mr-3" />
-            <div className="text-left">
-              <h1 className="text-2xl font-bold m-0">WaxPsy</h1>
-              <p className="text-xs italic text-gray-600 m-0">
-                Mental Health Awareness
-              </p>
-            </div>
+            <img
+              src="public/black-logo.png"
+              alt="Logo"
+              className="w-55 h-auto mr-3"
+            />
           </div>
 
           <h2 className="font-bold text-2xl mb-5">Connexion</h2>
@@ -135,7 +114,9 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
               className="w-full p-2 mb-3 rounded-full border border-gray-300 text-sm"
             />
 
-            <label className="block mb-1 font-semibold text-sm">Password</label>
+            <label className="block mb-1 font-semibold text-sm">
+              Mot de passe
+            </label>
             <input
               type="password"
               value={password}
@@ -194,11 +175,14 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <h3 className="text-lg font-semibold mb-4">Mot de passe oublié</h3>
             <p className="text-sm text-gray-600 mb-4">
-              Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+              Entrez votre adresse email et nous vous enverrons un lien pour
+              réinitialiser votre mot de passe.
             </p>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Email</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
                 <input
                   type="email"
                   value={forgotEmail}
@@ -212,7 +196,7 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
               <button
                 onClick={() => {
                   setShowForgotPassword(false);
-                  setForgotEmail('');
+                  setForgotEmail("");
                 }}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200"
               >
@@ -221,9 +205,11 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
               <button
                 onClick={() => {
                   // TODO: Implement password reset logic
-                  alert(`Un email de réinitialisation a été envoyé à ${forgotEmail}`);
+                  alert(
+                    `Un email de réinitialisation a été envoyé à ${forgotEmail}`
+                  );
                   setShowForgotPassword(false);
-                  setForgotEmail('');
+                  setForgotEmail("");
                 }}
                 className="px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700"
               >

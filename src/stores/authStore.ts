@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface User {
   id: number;
@@ -13,12 +13,13 @@ export interface User {
   diplome?: string;
   experience?: string;
   adresse?: string;
-  telephone?: string;
   tarif?: string;
   bio?: string;
   langues?: string[];
   creneauxDisponibles?: { jour: string; heures: string[] }[];
-  subscription?: 'free' | 'pro';
+  subscription?: "free" | "pro";
+  dateInscription?: string;
+  actif?: boolean;
   // Ajoutez d'autres propriétés utilisateur si nécessaire
 }
 
@@ -40,7 +41,7 @@ export const useAuthStore = create<AuthState>()(
       setUser: (user: User) => set({ user }),
     }),
     {
-      name: 'auth-storage', // nom pour le stockage local
+      name: "auth-storage", // nom pour le stockage local
     }
   )
 );

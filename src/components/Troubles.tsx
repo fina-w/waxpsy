@@ -202,7 +202,7 @@ const Troubles: React.FC = () => {
                   onClick={() => handleFilterChange('categorie', '')}
                   className="ml-1.5 inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-200 text-blue-600 hover:bg-blue-300 focus:outline-none"
                 >
-                  
+                  Catégorie
                 </button>
               </span>
             )}

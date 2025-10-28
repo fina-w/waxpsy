@@ -1,9 +1,9 @@
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 // Skeleton pour la section Troubles du Homepage (carousel)
 export const TroublesCarouselSkeleton = () => (
-  <section className="py-16 px-6 bg-gradient-to-r from-white via-white to-blue-100">
+  <div className="py-16 px-6">
     <div className="max-w-7xl mx-auto">
       {/* Titre de section */}
       <Skeleton height={40} width="30%" className="mx-auto mb-12" />
@@ -25,12 +25,12 @@ export const TroublesCarouselSkeleton = () => (
         <Skeleton circle width={40} height={40} />
       </div>
     </div>
-  </section>
+  </div>
 );
 
 // Skeleton pour la section Témoignages du Homepage
 export const TemoignagesCarouselSkeleton = () => (
-  <section className="py-16 px-6 bg-gradient-to-r from-white via-white to-blue-100">
+  <div className="py-16 px-6">
     <div className="max-w-7xl mx-auto">
       {/* Titre de section */}
       <Skeleton height={40} width="40%" className="mx-auto mb-12" />
@@ -69,5 +69,5 @@ export const TemoignagesCarouselSkeleton = () => (
         <Skeleton circle width={40} height={40} />
       </div>
     </div>
-  </section>
+  </div>
 );
