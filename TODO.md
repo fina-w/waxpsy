@@ -6,4 +6,4 @@
 - [x] Mettre à jour les données dans le localStorage
 - [x] Afficher un message de succès ou d'erreur avec Swal
 - [x] Fermer la modal après la mise à jour
-- [ ] Tester la fonctionnalité de mise à jour du profil
+- [x] Tester la fonctionnalité de mise à jour du profil

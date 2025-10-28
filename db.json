@@ -226,7 +226,18 @@
         }
       ],
       "verifiee": true,
-      "dateInscription": "2025-08-05T11:00:00Z"
+      "dateInscription": "2025-08-05T11:00:00Z",
+      "avis": [
+        {
+          "id": "1761490708003",
+          "utilisateurId": "101",
+          "utilisateurNom": "Dr. Khadija Diallo",
+          "note": 5,
+          "commentaire": "pll\n",
+          "date": "2025-10-26T14:58:28.003Z"
+        }
+      ],
+      "note": 5
     },
     {
       "id": "103",
@@ -997,7 +1008,7 @@
       "professionnelId": 101,
       "date": "2025-11-10T10:00:00Z",
       "motif": "Première consultation pour mon fils",
-      "statut": "confirmé",
+      "statut": "confirmed",
       "createdAt": "2025-11-01T14:30:00Z"
     },
     {

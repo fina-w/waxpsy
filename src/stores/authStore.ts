@@ -13,7 +13,6 @@ export interface User {
   diplome?: string;
   experience?: string;
   adresse?: string;
-  telephone?: string;
   tarif?: string;
   bio?: string;
   langues?: string[];
