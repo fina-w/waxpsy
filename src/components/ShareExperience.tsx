@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Bars3Icon, HomeIcon, UserIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ShareExperience: React.FC = () => {
-  const [experience, setExperience] = useState('');
-  const [titre, setTitre] = useState('');
-  const [email, setEmail] = useState('');
+  const [experience, setExperience] = useState("");
+  const [titre, setTitre] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!experience.trim()) {
-      alert('Veuillez partager votre expérience.');
+      alert("Veuillez partager votre expérience.");
       return;
     }
     // Simulate submission
-    console.log('Témoignage soumis:', { titre, email, experience });
-    alert('Votre témoignage a été soumis avec succès !');
-    navigate('/temoignages');
+    console.log("Témoignage soumis:", { titre, email, experience });
+    alert("Votre témoignage a été soumis avec succès !");
+    navigate("/temoignages");
   };
 
   return (
@@ -27,13 +26,26 @@ const ShareExperience: React.FC = () => {
         <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
           {/* Modal Header */}
           <div className="flex justify-between items-center p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold text-gray-900">Partager mon expérience</h2>
+            <h2 className="text-xl font-semibold text-gray-900">
+              Partager mon expérience
+            </h2>
             <button
-              onClick={() => navigate('/home')}
+              onClick={() => navigate("/home")}
               className="text-gray-400 hover:text-gray-600 transition"
+              title="Fermer"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -43,7 +55,9 @@ const ShareExperience: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Titre Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Titre de votre expérience (optionnel)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Titre de votre expérience (optionnel)
+                </label>
                 <input
                   type="text"
                   value={titre}
@@ -55,7 +69,9 @@ const ShareExperience: React.FC = () => {
 
               {/* Email Input */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Votre email (optionnel)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Votre email (optionnel)
+                </label>
                 <input
                   type="email"
                   value={email}
@@ -68,16 +84,17 @@ const ShareExperience: React.FC = () => {
               {/* Experience Textarea */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                  Votre expérience <span className="ml-1 text-red-500 text-xs">*</span>
+                  Votre expérience{" "}
+                  <span className="ml-1 text-red-500 text-xs">*</span>
                 </label>
-              <textarea
-                value={experience}
-                onChange={(e) => setExperience(e.target.value)}
-                required
-                rows={6}
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
-                placeholder="Racontez votre histoire... (trouble, symptômes, parcours, conseils...)"
-              ></textarea>
+                <textarea
+                  value={experience}
+                  onChange={(e) => setExperience(e.target.value)}
+                  required
+                  rows={6}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
+                  placeholder="Racontez votre histoire... (trouble, symptômes, parcours, conseils...)"
+                ></textarea>
               </div>
 
               {/* Submit Button */}

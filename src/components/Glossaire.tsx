@@ -1,14 +1,5 @@
 import { useState, useEffect } from "react";
 import { GlossaireSkeleton } from "./skeletons";
-import {
-  Bars3Icon,
-  HomeIcon,
-  UserIcon,
-  BriefcaseIcon,
-  ChatBubbleLeftRightIcon,
-  ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
-import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../config";
 
 interface TermeGlossaire {
@@ -19,7 +10,6 @@ interface TermeGlossaire {
 }
 
 const Glossaire: React.FC = () => {
-  const navigate = useNavigate();
   const [termes, setTermes] = useState<TermeGlossaire[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
