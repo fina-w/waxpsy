@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthStore } from "../stores/authStore";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 import {
   PencilIcon,
   CheckIcon,
@@ -92,27 +93,22 @@ const DashbordProfessionnal: React.FC = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const resp = await fetch("/db.json");
-        if (!resp.ok) throw new Error("Impossible de charger les données");
-        const data = await resp.json();
-        const allRdv: RendezVous[] = Array.isArray(data.rendezVous)
-          ? data.rendezVous
-          : [];
-        const myRdv = allRdv.filter(
-          (r) => Number(r.professionnelId) === Number(user.id)
-        );
-        setRendezVous(myRdv);
 
-        // Load professional full profile from db.json (professionnels)
-        const professionnels: Professional[] = Array.isArray(
-          data.professionnels
-        )
-          ? data.professionnels
-          : [];
-        const myProfile = professionnels.find(
-          (p: Professional) => Number(p.id) === Number(user.id)
+        // Fetch appointments for this professional
+        const rdvResp = await fetch(
+          `${API_BASE_URL}/rendezVous?professionnelId=${user.id}`
         );
-        if (myProfile) {
+        if (!rdvResp.ok)
+          throw new Error("Impossible de charger les rendez-vous");
+        const allRdv: RendezVous[] = await rdvResp.json();
+        setRendezVous(allRdv);
+
+        // Load professional full profile from API
+        const profileResp = await fetch(
+          `${API_BASE_URL}/professionnels/${user.id}`
+        );
+        if (profileResp.ok) {
+          const myProfile: Professional = await profileResp.json();
           setProfile(myProfile);
           setProfileForm({
             nom: myProfile.nom || "",
@@ -309,6 +305,7 @@ const DashbordProfessionnal: React.FC = () => {
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="md:hidden p-2 bg-white/20 rounded-lg text-white hover:bg-white/30 transition-colors"
+                title="Ouvrir le menu"
               >
                 <Bars3Icon className="h-6 w-6" />
               </button>
@@ -1020,6 +1017,7 @@ const DashbordProfessionnal: React.FC = () => {
                   onClick={() => setShowSubscriptionModal(false)}
                   className="text-gray-400 hover:text-gray-600"
                   disabled={paymentStatus === "processing"}
+                  title="Fermer"
                 >
                   <XMarkIcon className="h-6 w-6" />
                 </button>

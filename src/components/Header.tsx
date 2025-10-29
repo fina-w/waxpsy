@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useAuthStore } from "../stores/authStore";
 
 interface HeaderProps {
   currentPath?: string;
 }
 
 export const Header: React.FC<HeaderProps> = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -48,6 +52,15 @@ export const Header: React.FC<HeaderProps> = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleNavClick = (href: string) => {
+    if (href === "/glossaire" && !isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate(href);
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${bgColor}`}
@@ -71,9 +84,9 @@ export const Header: React.FC<HeaderProps> = () => {
               const isActive = item.href === currentPath;
               if (item.label === "Contact") {
                 return (
-                  <motion.a
+                  <motion.button
                     key={item.href}
-                    href={item.href}
+                    onClick={() => handleNavClick(item.href)}
                     className={`${textColor} relative py-2 px-1 ${
                       isActive ? "font-bold" : "hover:opacity-80"
                     }`}
@@ -87,13 +100,13 @@ export const Header: React.FC<HeaderProps> = () => {
                         layoutId="underline"
                       />
                     )}
-                  </motion.a>
+                  </motion.button>
                 );
               }
               return (
-                <motion.a
+                <motion.button
                   key={item.href}
-                  href={item.href}
+                  onClick={() => handleNavClick(item.href)}
                   className={`${textColor} relative py-2 px-1 ${
                     isActive ? "font-bold" : "hover:opacity-80"
                   }`}
@@ -107,7 +120,7 @@ export const Header: React.FC<HeaderProps> = () => {
                       layoutId="underline"
                     />
                   )}
-                </motion.a>
+                </motion.button>
               );
             })}
           </nav>
@@ -141,31 +154,29 @@ export const Header: React.FC<HeaderProps> = () => {
                   const isActive = item.href === currentPath;
                   if (item.label === "Contact") {
                     return (
-                      <motion.a
+                      <motion.button
                         key={item.href}
-                        href={item.href}
+                        onClick={() => handleNavClick(item.href)}
                         className={`${textColor} py-2 px-4 rounded-lg ${
                           isActive ? "bg-gray-100" : "hover:bg-gray-50"
                         }`}
-                        onClick={() => setIsMenuOpen(false)}
                         whileTap={{ scale: 0.98 }}
                       >
                         {item.label}
-                      </motion.a>
+                      </motion.button>
                     );
                   }
                   return (
-                    <motion.a
+                    <motion.button
                       key={item.href}
-                      href={item.href}
+                      onClick={() => handleNavClick(item.href)}
                       className={`${textColor} py-2 px-4 rounded-lg ${
                         isActive ? "bg-gray-100" : "hover:bg-gray-50"
                       }`}
-                      onClick={() => setIsMenuOpen(false)}
                       whileTap={{ scale: 0.98 }}
                     >
                       {item.label}
-                    </motion.a>
+                    </motion.button>
                   );
                 })}
               </div>

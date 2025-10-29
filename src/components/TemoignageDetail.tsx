@@ -1,25 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import { fetchTemoignage, addComment } from "../services/api";
-import { API_BASE_URL } from "../config";
+import { useParams, Link } from "react-router-dom";
+import { fetchTemoignage } from "../services/api";
 
 import type { Temoignage } from "../types/types";
 
 const TemoignageDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const [temoignage, setTemoignage] = useState<Temoignage | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [commentaire, setCommentaire] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Vérifier si l'utilisateur est connecté
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
-
     const loadTemoignage = async () => {
       if (!id) {
         setError("Aucun identifiant de témoignage fourni");
@@ -46,76 +37,6 @@ const TemoignageDetail: React.FC = () => {
 
     loadTemoignage();
   }, [id]);
-
-  const handleLike = async () => {
-    if (!isAuthenticated) {
-      navigate("/login", { state: { from: `/temoignages/${id}` } });
-      return;
-    }
-
-    try {
-      // Mettre à jour localement pour une meilleure réactivité
-      if (temoignage) {
-        const alreadyLiked = temoignage.userLiked;
-        const likeIncrement = alreadyLiked ? -1 : 1;
-
-        setTemoignage({
-          ...temoignage,
-          likes: (temoignage.likes || 0) + likeIncrement,
-          userLiked: !alreadyLiked,
-        });
-
-        // Envoyer la mise à jour au serveur
-        const token = localStorage.getItem("token");
-        const response = await fetch(`${API_BASE_URL}/temoignages/${id}/like`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...(token ? { Authorization: `Bearer ${token}` } : {}),
-          },
-          credentials: "include",
-        });
-
-        if (!response.ok) {
-          // En cas d'erreur, annuler la modification locale
-          setTemoignage({
-            ...temoignage,
-            likes: (temoignage.likes || 0) - likeIncrement,
-            userLiked: alreadyLiked,
-          });
-          throw new Error("Échec de la mise à jour du like");
-        }
-      }
-    } catch (err) {
-      console.error("Erreur lors de la mise à jour du like:", err);
-      setError("Erreur lors de la mise à jour du like. Veuillez réessayer.");
-    }
-  };
-
-  const handleCommentSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!commentaire.trim() || !isAuthenticated || !id) return;
-
-    try {
-      setIsSubmitting(true);
-      const newComment = await addComment(id, commentaire);
-
-      // Mettre à jour localement pour une meilleure réactivité
-      if (temoignage) {
-        setTemoignage({
-          ...temoignage,
-          commentaires: [...(temoignage.commentaires || []), newComment],
-        });
-      }
-
-      setCommentaire("");
-    } catch (err) {
-      console.error("Erreur lors de l'ajout du commentaire:", err);
-      setError("Erreur lors de l'ajout du commentaire");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -252,14 +173,13 @@ const TemoignageDetail: React.FC = () => {
 
         <div className="flex items-center border-t border-b border-gray-100 py-3 my-4">
           <button
-            onClick={handleLike}
             className={`flex items-center ${
               temoignage.userLiked
                 ? "text-red-500"
                 : "text-gray-500 hover:text-red-500"
             } transition-colors`}
-            disabled={!isAuthenticated}
-            title={!isAuthenticated ? "Connectez-vous pour aimer" : ""}
+            disabled={true}
+            title="Connectez-vous pour aimer"
           >
             <svg
               className="w-6 h-6 mr-1"
@@ -284,49 +204,6 @@ const TemoignageDetail: React.FC = () => {
         <h2 className="text-xl font-semibold text-gray-800 mb-4">
           Commentaires ({temoignage.commentaires?.length || 0})
         </h2>
-
-        {isAuthenticated ? (
-          <form onSubmit={handleCommentSubmit} className="mb-6">
-            <div className="flex flex-col space-y-3">
-              <div>
-                <label htmlFor="comment" className="sr-only">
-                  Votre commentaire
-                </label>
-                <textarea
-                  id="comment"
-                  rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Partagez votre avis..."
-                  value={commentaire}
-                  onChange={(e) => setCommentaire(e.target.value)}
-                  required
-                ></textarea>
-              </div>
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  disabled={isSubmitting || !commentaire.trim()}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  {isSubmitting ? "Publication..." : "Publier"}
-                </button>
-              </div>
-            </div>
-          </form>
-        ) : (
-          <div className="mb-6 p-4 bg-blue-50 rounded-lg text-center">
-            <p className="text-blue-800">
-              <Link
-                to="/login"
-                state={{ from: `/temoignages/${id}` }}
-                className="font-medium text-blue-600 hover:underline"
-              >
-                Connectez-vous
-              </Link>{" "}
-              pour laisser un commentaire.
-            </p>
-          </div>
-        )}
 
         <div className="space-y-4">
           {!temoignage.commentaires || temoignage.commentaires.length === 0 ? (
@@ -359,13 +236,18 @@ const TemoignageDetail: React.FC = () => {
                       {comment.utilisateur?.nom || "Utilisateur anonyme"}
                     </h3>
                     <span className="text-xs text-gray-500">
-                      {new Date(comment.createdAt).toLocaleDateString("fr-FR", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                      {comment.createdAt
+                        ? new Date(comment.createdAt).toLocaleDateString(
+                            "fr-FR",
+                            {
+                              day: "numeric",
+                              month: "short",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            }
+                          )
+                        : "Date inconnue"}
                     </span>
                   </div>
                   <p className="mt-1 text-gray-700">{comment.contenu}</p>

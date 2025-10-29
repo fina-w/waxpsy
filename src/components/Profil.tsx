@@ -3,6 +3,7 @@ import Header from "./Header";
 import { useAuthStore } from "../stores/authStore";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { API_BASE_URL } from "../config";
 import {
   PencilIcon,
   LockClosedIcon,
@@ -46,41 +47,65 @@ const Profil: React.FC = () => {
 
   const handleAvatarSelect = async (avatar: string) => {
     if (!user) return;
-    setSelectedAvatar(avatar);
-    const updatedUser = { ...user, avatar };
-    useAuthStore.getState().setUser(updatedUser);
+    try {
+      const response = await fetch(`${API_BASE_URL}/utilisateurs/${user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ avatar }),
+      });
 
-    // simulation de sauvegarde
-    const db = JSON.parse(localStorage.getItem("db") || "{}");
-    if (db.utilisateurs) {
-      db.utilisateurs = db.utilisateurs.map((u: any) =>
-        u.id === user.id ? { ...u, avatar } : u
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour de l'avatar");
+      }
+
+      setSelectedAvatar(avatar);
+      const updatedUser = { ...user, avatar };
+      useAuthStore.getState().setUser(updatedUser);
+
+      await Swal.fire("Succès", "Avatar mis à jour avec succès", "success");
+      setShowAvatarModal(false);
+    } catch (error) {
+      console.error("Erreur:", error);
+      await Swal.fire(
+        "Erreur",
+        "Impossible de mettre à jour l'avatar",
+        "error"
       );
-      localStorage.setItem("db", JSON.stringify(db));
     }
-
-    await Swal.fire("Succès", "Avatar mis à jour avec succès", "success");
-    setShowAvatarModal(false);
   };
 
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
 
-    const updatedUser = { ...user, nom: editForm.nom, email: editForm.email };
-    useAuthStore.getState().setUser(updatedUser);
+    try {
+      const response = await fetch(`${API_BASE_URL}/utilisateurs/${user.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ nom: editForm.nom, email: editForm.email }),
+      });
 
-    // simulation de sauvegarde
-    const db = JSON.parse(localStorage.getItem("db") || "{}");
-    if (db.utilisateurs) {
-      db.utilisateurs = db.utilisateurs.map((u: any) =>
-        u.id === user.id ? updatedUser : u
+      if (!response.ok) {
+        throw new Error("Erreur lors de la mise à jour du profil");
+      }
+
+      const updatedUser = { ...user, nom: editForm.nom, email: editForm.email };
+      useAuthStore.getState().setUser(updatedUser);
+
+      await Swal.fire("Succès", "Profil mis à jour avec succès", "success");
+      setShowEditModal(false);
+    } catch (error) {
+      console.error("Erreur:", error);
+      await Swal.fire(
+        "Erreur",
+        "Impossible de mettre à jour le profil",
+        "error"
       );
-      localStorage.setItem("db", JSON.stringify(db));
     }
-
-    await Swal.fire("Succès", "Profil mis à jour avec succès", "success");
-    setShowEditModal(false);
   };
 
   const handlePasswordSubmit = async (e: React.FormEvent) => {

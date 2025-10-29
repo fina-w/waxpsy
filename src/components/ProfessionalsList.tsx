@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { ProfileSkeletonList } from "./skeletons";
+import { TemoignageSkeletonGrid } from "./skeletons";
 import SearchFilters from "./ui/SearchFilters";
 import { BriefcaseBusiness, Star } from "lucide-react";
 import Footer from "./footer";
@@ -390,7 +390,7 @@ const ProfessionalsList: React.FC = () => {
       <div className="min-h-screen bg-gradient-to-r from-white via-white to-blue-100">
         <div className="container mx-auto px-4 py-8">
           <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8 animate-pulse"></div>
-          <ProfileSkeletonList count={6} />
+          <TemoignageSkeletonGrid count={6} />
         </div>
       </div>
     );

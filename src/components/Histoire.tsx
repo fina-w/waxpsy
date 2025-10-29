@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleDetailSkeleton } from "./skeletons";
+import { API_BASE_URL } from "../config";
 
 interface Histoire {
   id: string;
@@ -21,15 +22,11 @@ const Histoire: React.FC = () => {
   useEffect(() => {
     const fetchHistoire = async () => {
       try {
-        const response = await fetch("/db.json");
+        const response = await fetch(`${API_BASE_URL}/histoires/${id}`);
         if (!response.ok)
-          throw new Error("Échec de la récupération des données");
-        const data = await response.json();
-        const foundHistoire = data.histoires.find(
-          (histoire: Histoire) => histoire.id === id
-        );
-        if (!foundHistoire) throw new Error("Histoire non trouvée");
-        setHistoire(foundHistoire);
+          throw new Error("Échec de la récupération de l'histoire");
+        const histoireData = await response.json();
+        setHistoire(histoireData);
       } catch (err) {
         console.error("Fetch error:", err);
         setError(err instanceof Error ? err.message : "Erreur inconnue");

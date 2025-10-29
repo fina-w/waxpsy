@@ -173,7 +173,7 @@ const APropos: React.FC = () => {
                 name: "Safiétou DIANGAR",
                 role: "Développeuse Full Stack",
                 bio: "Passionnée par la création d'expériences numériques qui améliorent la vie des gens. Spécialisée dans le développement d'applications web réactives et accessibles.",
-                image: "public/safietoudiangar.jpg",
+                image: "/safietoudiangar.jpg",
                 skills: ["React", "Flutter", "Laravel", "UI/UX"],
               },
               {
@@ -181,7 +181,7 @@ const APropos: React.FC = () => {
                 role: "Développeuse Full Stack",
                 bio: "Développeuse passionnée par les solutions technologiques innovantes. Expérimentée dans la création d'applications web complètes, du front-end au back-end.",
                 image:
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                  "/Bineta Badiane1.jpg",
                 skills: ["JavaScript", "Python", "Django", "React"],
               },
             ].map((member, index) => (

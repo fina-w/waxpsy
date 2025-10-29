@@ -15,20 +15,20 @@
 - [x] Remplacer vérification db.json par appel API
 - [x] Gérer authentification utilisateurs/administrateurs/professionnels
 
-### 🔄 QuizPage.tsx
+### ✅ QuizPage.tsx
 
-- [ ] Remplacer fallback db.json par endpoint /quizzes
-- [ ] Supprimer chargement depuis db.json
+- [x] Remplacer fallback db.json par endpoint /quizzes
+- [x] Supprimer chargement depuis db.json
 
-### 🔄 Histoire.tsx
+### ✅ Histoire.tsx
 
-- [ ] Remplacer fetch("/db.json") par /histoires/:id
-- [ ] Gérer erreur si endpoint n'existe pas
+- [x] Remplacer fetch("/db.json") par /histoires/:id
+- [x] Gérer erreur si endpoint n'existe pas
 
-### 🔄 Glossaire.tsx
+### ✅ Glossaire.tsx
 
-- [ ] Remplacer fetch('db.json') par /glossaire
-- [ ] Supprimer chargement local
+- [x] Remplacer fetch('db.json') par /glossaire
+- [x] Supprimer chargement local
 
 ### 🔄 dashbordprofessionnal.tsx
 

@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import { GlossaireSkeleton } from "./skeletons";
-import { Bars3Icon, HomeIcon, UserIcon, BriefcaseIcon, ChatBubbleLeftRightIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+import {
+  Bars3Icon,
+  HomeIcon,
+  UserIcon,
+  BriefcaseIcon,
+  ChatBubbleLeftRightIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../config";
 
 interface TermeGlossaire {
   id: string;
@@ -21,16 +29,18 @@ const Glossaire: React.FC = () => {
     const fetchTermes = async () => {
       try {
         setLoading(true);
-        const response = await fetch('db.json');
+        const response = await fetch(`${API_BASE_URL}/glossaire`);
         if (!response.ok) {
-          throw new Error('Erreur lors du chargement du glossaire');
+          throw new Error("Erreur lors du chargement du glossaire");
         }
         const data = await response.json();
-        setTermes(data.glossaire);
+        setTermes(data);
         setError(null);
       } catch (err) {
-        console.error('Erreur:', err);
-        setError('Impossible de charger le glossaire. Veuillez réessayer plus tard.');
+        console.error("Erreur:", err);
+        setError(
+          "Impossible de charger le glossaire. Veuillez réessayer plus tard."
+        );
       } finally {
         setLoading(false);
       }
@@ -39,10 +49,12 @@ const Glossaire: React.FC = () => {
     fetchTermes();
   }, []);
 
-  const filteredTermes = termes.filter((terme) =>
-    terme.terme.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    terme.definition.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (terme.categorie && terme.categorie.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredTermes = termes.filter(
+    (terme) =>
+      terme.terme.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      terme.definition.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (terme.categorie &&
+        terme.categorie.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   if (loading) {
@@ -69,88 +81,121 @@ const Glossaire: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           {/* En-tête */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Glossaire de termes psychologiques</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Glossaire de termes psychologiques
+            </h1>
 
-          <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Qu'est-ce qu'une maladie mentale ?</h2>
-            <p className="text-gray-600">
-              Une maladie mentale est une maladie physique du cerveau qui provoque des perturbations dans la pensée, le comportement,
-              l'énergie ou l'émotion qui rendent difficile de faire face aux exigences ordinaires de la vie.
-              La recherche commence à découvrir les causes compliquées de ces maladies qui peuvent inclure la génétique,
-              la chimie du cerveau, la structure du cerveau, le traumatisme et / ou le fait d'avoir une autre condition médicale,
-              comme les maladies cardiaques.
-            </p>
-          </div>
-
-          {/* Barre de recherche */}
-          <div className="relative max-w-2xl mx-auto">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+            <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                Qu'est-ce qu'une maladie mentale ?
+              </h2>
+              <p className="text-gray-600">
+                Une maladie mentale est une maladie physique du cerveau qui
+                provoque des perturbations dans la pensée, le comportement,
+                l'énergie ou l'émotion qui rendent difficile de faire face aux
+                exigences ordinaires de la vie. La recherche commence à
+                découvrir les causes compliquées de ces maladies qui peuvent
+                inclure la génétique, la chimie du cerveau, la structure du
+                cerveau, le traumatisme et / ou le fait d'avoir une autre
+                condition médicale, comme les maladies cardiaques.
+              </p>
             </div>
-            <input
-              type="text"
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Rechercher un terme ou une définition..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </div>
 
-        {/* Liste des termes */}
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Terme
-                  </th>
-                  <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Définition
-                  </th>
-                  {termes.some(t => t.categorie) && (
-                    <th scope="col" className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Catégorie
-                    </th>
-                  )}
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredTermes.length > 0 ? (
-                  filteredTermes.map((terme) => (
-                    <tr key={terme.id} className="hover:bg-gray-50">
-                      <td className="px-4 md:px-6 py-4 whitespace-nowrap">
-                        <div className="font-medium text-gray-900">{terme.terme}</div>
-                      </td>
-                      <td className="px-4 md:px-6 py-4">
-                        <div className="text-gray-600 text-sm md:text-base">{terme.definition}</div>
-                      </td>
-                      {termes.some(t => t.categorie) && (
-                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
-                          {terme.categorie && (
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800">
-                              {terme.categorie}
-                            </span>
-                          )}
-                        </td>
-                      )}
-                    </tr>
-                  ))
-                ) : (
+            {/* Barre de recherche */}
+            <div className="relative max-w-2xl mx-auto">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                  className="h-5 w-5 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="Rechercher un terme ou une définition..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Liste des termes */}
+          <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div className="overflow-x-auto">
+              <table className="min-w-full divide-y divide-gray-200">
+                <thead className="bg-gray-50">
                   <tr>
-                    <td colSpan={termes.some(t => t.categorie) ? 3 : 2} className="px-4 md:px-6 py-4 text-center text-gray-500">
-                      Aucun terme trouvé pour "{searchTerm}"
-                    </td>
+                    <th
+                      scope="col"
+                      className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Terme
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Définition
+                    </th>
+                    {termes.some((t) => t.categorie) && (
+                      <th
+                        scope="col"
+                        className="px-4 md:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Catégorie
+                      </th>
+                    )}
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-200">
+                  {filteredTermes.length > 0 ? (
+                    filteredTermes.map((terme) => (
+                      <tr key={terme.id} className="hover:bg-gray-50">
+                        <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                          <div className="font-medium text-gray-900">
+                            {terme.terme}
+                          </div>
+                        </td>
+                        <td className="px-4 md:px-6 py-4">
+                          <div className="text-gray-600 text-sm md:text-base">
+                            {terme.definition}
+                          </div>
+                        </td>
+                        {termes.some((t) => t.categorie) && (
+                          <td className="px-4 md:px-6 py-4 whitespace-nowrap">
+                            {terme.categorie && (
+                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800">
+                                {terme.categorie}
+                              </span>
+                            )}
+                          </td>
+                        )}
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan={termes.some((t) => t.categorie) ? 3 : 2}
+                        className="px-4 md:px-6 py-4 text-center text-gray-500"
+                      >
+                        Aucun terme trouvé pour "{searchTerm}"
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );

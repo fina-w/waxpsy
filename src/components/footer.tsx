@@ -1,6 +1,8 @@
 // src/components/Footer.tsx
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../stores/authStore";
 import {
   FaFacebookF,
   FaTwitter,
@@ -12,23 +14,54 @@ import {
 const footerSections = [
   {
     title: "À Propos",
-    links: ["Notre Mission", "L'Équipe", "Contact", "Partenaires"],
+    links: [
+      { label: "Notre Mission", href: "/apropos" },
+      { label: "L'Équipe", href: "/apropos" },
+      { label: "Contact", href: "/contact" },
+      { label: "Partenaires", href: "/apropos" },
+    ],
   },
   {
     title: "Contenus",
-    links: ["Articles", "Histoires", "Quiz", "Témoignages"],
+    links: [
+      { label: "Articles", href: "/articles" },
+      { label: "Histoires", href: "/histoires" },
+      { label: "Quiz", href: "/quizpage" },
+      { label: "Témoignages", href: "/temoignages" },
+    ],
   },
   {
     title: "Aide & Support",
-    links: ["SOS/Urgence", "Annuaire", "FAQ", "Nous Contacter"],
+    links: [
+      { label: "SOS/Urgence", href: "/urgences" },
+      { label: "Annuaire", href: "/professionals" },
+      { label: "FAQ", href: "/contact" },
+      { label: "Nous Contacter", href: "/contact" },
+    ],
   },
   {
     title: "Suivez-nous",
-    links: ["Facebook", "Instagram", "Twitter", "LinkedIn"],
+    links: [
+      { label: "Facebook", href: "#" },
+      { label: "Instagram", href: "#" },
+      { label: "Twitter", href: "#" },
+      { label: "LinkedIn", href: "#" },
+    ],
   },
 ];
 
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const handleLinkClick = (href: string) => {
+    if (href === "/glossaire" && !isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate(href);
+    }
+  };
+
   const renderSocialIcon = (platform: string) => {
     const baseClasses = "text-lg transition-colors duration-200";
 
@@ -105,26 +138,26 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="space-y-1">
                   {section.links.map((link) => (
-                    <li key={link}>
+                    <li key={link.label}>
                       {section.title === "Suivez-nous" ? (
                         <a
-                          href="#"
+                          href={link.href}
                           className="text-gray-200 hover:text-white transition-colors flex items-center justify-center sm:justify-start"
-                          aria-label={link}
-                          title={link}
+                          aria-label={link.label}
+                          title={link.label}
                         >
-                          {renderSocialIcon(link)}
+                          {renderSocialIcon(link.label)}
                           <span className="ml-2 hidden sm:inline text-sm">
-                            {link}
+                            {link.label}
                           </span>
                         </a>
                       ) : (
-                        <a
-                          href="#"
+                        <button
+                          onClick={() => handleLinkClick(link.href)}
                           className="text-xs sm:text-sm text-gray-200 hover:text-white hover:underline transition-colors"
                         >
-                          {link}
-                        </a>
+                          {link.label}
+                        </button>
                       )}
                     </li>
                   ))}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { ArticleDetailSkeleton } from "./skeletons";
+import { API_BASE_URL } from "../config";
 
 interface Trouble {
   id: string;
@@ -34,17 +35,17 @@ const Articles: React.FC = () => {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        const response = await fetch("/db.json");
-        if (!response.ok) throw new Error("Échec du chargement des données");
-        const data = await response.json();
+        // Fetch article from API
+        const articleResponse = await fetch(`${API_BASE_URL}/articles/${id}`);
+        if (!articleResponse.ok) throw new Error("Article non trouvé");
+        const foundArticle = await articleResponse.json();
 
-        const foundArticle = data.articles.find((a: Article) => a.id === id);
-        if (!foundArticle) throw new Error("Article non trouvé");
-
-        // Trouver le trouble associé
-        const relatedTrouble = data.troubles.find(
-          (t: Trouble) => t.id === foundArticle.troubleId
+        // Fetch related trouble
+        const troubleResponse = await fetch(
+          `${API_BASE_URL}/troubles/${foundArticle.troubleId}`
         );
+        if (!troubleResponse.ok) throw new Error("Trouble associé non trouvé");
+        const relatedTrouble = await troubleResponse.json();
 
         // Fusionner les données
         setArticle({

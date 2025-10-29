@@ -9,7 +9,7 @@ import {
   TemoignagesCarouselSkeleton,
 } from "./skeletons";
 import { useAuthStore } from "../stores/authStore";
-import db from "../../db.json";
+import { API_BASE_URL } from "../config";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
@@ -76,16 +76,32 @@ const Homepage: React.FC = () => {
       // Add artificial delay to make skeletons visible
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      // Load data from imported db.json
-      const troublesData = db.troubles;
-      const temoignagesData = db.temoignages.filter(
-        (t: Temoignage) => t.statut === "approuvé"
-      );
+      try {
+        // Load data from API
+        const [troublesResponse, temoignagesResponse] = await Promise.all([
+          fetch(`${API_BASE_URL}/troubles`),
+          fetch(`${API_BASE_URL}/temoignages`),
+        ]);
 
-      setTroubles(troublesData);
-      setTemoignages(temoignagesData);
-      setError(null);
-      setLoading(false);
+        if (!troublesResponse.ok || !temoignagesResponse.ok) {
+          throw new Error("Erreur lors du chargement des données");
+        }
+
+        const troublesData = await troublesResponse.json();
+        const allTemoignages = await temoignagesResponse.json();
+        const temoignagesData = allTemoignages.filter(
+          (t: Temoignage) => t.statut === "approuvé"
+        );
+
+        setTroubles(troublesData);
+        setTemoignages(temoignagesData);
+        setError(null);
+      } catch (err) {
+        console.error("Erreur lors du chargement:", err);
+        setError(err instanceof Error ? err.message : "Erreur inconnue");
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadData();
@@ -112,19 +128,35 @@ const Homepage: React.FC = () => {
   }, [temoignages.length, currentTemoignageIndex, nextTemoignages]);
 
   const handleTroubleClick = (id: string) => {
-    navigate(`/articles/${id}`);
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate(`/articles/${id}`);
+    }
   };
 
   const handleProfessionalsClick = () => {
-    navigate("/professionals");
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate("/professionals");
+    }
   };
 
   const handleTemoignagesClick = () => {
-    navigate("/temoignages");
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate("/temoignages");
+    }
   };
 
   const handleUrgenceClick = () => {
-    navigate("/urgences");
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate("/urgences");
+    }
   };
 
   // Suppression du loading global - on affiche la page avec des skeletons partiels
@@ -158,7 +190,13 @@ const Homepage: React.FC = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <button
-              onClick={() => navigate("/glossaire")}
+              onClick={() => {
+                if (!isAuthenticated) {
+                  navigate("/login");
+                } else {
+                  navigate("/glossaire");
+                }
+              }}
               className="border-2 border-white rounded-full px-6 sm:px-8 py-3 flex items-center space-x-2 hover:bg-white hover:text-black transition text-sm sm:text-lg"
             >
               <span>Lire le Glossaire</span>
@@ -601,7 +639,12 @@ const Homepage: React.FC = () => {
                             12
                           </span>
                         </div>
-                        <button className="bg-teal-700 hover:bg-teal-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-colors">
+                        <button
+                          onClick={() =>
+                            navigate(`/temoignages/${temoignage.id}`)
+                          }
+                          className="bg-teal-700 hover:bg-teal-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-colors"
+                        >
                           Lire la suite
                         </button>
                       </div>
