@@ -1,27 +1,38 @@
-import { useState } from 'react';
-import { FaPhone, FaEnvelope, FaPaperPlane, FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaTimes } from 'react-icons/fa';
-import { motion } from 'framer-motion';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
-import Header from './Header';
-import Footer from './footer';
+import {
+  FaPhone,
+  FaEnvelope,
+  FaPaperPlane,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaLinkedin,
+} from "react-icons/fa";
+import { motion } from "framer-motion";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
+import Header from "./Header";
+import Footer from "./footer";
 
 // Définition du schéma de validation avec Zod
 const contactFormSchema = z.object({
-  name: z.string()
-    .min(2, { message: 'Le nom doit contenir au moins 2 caractères' })
-    .max(50, { message: 'Le nom ne doit pas dépasser 50 caractères' }),
-  email: z.string()
-    .email({ message: 'Veuillez entrer une adresse email valide' }),
-  subject: z.string()
-    .min(5, { message: 'Le sujet doit contenir au moins 5 caractères' })
-    .max(100, { message: 'Le sujet ne doit pas dépasser 100 caractères' }),
-  message: z.string()
-    .min(10, { message: 'Le message doit contenir au moins 10 caractères' })
-    .max(1000, { message: 'Le message ne doit pas dépasser 1000 caractères' })
+  name: z
+    .string()
+    .min(2, { message: "Le nom doit contenir au moins 2 caractères" })
+    .max(50, { message: "Le nom ne doit pas dépasser 50 caractères" }),
+  email: z
+    .string()
+    .email({ message: "Veuillez entrer une adresse email valide" }),
+  subject: z
+    .string()
+    .min(5, { message: "Le sujet doit contenir au moins 5 caractères" })
+    .max(100, { message: "Le sujet ne doit pas dépasser 100 caractères" }),
+  message: z
+    .string()
+    .min(10, { message: "Le message doit contenir au moins 10 caractères" })
+    .max(1000, { message: "Le message ne doit pas dépasser 1000 caractères" }),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -31,27 +42,27 @@ const Contact: React.FC = () => {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema)
+    resolver: zodResolver(contactFormSchema),
   });
 
   // Liens des réseaux sociaux
   const socialLinks = {
-    facebook: 'https://www.facebook.com/waxpsy',
-    instagram: 'https://www.instagram.com/waxpsy',
-    twitter: 'https://twitter.com/waxpsy',
-    linkedin: 'https://www.linkedin.com/company/waxpsy'
+    facebook: "https://www.facebook.com/waxpsy",
+    instagram: "https://www.instagram.com/waxpsy",
+    twitter: "https://twitter.com/waxpsy",
+    linkedin: "https://www.linkedin.com/company/waxpsy",
   };
 
   const showSuccessAlert = () => {
     Swal.fire({
-      title: 'Message envoyé avec succès !',
-      text: 'Nous avons bien reçu votre message et nous vous répondrons dans les plus brefs délais.',
-      icon: 'success',
-      confirmButtonText: 'Parfait',
-      confirmButtonColor: '#015635',
-      background: '#ffffff',
+      title: "Message envoyé avec succès !",
+      text: "Nous avons bien reçu votre message et nous vous répondrons dans les plus brefs délais.",
+      icon: "success",
+      confirmButtonText: "Parfait",
+      confirmButtonColor: "#015635",
+      background: "#ffffff",
       backdrop: `
         rgba(1,86,53,0.1)
         url("/images/nyan-cat.gif")
@@ -62,20 +73,20 @@ const Contact: React.FC = () => {
       timer: 5000,
       timerProgressBar: true,
       didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-      }
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
     });
   };
 
   const showErrorAlert = (message: string) => {
     Swal.fire({
-      title: 'Oups...',
+      title: "Oups...",
       text: message,
-      icon: 'error',
-      confirmButtonText: 'D\'accord',
-      confirmButtonColor: '#ef4444',
-      background: '#ffffff',
+      icon: "error",
+      confirmButtonText: "D'accord",
+      confirmButtonColor: "#ef4444",
+      background: "#ffffff",
       showConfirmButton: true,
     });
   };
@@ -83,8 +94,8 @@ const Contact: React.FC = () => {
   const onSubmit = async () => {
     try {
       // Afficher un loader pendant l'envoi
-      const { isDismissed } = await Swal.fire({
-        title: 'Envoi en cours...',
+      await Swal.fire({
+        title: "Envoi en cours...",
         allowOutsideClick: false,
         didOpen: () => {
           Swal.showLoading();
@@ -92,7 +103,7 @@ const Contact: React.FC = () => {
       });
 
       // Simulation d'envoi de formulaire
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
 
       // Fermer le loader
       Swal.close();
@@ -102,16 +113,17 @@ const Contact: React.FC = () => {
 
       // Réinitialisation du formulaire
       reset();
-
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.';
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer plus tard.";
       showErrorAlert(errorMessage);
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-r from-white via-white to-blue-50">
-
       {/* Hero Section */}
       <section
         className="relative bg-cover bg-center h-[600px] flex flex-col text-white"
@@ -128,7 +140,8 @@ const Contact: React.FC = () => {
             CONTACTEZ-NOUS
           </h1>
           <p className="text-xl text-white max-w-2xl mx-auto">
-            Nous sommes là pour répondre à vos questions et vous accompagner dans votre parcours de bien-être mental.
+            Nous sommes là pour répondre à vos questions et vous accompagner
+            dans votre parcours de bien-être mental.
           </p>
         </div>
       </section>
@@ -143,80 +156,102 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="bg-white rounded-xl shadow-lg p-8"
           >
-            <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">Envoyez-nous un message</h2>
+            <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">
+              Envoyez-nous un message
+            </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Votre nom *
                   </label>
                   <input
                     id="name"
                     type="text"
                     className={`w-full px-4 py-2 border ${
-                      errors.name ? 'border-red-500' : 'border-gray-300'
+                      errors.name ? "border-red-500" : "border-gray-300"
                     } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                     placeholder="Votre nom complet"
-                    {...register('name')}
+                    {...register("name")}
                   />
                   {errors.name && (
-                    <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.name.message}
+                    </p>
                   )}
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Votre email *
                   </label>
                   <input
                     id="email"
                     type="email"
                     className={`w-full px-4 py-2 border ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
+                      errors.email ? "border-red-500" : "border-gray-300"
                     } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                     placeholder="votre@email.com"
-                    {...register('email')}
+                    {...register("email")}
                   />
                   {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.email.message}
+                    </p>
                   )}
                 </div>
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="subject"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Sujet *
                 </label>
                 <input
                   id="subject"
                   type="text"
                   className={`w-full px-4 py-2 border ${
-                    errors.subject ? 'border-red-500' : 'border-gray-300'
+                    errors.subject ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                   placeholder="Objet de votre message"
-                  {...register('subject')}
+                  {...register("subject")}
                 />
                 {errors.subject && (
-                  <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.subject.message}
+                  </p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-gray-700 mb-1"
+                >
                   Votre message *
                 </label>
                 <textarea
                   id="message"
                   rows={5}
                   className={`w-full px-4 py-2 border ${
-                    errors.message ? 'border-red-500' : 'border-gray-300'
+                    errors.message ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition`}
                   placeholder="Décrivez-nous votre demande..."
-                  {...register('message')}
+                  {...register("message")}
                 ></textarea>
                 {errors.message && (
-                  <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                  <p className="mt-1 text-sm text-red-600">
+                    {errors.message.message}
+                  </p>
                 )}
               </div>
 
@@ -228,9 +263,25 @@ const Contact: React.FC = () => {
                 >
                   {isSubmitting ? (
                     <>
-                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
                       </svg>
                       Envoi en cours...
                     </>
@@ -253,18 +304,22 @@ const Contact: React.FC = () => {
             className="space-y-8"
           >
             <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">Nos coordonnées</h2>
+              <h2 className="text-2xl font-serif font-semibold text-green-800 mb-6">
+                Nos coordonnées
+              </h2>
 
               <div className="space-y-6">
-
                 <div className="flex items-start">
                   <div className="flex-shrink-0 bg-blue-100 p-3 rounded-full text-blue-600">
                     <FaPhone className="h-6 w-6" />
                   </div>
                   <div className="ml-4">
-                    <h3 className="text-lg font-medium text-gray-900">Téléphone</h3>
+                    <h3 className="text-lg font-medium text-gray-900">
+                      Téléphone
+                    </h3>
                     <p className="mt-1 text-gray-600">
-                      +33 1 23 45 67 89<br />
+                      +33 1 23 45 67 89
+                      <br />
                       Lundi - Vendredi, 9h - 18h
                     </p>
                   </div>
@@ -277,7 +332,8 @@ const Contact: React.FC = () => {
                   <div className="ml-4">
                     <h3 className="text-lg font-medium text-gray-900">Email</h3>
                     <p className="mt-1 text-gray-600">
-                      waxpsy@sn.com<br />
+                      waxpsy@sn.com
+                      <br />
                       Réponse sous 24-48h
                     </p>
                   </div>
@@ -285,7 +341,9 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="mt-8 text-center">
-                <h3 className="text-lg font-medium text-gray-900 mb-4 ">Suivez-nous</h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-4 ">
+                  Suivez-nous
+                </h3>
                 <div className="flex space-x-4  items-center justify-center">
                   <a
                     href={socialLinks.facebook}
@@ -328,20 +386,52 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="bg-red-600 rounded-xl shadow-lg p-8 text-white">
-              <h2 className="text-2xl font-serif font-semibold mb-4">Besoin d'aide immédiate ?</h2>
+              <h2 className="text-2xl font-serif font-semibold mb-4">
+                Besoin d'aide immédiate ?
+              </h2>
               <p className="mb-6">
-                Si vous ou un proche avez besoin d'une aide urgente, contactez immédiatement les services d'urgence ou un professionnel de santé.
+                Si vous ou un proche avez besoin d'une aide urgente, contactez
+                immédiatement les services d'urgence ou un professionnel de
+                santé.
               </p>
               <div className="space-y-3">
-                <a href="tel:15" className="flex items-center text-lg font-medium hover:underline">
-                  <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                <a
+                  href="tel:15"
+                  className="flex items-center text-lg font-medium hover:underline"
+                >
+                  <svg
+                    className="h-5 w-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    ></path>
                   </svg>
                   SAMU : 15
                 </a>
-                <a href="tel:3114" className="flex items-center text-lg font-medium hover:underline">
-                  <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                <a
+                  href="tel:3114"
+                  className="flex items-center text-lg font-medium hover:underline"
+                >
+                  <svg
+                    className="h-5 w-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    ></path>
                   </svg>
                   Urgences psychiatriques : 31 14
                 </a>

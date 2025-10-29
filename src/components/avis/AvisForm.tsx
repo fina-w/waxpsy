@@ -1,19 +1,25 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '../ui/button';
-import { Textarea } from '../ui/textarea';
-import { Rating } from '../ui/Rating';
-import { useToast } from '../ui/use-toast';
-import { Loader2 } from 'lucide-react';
-import { createAvis } from '@/services/avisService';
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
+import { Rating } from "../ui/Rating";
+import { useToast } from "../ui/use-toast";
+import { Loader2 } from "lucide-react";
+import { createAvis } from "../../services/avisService";
 
 const avisSchema = z.object({
-  note: z.number().min(1, 'Veuillez donner une note').max(5, 'La note maximale est 5'),
-  commentaire: z.string().max(1000, 'Le commentaire ne peut pas dépasser 1000 caractères').optional(),
-  professionnelId: z.string().min(1, 'ID du professionnel requis'),
-  utilisateurId: z.string().min(1, 'ID de l\'utilisateur requis'),
+  note: z
+    .number()
+    .min(1, "Veuillez donner une note")
+    .max(5, "La note maximale est 5"),
+  commentaire: z
+    .string()
+    .max(1000, "Le commentaire ne peut pas dépasser 1000 caractères")
+    .optional(),
+  professionnelId: z.string().min(1, "ID du professionnel requis"),
+  utilisateurId: z.string().min(1, "ID de l'utilisateur requis"),
 });
 
 type AvisFormData = z.infer<typeof avisSchema>;
@@ -44,31 +50,32 @@ export const AvisForm = ({
     resolver: zodResolver(avisSchema),
     defaultValues: {
       note: 0,
-      commentaire: '',
+      commentaire: "",
       professionnelId,
       utilisateurId,
     },
   });
 
-  const note = watch('note');
+  const note = watch("note");
 
   const onSubmit = async (data: AvisFormData) => {
     try {
       setIsSubmitting(true);
       await createAvis(data);
-      
+
       toast({
-        title: 'Merci pour votre avis !',
-        description: 'Votre avis a été enregistré avec succès.',
+        title: "Merci pour votre avis !",
+        description: "Votre avis a été enregistré avec succès.",
       });
-      
+
       onSuccess?.();
     } catch (error) {
-      console.error('Erreur lors de l\'envoi de l\'avis:', error);
+      console.error("Erreur lors de l'envoi de l'avis:", error);
       toast({
-        title: 'Erreur',
-        description: 'Une erreur est survenue lors de l\'envoi de votre avis. Veuillez réessayer.',
-        variant: 'destructive',
+        title: "Erreur",
+        description:
+          "Une erreur est survenue lors de l'envoi de votre avis. Veuillez réessayer.",
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -83,7 +90,9 @@ export const AvisForm = ({
         </label>
         <Rating
           value={note}
-          onChange={(value) => setValue('note', value, { shouldValidate: true })}
+          onChange={(value) =>
+            setValue("note", value, { shouldValidate: true })
+          }
           size={32}
         />
         {errors.note && (
@@ -100,9 +109,9 @@ export const AvisForm = ({
         </label>
         <Textarea
           id="commentaire"
-          {...register('commentaire')}
+          {...register("commentaire")}
           rows={4}
-          className={`w-full ${errors.commentaire ? 'border-red-300' : ''}`}
+          className={`w-full ${errors.commentaire ? "border-red-300" : ""}`}
           placeholder="Décrivez votre expérience avec ce professionnel..."
         />
         {errors.commentaire && (
@@ -130,7 +139,7 @@ export const AvisForm = ({
               Envoi en cours...
             </>
           ) : (
-            'Publier mon avis'
+            "Publier mon avis"
           )}
         </Button>
       </div>
