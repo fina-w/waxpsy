@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Star } from 'lucide-react';
-import { cn } from '../../lib/utils';
+import { useState, useEffect } from "react";
+import { Star } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface RatingProps {
   value: number;
@@ -31,31 +31,31 @@ export const Rating = ({
   };
 
   return (
-    <div className={cn('flex items-center gap-1', className)}>
+    <div className={cn("flex items-center gap-1", className)}>
       {[1, 2, 3, 4, 5].map((star) => {
         const isFilled = hover ? star <= (hover || 0) : star <= (rating || 0);
-        
+
         return (
           <button
             key={star}
             type="button"
             className={cn(
-              'transition-colors',
-              !readOnly && 'cursor-pointer hover:scale-110',
-              isFilled ? 'text-yellow-400' : 'text-gray-300'
+              "transition-colors",
+              !readOnly && "cursor-pointer hover:scale-110",
+              isFilled ? "text-yellow-400" : "text-gray-300"
             )}
             onClick={() => handleClick(star)}
             onMouseEnter={() => !readOnly && setHover(star)}
             onMouseLeave={() => !readOnly && setHover(null)}
             disabled={readOnly}
-            aria-label={`Noter ${star} étoile${star > 1 ? 's' : ''}`}
+            aria-label={`Noter ${star} étoile${star > 1 ? "s" : ""}`}
           >
-            <Star 
-              size={size} 
+            <Star
+              size={size}
               className={cn(
-                'fill-current',
-                isFilled ? 'opacity-100' : 'opacity-50'
-              )} 
+                "fill-current",
+                isFilled ? "opacity-100" : "opacity-50"
+              )}
             />
           </button>
         );

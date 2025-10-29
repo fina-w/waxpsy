@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../ui/button";
-import { Textarea } from "../ui/textarea";
-import { Rating } from "../ui/Rating";
-import { useToast } from "../ui/use-toast";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Rating } from "@/components/ui/Rating";
+import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
-import { createAvis } from "../../services/avisService";
+import { createAvis } from "@/services/avisService";
 
 const avisSchema = z.object({
   note: z

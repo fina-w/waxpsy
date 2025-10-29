@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { GlossaireSkeleton } from "./skeletons";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "@/config";
 
 interface TermeGlossaire {
   id: string;

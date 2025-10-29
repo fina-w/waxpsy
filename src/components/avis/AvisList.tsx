@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { Rating } from "../ui/Rating";
-import type { Avis } from "../../services/avisService";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Rating } from "@/components/ui/Rating";
+import type { Avis } from "@/services/avisService";
 
 interface AvisListProps {
   avis: Avis[];
