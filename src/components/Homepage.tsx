@@ -1,22 +1,28 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import type { Trouble, Temoignage } from "../types/types";
 import { Header } from "./Header";
 import Footer from "./footer";
-import { TroublesCarouselSkeleton, TemoignagesCarouselSkeleton } from "./skeletons";
+import {
+  TroublesCarouselSkeleton,
+  TemoignagesCarouselSkeleton,
+} from "./skeletons";
 import { useAuthStore } from "../stores/authStore";
-import db from "../../db.json";
+import { API_BASE_URL } from "../config";
 
 const Homepage: React.FC = () => {
   const navigate = useNavigate();
   const [troubles, setTroubles] = useState<Trouble[]>([]);
   const [temoignages, setTemoignages] = useState<Temoignage[]>([]);
-  const [faqs] = useState<Array<{id: string, question: string, reponse: string}>>([]);
+  const [faqs] = useState<
+    Array<{ id: string; question: string; reponse: string }>
+  >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentTroubleIndex, setCurrentTroubleIndex] = useState(0);
   const [currentTemoignageIndex, setCurrentTemoignageIndex] = useState(0);
+
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const nextTroubles = useCallback(() => {
@@ -41,8 +47,8 @@ const Homepage: React.FC = () => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Pour les témoignages
@@ -56,20 +62,49 @@ const Homepage: React.FC = () => {
   const prevTemoignages = useCallback(() => {
     const itemsToShow = window.innerWidth < 768 ? 1 : 3;
     setCurrentTemoignageIndex((prev) =>
-      prev - itemsToShow < 0 ? Math.max(0, temoignages.length - itemsToShow) : prev - itemsToShow
+      prev - itemsToShow < 0
+        ? Math.max(0, temoignages.length - itemsToShow)
+        : prev - itemsToShow
     );
   }, [temoignages.length]);
 
   useEffect(() => {
     console.log("Current user in Homepage:", isAuthenticated);
-    // Load data from imported db.json
-    const troublesData = db.troubles;
-    const temoignagesData = db.temoignages.filter((t: any) => t.statut === 'approuvé');
+    // Simulate loading delay to show skeletons
+    const loadData = async () => {
+      setLoading(true);
+      // Add artificial delay to make skeletons visible
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    setTroubles(troublesData);
-    setTemoignages(temoignagesData);
-    setError(null);
-    setLoading(false);
+      try {
+        // Load data from API
+        const [troublesResponse, temoignagesResponse] = await Promise.all([
+          fetch(`${API_BASE_URL}/troubles`),
+          fetch(`${API_BASE_URL}/temoignages`),
+        ]);
+
+        if (!troublesResponse.ok || !temoignagesResponse.ok) {
+          throw new Error("Erreur lors du chargement des données");
+        }
+
+        const troublesData = await troublesResponse.json();
+        const allTemoignages = await temoignagesResponse.json();
+        const temoignagesData = allTemoignages.filter(
+          (t: Temoignage) => t.statut === "approuvé"
+        );
+
+        setTroubles(troublesData);
+        setTemoignages(temoignagesData);
+        setError(null);
+      } catch (err) {
+        console.error("Erreur lors du chargement:", err);
+        setError(err instanceof Error ? err.message : "Erreur inconnue");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
   }, []);
 
   // Auto-scroll pour les troubles (toutes les 5 secondes)
@@ -92,22 +127,36 @@ const Homepage: React.FC = () => {
     }
   }, [temoignages.length, currentTemoignageIndex, nextTemoignages]);
 
-
-
   const handleTroubleClick = (id: string) => {
-    navigate(`/troubles/${id}`);
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate(`/articles/${id}`);
+    }
   };
 
   const handleProfessionalsClick = () => {
-    navigate('/professionals');
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate("/professionals");
+    }
   };
 
   const handleTemoignagesClick = () => {
-    navigate('/temoignages');
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate("/temoignages");
+    }
   };
 
   const handleUrgenceClick = () => {
-    navigate('/urgences');
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate("/urgences");
+    }
   };
 
   // Suppression du loading global - on affiche la page avec des skeletons partiels
@@ -141,7 +190,13 @@ const Homepage: React.FC = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <button
-              onClick={() => navigate("/glossaire")}
+              onClick={() => {
+                if (!isAuthenticated) {
+                  navigate("/login");
+                } else {
+                  navigate("/glossaire");
+                }
+              }}
               className="border-2 border-white rounded-full px-6 sm:px-8 py-3 flex items-center space-x-2 hover:bg-white hover:text-black transition text-sm sm:text-lg"
             >
               <span>Lire le Glossaire</span>
@@ -192,7 +247,9 @@ const Homepage: React.FC = () => {
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               className="flex flex-col items-center text-white cursor-pointer"
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              onClick={() =>
+                window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+              }
             >
               <span className="text-sm mb-2">Scroll pour découvrir</span>
               <svg
@@ -242,7 +299,10 @@ const Homepage: React.FC = () => {
             C'est quoi Waxpsy ?
           </h2>
           <p className="text-gray-700 max-w-3xl mx-auto text-lg mb-8">
-            Waxpsy est une plateforme sénégalaise dédiée à la sensibilisation et à l'information sur la santé mentale. Notre mission est de briser les tabous et d'offrir un espace sûr pour parler ouvertement de santé mentale au Sénégal.
+            Waxpsy est une plateforme sénégalaise dédiée à la sensibilisation et
+            à l'information sur la santé mentale. Notre mission est de briser
+            les tabous et d'offrir un espace sûr pour parler ouvertement de
+            santé mentale au Sénégal.
           </p>
         </motion.div>
       </motion.section>
@@ -267,8 +327,8 @@ const Homepage: React.FC = () => {
               className="flex justify-between items-center mb-8"
             >
               <h2 className="text-3xl font-serif">Découvrez</h2>
-              <a
-                href="/troubles"
+              <button
+                onClick={() => navigate("/troubles")}
                 className="text-green-700 font-semibold flex items-center hover:text-[#015635] transition"
               >
                 Voir tous les troubles
@@ -286,94 +346,96 @@ const Homepage: React.FC = () => {
                     d="M9 5l7 7-7 7"
                   />
                 </svg>
-              </a>
+              </button>
             </motion.div>
             <div className="relative px-16">
               {/* Boutons de navigation */}
               {troubles.length > 3 && (
-              <>
-                <button
-                  onClick={prevTroubles}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 bg-[#015635] rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
-                  aria-label="Trouble précédent"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                <>
+                  <button
+                    onClick={prevTroubles}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 bg-[#015635] rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                    aria-label="Trouble précédent"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={nextTroubles}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 bg-[#015635] rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
-                  aria-label="Trouble suivant"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-white"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </>
-            )}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
-              {troubles
-                .slice(
-                  currentTroubleIndex,
-                  window.innerWidth < 768 ? currentTroubleIndex + 1 : currentTroubleIndex + 3
-                )
-                .map((trouble) => (
-                  <div
-                    key={trouble.id}
-                    className="bg-transparent cursor-pointer group"
-                    onClick={() => handleTroubleClick(trouble.id)}
-                  >
-                    <div className="relative h-50 overflow-hidden">
-                      <img
-                        src={trouble.image}
-                        alt={trouble.nom}
-                        loading="lazy"
-                        className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-sm"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = "/adhd.jpg";
-                        }}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
                       />
-                      {/* Bouton Lire qui apparaît au survol */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <button className="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors duration-300">
-                          Lire
-                        </button>
+                    </svg>
+                  </button>
+                  <button
+                    onClick={nextTroubles}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 bg-[#015635] rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                    aria-label="Trouble suivant"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
+                {troubles
+                  .slice(
+                    currentTroubleIndex,
+                    window.innerWidth < 768
+                      ? currentTroubleIndex + 1
+                      : currentTroubleIndex + 3
+                  )
+                  .map((trouble) => (
+                    <div
+                      key={trouble.id}
+                      className="bg-transparent cursor-pointer group"
+                      onClick={() => handleTroubleClick(trouble.id)}
+                    >
+                      <div className="relative h-50 overflow-hidden">
+                        <img
+                          src={trouble.image}
+                          alt={trouble.nom}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-all duration-300 group-hover:brightness-50 group-hover:blur-sm bg-gray-200"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = "/adhd.jpg";
+                          }}
+                        />
+                        {/* Bouton Lire qui apparaît au survol */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <button className="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-gray-900 transition-colors duration-300">
+                            Lire
+                          </button>
+                        </div>
+                      </div>
+                      <div className="p-auto">
+                        <h3 className="font-serif text-xl font-medium mb-2">
+                          {trouble.nom}
+                        </h3>
                       </div>
                     </div>
-                    <div className="p-auto">
-                      <h3 className="font-serif text-xl font-medium mb-2">
-                        {trouble.nom}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
             </div>
           </div>
-        </div>
-      </motion.section>
+        </motion.section>
       )}
 
       {/* Section Pour mieux comprendre */}
@@ -442,7 +504,7 @@ const Homepage: React.FC = () => {
 
               <div
                 className="border-2 border-black rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow cursor-pointer"
-                onClick={() => navigate('/quizpage')}
+                onClick={() => navigate("/quizpage")}
               >
                 <div className="mb-6">
                   <img
@@ -473,7 +535,10 @@ const Homepage: React.FC = () => {
               <h2 className="text-3xl font-bold text-white">
                 Quelques Témoignages
               </h2>
-              <button onClick={handleTemoignagesClick} className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2">
+              <button
+                onClick={handleTemoignagesClick}
+                className="text-white font-medium hover:opacity-80 transition-opacity flex items-center gap-2"
+              >
                 Tout Voir <span className="text-xl">→</span>
               </button>
             </div>
@@ -481,106 +546,113 @@ const Homepage: React.FC = () => {
             <div className="relative px-16">
               {/* Boutons de navigation pour les témoignages */}
               {temoignages.length > 3 && (
-              <>
-                <button
-                  onClick={prevTemoignages}
-                  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
-                  aria-label="Témoignage précédent"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-gray-700"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                <>
+                  <button
+                    onClick={prevTemoignages}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                    aria-label="Témoignage précédent"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 19l-7-7 7-7"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={nextTemoignages}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
-                  aria-label="Témoignage suivant"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-gray-700"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-gray-700"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 19l-7-7 7-7"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={nextTemoignages}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition z-10"
+                    aria-label="Témoignage suivant"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </button>
-              </>
-            )}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
-              {temoignages
-                .slice(
-                  currentTemoignageIndex,
-                  window.innerWidth < 768 ? currentTemoignageIndex + 1 : currentTemoignageIndex + 3
-                )
-                .map((temoignage) => (
-                <div
-                  key={temoignage.id}
-                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col"
-                >
-                  {/* En-tête avec nom et date */}
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h4 className="font-semibold text-sm text-gray-800">
-                        {temoignage.utilisateurId
-                          ? `Utilisateur ${temoignage.utilisateurId}`
-                          : "Anonyme"}
-                      </h4>
-                      <p className="text-xs text-gray-500 mt-1">
-                        Il y a 2 jours
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-gray-700"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500 ease-in-out">
+                {temoignages
+                  .slice(
+                    currentTemoignageIndex,
+                    window.innerWidth < 768
+                      ? currentTemoignageIndex + 1
+                      : currentTemoignageIndex + 3
+                  )
+                  .map((temoignage) => (
+                    <div
+                      key={temoignage.id}
+                      className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow flex flex-col"
+                    >
+                      {/* En-tête avec nom et date */}
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h4 className="font-semibold text-sm text-gray-800">
+                            {temoignage.utilisateurId
+                              ? `Utilisateur ${temoignage.utilisateurId}`
+                              : "Anonyme"}
+                          </h4>
+                          <p className="text-xs text-gray-500 mt-1">
+                            Il y a 2 jours
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Titre avec badge */}
+                      <div className="flex items-center gap-3 mb-4">
+                        <h3 className="font-bold text-base text-gray-900 flex-grow">
+                          {temoignage.titre}
+                        </h3>
+                        <span className="bg-purple-200 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
+                          TDAH
+                        </span>
+                      </div>
+
+                      {/* Contenu */}
+                      <p className="text-gray-700 text-sm mb-6 flex-grow leading-relaxed">
+                        {temoignage.contenu.substring(0, 150)}...
                       </p>
+
+                      {/* Footer avec likes et bouton */}
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <div className="flex items-center gap-2">
+                          <span className="text-red-500 text-xl">❤️</span>
+                          <span className="text-sm font-medium text-gray-600">
+                            12
+                          </span>
+                        </div>
+                        <button
+                          onClick={() =>
+                            navigate(`/temoignages/${temoignage.id}`)
+                          }
+                          className="bg-teal-700 hover:bg-teal-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-colors"
+                        >
+                          Lire la suite
+                        </button>
+                      </div>
                     </div>
-                  </div>
-
-                  {/* Titre avec badge */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <h3 className="font-bold text-base text-gray-900 flex-grow">
-                      {temoignage.titre}
-                    </h3>
-                    <span className="bg-purple-200 text-purple-800 text-xs font-semibold px-3 py-1 rounded-full whitespace-nowrap">
-                      TDAH
-                    </span>
-                  </div>
-
-                  {/* Contenu */}
-                  <p className="text-gray-700 text-sm mb-6 flex-grow leading-relaxed">
-                    {temoignage.contenu.substring(0, 150)}...
-                  </p>
-
-                  {/* Footer avec likes et bouton */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <div className="flex items-center gap-2">
-                      <span className="text-red-500 text-xl">❤️</span>
-                      <span className="text-sm font-medium text-gray-600">
-                        12
-                      </span>
-                    </div>
-                    <button className="bg-teal-700 hover:bg-teal-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-colors">
-                      Lire la suite
-                    </button>
-                  </div>
-                </div>
-              ))}
+                  ))}
+              </div>
+            </div>
           </div>
-        </div>
-        </div>
         )}
         {/* La vague SVG en bas */}
         <div
@@ -604,60 +676,78 @@ const Homepage: React.FC = () => {
       {/* Section Statistiques */}
       <section className="mt-12">
         {/* Section Statistiques */}
-          <div className="max-w-5xl mx-auto bg-transparent p-8 md:p-12 rounded-xl shadow-lg">
-            <div className="text-center mb-10">
-              <h3 className="text-3xl font-bold text-gray-800 mb-4">
-                La Santé Mentale en Chiffres au Sénégal
-              </h3>
-              <p className="text-gray-600 max-w-3xl mx-auto">
-                Ces chiffres, bien que préoccupants, ne reflètent qu'une partie de la réalité. 
-                Beaucoup de cas ne sont pas déclarés en raison de la stigmatisation et du manque d'accès aux soins.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Carte Statistique 1 */}
-              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
-                <div className="text-4xl font-bold text-center text-[#015635] mb-2">9.4%</div>
-                <p className="text-gray-700">des Sénégalais présentent un risque suicidaire</p>
-              </div>
-              
-              {/* Carte Statistique 2 */}
-              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
-                <div className="text-4xl font-bold text-center text-[#015635] mb-2">1.5%</div>
-                <p className="text-gray-700">de la population souffre de dépression sévère</p>
-              </div>
-              
-              {/* Carte Statistique 3 */}
-              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
-                <div className="text-4xl font-bold text-center text-[#015635] mb-2">3.7%</div>
-                <p className="text-gray-700">de la population est atteinte d'épilepsie</p>
-              </div>
-              
-              {/* Carte Statistique 4 */}
-              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
-                <div className="text-4xl font-bold text-center text-[#015635] mb-2">0.7%</div>
-                <p className="text-gray-700">de consommation de cannabis</p>
-              </div>
-              
-              {/* Carte Statistique 5 */}
-              <div className="bg-green-50 p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
-                <div className="text-4xl font-bold text-center text-[#015635] mb-2">0.2%</div>
-                <p className="text-gray-700">de consommation de cocaïne</p>
-              </div>
-              
-              {/* Carte Témoignage */}
-              <div className="bg-[#015635] p-6 rounded-lg flex flex-col justify-center hover:shadow-md transition-shadow">
-                <p className="text-white italic text-center">
-                  "Ces chiffres ne sont que la partie visible de l'iceberg. Beaucoup de nos proches souffrent en silence."
-                </p>
-              </div>
-            </div>
-            
-            <p className="text-sm text-gray-500 text-center mt-8">
-              Source : Enquête nationale sur la santé mentale au Sénégal (2023)
+        <div className="max-w-5xl mx-auto bg-transparent p-8 md:p-12 rounded-xl">
+          <div className="text-center mb-10">
+            <h3 className="text-3xl font-bold text-gray-800 mb-4">
+              La Santé Mentale en Chiffres au Sénégal
+            </h3>
+            <p className="text-gray-700 max-w-3xl mx-auto">
+              Ces chiffres, bien que préoccupants, ne reflètent qu'une partie de
+              la réalité. Beaucoup de cas ne sont pas déclarés en raison de la
+              stigmatisation et du manque d'accès aux soins.
             </p>
           </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+            {/* Carte Statistique 1 */}
+            <div className=" p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+              <div className="text-4xl font-bold text-center text-[#015635] mb-2">
+                9.4%
+              </div>
+              <p className="text-gray-700">
+                des Sénégalais présentent un risque suicidaire
+              </p>
+            </div>
+
+            {/* Carte Statistique 2 */}
+            <div className=" p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+              <div className="text-4xl font-bold text-center text-[#015635] mb-2">
+                1.5%
+              </div>
+              <p className="text-gray-700">
+                de la population souffre de dépression sévère
+              </p>
+            </div>
+
+            {/* Carte Statistique 3 */}
+            <div className=" p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+              <div className="text-4xl font-bold text-center text-[#015635] mb-2">
+                3.7%
+              </div>
+              <p className="text-black">
+                de la population est atteinte d'épilepsie
+              </p>
+            </div>
+
+            {/* Carte Statistique 4 */}
+            <div className="p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+              <div className="text-4xl font-bold text-center text-[#015635] mb-2">
+                0.7%
+              </div>
+              <p className="text-black">de consommation de cannabis</p>
+            </div>
+
+            {/* Carte Statistique 5 */}
+            <div className="p-6 rounded-lg border-2 border-[#015635] hover:shadow-md transition-shadow">
+              <div className="text-4xl font-bold text-center text-[#015635] mb-2">
+                0.2%
+              </div>
+              <p className="text-black">de consommation de cocaïne</p>
+            </div>
+
+            {/* Carte Témoignage */}
+            <div className="bg-[#015635] p-6 rounded-lg flex flex-col justify-center hover:shadow-md transition-shadow">
+              <p className="text-white italic text-center">
+                "Et ce n'est que la partie visible de l'iceberg. Beaucoup de nos
+                proches souffrent en silence."
+              </p>
+            </div>
+          </div>
+
+          <p className="text-sm text-gray-500 text-center mt-8">
+            Source : Enquête nationale sur la santé mentale au Sénégal (2023)
+          </p>
+        </div>
       </section>
 
       {/* Section Besoin d'aide Immédiate */}
@@ -722,35 +812,43 @@ const Homepage: React.FC = () => {
       {/* Section FAQ */}
       <section className="py-12 ">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Questions fréquemment posées</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Questions fréquemment posées
+          </h2>
           {loading ? (
             <div className="text-center">Chargement des questions...</div>
           ) : error ? (
             <div className="text-center text-red-500">{error}</div>
           ) : (
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
-                <div className="divide-y divide-gray-100">
-                  {faqs.map((faq) => (
-                    <details key={faq.id} className="group">
-                      <summary className="flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50">
-                        <span className="text-base font-medium text-gray-900">{faq.question}</span>
-                        <span className="ml-2 text-[#015635] text-xl transition-transform duration-200 group-open:rotate-180">+</span>
-                      </summary>
-                      <div className="px-4 pb-4 pt-2 text-gray-600 bg-gray-50">
-                        <p>{faq.reponse}</p>
-                      </div>
-                    </details>
-                  ))}
-                </div>
-                <div className="p-6 text-center bg-gray-50 border-t border-gray-100">
-                  <p className="text-gray-600 mb-4">Vous ne trouvez pas de réponse à votre question ?</p>
-                  <button
-                    onClick={() => navigate('/contact')}
-                    className="bg-[#015635] text-white px-6 py-2 rounded-md hover:bg-[#014429] transition-colors"
-                  >
-                    Contactez-nous
-                  </button>
-                </div>
+              <div className="divide-y divide-gray-100">
+                {faqs.map((faq) => (
+                  <details key={faq.id} className="group">
+                    <summary className="flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50">
+                      <span className="text-base font-medium text-gray-900">
+                        {faq.question}
+                      </span>
+                      <span className="ml-2 text-[#015635] text-xl transition-transform duration-200 group-open:rotate-180">
+                        +
+                      </span>
+                    </summary>
+                    <div className="px-4 pb-4 pt-2 text-gray-600 bg-gray-50">
+                      <p>{faq.reponse}</p>
+                    </div>
+                  </details>
+                ))}
+              </div>
+              <div className="p-6 text-center bg-gray-50 border-t border-gray-100">
+                <p className="text-gray-600 mb-4">
+                  Vous ne trouvez pas de réponse à votre question ?
+                </p>
+                <button
+                  onClick={() => navigate("/contact")}
+                  className="bg-[#015635] text-white px-6 py-2 rounded-md hover:bg-[#014429] transition-colors"
+                >
+                  Contactez-nous
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -759,7 +857,6 @@ const Homepage: React.FC = () => {
       <section className="bg-gradient-to-r from-white via-white to-blue-100">
         <Footer />
       </section>
-
     </div>
   );
 };

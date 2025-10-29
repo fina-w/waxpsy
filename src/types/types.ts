@@ -1,6 +1,10 @@
-import { BaseEntity } from './common';
+interface BaseEntity {
+  id: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
 
-export type UserRole = 'utilisateur' | 'professionnel' | 'administrateur';
+export type UserRole = "utilisateur" | "professionnel" | "administrateur";
 
 export interface Utilisateur extends BaseEntity {
   nom: string;
@@ -29,7 +33,7 @@ export interface Trouble extends BaseEntity {
   ressourcesUtiles?: Array<{
     titre: string;
     url: string;
-    type: 'article' | 'video' | 'lien';
+    type: "article" | "video" | "lien";
   }>;
 }
 
@@ -40,34 +44,46 @@ export interface Article extends BaseEntity {
   auteurId?: string;
   imageUrl?: string;
   tags?: string[];
-  statut?: 'brouillon' | 'publié' | 'archivé';
-  datePublication?: string;
+  statut?: "brouillon" | "publié" | "archivé";
+  datePublication?: Date;
   vues?: number;
   tempsLecture?: number; // en minutes
 }
 
 export interface Temoignage extends BaseEntity {
-  utilisateurId: string;
+  utilisateurId: number;
   titre: string;
   contenu: string;
   note?: number;
-  statut: 'en_attente' | 'approuvé' | 'rejeté';
-  dateCreation?: string;
+  statut: "en_attente" | "approuvé" | "rejeté";
+  dateCreation?: Date;
   metadonnees?: {
     anonyme?: boolean;
     troubleId?: string;
     professionnelId?: string;
   };
+  likes?: number;
+  userLiked?: boolean;
+  commentaires?: Commentaire[];
+  utilisateur?: Utilisateur;
 }
 
 export interface Histoire extends BaseEntity {
-  troubleId: string;
+  troubleId: number;
   titre: string;
   recit: string;
-  auteurId?: string;
-  statut?: 'brouillon' | 'publié' | 'archivé';
+  auteurId?: number;
+  statut?: "brouillon" | "publié" | "archivé";
   imageUrl?: string;
   extrait?: string;
   motsCles?: string[];
   updatedAt?: string;
+}
+
+export interface Commentaire {
+  id: number;
+  contenu: string;
+  utilisateur: Utilisateur;
+  createdAt: Date;
+  updatedAt: Date;
 }

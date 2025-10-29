@@ -1,41 +1,81 @@
 // src/components/Footer.tsx
 
-import React from 'react';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../stores/authStore";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 // Structure des données pour une maintenance facile
 const footerSections = [
   {
-    title: 'À Propos',
-    links: ['Notre Mission', 'L\'Équipe', 'Contact', 'Partenaires'],
+    title: "À Propos",
+    links: [
+      { label: "Notre Mission", href: "/apropos" },
+      { label: "L'Équipe", href: "/apropos" },
+      { label: "Contact", href: "/contact" },
+      { label: "Partenaires", href: "/apropos" },
+    ],
   },
   {
-    title: 'Contenus',
-    links: ['Articles', 'Histoires', 'Quiz', 'Témoignages'],
+    title: "Contenus",
+    links: [
+      { label: "Articles", href: "/articles" },
+      { label: "Histoires", href: "/histoires" },
+      { label: "Quiz", href: "/quizpage" },
+      { label: "Témoignages", href: "/temoignages" },
+    ],
   },
   {
-    title: 'Aide & Support',
-    links: ['SOS/Urgence', 'Annuaire', 'FAQ', 'Nous Contacter'],
+    title: "Aide & Support",
+    links: [
+      { label: "SOS/Urgence", href: "/urgences" },
+      { label: "Annuaire", href: "/professionals" },
+      { label: "FAQ", href: "/contact" },
+      { label: "Nous Contacter", href: "/contact" },
+    ],
   },
   {
-    title: 'Suivez-nous',
-    links: ['Facebook', 'Instagram', 'Twitter', 'LinkedIn'],
+    title: "Suivez-nous",
+    links: [
+      { label: "Facebook", href: "#" },
+      { label: "Instagram", href: "#" },
+      { label: "Twitter", href: "#" },
+      { label: "LinkedIn", href: "#" },
+    ],
   },
 ];
 
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const handleLinkClick = (href: string) => {
+    if (href === "/glossaire" && !isAuthenticated) {
+      navigate("/login");
+    } else {
+      navigate(href);
+    }
+  };
+
   const renderSocialIcon = (platform: string) => {
     const baseClasses = "text-lg transition-colors duration-200";
-    
+
     switch (platform) {
-      case 'Facebook':
+      case "Facebook":
         return <FaFacebookF className={`${baseClasses} hover:text-blue-600`} />;
-      case 'Twitter':
+      case "Twitter":
         return <FaTwitter className={`${baseClasses} hover:text-blue-400`} />;
-      case 'Instagram':
+      case "Instagram":
         return <FaInstagram className={`${baseClasses} hover:text-pink-600`} />;
-      case 'LinkedIn':
-        return <FaLinkedinIn className={`${baseClasses} hover:text-blue-700`} />;
+      case "LinkedIn":
+        return (
+          <FaLinkedinIn className={`${baseClasses} hover:text-blue-700`} />
+        );
       default:
         return null;
     }
@@ -53,8 +93,14 @@ const Footer: React.FC = () => {
         >
           <defs>
             <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="60%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#dbeafe', stopOpacity: 1 }} />
+              <stop
+                offset="60%"
+                style={{ stopColor: "#ffffff", stopOpacity: 1 }}
+              />
+              <stop
+                offset="100%"
+                style={{ stopColor: "#dbeafe", stopOpacity: 1 }}
+              />
             </linearGradient>
           </defs>
           <path
@@ -71,10 +117,11 @@ const Footer: React.FC = () => {
           {/* Section Logo */}
           <div className="w-full lg:w-auto lg:flex-none mb-6 lg:mb-0 lg:mr-12">
             <div className="max-w-xs">
-              <img 
-                src="/white-logo.png" 
-                alt="WaxPsy Logo" 
-                className="h-14 sm:h-16 mb-3 mx-auto" 
+              <img
+                src="/white-logo.png"
+                alt="WaxPsy Logo"
+                className="h-14 sm:h-16 mb-3 mx-auto"
+                loading="lazy"
               />
               <p className="text-xs sm:text-sm text-center text-gray-300">
                 Plateforme de sensibilisation à la santé mentale
@@ -91,24 +138,26 @@ const Footer: React.FC = () => {
                 </h3>
                 <ul className="space-y-1">
                   {section.links.map((link) => (
-                    <li key={link}>
-                      {section.title === 'Suivez-nous' ? (
-                        <a 
-                          href="#" 
+                    <li key={link.label}>
+                      {section.title === "Suivez-nous" ? (
+                        <a
+                          href={link.href}
                           className="text-gray-200 hover:text-white transition-colors flex items-center justify-center sm:justify-start"
-                          aria-label={link}
-                          title={link}
+                          aria-label={link.label}
+                          title={link.label}
                         >
-                          {renderSocialIcon(link)}
-                          <span className="ml-2 hidden sm:inline text-sm">{link}</span>
+                          {renderSocialIcon(link.label)}
+                          <span className="ml-2 hidden sm:inline text-sm">
+                            {link.label}
+                          </span>
                         </a>
                       ) : (
-                        <a 
-                          href="#" 
+                        <button
+                          onClick={() => handleLinkClick(link.href)}
                           className="text-xs sm:text-sm text-gray-200 hover:text-white hover:underline transition-colors"
                         >
-                          {link}
-                        </a>
+                          {link.label}
+                        </button>
                       )}
                     </li>
                   ))}
@@ -129,10 +178,17 @@ const Footer: React.FC = () => {
               &copy; {new Date().getFullYear()} WaxPsy - Tous droits réservés
             </p>
             <div className="flex flex-wrap justify-center gap-2 sm:gap-4 text-xs sm:text-sm">
-              {['Mentions Légales', 'Confidentialité', 'Conditions d\'Utilisation'].map((item) => (
+              {[
+                "Mentions Légales",
+                "Confidentialité",
+                "Conditions d'Utilisation",
+              ].map((item) => (
                 <React.Fragment key={item}>
-                  <a 
-                    href={`/${item.toLowerCase().replace(/\s+/g, '-').replace('\'', '')}`} 
+                  <a
+                    href={`/${item
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")
+                      .replace("'", "")}`}
                     className="text-gray-300 hover:text-white hover:underline transition-colors"
                   >
                     {item}
@@ -141,16 +197,26 @@ const Footer: React.FC = () => {
                 </React.Fragment>
               ))}
             </div>
-            
+
             {/* Bouton retour en haut */}
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="mt-6 text-xs text-gray-300 hover:text-white flex items-center justify-center mx-auto"
               aria-label="Retour en haut de la page"
             >
               <span className="mr-1">Haut de page</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 15l7-7 7 7"
+                />
               </svg>
             </button>
           </div>

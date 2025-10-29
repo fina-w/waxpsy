@@ -1,9 +1,62 @@
-# TODO: Implémenter la mise à jour du profil
+# Migration vers API Backend - Suppression de db.json
 
-## Étapes à suivre :
-- [x] Modifier la logique du bouton "Sauvegarder" dans la modal d'édition de Profil.tsx pour mettre à jour le nom et l'email
-- [x] Mettre à jour l'utilisateur dans le store d'authentification
-- [x] Mettre à jour les données dans le localStorage
-- [x] Afficher un message de succès ou d'erreur avec Swal
-- [x] Fermer la modal après la mise à jour
-- [ ] Tester la fonctionnalité de mise à jour du profil
+## Composants à modifier
+
+### ✅ ProfessionalsList.tsx
+
+- [x] Remplacer fetch("/db.json") par API_BASE_URL/professionnels
+- [x] Supprimer le fallback db.json
+- [x] Ajouter import API_BASE_URL
+- [x] Corriger les types TypeScript
+
+### ✅ Login.tsx
+
+- [x] Créer fonction d'authentification dans api.ts
+- [x] Remplacer vérification db.json par appel API
+- [x] Gérer authentification utilisateurs/administrateurs/professionnels
+
+### ✅ QuizPage.tsx
+
+- [x] Remplacer fallback db.json par endpoint /quizzes
+- [x] Supprimer chargement depuis db.json
+
+### ✅ Histoire.tsx
+
+- [x] Remplacer fetch("/db.json") par /histoires/:id
+- [x] Gérer erreur si endpoint n'existe pas
+
+### ✅ Glossaire.tsx
+
+- [x] Remplacer fetch('db.json') par /glossaire
+- [x] Supprimer chargement local
+
+### 🔄 dashbordprofessionnal.tsx
+
+- [ ] Remplacer chargement db.json par endpoints API existants
+- [ ] Utiliser /professionnels/:id et /rendezVous
+
+### 🔄 dahsbordAdmin.tsx
+
+- [ ] Supprimer fallback db.json
+- [ ] S'assurer que tous endpoints fonctionnent
+
+### 🔄 Articles.tsx
+
+- [ ] Remplacer fetch("/db.json") par /articles/:id et /troubles
+- [ ] Gérer données liées
+
+## Endpoints à créer dans le backend (si nécessaire)
+
+- [ ] POST /auth/login - Authentification
+- [ ] GET /quizzes - Liste des quiz
+- [ ] GET /histoires/:id - Détail histoire
+- [ ] GET /glossaire - Termes du glossaire
+- [ ] GET /articles/:id - Détail article
+- [ ] GET /troubles - Liste des troubles
+
+## Tests
+
+- [ ] Tester chaque composant après modification
+- [ ] Vérifier authentification
+- [ ] Vérifier chargement des données
+- [ ] Supprimer db.json
