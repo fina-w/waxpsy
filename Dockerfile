@@ -8,7 +8,7 @@ COPY package*.json ./
 COPY .npmrc* ./
 
 # Installer les dépendances
-RUN npm ci --legacy-peer-deps
+RUN npm ci --legacy-peer-deps --include=optional
 
 # Copier le reste des fichiers
 COPY . .
