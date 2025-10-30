@@ -18,7 +18,7 @@
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-toast": "^1.2.15",
-    "@tailwindcss/vite": "^3.4.0",
+    "@tailwindcss/vite": "^4.1.16",
     "@types/date-fns": "^2.5.3",
     "@types/moment": "^2.11.29",
     "@types/react-big-calendar": "^1.16.3",
