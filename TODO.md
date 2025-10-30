@@ -1,5 +1,6 @@
-# Dockerfile Optimization Tasks
+# Fix npm run dev issue
 
-- [x] Update Dockerfile: Switch to alpine-based images (node:20-alpine, nginx:alpine), use npm ci for faster installs, combine RUN commands, remove npm cache clean, add ENV NODE_ENV=production.
-- [x] Update nginx.conf: Add gzip compression and caching headers for better performance.
-- [x] Test the optimized build with docker build to verify performance improvement and correctness.
+- [ ] Delete node_modules directory
+- [ ] Delete package-lock.json
+- [ ] Run npm install
+- [ ] Test npm run dev
